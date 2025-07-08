@@ -1,8 +1,8 @@
-![logo](https://github.com/Samar-Memon/Samar-Memon/blob/main/Samar%20Raza.jpg)
+![logo](https://github.com/samar-raza17/samar-raza17/blob/main/thumbnail.png?raw=true)
 <h1 align="center">Hi 👋, I'm Samar Raza</h1>
 <h3 align="center">A passionate Full-Stack Web Developer from Pakistan</h3>
 
-<img align="right" alt="coding" width="400px" src="https://github.com/samar-raza17/samar-raza17/blob/main/thumbnail.png?raw=true">
+<img align="right" alt="coding" width="400px" src="https://camo.githubusercontent.com/2eedf25c65a9269ed2097998da5fded175a37ee0997c3d2c83dfde65eb6d88a4/68747470733a2f2f6d656469612e74656e6f722e636f6d2f4e4f594633663832625f6741414141432f70726f6772616d6d65722e676966">
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Samar-Memon&label=Profile%20views&color=0e75b6&style=flat" alt="Samar-Memon" /> </p>
 
