@@ -177,6 +177,53 @@ border-left:1px solid rgba(0,0,0,.24);border-right:1px solid rgba(255,255,255,.3
 @media(prefers-reduced-motion:reduce){
  .sr-hang-photo,.sr-hang-image img,.sr-detail-btn{transition:none!important;transform:none!important}
 }
+
+/* Restore the original tall Polaroid silhouette while retaining complete,
+   un-cropped landscape screenshots and visual fill behind the image. */
+.sr-scroll-work .sr-hang-image {
+  aspect-ratio: 4 / 5;
+  height: clamp(310px, 44vh, 440px);
+  background: #e3edea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.sr-scroll-work .sr-hang-image::before {
+  inset: -25px;
+  z-index: -1;
+  background-image: var(--project-bg);
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px) saturate(.78);
+  opacity: .67;
+  transform: scale(1.1);
+}
+.sr-scroll-work .sr-hang-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg,rgba(244,249,247,.46),rgba(226,239,233,.15) 48%,rgba(244,249,247,.46));
+  pointer-events:none;
+}
+.sr-scroll-work .sr-hang-image > img {
+  position: relative;
+  inset: auto;
+  display:block;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  box-shadow: 0 9px 22px rgba(10,34,42,.15);
+}
+@media(max-width:680px) {
+  .sr-scroll-work .sr-hang-image {
+    aspect-ratio: 4 / 5;
+    height: clamp(300px, 45vh, 440px);
+  }
+}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
