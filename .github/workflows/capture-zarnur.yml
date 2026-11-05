@@ -28,7 +28,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/zarnur-*.png
+          git add assets/zarnur-*.png assets/shaoor-lms-live.png assets/tahir-madani-live.png
           if ! git diff --cached --quiet; then
             git commit -m "Add actual Zarnur website and Play Store captures [skip ci]"
             git push origin HEAD:samar-preview
