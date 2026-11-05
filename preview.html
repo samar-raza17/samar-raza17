@@ -56,7 +56,7 @@ body > main, body > .site-foot {
 .sr-hang-string{pointer-events:none;position:absolute;z-index:1;inset:0 auto auto 0;width:100%;height:clamp(75px,13vh,145px);}
 .sr-hang-track{display:flex;gap:clamp(15px,2.4vw,34px);overflow:hidden;scrollbar-width:none;scroll-behavior:auto;scroll-snap-type:none;touch-action:pan-y;min-width:0;width:100%;height:100%;padding:clamp(23px,4vh,45px) 7px 14px;user-select:none;outline-offset:4px;}
 .sr-hang-track::-webkit-scrollbar{display:none}
-.sr-hang-item{position:relative;flex:0 0 calc((100% - 3 * clamp(15px,2.4vw,34px)) / 4);min-width:0;height:max-content;max-height:100%;transform-origin:50% 4%;transform:translateY(var(--sr-rope-offset,0px)) rotate(var(--sr-rotate));padding-top:18px;z-index:2;}
+.sr-hang-item{position:relative;flex:0 0 calc((100% - 2 * clamp(15px,2.4vw,34px)) / 3);min-width:0;height:max-content;max-height:100%;transform-origin:50% 4%;transform:translateY(var(--sr-rope-offset,0px)) rotate(var(--sr-rotate));padding-top:18px;z-index:2;}
 .sr-hang-item:nth-child(4n+2),.sr-hang-item:nth-child(4n+3){margin-top:0;}
 .sr-hang-item:hover{filter:drop-shadow(0px 5px 7px rgba(22,43,54,.09));}
 /* Slim colourful plastic clothespins with small metallic spring */
@@ -83,10 +83,10 @@ border-left:1px solid rgba(0,0,0,.24);border-right:1px solid rgba(255,255,255,.3
 .sr-hang-item:nth-child(6n+6) .sr-hang-pin{--clip:#f5af77;--clip-light:#ffe1bc;--clip-dark:#d07e49}
 
 
-.sr-hang-photo{display:block;overflow:hidden;background:#fff;padding:10px 10px 0;border:2px solid var(--ink);box-shadow:6px 8px 0 var(--ink);border-radius:3px;color:var(--ink);}
-.sr-hang-image{display:grid;place-items:center;width:100%;height:clamp(215px,42vh,440px);background:#e7ede9;overflow:hidden;position:relative;isolation:isolate}
-.sr-hang-image:before{content:"";position:absolute;inset:-18px;z-index:-1;background-image:var(--project-bg);background-size:cover;background-position:center;filter:blur(16px);opacity:.24;transform:scale(1.06)}
-.sr-hang-image img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;position:relative;pointer-events:none}
+.sr-hang-photo{display:block;overflow:hidden;background:#fff;padding:7px 7px 0;border:2px solid var(--ink);box-shadow:6px 8px 0 var(--ink);border-radius:3px;color:var(--ink);}
+.sr-hang-image{display:grid;place-items:center;width:100%;height:auto;aspect-ratio:16 / 9;background:#e7ede9;overflow:hidden;position:relative;isolation:isolate}
+.sr-hang-image:before{content:"";position:absolute;inset:-18px;z-index:-1;background-image:var(--project-bg);background-size:cover;background-position:center;filter:blur(13px);opacity:.54;transform:scale(1.06)}
+.sr-hang-image img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;position:absolute;inset:0;pointer-events:none}
 .sr-hang-hover{position:absolute;inset:0;display:grid;place-items:end center;padding:20px;background:linear-gradient(0deg,rgba(12,38,47,.75),rgba(12,38,47,0) 62%);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;}
 .sr-hang-item:hover .sr-hang-hover,.sr-hang-item:focus-within .sr-hang-hover{opacity:1;visibility:visible}
 .sr-detail-btn{border:1px solid #fff;background:#fff;color:#183741;padding:13px 17px;font:600 12px var(--font-mono);cursor:pointer;box-shadow:3px 3px #132c34}
@@ -113,7 +113,7 @@ border-left:1px solid rgba(0,0,0,.24);border-right:1px solid rgba(255,255,255,.3
 .sr-modal-links a{padding:12px 16px;border:1px solid #17313b;font:600 12px var(--font-mono);text-decoration:none;color:#17313b}
 .sr-modal-links a:first-child{background:#17313b;color:#fff}
 .sr-modal-links a[hidden]{display:none}
-@media(max-width:1050px){.sr-hang-item{flex-basis:calc((100% - clamp(15px,2.4vw,34px)) / 2)}.sr-hang-image{height:clamp(220px,38vh,400px)}}
+@media(max-width:1050px){.sr-hang-item{flex-basis:calc((100% - clamp(15px,2.4vw,34px)) / 2)}.sr-hang-image{height:auto;aspect-ratio:16/9}}
 @media(max-width:680px){
 .sr-scroll-work{padding-inline:18px!important}
 .sr-scroll-pin{top:80px;height:calc(100svh - 85px);min-height:520px}
@@ -122,7 +122,7 @@ border-left:1px solid rgba(0,0,0,.24);border-right:1px solid rgba(255,255,255,.3
 .sr-scroll-counter{font-size:10px}
 .sr-scroll-instruct{font-size:10px}
 .sr-hang-item{flex-basis:82%}
-.sr-hang-image{height:clamp(210px,47vh,390px)}
+.sr-hang-image{height:auto;aspect-ratio:16/9}
 .sr-hang-meta{font-size:10px}
 .sr-hang-string{height:90px}
 .sr-modal-grid{grid-template-columns:1fr}
@@ -133,6 +133,14 @@ border-left:1px solid rgba(0,0,0,.24);border-right:1px solid rgba(255,255,255,.3
 .sr-hang-hover{opacity:1;visibility:visible;background:linear-gradient(0deg,rgba(12,38,47,.38),transparent 55%)}
 }
 @media(prefers-reduced-motion:reduce){.sr-hang-hover{transition:none}.sr-scroll-progress>div{transition:none}}
+
+/* Final wide screenshot frame tuning: preserve pixels, no hard crop. */
+.sr-hang-image{aspect-ratio:16/9}
+.sr-hang-photo{max-width:100%}
+.sr-hang-caption{min-height:58px}
+.sr-hang-track{align-items:flex-start}
+@media (max-width:1050px){.sr-hang-item{flex-basis:calc((100% - clamp(15px,2.4vw,34px)) / 2)}}
+@media (max-width:680px){.sr-hang-item{flex-basis:88%}.sr-hang-image{aspect-ratio:16/9}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
