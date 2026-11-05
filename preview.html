@@ -434,6 +434,72 @@ nav a[data-target="studio"]{white-space:nowrap}
 @media(max-width:900px){.sr-pg-intro{grid-template-columns:1fr;gap:12px}.sr-pg-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.sr-pg-gallery .sr-pg-card:last-child{grid-column:1/-1}.sr-career-list{grid-template-columns:1fr}}
 @media(max-width:600px){.sr-pg-gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 8px 18px 0}.sr-pg-card{flex:0 0 min(82vw,340px);scroll-snap-align:start}.sr-pg-gallery .sr-pg-card:last-child{grid-column:auto}.sr-pg-preview{height:242px}.sr-pg-intro .slot-title{font-size:clamp(43px,11vw,62px)}.sr-career-heading{display:block}.sr-career-heading>p{margin-top:17px}.sr-career-card{padding:21px 19px;min-height:0}.sr-career-list{gap:14px}.sr-career-item{grid-template-columns:25px minmax(0,1fr)}.sr-career-card h4{font-size:20px}.sr-career-heading h3{font-size:clamp(43px,10vw,63px)}.sr-pg-footnote{text-align:left}}
 @media(prefers-reduced-motion:reduce){.sr-pg-card,.sr-pg-window,.sr-pg-interface,.sr-career-card,.sr-pg-orbit{transition:none!important}}
+
+/* Interactive three-dimensional Career Wall */
+.sr-career-wall{margin-top:clamp(95px,10vw,150px);isolation:isolate}
+.sr-wall-heading{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:32px}
+.sr-wall-heading h3{margin:18px 0 0;font-size:clamp(52px,6.2vw,94px);font-weight:900;letter-spacing:-.075em;line-height:.99}
+.sr-wall-heading>p{max-width:350px;color:#625c55;font-size:16px;line-height:1.65;margin:0 0 7px}
+.sr-wall-heading>p b{color:#d95c14}
+.sr-wall-guide{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #d7c5b4;padding:16px 0;color:#b2541a;font:700 11px var(--font-mono);letter-spacing:.06em}
+.sr-wall-grid{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(21px,2.5vw,35px);margin:0;padding:15px 9px 24px;perspective:1400px}
+.sr-wall-item{height:clamp(290px,23vw,352px);min-width:0;position:relative;transform:rotate(var(--tilt));transition:transform .36s cubic-bezier(.22,.8,.18,1);perspective:950px}
+.sr-wall-item:nth-child(even){margin-top:18px}
+.sr-wall-item:hover,.sr-wall-item:focus-within,.sr-wall-item.is-broken{transform:translateY(-8px) rotate(0deg);z-index:10}
+.sr-wall-trigger{display:block;width:100%;height:100%;border:0;padding:0;margin:0;cursor:pointer;background:transparent;text-align:left;color:inherit;font:inherit;outline-offset:8px;isolation:isolate}
+.sr-wall-trigger:focus-visible{outline:3px dashed #f97316}
+.sr-wall-depth{display:block;position:relative;width:100%;height:100%;filter:drop-shadow(7px 10px 0 #171717);transform-style:preserve-3d}
+.sr-wall-item:nth-child(3n+2) .sr-wall-depth{filter:drop-shadow(8px 11px 0 #49332a)}
+.sr-wall-item:nth-child(3n+3) .sr-wall-depth{filter:drop-shadow(8px 11px 0 #d56013)}
+.sr-wall-inside{box-sizing:border-box;position:absolute;inset:0;background:radial-gradient(circle at 95% 0,#f9731625,transparent 47%),linear-gradient(145deg,#272623,#121514);border:2px solid #f97316;color:#fff;z-index:0;display:flex;flex-direction:column;padding:clamp(18px,1.7vw,29px);overflow:hidden;box-shadow:inset 0 0 40px #0008}
+.sr-wall-inside:after{content:"";width:170px;height:170px;position:absolute;top:-75px;right:-55px;border:1px dashed #f9731680;transform:rotate(30deg)}
+.sr-wall-inside-eyebrow{font:700 9px/1.5 var(--font-mono);color:#f5a46b;display:flex;justify-content:space-between;gap:10px;position:relative;z-index:1}
+.sr-wall-inside-eyebrow i{font-style:normal}
+.sr-wall-job{display:block;position:relative;z-index:1;font-size:clamp(20px,1.72vw,29px);letter-spacing:-.05em;line-height:1.17;margin:clamp(14px,2vw,27px) 0 10px;overflow-wrap:break-word}
+.sr-wall-years{font:11px/1.5 var(--font-mono);color:#ffb47e}
+.sr-wall-story{font-size:clamp(11px,.86vw,13px);line-height:1.56;color:#d4d2ce;margin-top:clamp(10px,1.5vw,21px);display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.sr-wall-inner-company{margin-top:auto;padding-top:7px;font:11px/1.4 var(--font-mono);color:#ffae6d;position:relative;z-index:1}
+.sr-wall-inner-company small{color:#a1d6b1;font-size:9px}
+.sr-wall-plaster{display:block;position:absolute;inset:0;z-index:2;pointer-events:none;transform-style:preserve-3d}
+.sr-wall-fragments{position:absolute;inset:0;transform-style:preserve-3d}
+.sr-wall-fragment{position:absolute;inset:0;display:block;transform:translate3d(0,0,2px);backface-visibility:hidden;will-change:transform;transition:transform .7s cubic-bezier(.17,.72,.17,1);
+ background:radial-gradient(circle at 15% 10%,#fffaf2 0,transparent 50%),radial-gradient(circle at 75% 90%,#b6a28f44 0,transparent 40%),repeating-linear-gradient(0deg,transparent 0 22px,#ae9c8920 23px),linear-gradient(125deg,#e1d7c9,#f5ede1 52%,#d2c3b0);
+ box-shadow:inset 5px 8px 13px #fff9,inset -7px -7px 13px #8c726344;border:1px solid #cbbbaf}
+.sr-wall-fragment.one{clip-path:polygon(0 0,45% 0,49% 29%,30% 42%,0 33%)}
+.sr-wall-fragment.two{clip-path:polygon(45% 0,100% 0,100% 39%,68% 33%,49% 29%)}
+.sr-wall-fragment.three{clip-path:polygon(0 33%,30% 42%,39% 58%,0 75%)}
+.sr-wall-fragment.four{clip-path:polygon(49% 29%,68% 33%,100% 39%,100% 75%,69% 63%,39% 58%,30% 42%)}
+.sr-wall-fragment.five{clip-path:polygon(0 75%,39% 58%,69% 63%,58% 100%,0 100%)}
+.sr-wall-fragment.six{clip-path:polygon(69% 63%,100% 75%,100% 100%,58% 100%)}
+.sr-wall-crack-lines{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;color:#62554a;opacity:.2;transition:opacity .3s}
+.sr-wall-crack-lines path{stroke-dasharray:850;stroke-dashoffset:850;transition:stroke-dashoffset .3s ease}
+.sr-wall-front{position:absolute;inset:0;z-index:3;padding:clamp(22px,2.1vw,35px);display:flex;flex-direction:column;overflow:hidden;transition:opacity .18s ease,transform .28s;pointer-events:none}
+.sr-wall-front-row{display:flex;justify-content:space-between;gap:8px;font:700 10px/1.4 var(--font-mono);letter-spacing:.035em;color:#8b6041}
+.sr-wall-front-row span:last-child{color:#ad5b23}
+.sr-wall-front strong{margin:auto 0 14px;font-size:clamp(23px,2.05vw,35px);line-height:1.11;letter-spacing:-.05em;color:#292622;font-weight:900;overflow-wrap:break-word;text-shadow:0 1px 0 #fff7}
+.sr-wall-front-date{color:#756a60;font:11px var(--font-mono)}
+.sr-wall-action{border-top:1px solid #c9b8a8;margin-top:20px;padding-top:12px;color:#c45418;font:700 10px var(--font-mono);display:flex;align-items:center;gap:7px}
+.sr-wall-action i{font-size:19px;font-style:normal;margin-left:auto}
+.sr-wall-tap-word{display:none}
+.sr-wall-item:hover .sr-wall-crack-lines,.sr-wall-item:focus-within .sr-wall-crack-lines,.sr-wall-item.is-broken .sr-wall-crack-lines{opacity:1}
+.sr-wall-item:hover .sr-wall-crack-lines path,.sr-wall-item:focus-within .sr-wall-crack-lines path,.sr-wall-item.is-broken .sr-wall-crack-lines path{stroke-dashoffset:0}
+.sr-wall-item:hover .sr-wall-front,.sr-wall-item:focus-within .sr-wall-front,.sr-wall-item.is-broken .sr-wall-front{opacity:0;transform:scale(.94);transition-delay:.13s}
+.sr-wall-item:hover .sr-wall-crack-lines,.sr-wall-item:focus-within .sr-wall-crack-lines,.sr-wall-item.is-broken .sr-wall-crack-lines{opacity:0;transition-delay:.38s}
+.sr-wall-item:hover .sr-wall-fragment.one,.sr-wall-item:focus-within .sr-wall-fragment.one,.sr-wall-item.is-broken .sr-wall-fragment.one{transform:translate3d(-46px,-54px,100px) rotate(-9deg)}
+.sr-wall-item:hover .sr-wall-fragment.two,.sr-wall-item:focus-within .sr-wall-fragment.two,.sr-wall-item.is-broken .sr-wall-fragment.two{transform:translate3d(48px,-37px,115px) rotate(10deg)}
+.sr-wall-item:hover .sr-wall-fragment.three,.sr-wall-item:focus-within .sr-wall-fragment.three,.sr-wall-item.is-broken .sr-wall-fragment.three{transform:translate3d(-65px,11px,95px) rotate(-13deg)}
+.sr-wall-item:hover .sr-wall-fragment.four,.sr-wall-item:focus-within .sr-wall-fragment.four,.sr-wall-item.is-broken .sr-wall-fragment.four{transform:translate3d(80px,12px,110px) rotate(11deg)}
+.sr-wall-item:hover .sr-wall-fragment.five,.sr-wall-item:focus-within .sr-wall-fragment.five,.sr-wall-item.is-broken .sr-wall-fragment.five{transform:translate3d(-28px,76px,110px) rotate(9deg)}
+.sr-wall-item:hover .sr-wall-fragment.six,.sr-wall-item:focus-within .sr-wall-fragment.six,.sr-wall-item.is-broken .sr-wall-fragment.six{transform:translate3d(49px,67px,110px) rotate(-10deg)}
+.sr-wall-finale{grid-column:span 2;min-height:290px;display:flex;flex-direction:column;justify-content:space-between;border:2px dashed #d1bdaa;padding:28px 38px;transform:rotate(.4deg);position:relative}
+.sr-wall-finale:before,.sr-wall-finale:after{content:"+";position:absolute;color:#eb6d1f;font:27px var(--font-mono)}.sr-wall-finale:before{top:-19px;left:-14px}.sr-wall-finale:after{bottom:-19px;right:-11px}
+.sr-wall-finale>span{font:700 11px var(--font-mono);color:#a44917;letter-spacing:.05em}
+.sr-wall-finale strong{font-size:clamp(46px,5vw,78px);line-height:.96;letter-spacing:-.07em}
+.sr-wall-finale strong em{font-style:normal;color:#f97316}
+.sr-wall-footer{text-align:center;font:11px var(--font-mono);color:#a28d7b;margin:27px 0 0}
+@media(max-width:1050px){.sr-wall-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sr-wall-item{height:320px}.sr-wall-finale{grid-column:auto;min-height:320px}}
+@media(max-width:680px){.sr-wall-heading{display:block}.sr-wall-heading h3{font-size:clamp(48px,10.5vw,70px)}.sr-wall-heading>p{margin-top:20px}.sr-wall-guide{display:block;font-size:10px}.sr-wall-guide span:last-child{display:block;margin-top:8px}.sr-wall-grid{grid-template-columns:1fr;gap:33px;padding-inline:13px}.sr-wall-item{height:330px;margin-top:0!important}.sr-wall-finale{min-height:250px;padding:23px}.sr-wall-hover-word{display:none}.sr-wall-tap-word{display:inline}.sr-wall-job{font-size:clamp(23px,5.7vw,30px)}.sr-wall-story{font-size:12px}.sr-wall-item:hover .sr-wall-fragment.four,.sr-wall-item.is-broken .sr-wall-fragment.four{transform:translate3d(37px,8px,80px) rotate(10deg)}}
+@media(prefers-reduced-motion:reduce){.sr-wall-item,.sr-wall-fragment,.sr-wall-front,.sr-wall-crack-lines,.sr-wall-crack-lines path{transition-duration:.01ms!important}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -783,77 +849,176 @@ nav a[data-target="studio"]{white-space:nowrap}
       </div>
     </div>
 
-    <section class="sr-career" aria-labelledby="sr-career-title">
-      <div class="sr-career-heading">
-        <div><p class="eyebrow">( the journey so far )</p>
-          <h3 id="sr-career-title">Where I've <span class="hl">worked.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FDBA74"/></svg></span></h3></div>
-        <p>From internships and teaching to building production web and mobile products—every role shaped how I work today.</p>
-      </div>
-      <ol class="sr-career-list">      <li class="sr-career-item is-current">
-        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">01</span></div>
-        <article class="sr-career-card">
-          <div class="sr-career-top"><span class="sr-career-company">12Monday Technologies</span><span class="sr-career-live">Current</span></div>
-          <h4>Full-Stack Developer</h4>
-          <div class="sr-career-meta"><span class="sr-career-date">Nov 2025 - Present</span></div>
-          <p>Developing and maintaining full-stack applications using modern web technologies. Collaborating with cross-functional teams to design, implement, and optimize features, ensuring performance and scalability.</p>
-        </article>
-      </li>
-      <li class="sr-career-item is-current">
-        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">02</span></div>
-        <article class="sr-career-card">
-          <div class="sr-career-top"><span class="sr-career-company">Code Thread</span><span class="sr-career-live">Current</span></div>
-          <h4>Junior Full-Stack Developer</h4>
-          <div class="sr-career-meta"><span class="sr-career-date">May 2025 - Present</span></div>
-          <p>Working remotely as a full-stack developer, building scalable web applications using modern technologies. Handling both frontend and backend responsibilities in a fast-paced environment.</p>
-        </article>
-      </li>
-      <li class="sr-career-item">
-        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">03</span></div>
-        <article class="sr-career-card">
-          <div class="sr-career-top"><span class="sr-career-company">DigiEnder</span></div>
-          <h4>Junior Full-Stack Developer</h4>
-          <div class="sr-career-meta"><span class="sr-career-date">Feb 2025 - Jul 2025</span></div>
-          <p>Worked on full-stack applications across frontend and backend, building features and improving implementation skills.</p>
-        </article>
-      </li>
-      <li class="sr-career-item is-current">
-        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">04</span></div>
-        <article class="sr-career-card">
-          <div class="sr-career-top"><span class="sr-career-company">SMIT (Saylani Mass IT Training)</span><span class="sr-career-live">Current</span></div>
-          <h4>Full Stack Web &amp; App Development (Teaching Assistant)</h4>
-          <div class="sr-career-meta"><span class="sr-career-date">May 2025 - Present</span></div>
-          <p>Assisting in teaching full stack web and app development courses. Helping students understand core programming concepts, resolving their queries, and supporting hands-on project work.</p>
-        </article>
-      </li>
-      <li class="sr-career-item">
-        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">05</span></div>
-        <article class="sr-career-card">
-          <div class="sr-career-top"><span class="sr-career-company">DigiEnder</span></div>
-          <h4>Full-Stack Developer (Internship)</h4>
-          <div class="sr-career-meta"><span class="sr-career-date">Nov 2024 - Feb 2025</span></div>
-          <p>Completed a comprehensive internship focusing on full-stack development. Gained hands-on experience with modern web technologies and development workflows.</p>
-        </article>
-      </li>
-      <li class="sr-career-item">
-        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">06</span></div>
-        <article class="sr-career-card">
-          <div class="sr-career-top"><span class="sr-career-company">Start Kids Learning Institute</span></div>
-          <h4>Front-End Development (Teaching)</h4>
-          <div class="sr-career-meta"><span class="sr-career-date">Apr 2024 - Nov 2024</span></div>
-          <p>Taught front-end development concepts to students, creating curriculum and hands-on projects. Developed teaching materials and mentored aspiring developers.</p>
-        </article>
-      </li>
-      <li class="sr-career-item">
-        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">07</span></div>
-        <article class="sr-career-card">
-          <div class="sr-career-top"><span class="sr-career-company">Tria Tech Solution Pvt Ltd.</span></div>
-          <h4>Front-End Developer (Internship)</h4>
-          <div class="sr-career-meta"><span class="sr-career-date">Apr 2024 - Aug 2024</span></div>
-          <p>Started my professional journey with front-end development internship. Learned modern frontend technologies and best practices while working on real projects.</p>
-        </article>
-      </li>
-      </ol>
-    </section>
+    <section class="sr-career sr-career-wall" aria-labelledby="sr-career-title">
+ <div class="sr-wall-heading"><div><p class="eyebrow">( built through experience ) <span class="pen-note">7 chapters, still building</span></p>
+ <h3 id="sr-career-title">The Career <span class="hl">Wall.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FDBA74"/></svg></span></h3></div>
+ <p>Every role left its mark. <b>Break the surface</b> to see what I learned, built and explored along the way.</p></div>
+ <div class="sr-wall-guide"><span>✳ HOVER TO CRACK THE WALL</span><span>OR TAP A TILE TO DISCOVER ↘</span></div>
+ <ol class="sr-wall-grid"><li class="sr-wall-item active-role" style="--tilt:-1.2deg">
+ <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal 12Monday Technologies experience">
+  <span class="sr-wall-depth">
+   <span class="sr-wall-inside">
+    <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>01 / 07</i></span>
+    <strong class="sr-wall-job">Full-Stack Developer</strong>
+    <span class="sr-wall-years">Nov 2025 - Present</span>
+    <span class="sr-wall-story">Developing and maintaining full-stack applications using modern web technologies. Collaborating with cross-functional teams to design, implement, and optimize features, ensuring performance and scalability.</span>
+    <span class="sr-wall-inner-company">12Monday Technologies <small>● CURRENT</small></span>
+   </span>
+   <span class="sr-wall-plaster" aria-hidden="true">
+    <span class="sr-wall-fragments"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span></span>
+    <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
+    <span class="sr-wall-front">
+     <span class="sr-wall-front-row"><span>CHAPTER 01</span><span>● PRESENT</span></span>
+     <strong>12Monday Technologies</strong>
+     <span class="sr-wall-front-date">Nov 2025 - Present</span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+    </span>
+   </span>
+  </span>
+ </button>
+</li>
+<li class="sr-wall-item active-role" style="--tilt:0.8deg">
+ <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal Code Thread experience">
+  <span class="sr-wall-depth">
+   <span class="sr-wall-inside">
+    <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>02 / 07</i></span>
+    <strong class="sr-wall-job">Junior Full-Stack Developer</strong>
+    <span class="sr-wall-years">May 2025 - Present</span>
+    <span class="sr-wall-story">Working remotely as a full-stack developer, building scalable web applications using modern technologies. Handling both frontend and backend responsibilities in a fast-paced environment.</span>
+    <span class="sr-wall-inner-company">Code Thread <small>● CURRENT</small></span>
+   </span>
+   <span class="sr-wall-plaster" aria-hidden="true">
+    <span class="sr-wall-fragments"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span></span>
+    <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
+    <span class="sr-wall-front">
+     <span class="sr-wall-front-row"><span>CHAPTER 02</span><span>● PRESENT</span></span>
+     <strong>Code Thread</strong>
+     <span class="sr-wall-front-date">May 2025 - Present</span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+    </span>
+   </span>
+  </span>
+ </button>
+</li>
+<li class="sr-wall-item" style="--tilt:-0.6deg">
+ <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal DigiEnder experience">
+  <span class="sr-wall-depth">
+   <span class="sr-wall-inside">
+    <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>03 / 07</i></span>
+    <strong class="sr-wall-job">Junior Full-Stack Developer</strong>
+    <span class="sr-wall-years">Feb 2025 - Jul 2025</span>
+    <span class="sr-wall-story">Worked on full-stack applications across frontend and backend, building features and improving implementation skills.</span>
+    <span class="sr-wall-inner-company">DigiEnder</span>
+   </span>
+   <span class="sr-wall-plaster" aria-hidden="true">
+    <span class="sr-wall-fragments"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span></span>
+    <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
+    <span class="sr-wall-front">
+     <span class="sr-wall-front-row"><span>CHAPTER 03</span><span>ARCHIVE</span></span>
+     <strong>DigiEnder</strong>
+     <span class="sr-wall-front-date">Feb 2025 - Jul 2025</span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+    </span>
+   </span>
+  </span>
+ </button>
+</li>
+<li class="sr-wall-item active-role" style="--tilt:1.2deg">
+ <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal SMIT (Saylani Mass IT Training) experience">
+  <span class="sr-wall-depth">
+   <span class="sr-wall-inside">
+    <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>04 / 07</i></span>
+    <strong class="sr-wall-job">Full Stack Web &amp; App Development (Teaching Assistant)</strong>
+    <span class="sr-wall-years">May 2025 - Present</span>
+    <span class="sr-wall-story">Assisting in teaching full stack web and app development courses. Helping students understand core programming concepts, resolving their queries, and supporting hands-on project work.</span>
+    <span class="sr-wall-inner-company">SMIT (Saylani Mass IT Training) <small>● CURRENT</small></span>
+   </span>
+   <span class="sr-wall-plaster" aria-hidden="true">
+    <span class="sr-wall-fragments"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span></span>
+    <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
+    <span class="sr-wall-front">
+     <span class="sr-wall-front-row"><span>CHAPTER 04</span><span>● PRESENT</span></span>
+     <strong>SMIT (Saylani Mass IT Training)</strong>
+     <span class="sr-wall-front-date">May 2025 - Present</span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+    </span>
+   </span>
+  </span>
+ </button>
+</li>
+<li class="sr-wall-item" style="--tilt:-1.4deg">
+ <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal DigiEnder experience">
+  <span class="sr-wall-depth">
+   <span class="sr-wall-inside">
+    <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>05 / 07</i></span>
+    <strong class="sr-wall-job">Full-Stack Developer (Internship)</strong>
+    <span class="sr-wall-years">Nov 2024 - Feb 2025</span>
+    <span class="sr-wall-story">Completed a comprehensive internship focusing on full-stack development. Gained hands-on experience with modern web technologies and development workflows.</span>
+    <span class="sr-wall-inner-company">DigiEnder</span>
+   </span>
+   <span class="sr-wall-plaster" aria-hidden="true">
+    <span class="sr-wall-fragments"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span></span>
+    <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
+    <span class="sr-wall-front">
+     <span class="sr-wall-front-row"><span>CHAPTER 05</span><span>ARCHIVE</span></span>
+     <strong>DigiEnder</strong>
+     <span class="sr-wall-front-date">Nov 2024 - Feb 2025</span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+    </span>
+   </span>
+  </span>
+ </button>
+</li>
+<li class="sr-wall-item" style="--tilt:0.6deg">
+ <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal Start Kids Learning Institute experience">
+  <span class="sr-wall-depth">
+   <span class="sr-wall-inside">
+    <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>06 / 07</i></span>
+    <strong class="sr-wall-job">Front-End Development (Teaching)</strong>
+    <span class="sr-wall-years">Apr 2024 - Nov 2024</span>
+    <span class="sr-wall-story">Taught front-end development concepts to students, creating curriculum and hands-on projects. Developed teaching materials and mentored aspiring developers.</span>
+    <span class="sr-wall-inner-company">Start Kids Learning Institute</span>
+   </span>
+   <span class="sr-wall-plaster" aria-hidden="true">
+    <span class="sr-wall-fragments"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span></span>
+    <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
+    <span class="sr-wall-front">
+     <span class="sr-wall-front-row"><span>CHAPTER 06</span><span>ARCHIVE</span></span>
+     <strong>Start Kids Learning Institute</strong>
+     <span class="sr-wall-front-date">Apr 2024 - Nov 2024</span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+    </span>
+   </span>
+  </span>
+ </button>
+</li>
+<li class="sr-wall-item" style="--tilt:-0.8deg">
+ <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal Tria Tech Solution Pvt Ltd. experience">
+  <span class="sr-wall-depth">
+   <span class="sr-wall-inside">
+    <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>07 / 07</i></span>
+    <strong class="sr-wall-job">Front-End Developer (Internship)</strong>
+    <span class="sr-wall-years">Apr 2024 - Aug 2024</span>
+    <span class="sr-wall-story">Started my professional journey with front-end development internship. Learned modern frontend technologies and best practices while working on real projects.</span>
+    <span class="sr-wall-inner-company">Tria Tech Solution Pvt Ltd.</span>
+   </span>
+   <span class="sr-wall-plaster" aria-hidden="true">
+    <span class="sr-wall-fragments"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span></span>
+    <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
+    <span class="sr-wall-front">
+     <span class="sr-wall-front-row"><span>CHAPTER 07</span><span>ARCHIVE</span></span>
+     <strong>Tria Tech Solution Pvt Ltd.</strong>
+     <span class="sr-wall-front-date">Apr 2024 - Aug 2024</span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+    </span>
+   </span>
+  </span>
+ </button>
+</li>
+  <li class="sr-wall-finale" aria-hidden="true"><span>THE STORY CONTINUES</span><strong>Always<br><em>building.</em></strong><span>MAKE. BREAK. LEARN. REPEAT. ↗</span></li>
+ </ol>
+ <p class="sr-wall-footer">Seven chapters. One continuous journey—from 2024 to today.</p>
+</section>
   </section>
 
   <!-- ================= SKILLS STRIP ================= -->
@@ -2917,4 +3082,16 @@ try {
  syncGeometry();
  window.addEventListener("load",syncGeometry,{once:true});
 })();
-</script></body></html>
+</script><script>
+(()=>{
+ const list=[...document.querySelectorAll('.sr-wall-item')];
+ const close=()=>list.forEach(card=>{card.classList.remove('is-broken');card.querySelector('.sr-wall-trigger')?.setAttribute('aria-expanded','false')});
+ list.forEach(card=>card.querySelector('.sr-wall-trigger')?.addEventListener('click',()=>{
+  const willOpen=!card.classList.contains('is-broken');close();
+  if(willOpen){card.classList.add('is-broken');card.querySelector('.sr-wall-trigger')?.setAttribute('aria-expanded','true')}
+ }));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+ document.addEventListener('click',e=>{if(!e.target.closest('.sr-wall-item'))close()});
+})();
+</script>
+</body></html>
