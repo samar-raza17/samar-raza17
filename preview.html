@@ -531,24 +531,15 @@ nav a[data-target="studio"]{white-space:nowrap}
 @media(prefers-reduced-motion:reduce){.sr-wall-item,.sr-wall-fragment,.sr-wall-front,.sr-wall-crack-lines,.sr-wall-hammer,.sr-wall-inside>*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style><style id="hero-stone-break-styles">
 .pz-stage{isolation:isolate;overflow:hidden}
-.hero-stone-wall{position:absolute;inset:7% 12%;z-index:20;pointer-events:none;perspective:850px;overflow:visible}
-.hero-masonry{position:absolute;inset:12% 6%;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr));filter:drop-shadow(5px 9px 3px #202c3455)}
-.hero-stone{position:relative;display:block;clip-path:var(--stone-shape);background:linear-gradient(128deg,#a2a4a1 0%,#717b7d 42%,#45525b 80%,#2f3d47 100%);border:1px solid #38454d;box-shadow:inset 3px 4px 1px #d9ddcf,inset -7px -7px 8px #192630;transform-origin:center;opacity:1}
-.hero-stone:nth-child(3n){background:linear-gradient(125deg,#b2b5aa,#79817f 46%,#48545b 85%)}
-.hero-stone:nth-child(4n){background:linear-gradient(145deg,#8f9b9c,#687579 40%,#344552 100%)}
-.hero-stone:after{content:"";position:absolute;inset:9%;clip-path:polygon(0 0,100% 7%,80% 14%,18% 22%,9% 73%,0 85%);border-top:2px solid #d9dcd2;opacity:.38}
-.hero-hammer{position:absolute;width:132px;height:158px;left:53%;top:-22%;z-index:4;transform:translate(100px,-100px) rotate(-57deg);opacity:0;filter:drop-shadow(7px 10px 3px #17222a70)}
-.hero-hammer svg{width:100%;height:100%}
-.hero-impact-flash{position:absolute;top:42%;left:50%;width:16px;height:16px;border:4px solid #fff5cd;border-radius:50%;transform:translate(-50%,-50%) scale(0);opacity:0;box-shadow:0 0 22px #fff2bd}
-.hero-stone-wall.is-striking .hero-hammer{animation:heroHammerStrike .73s cubic-bezier(.28,.05,.65,.98) both}
-.hero-stone-wall.is-crumbling .hero-impact-flash{animation:heroImpactFlash .5s ease-out both}
-.hero-stone-wall.is-crumbling .hero-stone{animation:heroStoneFall 1.24s cubic-bezier(.3,.1,.9,.63) var(--delay) forwards}
-.hero-stone-wall.is-crumbling .hero-masonry{animation:heroWallFade 1.3s ease-in forwards}
-@keyframes heroHammerStrike{0%{opacity:0;transform:translate(118px,-106px) rotate(-57deg)}15%{opacity:1}47%{transform:translate(60px,-25px) rotate(-33deg)}73%{transform:translate(0,20px) rotate(38deg)}82%{transform:translate(-7px,14px) rotate(27deg)}100%{opacity:1;transform:translate(18px,-18px) rotate(-9deg)}}
-@keyframes heroStoneFall{0%{opacity:1;transform:translate3d(0,0,0) rotate(0) scale(1)}18%{transform:translate3d(calc(var(--dx)*.3),-20px,35px) rotate(9deg)}100%{opacity:0;transform:translate3d(var(--dx),var(--dy),-120px) rotate(var(--spin)) scale(.68)}}
-@keyframes heroImpactFlash{15%{opacity:1;transform:translate(-50%,-50%) scale(1.6)}100%{opacity:0;transform:translate(-50%,-50%) scale(18)}}
-@keyframes heroWallFade{0%,35%{opacity:1}100%{opacity:0}}
-@media(prefers-reduced-motion:reduce){.hero-stone-wall{display:none}}
+.hero-break-fx{position:absolute;inset:0;z-index:20;pointer-events:none}
+.hero-hammer{position:absolute;width:clamp(110px,24%,155px);height:160px;left:54%;top:18%;opacity:0;transform:translate(105px,-110px) rotate(-55deg);transform-origin:55% 65%;filter:drop-shadow(6px 9px 3px #18252a80)}
+.hero-hammer svg{display:block;width:100%;height:100%}
+.hero-impact-flash{position:absolute;top:46%;left:52%;width:18px;height:18px;border:4px solid #fff5cb;border-radius:50%;transform:translate(-50%,-50%) scale(0);opacity:0;box-shadow:0 0 22px #fff2bd}
+.hero-break-fx.is-striking .hero-hammer{animation:heroHammerStrike .78s cubic-bezier(.28,.05,.65,.98) both}
+.hero-break-fx.is-crumbling .hero-impact-flash{animation:heroImpactFlash .42s ease-out both}
+@keyframes heroHammerStrike{0%{opacity:0;transform:translate(115px,-110px) rotate(-55deg)}15%{opacity:1}47%{transform:translate(65px,-35px) rotate(-29deg)}78%{transform:translate(-8px,24px) rotate(39deg)}100%{opacity:0;transform:translate(20px,-24px) rotate(-10deg)}}
+@keyframes heroImpactFlash{15%{opacity:1;transform:translate(-50%,-50%) scale(1.6)}100%{opacity:0;transform:translate(-50%,-50%) scale(17)}}
+@media(prefers-reduced-motion:reduce){.hero-break-fx{display:none}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -593,7 +584,7 @@ nav a[data-target="studio"]{white-space:nowrap}
     </div>
 
     <section class="stage-wrap" aria-label="Photo puzzle">
-      <p class="note" id="note" aria-hidden="true">rebuild the broken stone portrait!
+      <p class="note" id="note" aria-hidden="true">break the wall, then rebuild me!
         <svg width="18" height="34" viewBox="0 0 24 48"><path d="M4 2 C 16 10, 4 22, 12 34 L 12 44" fill="none" stroke="#F97316" stroke-width="2.5" stroke-linecap="round"/><path d="M5 36 L12 45 L19 36" fill="none" stroke="#F97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </p>
       <div class="pz-stage" id="stage" role="img" aria-label="A stone-wall portrait broken into irregular fragments. Drag each stone onto its matching location or use Solve.">
@@ -602,7 +593,7 @@ nav a[data-target="studio"]{white-space:nowrap}
       <div class="controls">
         <p class="win" id="win" hidden aria-live="polite"><span class="mark" id="winText">Nice. You put me together.</span><a href="#work">See my work &rarr;</a></p>
         <div class="pz-tools">
-          <button class="pz-tool" id="shuffleBtn" type="button">&#8635; shuffle</button>
+          <button class="pz-tool" id="shuffleBtn" type="button">&#9874; break</button>
           <button class="pz-tool" id="photoBtn" type="button">&#8644; next photo</button>
           <button class="pz-tool" id="solveBtn" type="button">&#10003; solve</button>
         </div>
@@ -1362,7 +1353,7 @@ nav a[data-target="studio"]{white-space:nowrap}
 
   /* ---------- shared materials ---------- */
   const sideMat = new THREE.MeshBasicMaterial({ color: INK });
-  const edgeMat = new THREE.LineBasicMaterial({ color: INK, transparent: true });
+  const edgeMat = new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: 0.26 });
   const tapeMat = new THREE.MeshBasicMaterial({ color: 0xEFE6C6, transparent: true, opacity: 0.88, depthWrite: false });
   const unitSquare = (() => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute([-.5,-.5,0, .5,-.5,0, .5,.5,0, -.5,.5,0], 3)); return g; })();
 
@@ -1400,11 +1391,11 @@ nav a[data-target="studio"]{white-space:nowrap}
       return z - Math.floor(z);
     };
     const corner = (x,y) => [
-      x - .5 + (x>0 && x<n ? (jitter(x,y,1)-.5)*.12 : 0),
-      .5-y + (y>0 && y<n ? (jitter(x,y,2)-.5)*.12 : 0)
+      x - .5 + (x>0 && x<n ? (jitter(x,y,1)-.5)*.18 : 0),
+      .5-y + (y>0 && y<n ? (jitter(x,y,2)-.5)*.18 : 0)
     ];
     const mid = (a,b,vertical,x,y) => {
-      const shift=(jitter(x,y,vertical?3:4)-.5)*.24;
+      const shift=(jitter(x,y,vertical?3:4)-.5)*.38;
       return vertical ? [(a[0]+b[0])/2+shift,(a[1]+b[1])/2] :
         [(a[0]+b[0])/2,(a[1]+b[1])/2+shift];
     };
@@ -1430,7 +1421,7 @@ nav a[data-target="studio"]{white-space:nowrap}
       const outlineGeo=new THREE.BufferGeometry().setFromPoints([...poly,new THREE.Vector2(poly[0].x,poly[0].y)]);
       const edge=new THREE.Line(outlineGeo,edgeMat);edge.position.z=.13;mesh.add(edge);
       const shadow=new THREE.Mesh(new THREE.ShapeGeometry(shape),new THREE.MeshBasicMaterial({color:INK,transparent:true,opacity:0,depthWrite:false}));
-      const p={r,c,mesh,front,shadow,tape:null,placed:true,nx:0,ny:0,rz0:0,x:0,y:0,tx:0,ty:0,rz:0,lift:0,tiltX:0,tiltY:0,seam:0.985,zOrder:0,flipStart:0,flipTo:null,swapped:true,vx:0,hx:0,hy:0,loose:0};
+      const p={r,c,mesh,front,shadow,tape:null,placed:true,nx:0,ny:0,rz0:0,x:0,y:0,tx:0,ty:0,rz:0,lift:0,tiltX:0,tiltY:0,seam:1,zOrder:0,flipStart:0,flipTo:null,swapped:true,vx:0,hx:0,hy:0,loose:0};
       const sl=slotOf(p);p.x=sl.x;p.y=sl.y;
       // Convert the absolute (wall-space) polygons into each piece's local space.
       mesh.geometry.translate(-c,r,0);
@@ -1439,7 +1430,7 @@ nav a[data-target="studio"]{white-space:nowrap}
       mesh.userData.piece=p;
       scene.add(shadow);scene.add(mesh);pieces.push(p);
     }
-    complete = false; $('win').hidden = true; updateUI();
+    complete = false; playing = false; $('win').hidden = true; updateUI();
   }
 
   function layout() {
@@ -1523,6 +1514,7 @@ nav a[data-target="studio"]{white-space:nowrap}
     return hits.length ? hits[0].object.userData.piece : null;
   }
   canvas.addEventListener('pointerdown', e => {
+    if (breaking) return;
     const p = pick(e); if (!p) return;
     e.preventDefault();
     const w = toWorld(e);
@@ -1565,47 +1557,46 @@ nav a[data-target="studio"]{white-space:nowrap}
   });
 
 
-  // Minecraft-inspired on-load hammer strike, with collapsing irregular stones.
-  // The overlay is decorative and never blocks puzzle dragging after impact.
+  // The assembled photograph IS the stone wall: no fake masonry overlay.
+  // The hammer strikes the real image and scatters its irregular fragments.
   let breaking=false;
   function beginStoneBreak(){
-    if(breaking)return;
+    if(breaking || !pieces.length)return;
     if(reduced){scatter(false);return;}
     breaking=true;
-    let wall=stage.querySelector('.hero-stone-wall');
-    if(!wall){
-      wall=document.createElement('div');
-      wall.className='hero-stone-wall';
-      wall.setAttribute('aria-hidden','true');
-      const mason=document.createElement('div');mason.className='hero-masonry';
-      const faces=[
-        'polygon(3% 1%,95% 0,100% 30%,91% 96%,4% 100%,0 48%)',
-        'polygon(0 6%,80% 0,100% 25%,94% 96%,11% 100%,0 60%)',
-        'polygon(8% 0,98% 7%,92% 79%,74% 100%,0 90%,0 15%)',
-        'polygon(4% 9%,84% 0,100% 36%,91% 100%,9% 95%,0 65%)'
-      ];
-      for(let i=0;i<24;i++){
-        const stone=document.createElement('span');
-        stone.className='hero-stone';
-        stone.style.setProperty('--stone-shape',faces[i%faces.length]);
-        stone.style.setProperty('--dx',((i%6-2.5)*18+(i%3-1)*60)+'px');
-        stone.style.setProperty('--dy',(170+Math.floor(i/6)*42+i%3*35)+'px');
-        stone.style.setProperty('--spin',((i%2?-1:1)*(35+i*7))+'deg');
-        stone.style.setProperty('--delay',((i%6)*42+Math.floor(i/6)*27)+'ms');
-        mason.appendChild(stone);
-      }
-      wall.appendChild(mason);
-      const hammer=document.createElement('div');hammer.className='hero-hammer';hammer.innerHTML='<svg viewBox="0 0 150 180" role="presentation"><path d="M95 70L45 163" stroke="#49301e" stroke-width="18" stroke-linecap="round"/><path d="M96 74L45 163" stroke="#ac7546" stroke-width="8" stroke-linecap="round"/><path d="M41 32H125L134 43V81L119 91H41L27 76V47Z" fill="#5a6875" stroke="#263646" stroke-width="7" stroke-linejoin="round"/><path d="M48 44H121" stroke="#afbdc8" stroke-width="8" stroke-linecap="round"/><path d="M41 78H119" stroke="#364554" stroke-width="6"/></svg>';
-      wall.appendChild(hammer);
-      const flash=document.createElement('div');flash.className='hero-impact-flash';
-      wall.appendChild(flash);
-      stage.appendChild(wall);
+    complete=false;playing=false;
+    $('win').hidden=true;
+    // On repeat, smoothly reconstruct the image before striking it.
+    const wasBroken=pieces.some(p=>!p.placed);
+    pieces.forEach(p=>{p.placed=true;p.rz0=0;});
+    updateUI();
+    let fx=stage.querySelector('.hero-break-fx');
+    if(!fx){
+      fx=document.createElement('div');
+      fx.className='hero-break-fx';
+      fx.setAttribute('aria-hidden','true');
+      const hammer=document.createElement('div');
+      hammer.className='hero-hammer';
+      hammer.innerHTML='<svg viewBox="0 0 150 180" role="presentation"><path d="M95 70L45 163" stroke="#49301e" stroke-width="18" stroke-linecap="round"/><path d="M96 74L45 163" stroke="#ac7546" stroke-width="8" stroke-linecap="round"/><path d="M41 32H125L134 43V81L119 91H41L27 76V47Z" fill="#5a6875" stroke="#263646" stroke-width="7" stroke-linejoin="round"/><path d="M48 44H121" stroke="#afbdc8" stroke-width="8" stroke-linecap="round"/><path d="M41 78H119" stroke="#364554" stroke-width="6"/></svg>';
+      const flash=document.createElement('div');
+      flash.className='hero-impact-flash';
+      fx.append(hammer,flash);stage.appendChild(fx);
     }
-    wall.classList.remove('is-striking','is-crumbling');
-    void wall.offsetWidth;
-    wall.classList.add('is-striking');
-    setTimeout(()=>{wall.classList.add('is-crumbling');scatter(true);},690);
-    setTimeout(()=>{wall.classList.remove('is-striking','is-crumbling');breaking=false;},2050);
+    fx.classList.remove('is-striking','is-crumbling');
+    const strike=()=>{
+      if(!breaking)return;
+      void fx.offsetWidth;
+      fx.classList.add('is-striking');
+      setTimeout(()=>{
+        fx.classList.add('is-crumbling');
+        scatter(true);
+      },590);
+      setTimeout(()=>{
+        fx.classList.remove('is-striking','is-crumbling');
+        breaking=false;
+      },1850);
+    };
+    if(wasBroken)setTimeout(strike,650);else strike();
   }
 
   /* ---------- loop ---------- */
@@ -1617,7 +1608,7 @@ nav a[data-target="studio"]{white-space:nowrap}
     const dt = Math.min((now - last) / 1000, 0.05); last = now;
     const k = reduced ? 1 : 1 - Math.exp(-dt * 14);
     const kSlow = reduced ? 1 : 1 - Math.exp(-dt * 10);
-    edgeMat.opacity += ((complete ? 0 : 1) - edgeMat.opacity) * kSlow;
+    edgeMat.opacity += ((playing ? 0.55 : 0.26) - edgeMat.opacity) * kSlow;
     for (const p of pieces) {
       const isDrag = drag && drag.p === p;
       let tx, ty, trz;
@@ -1637,7 +1628,7 @@ nav a[data-target="studio"]{white-space:nowrap}
       if (isHover) { tTiltX = -p.hy * 0.35; tTiltY = p.hx * 0.35; }
       if (isDrag) { tTiltY = Math.max(-0.35, Math.min(0.35, p.vx * 1.5)); p.vx *= 0.85; }
       p.tiltX += (tTiltX - p.tiltX) * kSlow; p.tiltY += (tTiltY - p.tiltY) * kSlow;
-      p.seam += ((complete ? 1.0 : 0.97) - p.seam) * kSlow;
+      p.seam += (1 - p.seam) * kSlow;
 
       let flip = 0;
       if (p.flipTo && now >= p.flipStart) {
