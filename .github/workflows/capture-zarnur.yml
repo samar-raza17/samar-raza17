@@ -1,0 +1,35 @@
+name: Capture real Zarnur portfolio screenshots
+on:
+  push:
+    branches: [samar-preview]
+    paths: ['.github/workflows/capture-zarnur.yml', 'scripts/capture-zarnur.cjs']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: samar-preview
+      - uses: browser-actions/setup-chrome@v1
+      - name: Install browser driver
+        run: |
+          mkdir -p /tmp/zarnur-shot && cd /tmp/zarnur-shot
+          npm init -y >/dev/null
+          npm install playwright --no-audit --no-fund
+      - name: Capture official websites and public Play Store screenshots
+        env:
+          NODE_PATH: /tmp/zarnur-shot/node_modules
+        run: node scripts/capture-zarnur.cjs
+      - name: Save screenshots on preview branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/zarnur-*.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Add actual Zarnur website and Play Store captures [skip ci]"
+            git push origin HEAD:samar-preview
+          fi
