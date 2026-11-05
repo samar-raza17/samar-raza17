@@ -765,6 +765,43 @@ filter:drop-shadow(1px 2px 1px #170e0ba6)}
 .sr-wall-item.is-revealed .sr-medium-stone-wall{visibility:hidden!important}
 .sr-wall-item.is-revealed .sr-wall-plaster:after{display:none}
 @media(prefers-reduced-motion:reduce){.sr-wall-item.is-shattering .sr-medium-stone-wall .sr-wall-fragment{animation-duration:.01ms!important}}
+</style><style id="sr-experience-reveal-and-site-minecraft-v3">
+/* CRITICAL: old plaster overlay was opaque even after all stones vanished.
+   Keep the inside content above it and remove the plaster surface on reveal. */
+.sr-wall-item .sr-wall-inside{z-index:2;position:absolute;inset:0;display:flex;flex-direction:column;visibility:visible;opacity:1;color:#fff7ed;isolation:isolate}
+.sr-wall-item .sr-wall-inside .sr-wall-inside-eyebrow,.sr-wall-item .sr-wall-inside .sr-wall-job,.sr-wall-item .sr-wall-inside .sr-wall-years,.sr-wall-item .sr-wall-inside .sr-wall-story,.sr-wall-item .sr-wall-inside .sr-wall-inner-company{position:relative;z-index:3;visibility:visible}
+.sr-wall-item .sr-wall-plaster{z-index:4}
+.sr-wall-item .sr-wall-front{z-index:8}
+.sr-wall-item.is-shattering .sr-wall-plaster{background:transparent!important}
+.sr-wall-item.is-revealed .sr-wall-plaster{opacity:0!important;visibility:hidden!important;background:transparent!important;pointer-events:none!important}
+.sr-wall-item.is-revealed .sr-medium-stone-wall{opacity:0!important;visibility:hidden!important}
+.sr-wall-item.is-revealed .sr-wall-inside{display:flex!important;opacity:1!important;visibility:visible!important;z-index:6!important;transform:none!important;background:radial-gradient(circle at 92% 4%,#b75a2933,transparent 50%),linear-gradient(145deg,#3a2820,#191614)!important;border-color:#ef852f!important}
+.sr-wall-item.is-revealed .sr-wall-inside>*{opacity:1!important;visibility:visible!important;transform:none}
+.sr-wall-item.is-revealed .sr-wall-inside .sr-wall-job,.sr-wall-item.is-revealed .sr-wall-inside .sr-wall-story{animation:srWallTextIn .45s both!important}
+.sr-wall-item.is-revealed .sr-wall-front{opacity:0!important;visibility:hidden!important}
+.sr-wall-item.is-revealed .sr-wall-inside-eyebrow{color:#ffad69!important}
+.sr-wall-item.is-revealed .sr-wall-job{color:#fff8e9!important;text-shadow:0 2px 0 #0c0a08}
+.sr-wall-item.is-revealed .sr-wall-story{color:#e7d8c9!important}
+.sr-wall-item.is-revealed .sr-wall-inner-company{color:#ffa557!important}
+/* Thematic finish pass across existing components: NO layout or positioning edits. */
+:root{--sr-earth-dark:#35251c;--sr-earth-ink:#261a16;--sr-earth-stone:#bc8c62;--sr-earth-cream:#f8f2e7;--sr-earth-orange:#e77722}
+body{background-color:#fbf8f3}
+.btn,.cta,.pz-tool,.sr-project-action,.sr-detail-btn{border-radius:2px!important;box-shadow:3px 4px 0 #543b2a!important;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease}
+.btn:hover,.cta:hover,.pz-tool:hover,.sr-project-action:hover,.sr-detail-btn:hover{transform:translate(-1px,-2px);box-shadow:5px 6px 0 #543b2a!important}
+.btn:active,.cta:active,.pz-tool:active,.sr-project-action:active,.sr-detail-btn:active{transform:translate(2px,3px);box-shadow:1px 1px 0 #543b2a!important}
+.tags li{border-radius:3px!important;border-color:#775339!important;background:linear-gradient(145deg,#fef8eb,#eedcc2)!important;box-shadow:2px 2px 0 #8b674b;color:#553724}
+.tags li:hover{background:#ffdfb9!important}
+.ab-photo{border-color:#65432e!important;box-shadow:8px 8px 0 #5b3c2b!important;background:#f7e8d2!important}
+.ab-photo:hover{box-shadow:11px 11px 0 #5b3c2b!important}
+.sr-project-action{background:linear-gradient(145deg,#f9e5c6,#eec18f)!important;border-color:#784e30!important;color:#412b20!important}
+.sr-wall-guide{border-color:#b38c6a!important}
+.sr-wall-finale{border-color:#aa7957!important;background:linear-gradient(145deg,#fff9f0,#f4e5d2)}
+.site-nav .logo,.site-nav .nav a.link{filter:drop-shadow(2px 3px 0 #563b3024)}
+.site-nav .nav a.link:hover{filter:drop-shadow(3px 4px 0 #563b3048)}
+.sr-scroll-work .sr-rock-window .sr-hang-photo{box-shadow:inset 6px 6px 9px #28190f6b,3px 5px 0 #6d4836!important}
+.sr-scroll-work .sr-rock-window .sr-hang-image.sr-real-shot{border-color:#ab7d57!important}
+:focus-visible{outline-color:#ea7728}
+@media(prefers-reduced-motion:reduce){.btn,.cta,.pz-tool,.sr-project-action,.sr-detail-btn{transition:none}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
