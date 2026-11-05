@@ -141,6 +141,42 @@ border-left:1px solid rgba(0,0,0,.24);border-right:1px solid rgba(255,255,255,.3
 .sr-hang-track{align-items:flex-start}
 @media (max-width:1050px){.sr-hang-item{flex-basis:calc((100% - clamp(15px,2.4vw,34px)) / 2)}}
 @media (max-width:680px){.sr-hang-item{flex-basis:88%}.sr-hang-image{aspect-ratio:16/9}}
+
+/* Polaroid hover interactions — inspired by the lower Studio gallery.
+   Move only the photo, not its rope-aligned clip or carousel track. */
+.sr-hang-photo{
+  transform:translateY(0) rotate(0deg);
+  transform-origin:center 12%;
+  transition:transform .36s cubic-bezier(.2,.8,.2,1),box-shadow .36s cubic-bezier(.2,.8,.2,1),border-color .3s ease;
+  will-change:transform;
+}
+.sr-hang-item:hover .sr-hang-photo,
+.sr-hang-item:focus-within .sr-hang-photo{
+  transform:translateY(-10px) rotate(calc(var(--sr-rotate) * -.4));
+  box-shadow:11px 16px 0 var(--ink);
+  border-color:#137d83;
+}
+.sr-hang-image img{
+  transition:transform .45s cubic-bezier(.2,.8,.2,1);
+}
+.sr-hang-item:hover .sr-hang-image img,
+.sr-hang-item:focus-within .sr-hang-image img{
+  transform:scale(1.035);
+}
+.sr-hang-item .sr-detail-btn{
+  transform:translateY(12px);
+  transition:transform .32s cubic-bezier(.2,.8,.2,1),background-color .2s;
+}
+.sr-hang-item:hover .sr-detail-btn,
+.sr-hang-item:focus-within .sr-detail-btn{
+  transform:translateY(0);
+}
+@media(hover:none){
+ .sr-hang-photo,.sr-hang-image img,.sr-detail-btn{transform:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .sr-hang-photo,.sr-hang-image img,.sr-detail-btn{transition:none!important;transform:none!important}
+}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
