@@ -543,6 +543,47 @@ nav a[data-target="studio"]{white-space:nowrap}
 </style><style id="puzzle-hints-clean-board">
 #hintBtn:disabled{opacity:.4;cursor:not-allowed;box-shadow:1px 1px 0 #161616;transform:none}
 #hintBtn:not(:disabled):hover{background:#fff3d5}
+</style><style id="construction-finish-styles">
+.construction-site{position:absolute;inset:0;z-index:25;pointer-events:none;overflow:hidden;font-family:var(--font-mono)}
+.construction-truck{position:absolute;left:0;bottom:3%;width:clamp(132px,31%,210px);transform:translateX(-150%);filter:drop-shadow(3px 5px 3px #23313b35)}
+.construction-truck svg,.construction-worker svg,.construction-trowel svg{width:100%;height:100%;display:block}
+.construction-site.is-arriving .construction-truck{animation:truckArrives 1.3s cubic-bezier(.12,.8,.22,1) forwards}
+.construction-site.is-leaving .construction-truck{animation:truckLeaves 1s ease-in forwards}
+.construction-worker{position:absolute;left:28%;bottom:6%;width:clamp(78px,19%,128px);transform:translateY(120%);filter:drop-shadow(2px 4px 3px #23313b30)}
+.construction-site.is-filling .construction-worker{animation:workerUp .7s ease-out forwards}
+.construction-site.is-plastering .construction-worker{animation:workerWork 3.2s ease-in-out forwards}
+.construction-site.is-finishing .construction-worker{animation:workerFinish .85s ease-in-out forwards}
+.construction-site.is-leaving .construction-worker{animation:workerLeave .85s ease-in forwards}
+.construction-trowel{position:absolute;width:60px;left:76%;top:44%;transform-origin:12% 75%;transform:rotate(-35deg)}
+.construction-site.is-filling .construction-trowel{animation:trowelScoop .75s ease-in-out 3 alternate}
+.construction-site.is-plastering .construction-trowel{animation:trowelApply .48s ease-in-out 6 alternate}
+.construction-bowl{position:absolute;left:17%;bottom:7%;width:clamp(58px,12%,92px);height:28px;border-radius:5px 5px 50% 50%;background:#9aa9ad;border:3px solid #334755;box-shadow:inset 0 -6px #5d747e;opacity:0;transform:translateY(30px);overflow:hidden}
+.construction-cement{position:absolute;bottom:3px;left:6px;right:6px;height:0;background:#d8d7cb;border-radius:50% 50% 40% 40%;transition:height 1s}
+.construction-site.is-filling .construction-bowl{opacity:1;transform:translateY(0);transition:transform .4s,opacity .4s}
+.construction-site.is-filling .construction-cement{height:18px}
+.construction-mortar{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0;overflow:visible}
+.construction-mortar svg{display:block;width:100%;height:100%;overflow:visible}
+.construction-mortar path{fill:none;stroke:#d5d3c4;stroke-width:.045;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.construction-site.is-plastering .construction-mortar{opacity:1}
+.construction-site.is-plastering .construction-mortar path{animation:jointFill 2.3s cubic-bezier(.2,.5,.3,1) forwards;animation-delay:calc(var(--joint) * 36ms)}
+.construction-site.is-polished .construction-mortar{opacity:0;transition:opacity .65s}
+.construction-dust{position:absolute;top:27%;left:47%;font-size:24px;letter-spacing:18px;color:#f6b45b;opacity:0}
+.construction-site.is-finishing .construction-dust{animation:finishSpark .9s ease-out forwards}
+.construction-status{position:absolute;left:50%;bottom:2%;transform:translateX(-50%);color:#dc7626;background:#f4f4f2ed;padding:2px 9px;font-size:11px;white-space:nowrap;opacity:0}
+.construction-site.is-filling .construction-status{opacity:1}
+.construction-site.is-leaving .construction-status{opacity:0}
+@keyframes truckArrives{0%{transform:translateX(-150%)}100%{transform:translateX(0)}}
+@keyframes truckLeaves{0%{transform:translateX(0)}100%{transform:translateX(-150%)}}
+@keyframes workerUp{to{transform:translateY(0)}}
+@keyframes workerWork{0%{transform:translate(0,0)}24%{transform:translate(16%,-28%)}50%{transform:translate(50%,-10%)}76%{transform:translate(85%,-35%)}100%{transform:translate(105%,0)}}
+@keyframes workerFinish{0%{transform:translate(105%,0)}50%{transform:translate(45%,-18%)}100%{transform:translate(0,0)}}
+@keyframes workerLeave{0%{transform:translateY(0)}100%{transform:translateY(140%)}}
+@keyframes trowelScoop{from{transform:rotate(-38deg)}to{transform:rotate(55deg) translateY(10px)}}
+@keyframes trowelApply{from{transform:rotate(-28deg) translateY(-15px)}to{transform:rotate(40deg) translateY(10px)}}
+@keyframes jointFill{to{stroke-dashoffset:0}}
+@keyframes finishSpark{0%{opacity:0;transform:scale(.6)}35%{opacity:1}100%{opacity:0;transform:scale(1.5)}}
+@media(max-width:520px){.construction-worker{left:22%}.construction-bowl{left:12%}.construction-status{bottom:0}}
+@media(prefers-reduced-motion:reduce){.construction-site{display:none}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -1369,6 +1410,17 @@ nav a[data-target="studio"]{white-space:nowrap}
   const MAX_HINTS=3;
   let hintsLeft=MAX_HINTS;
   let drag = null, hovered = null;
+  let buildActive=false, buildTimers=[], mortarMarkup='';
+  let finishPlane=null;
+  const buildLater=(fn,delay)=>buildTimers.push(setTimeout(fn,delay));
+  function cancelConstruction(){
+    buildTimers.forEach(clearTimeout);buildTimers=[];
+    buildActive=false;
+    const site=stage.querySelector('.construction-site');
+    if(site){site.remove();}
+    if(finishPlane){finishPlane.visible=false;finishPlane.material.opacity=0;}
+    edgeMat.opacity=.55;
+  }
   const boardGroup = new THREE.Group(); scene.add(boardGroup);
 
   function buildBoard() {
@@ -1391,6 +1443,8 @@ nav a[data-target="studio"]{white-space:nowrap}
   function slotOf(p) { return { x: -B / 2 + s * (p.c + 0.5), y: B / 2 - s * (p.r + 0.5) }; }
 
   function buildPieces(n) {
+    cancelConstruction();
+    if(finishPlane){scene.remove(finishPlane);finishPlane.geometry.dispose();finishPlane.material.dispose();finishPlane=null;}
     pieces.forEach(p => { scene.remove(p.mesh); scene.remove(p.shadow); p.mesh.geometry.dispose(); p.front.dispose(); p.shadow.material.dispose(); });
     pieces = []; N = n;
     buildBoard(); layout();
@@ -1410,6 +1464,39 @@ nav a[data-target="studio"]{white-space:nowrap}
       return vertical ? [(a[0]+b[0])/2+shift,(a[1]+b[1])/2] :
         [(a[0]+b[0])/2,(a[1]+b[1])/2+shift];
     };
+    // Mortar follows the real irregular seams, not a fake rectangular grid.
+    const lines=[];
+    const pt=([x,y])=>[(x+.5).toFixed(3),(.5-y).toFixed(3)].join(' ');
+    for(let x=1;x<n;x++)for(let y=0;y<n;y++){
+      const u=corner(x,y),v=corner(x,y+1);
+      lines.push('M'+pt(u)+' L'+pt(mid(u,v,true,x,y))+' L'+pt(v));
+    }
+    for(let y=1;y<n;y++)for(let x=0;x<n;x++){
+      const u=corner(x,y),v=corner(x+1,y);
+      lines.push('M'+pt(u)+' L'+pt(mid(u,v,false,x,y))+' L'+pt(v));
+    }
+    mortarMarkup=lines.map((d,i)=>'<path pathLength="1" d="'+d+'" style="--joint:'+i+'"/>').join('');
+    // A single finished image surface is faded in after the mason smooths the joints.
+    const perimeter=[];
+    const append=(v)=>perimeter.push(new THREE.Vector2(v[0]-(n-1)/2,v[1]+(n-1)/2));
+    for(let x=0;x<n;x++){const u=corner(x,0),v=corner(x+1,0);append(u);append(mid(u,v,false,x,0));}
+    for(let y=0;y<n;y++){const u=corner(n,y),v=corner(n,y+1);append(u);append(mid(u,v,true,n,y));}
+    for(let x=n;x>0;x--){const u=corner(x,n),v=corner(x-1,n);append(u);append(mid(u,v,false,x-1,n));}
+    for(let y=n;y>0;y--){const u=corner(0,y),v=corner(0,y-1);append(u);append(mid(u,v,true,0,y-1));}
+    const finishShape=new THREE.Shape();
+    perimeter.forEach((v,i)=>i?finishShape.lineTo(v.x,v.y):finishShape.moveTo(v.x,v.y));
+    finishShape.closePath();
+    const finishGeo=new THREE.ShapeGeometry(finishShape);
+    const pos=finishGeo.getAttribute('position'),uv=finishGeo.getAttribute('uv');
+    for(let i=0;i<pos.count;i++)uv.setXY(i,(pos.getX(i)+n/2)/n,(pos.getY(i)+n/2)/n);
+    uv.needsUpdate=true;
+    finishPlane=new THREE.Mesh(finishGeo,new THREE.MeshBasicMaterial({
+      map:textures[photoIndex],transparent:true,opacity:0,side:THREE.DoubleSide,depthTest:false,depthWrite:false
+    }));
+    finishPlane.position.z=.38;
+    finishPlane.renderOrder=1000;
+    finishPlane.visible=false;
+    scene.add(finishPlane);
     for (let r=0;r<n;r++) for(let c=0;c<n;c++){
       const tl=corner(c,r),tr=corner(c+1,r),br=corner(c+1,r+1),bl=corner(c,r+1);
       const vertices=[tl,mid(tl,tr,false,c,r),tr,mid(tr,br,true,c+1,r),
@@ -1455,6 +1542,9 @@ nav a[data-target="studio"]{white-space:nowrap}
     s = B / N;
     boardGroup.scale.set(B, B, 1);
     boardGroup.position.y = 0;
+    if(finishPlane)finishPlane.scale.set(s,s,1);
+    const mortar=stage.querySelector('.construction-mortar');
+    if(mortar){mortar.style.width=(B/viewW*100)+'%';mortar.style.height=(B/VIEW_H*100)+'%';}
   }
 
   const clampX = x => { const m = s * 0.6; return Math.max(-viewW / 2 + m, Math.min(viewW / 2 - m, x)); };
@@ -1473,6 +1563,7 @@ nav a[data-target="studio"]{white-space:nowrap}
   }
 
   function scatter(stagger) {
+    cancelConstruction();
     complete = false; $('win').hidden = true;
     hintsLeft=MAX_HINTS;
     updateUI();
@@ -1486,6 +1577,8 @@ nav a[data-target="studio"]{white-space:nowrap}
   }
 
   function solve() {
+    if(building())return;
+    if(complete)return;
     pieces.forEach((p, i) => {
       const apply = () => { p.placed = true; updateUI(); checkComplete(true); };
       if (!reduced) setTimeout(apply, i * 40); else apply();
@@ -1495,29 +1588,101 @@ nav a[data-target="studio"]{white-space:nowrap}
   function nextPhoto() {
     photoIndex = (photoIndex + 1) % textures.length;
     const now = performance.now();
+    if(finishPlane){finishPlane.material.map=textures[photoIndex];finishPlane.material.needsUpdate=true;}
     pieces.forEach(p => { p.flipTo = textures[photoIndex]; p.swapped = false; p.flipStart = now + (reduced ? 0 : (p.r + p.c) * 60); });
     $('photoLabel').textContent = 'photo ' + (photoIndex + 1) + '/' + textures.length;
   }
 
   const placedCount = () => pieces.filter(p => p.placed).length;
-  function checkComplete(viaSolve) {
-    if (complete || !playing || placedCount() !== pieces.length) return;
-    complete = true;
-    const secs = Math.round((performance.now() - startTime) / 1000);
-    const t = Math.floor(secs / 60) + ':' + String(secs % 60).padStart(2, '0');
-    $('winText').textContent = viaSolve ? 'Solved for you. Try it yourself next?' : 'Nice! You put me together in ' + t + '.';
-    $('win').hidden = false;
+
+  const building=()=>buildActive;
+  function startConstruction(){
+    if(buildActive || !pieces.length)return;
+    if(reduced){
+      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
+      edgeMat.opacity=0;
+      $('win').hidden=false;
+      return;
+    }
+    buildActive=true;
+    const site=document.createElement('div');
+    site.className='construction-site';
+    site.setAttribute('aria-hidden','true');
+    site.innerHTML=`
+      <div class="construction-mortar"><svg viewBox="0 0 ${N} ${N}" preserveAspectRatio="none">${mortarMarkup}</svg></div>
+      <div class="construction-truck" aria-hidden="true">
+        <svg viewBox="0 0 258 148"><ellipse cx="130" cy="133" rx="108" ry="9" fill="#142b3930"/>
+          <rect x="10" y="76" width="166" height="51" rx="8" fill="#e99137" stroke="#243546" stroke-width="5"/>
+          <path d="M167 78H204L232 101V126H167Z" fill="#f4ac52" stroke="#243546" stroke-width="5"/>
+          <rect x="184" y="88" width="22" height="19" rx="2" fill="#bde5e7" stroke="#243546" stroke-width="3"/>
+          <path d="M28 69L51 22L147 22L170 69Z" fill="#e8ece8" stroke="#344350" stroke-width="5"/>
+          <path d="M42 68L63 31L132 31L152 68Z" fill="#5c7480" stroke="#263744" stroke-width="3"/>
+          <path d="M58 38L139 58M62 57L129 35" stroke="#d2d9d4" stroke-width="5"/>
+          <path d="M28 73L8 100" fill="none" stroke="#475967" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="62" cy="129" r="17" fill="#2a3945"/><circle cx="62" cy="129" r="8" fill="#bdc4c2"/>
+          <circle cx="191" cy="129" r="17" fill="#2a3945"/><circle cx="191" cy="129" r="8" fill="#bdc4c2"/>
+        </svg>
+      </div>
+      <div class="construction-worker" aria-hidden="true">
+        <svg viewBox="0 0 140 185">
+          <ellipse cx="69" cy="176" rx="56" ry="6" fill="#142b3930"/>
+          <path d="M45 122L36 168L53 171L72 132L84 171L103 171L98 121Z" fill="#2b5067" stroke="#233442" stroke-width="4"/>
+          <path d="M47 166L29 174H55M85 169L111 175H87" fill="#4d3a2a" stroke="#322b25" stroke-width="9" stroke-linecap="round"/>
+          <path d="M42 67Q67 51 96 69L105 133H40Z" fill="#f3a746" stroke="#273644" stroke-width="4"/>
+          <path d="M54 78V128M84 78V128" stroke="#fff1b8" stroke-width="5"/>
+          <path d="M38 84L21 118L46 122M100 82L117 113L93 121" fill="none" stroke="#b7794c" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="53" y="43" width="31" height="26" rx="10" fill="#b7794c"/>
+          <ellipse cx="69" cy="34" rx="25" ry="29" fill="#c38b5c" stroke="#613f2c" stroke-width="2"/>
+          <path d="M40 22H98L91 11Q69-3 48 11Z" fill="#f3ad37" stroke="#263644" stroke-width="4"/>
+          <path d="M38 23H101" stroke="#cc8327" stroke-width="8" stroke-linecap="round"/>
+          <circle cx="61" cy="35" r="2.5" fill="#302c28"/><circle cx="78" cy="35" r="2.5" fill="#302c28"/>
+          <path d="M63 49Q70 54 78 49" fill="none" stroke="#70442e" stroke-width="2"/>
+        </svg>
+        <div class="construction-trowel"><svg viewBox="0 0 90 54"><path d="M9 30L55 12L73 27L27 43Z" fill="#9faeb8" stroke="#253746" stroke-width="3"/><path d="M65 27L86 15" stroke="#775031" stroke-width="10" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="construction-bowl"><span class="construction-cement"></span></div>
+      <div class="construction-dust">✦ ✧ ✦</div>
+      <div class="construction-status">restoring the wall...</div>`;
+    stage.appendChild(site);
+    const mortar=site.querySelector('.construction-mortar');
+    mortar.style.width=(B/viewW*100)+'%';
+    mortar.style.height=(B/VIEW_H*100)+'%';
+    site.classList.add('is-arriving');
+    buildLater(()=>site.classList.add('is-filling'),1300);
+    buildLater(()=>site.classList.add('is-plastering'),2550);
+    buildLater(()=>site.classList.add('is-finishing'),5900);
+    buildLater(()=>{
+      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=0;}
+      site.classList.add('is-polished');
+    },6450);
+    buildLater(()=>site.classList.add('is-leaving'),6800);
+    buildLater(()=>{
+      site.remove();buildActive=false;
+      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
+      edgeMat.opacity=0;
+      $('win').hidden=false;
+      updateUI();
+    },7800);
+  }
+  function checkComplete(viaSolve){
+    if(complete || !playing || placedCount()!==pieces.length)return;
+    complete=true;
+    const secs=Math.max(0,Math.round((performance.now()-startTime)/1000));
+    const t=Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0');
+    $('winText').textContent=viaSolve?'The wall is restored. Break it again?':'Nice! You rebuilt my wall in '+t+'.';
+    $('win').hidden=true;
+    startConstruction();
   }
   function updateUI() {
     $('count').textContent=String(placedCount()).padStart(2,'0')+'/'+String(pieces.length).padStart(2,'0');
     const btn=$('hintBtn');
     btn.textContent='☼ hint ('+hintsLeft+')';
-    btn.disabled=hintsLeft===0 || complete || breaking || pieces.every(p=>p.placed);
+    btn.disabled=hintsLeft===0 || complete || breaking || buildActive || pieces.every(p=>p.placed);
     btn.setAttribute('aria-label',hintsLeft+' hints remaining. Place one missing stone piece automatically.');
   }
 
   function useHint(){
-    if(breaking || !playing || complete || hintsLeft<=0)return;
+    if(breaking || buildActive || !playing || complete || hintsLeft<=0)return;
     const unplaced=pieces.filter(p=>!p.placed && (!drag || drag.p!==p));
     if(!unplaced.length)return;
     // Prefer the piece nearest its own slot for a satisfying assisted snap.
@@ -1547,7 +1712,7 @@ nav a[data-target="studio"]{white-space:nowrap}
     return hits.length ? hits[0].object.userData.piece : null;
   }
   canvas.addEventListener('pointerdown', e => {
-    if (breaking) return;
+    if (breaking || buildActive) return;
     const p = pick(e); if (!p) return;
     e.preventDefault();
     const w = toWorld(e);
@@ -1582,7 +1747,7 @@ nav a[data-target="studio"]{white-space:nowrap}
 
   $('shuffleBtn').addEventListener('click', () => beginStoneBreak());
   $('hintBtn').addEventListener('click',useHint);
-  $('solveBtn').addEventListener('click', () => { if (!playing) { playing = true; startTime = performance.now(); } solve(); });
+  $('solveBtn').addEventListener('click', () => { if(buildActive || breaking)return; if (!playing) { playing = true; startTime = performance.now(); } solve(); });
   $('photoBtn').addEventListener('click', nextPhoto);
   document.addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -1595,7 +1760,8 @@ nav a[data-target="studio"]{white-space:nowrap}
   // The hammer strikes the real image and scatters its irregular fragments.
   let breaking=false;
   function beginStoneBreak(){
-    if(breaking || !pieces.length)return;
+    if(breaking || buildActive || !pieces.length)return;
+    cancelConstruction();
     if(reduced){scatter(false);return;}
     breaking=true;
     hintsLeft=MAX_HINTS;
@@ -1643,7 +1809,8 @@ nav a[data-target="studio"]{white-space:nowrap}
     const dt = Math.min((now - last) / 1000, 0.05); last = now;
     const k = reduced ? 1 : 1 - Math.exp(-dt * 14);
     const kSlow = reduced ? 1 : 1 - Math.exp(-dt * 10);
-    edgeMat.opacity += ((playing ? 0.55 : 0.26) - edgeMat.opacity) * kSlow;
+    edgeMat.opacity += (((complete && !buildActive) ? 0 : (playing ? 0.55 : 0.26)) - edgeMat.opacity) * kSlow;
+    if(finishPlane && finishPlane.visible && complete){finishPlane.material.opacity+=(1-finishPlane.material.opacity)*(1-Math.exp(-dt*3.6));}
     for (const p of pieces) {
       const isDrag = drag && drag.p === p;
       let tx, ty, trz;
@@ -2367,6 +2534,17 @@ try {
   const MAX_HINTS=3;
   let hintsLeft=MAX_HINTS;
   let drag = null, hovered = null;
+  let buildActive=false, buildTimers=[], mortarMarkup='';
+  let finishPlane=null;
+  const buildLater=(fn,delay)=>buildTimers.push(setTimeout(fn,delay));
+  function cancelConstruction(){
+    buildTimers.forEach(clearTimeout);buildTimers=[];
+    buildActive=false;
+    const site=stage.querySelector('.construction-site');
+    if(site){site.remove();}
+    if(finishPlane){finishPlane.visible=false;finishPlane.material.opacity=0;}
+    edgeMat.opacity=.55;
+  }
   const boardGroup = new THREE.Group(); scene.add(boardGroup);
 
   function buildBoard() {
@@ -2389,6 +2567,8 @@ try {
   function slotOf(p) { return { x: -B / 2 + s * (p.c + 0.5), y: B / 2 - s * (p.r + 0.5) }; }
 
   function buildPieces(n) {
+    cancelConstruction();
+    if(finishPlane){scene.remove(finishPlane);finishPlane.geometry.dispose();finishPlane.material.dispose();finishPlane=null;}
     pieces.forEach(p => { scene.remove(p.mesh); scene.remove(p.shadow); p.mesh.geometry.dispose(); p.front.dispose(); p.shadow.material.dispose(); });
     pieces = []; N = n;
     buildBoard(); layout();
@@ -2408,6 +2588,39 @@ try {
       return vertical ? [(a[0]+b[0])/2+shift,(a[1]+b[1])/2] :
         [(a[0]+b[0])/2,(a[1]+b[1])/2+shift];
     };
+    // Mortar follows the real irregular seams, not a fake rectangular grid.
+    const lines=[];
+    const pt=([x,y])=>[(x+.5).toFixed(3),(.5-y).toFixed(3)].join(' ');
+    for(let x=1;x<n;x++)for(let y=0;y<n;y++){
+      const u=corner(x,y),v=corner(x,y+1);
+      lines.push('M'+pt(u)+' L'+pt(mid(u,v,true,x,y))+' L'+pt(v));
+    }
+    for(let y=1;y<n;y++)for(let x=0;x<n;x++){
+      const u=corner(x,y),v=corner(x+1,y);
+      lines.push('M'+pt(u)+' L'+pt(mid(u,v,false,x,y))+' L'+pt(v));
+    }
+    mortarMarkup=lines.map((d,i)=>'<path pathLength="1" d="'+d+'" style="--joint:'+i+'"/>').join('');
+    // A single finished image surface is faded in after the mason smooths the joints.
+    const perimeter=[];
+    const append=(v)=>perimeter.push(new THREE.Vector2(v[0]-(n-1)/2,v[1]+(n-1)/2));
+    for(let x=0;x<n;x++){const u=corner(x,0),v=corner(x+1,0);append(u);append(mid(u,v,false,x,0));}
+    for(let y=0;y<n;y++){const u=corner(n,y),v=corner(n,y+1);append(u);append(mid(u,v,true,n,y));}
+    for(let x=n;x>0;x--){const u=corner(x,n),v=corner(x-1,n);append(u);append(mid(u,v,false,x-1,n));}
+    for(let y=n;y>0;y--){const u=corner(0,y),v=corner(0,y-1);append(u);append(mid(u,v,true,0,y-1));}
+    const finishShape=new THREE.Shape();
+    perimeter.forEach((v,i)=>i?finishShape.lineTo(v.x,v.y):finishShape.moveTo(v.x,v.y));
+    finishShape.closePath();
+    const finishGeo=new THREE.ShapeGeometry(finishShape);
+    const pos=finishGeo.getAttribute('position'),uv=finishGeo.getAttribute('uv');
+    for(let i=0;i<pos.count;i++)uv.setXY(i,(pos.getX(i)+n/2)/n,(pos.getY(i)+n/2)/n);
+    uv.needsUpdate=true;
+    finishPlane=new THREE.Mesh(finishGeo,new THREE.MeshBasicMaterial({
+      map:textures[photoIndex],transparent:true,opacity:0,side:THREE.DoubleSide,depthTest:false,depthWrite:false
+    }));
+    finishPlane.position.z=.38;
+    finishPlane.renderOrder=1000;
+    finishPlane.visible=false;
+    scene.add(finishPlane);
     for (let r=0;r<n;r++) for(let c=0;c<n;c++){
       const tl=corner(c,r),tr=corner(c+1,r),br=corner(c+1,r+1),bl=corner(c,r+1);
       const vertices=[tl,mid(tl,tr,false,c,r),tr,mid(tr,br,true,c+1,r),
@@ -2453,6 +2666,9 @@ try {
     s = B / N;
     boardGroup.scale.set(B, B, 1);
     boardGroup.position.y = 0;
+    if(finishPlane)finishPlane.scale.set(s,s,1);
+    const mortar=stage.querySelector('.construction-mortar');
+    if(mortar){mortar.style.width=(B/viewW*100)+'%';mortar.style.height=(B/VIEW_H*100)+'%';}
   }
 
   const clampX = x => { const m = s * 0.6; return Math.max(-viewW / 2 + m, Math.min(viewW / 2 - m, x)); };
@@ -2471,6 +2687,7 @@ try {
   }
 
   function scatter(stagger) {
+    cancelConstruction();
     complete = false; $('win').hidden = true;
     hintsLeft=MAX_HINTS;
     updateUI();
@@ -2484,6 +2701,8 @@ try {
   }
 
   function solve() {
+    if(building())return;
+    if(complete)return;
     pieces.forEach((p, i) => {
       const apply = () => { p.placed = true; updateUI(); checkComplete(true); };
       if (!reduced) setTimeout(apply, i * 40); else apply();
@@ -2493,29 +2712,101 @@ try {
   function nextPhoto() {
     photoIndex = (photoIndex + 1) % textures.length;
     const now = performance.now();
+    if(finishPlane){finishPlane.material.map=textures[photoIndex];finishPlane.material.needsUpdate=true;}
     pieces.forEach(p => { p.flipTo = textures[photoIndex]; p.swapped = false; p.flipStart = now + (reduced ? 0 : (p.r + p.c) * 60); });
     $('photoLabel').textContent = 'photo ' + (photoIndex + 1) + '/' + textures.length;
   }
 
   const placedCount = () => pieces.filter(p => p.placed).length;
-  function checkComplete(viaSolve) {
-    if (complete || !playing || placedCount() !== pieces.length) return;
-    complete = true;
-    const secs = Math.round((performance.now() - startTime) / 1000);
-    const t = Math.floor(secs / 60) + ':' + String(secs % 60).padStart(2, '0');
-    $('winText').textContent = viaSolve ? 'Solved for you. Try it yourself next?' : 'Nice! You put me together in ' + t + '.';
-    $('win').hidden = false;
+
+  const building=()=>buildActive;
+  function startConstruction(){
+    if(buildActive || !pieces.length)return;
+    if(reduced){
+      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
+      edgeMat.opacity=0;
+      $('win').hidden=false;
+      return;
+    }
+    buildActive=true;
+    const site=document.createElement('div');
+    site.className='construction-site';
+    site.setAttribute('aria-hidden','true');
+    site.innerHTML=`
+      <div class="construction-mortar"><svg viewBox="0 0 ${N} ${N}" preserveAspectRatio="none">${mortarMarkup}</svg></div>
+      <div class="construction-truck" aria-hidden="true">
+        <svg viewBox="0 0 258 148"><ellipse cx="130" cy="133" rx="108" ry="9" fill="#142b3930"/>
+          <rect x="10" y="76" width="166" height="51" rx="8" fill="#e99137" stroke="#243546" stroke-width="5"/>
+          <path d="M167 78H204L232 101V126H167Z" fill="#f4ac52" stroke="#243546" stroke-width="5"/>
+          <rect x="184" y="88" width="22" height="19" rx="2" fill="#bde5e7" stroke="#243546" stroke-width="3"/>
+          <path d="M28 69L51 22L147 22L170 69Z" fill="#e8ece8" stroke="#344350" stroke-width="5"/>
+          <path d="M42 68L63 31L132 31L152 68Z" fill="#5c7480" stroke="#263744" stroke-width="3"/>
+          <path d="M58 38L139 58M62 57L129 35" stroke="#d2d9d4" stroke-width="5"/>
+          <path d="M28 73L8 100" fill="none" stroke="#475967" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="62" cy="129" r="17" fill="#2a3945"/><circle cx="62" cy="129" r="8" fill="#bdc4c2"/>
+          <circle cx="191" cy="129" r="17" fill="#2a3945"/><circle cx="191" cy="129" r="8" fill="#bdc4c2"/>
+        </svg>
+      </div>
+      <div class="construction-worker" aria-hidden="true">
+        <svg viewBox="0 0 140 185">
+          <ellipse cx="69" cy="176" rx="56" ry="6" fill="#142b3930"/>
+          <path d="M45 122L36 168L53 171L72 132L84 171L103 171L98 121Z" fill="#2b5067" stroke="#233442" stroke-width="4"/>
+          <path d="M47 166L29 174H55M85 169L111 175H87" fill="#4d3a2a" stroke="#322b25" stroke-width="9" stroke-linecap="round"/>
+          <path d="M42 67Q67 51 96 69L105 133H40Z" fill="#f3a746" stroke="#273644" stroke-width="4"/>
+          <path d="M54 78V128M84 78V128" stroke="#fff1b8" stroke-width="5"/>
+          <path d="M38 84L21 118L46 122M100 82L117 113L93 121" fill="none" stroke="#b7794c" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="53" y="43" width="31" height="26" rx="10" fill="#b7794c"/>
+          <ellipse cx="69" cy="34" rx="25" ry="29" fill="#c38b5c" stroke="#613f2c" stroke-width="2"/>
+          <path d="M40 22H98L91 11Q69-3 48 11Z" fill="#f3ad37" stroke="#263644" stroke-width="4"/>
+          <path d="M38 23H101" stroke="#cc8327" stroke-width="8" stroke-linecap="round"/>
+          <circle cx="61" cy="35" r="2.5" fill="#302c28"/><circle cx="78" cy="35" r="2.5" fill="#302c28"/>
+          <path d="M63 49Q70 54 78 49" fill="none" stroke="#70442e" stroke-width="2"/>
+        </svg>
+        <div class="construction-trowel"><svg viewBox="0 0 90 54"><path d="M9 30L55 12L73 27L27 43Z" fill="#9faeb8" stroke="#253746" stroke-width="3"/><path d="M65 27L86 15" stroke="#775031" stroke-width="10" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="construction-bowl"><span class="construction-cement"></span></div>
+      <div class="construction-dust">✦ ✧ ✦</div>
+      <div class="construction-status">restoring the wall...</div>`;
+    stage.appendChild(site);
+    const mortar=site.querySelector('.construction-mortar');
+    mortar.style.width=(B/viewW*100)+'%';
+    mortar.style.height=(B/VIEW_H*100)+'%';
+    site.classList.add('is-arriving');
+    buildLater(()=>site.classList.add('is-filling'),1300);
+    buildLater(()=>site.classList.add('is-plastering'),2550);
+    buildLater(()=>site.classList.add('is-finishing'),5900);
+    buildLater(()=>{
+      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=0;}
+      site.classList.add('is-polished');
+    },6450);
+    buildLater(()=>site.classList.add('is-leaving'),6800);
+    buildLater(()=>{
+      site.remove();buildActive=false;
+      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
+      edgeMat.opacity=0;
+      $('win').hidden=false;
+      updateUI();
+    },7800);
+  }
+  function checkComplete(viaSolve){
+    if(complete || !playing || placedCount()!==pieces.length)return;
+    complete=true;
+    const secs=Math.max(0,Math.round((performance.now()-startTime)/1000));
+    const t=Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0');
+    $('winText').textContent=viaSolve?'The wall is restored. Break it again?':'Nice! You rebuilt my wall in '+t+'.';
+    $('win').hidden=true;
+    startConstruction();
   }
   function updateUI() {
     $('count').textContent=String(placedCount()).padStart(2,'0')+'/'+String(pieces.length).padStart(2,'0');
     const btn=$('hintBtn');
     btn.textContent='☼ hint ('+hintsLeft+')';
-    btn.disabled=hintsLeft===0 || complete || breaking || pieces.every(p=>p.placed);
+    btn.disabled=hintsLeft===0 || complete || breaking || buildActive || pieces.every(p=>p.placed);
     btn.setAttribute('aria-label',hintsLeft+' hints remaining. Place one missing stone piece automatically.');
   }
 
   function useHint(){
-    if(breaking || !playing || complete || hintsLeft<=0)return;
+    if(breaking || buildActive || !playing || complete || hintsLeft<=0)return;
     const unplaced=pieces.filter(p=>!p.placed && (!drag || drag.p!==p));
     if(!unplaced.length)return;
     // Prefer the piece nearest its own slot for a satisfying assisted snap.
@@ -2545,7 +2836,7 @@ try {
     return hits.length ? hits[0].object.userData.piece : null;
   }
   canvas.addEventListener('pointerdown', e => {
-    if (breaking) return;
+    if (breaking || buildActive) return;
     const p = pick(e); if (!p) return;
     e.preventDefault();
     const w = toWorld(e);
@@ -2580,7 +2871,7 @@ try {
 
   $('shuffleBtn').addEventListener('click', () => beginStoneBreak());
   $('hintBtn').addEventListener('click',useHint);
-  $('solveBtn').addEventListener('click', () => { if (!playing) { playing = true; startTime = performance.now(); } solve(); });
+  $('solveBtn').addEventListener('click', () => { if(buildActive || breaking)return; if (!playing) { playing = true; startTime = performance.now(); } solve(); });
   $('photoBtn').addEventListener('click', nextPhoto);
   document.addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -2593,7 +2884,8 @@ try {
   // The hammer strikes the real image and scatters its irregular fragments.
   let breaking=false;
   function beginStoneBreak(){
-    if(breaking || !pieces.length)return;
+    if(breaking || buildActive || !pieces.length)return;
+    cancelConstruction();
     if(reduced){scatter(false);return;}
     breaking=true;
     hintsLeft=MAX_HINTS;
@@ -2641,7 +2933,8 @@ try {
     const dt = Math.min((now - last) / 1000, 0.05); last = now;
     const k = reduced ? 1 : 1 - Math.exp(-dt * 14);
     const kSlow = reduced ? 1 : 1 - Math.exp(-dt * 10);
-    edgeMat.opacity += ((playing ? 0.55 : 0.26) - edgeMat.opacity) * kSlow;
+    edgeMat.opacity += (((complete && !buildActive) ? 0 : (playing ? 0.55 : 0.26)) - edgeMat.opacity) * kSlow;
+    if(finishPlane && finishPlane.visible && complete){finishPlane.material.opacity+=(1-finishPlane.material.opacity)*(1-Math.exp(-dt*3.6));}
     for (const p of pieces) {
       const isDrag = drag && drag.p === p;
       let tx, ty, trz;
