@@ -7,7 +7,17 @@ function setAssets(root){for(const ladder of root.querySelectorAll('.cw-ladder:n
 let img=document.createElement('img');img.src=urls["construction-ladder.svg"];img.alt="";ladder.append(img);ladder.classList.add('asset-3d');}
 for(const bowl of root.querySelectorAll('.cw-bowl:not(.asset-3d)')){let img=document.createElement('img');img.src=urls["cement-bowl-empty.svg"];img.alt="";bowl.append(img);bowl.classList.add('asset-3d');}
 for(const tool of root.querySelectorAll('.cw-trowel:not(.asset-3d)')){tool.innerHTML='<img alt="" src="'+urls["masonry-trowel.svg"]+'">';tool.classList.add('asset-3d');}
+for(const stream of root.querySelectorAll('.cw-pour:not(.asset-3d)')){stream.innerHTML='<img alt="" src="'+urls["cement-pouring.svg"]+'">';stream.classList.add('asset-3d');}
+const site=root.matches?.('.construction-site')?root:root.querySelector?.('.construction-site');
+if(site&&!site.dataset.assetBowlWatch){
+ site.dataset.assetBowlWatch='yes';
+ const sync=()=>{for(const bowl of site.querySelectorAll('.cw-bowl.asset-3d img')){
+ const key=site.classList.contains('loaded')?'cement-bowl-filled.svg':'cement-bowl-empty.svg';
+ if(bowl.dataset.svgKey!==key){bowl.dataset.svgKey=key;bowl.src=urls[key];}
+ }};
+ sync();new MutationObserver(sync).observe(site,{attributes:true,attributeFilter:['class']});
 }
-const st=document.createElement('style');st.textContent='.cw-ladder.asset-3d{background:none!important;border:0!important;width:72px!important}.cw-ladder.asset-3d img{display:block;width:100%;height:100%;object-fit:fill}.cw-bowl.asset-3d{background:none!important;border:0!important;overflow:visible!important;top:58%!important;height:38px!important}.cw-bowl.asset-3d>img{display:block;max-width:100%;height:100%;object-fit:contain}.cw-bowl.asset-3d>i{display:none!important}.cw-trowel.asset-3d>img{display:block;width:100%;height:auto}';document.head.appendChild(st);
+}
+const st=document.createElement('style');st.textContent='.cw-ladder.asset-3d{background:none!important;border:0!important;width:72px!important}.cw-ladder.asset-3d img{display:block;width:100%;height:100%;object-fit:fill}.cw-bowl.asset-3d{background:none!important;border:0!important;overflow:visible!important;top:58%!important;height:38px!important}.cw-bowl.asset-3d>img{display:block;max-width:100%;height:100%;object-fit:contain}.cw-bowl.asset-3d>i{display:none!important}.cw-trowel.asset-3d>img{display:block;width:100%;height:auto}.cw-pour.asset-3d{background:none!important;width:20px!important}.cw-pour.asset-3d img{display:block;width:100%;height:100%;object-fit:fill}';document.head.appendChild(st);
 setAssets(document);new MutationObserver(m=>{for(const v of m)for(const n of v.addedNodes){if(n.nodeType===1){if(n.matches?.('.construction-site'))setAssets(n);else if(n.querySelector?.('.construction-site'))setAssets(n);}}}).observe(document.body,{subtree:true,childList:true});
 }catch(e){console.warn("Additional construction SVG assets failed to load",e);}})();
