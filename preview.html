@@ -343,6 +343,14 @@ body{background-color:#fcfaf7!important}
 .sr-scroll-work .sr-project-action{opacity:1;visibility:visible;transform:none}
 }
 @media(max-height:620px){.sr-scroll-work .sr-hang-photo{height:clamp(275px,51vh,350px)}.sr-scroll-work .sr-hang-image.sr-real-shot{height:clamp(115px,22vh,180px)}.sr-scroll-work .sr-project-desc{-webkit-line-clamp:2}}
+
+/* Djanazah is one portfolio project, with two accessible detail tabs */
+.sr-project-tabs[hidden]{display:none!important}
+.sr-project-tabs{display:flex;gap:7px;margin:1px 0 5px;border-bottom:1px solid #e7dbcc;padding-bottom:9px}
+.sr-project-tabs button{font:600 12px var(--font-mono);background:#fff;border:1px solid #d9cfc3;color:#57534e;padding:10px 13px;cursor:pointer;transition:background .2s,color .2s}
+.sr-project-tabs button[aria-selected="true"]{background:#f97316;border-color:#f97316;color:white;box-shadow:2px 2px 0 #171717}
+.sr-project-tabs button:focus-visible{outline:2px solid #f97316;outline-offset:3px}
+#srProjectTabContent{display:flex;flex-direction:column;gap:13px}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -408,9 +416,9 @@ body{background-color:#fcfaf7!important}
   <section class="shell work sr-scroll-work" id="work" aria-labelledby="work-title">
  <div class="sr-scroll-pin">
    <div class="work-head sr-hang-head">
-     <div><p class="eyebrow">( selected work / 11 projects )</p>
+     <div><p class="eyebrow">( selected work / 10 projects )</p>
        <h2 class="slot-title" id="work-title">Things I've <span class="hl">built.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FED7AA"/></svg></span></h2></div>
-     <div class="sr-scroll-counter"><span id="srWorkCounter" aria-live="polite">01 / 11</span><span class="sr-scroll-instruct">scroll to explore ↓</span></div>
+     <div class="sr-scroll-counter"><span id="srWorkCounter" aria-live="polite">01 / 10</span><span class="sr-scroll-instruct">scroll to explore ↓</span></div>
    </div>
    <div class="sr-hanging-wrap">
       <svg class="sr-hang-string" viewBox="0 0 1200 145" preserveAspectRatio="none" aria-hidden="true">
@@ -526,22 +534,15 @@ body{background-color:#fcfaf7!important}
  </div>
       <span class="sr-hang-meta">Independent project · Html / Css</span>
       </article>
-<article class="sr-hang-item" style="--sr-rotate:1.4deg" aria-label="Djanazah Mobile App">
+<article class="sr-hang-item" style="--sr-rotate:1.4deg" aria-label="Djanazah — Mobile App and Admin Panel">
  <span class="sr-hang-pin" aria-hidden="true"></span>
  <div class="sr-hang-photo">
  <div class="sr-hang-image sr-real-shot sr-djanazah-brand"><a href="https://play.google.com/store/apps/details?id=nl.djanazahgebeden.app&amp;hl=en" target="_blank" rel="noopener noreferrer" class="sr-app-source"><img src="https://raw.githubusercontent.com/samar-raza17/djanazah-mobile-app/main/assets/images/app_icon.png" alt="Djanazah original app icon"><span>Actual screenshots on Google Play ↗</span></a></div>
-<div class="sr-project-card-copy"><div class="sr-hang-caption"><span>Djanazah Mobile App</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
- <p class="sr-project-desc">React Native and Expo app for nearby Janazah announcements, notifications, prayer guidance, and Duas.</p>
- <button class="sr-detail-btn sr-project-action" data-project="9" type="button" aria-label="View details for Djanazah Mobile App">View project details <span aria-hidden="true">↗</span></button>
- </div></div><span class="sr-hang-meta">Client project · React Native / Expo</span></article>
-<article class="sr-hang-item" style="--sr-rotate:-1.5deg" aria-label="Djanazah Admin Panel">
- <span class="sr-hang-pin" aria-hidden="true"></span>
- <div class="sr-hang-photo">
- <div class="sr-hang-image sr-real-shot sr-admin-cover"><img src="./assets/djanazah-admin-cover.svg" alt="Illustrative admin panel image" loading="lazy" draggable="false"></div>
-<div class="sr-project-card-copy"><div class="sr-hang-caption"><span>Djanazah Admin Panel</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
- <p class="sr-project-desc">Next.js dashboard to manage Janazah announcements, users, comments, Duas, categories, and settings.</p>
- <button class="sr-detail-btn sr-project-action" data-project="10" type="button" aria-label="View details for Djanazah Admin Panel">View project details <span aria-hidden="true">↗</span></button>
- </div></div><span class="sr-hang-meta">Client project · Next.js / React</span></article>
+<div class="sr-project-card-copy"><div class="sr-hang-caption"><span>Djanazah Platform</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
+ <p class="sr-project-desc">One connected platform for Janazah announcements and Duas, with a mobile app and management dashboard.</p>
+ <button class="sr-detail-btn sr-project-action" data-project="9" type="button" aria-label="View Djanazah mobile app and admin panel details">View project details <span aria-hidden="true">↗</span></button>
+ </div></div><span class="sr-hang-meta">Client platform · React Native / Next.js</span></article>
+
       </div>
    </div>
    <div class="sr-scroll-progress" aria-hidden="true"><div id="srWorkProgress"></div></div>
@@ -554,9 +555,15 @@ body{background-color:#fcfaf7!important}
    <div class="sr-modal-text">
       <p class="eyebrow">PROJECT <span id="srModalIndex"></span></p>
       <h2 id="srModalTitle"></h2>
+      <div id="srProjectTabs" class="sr-project-tabs" role="tablist" aria-label="Djanazah platform views" hidden>
+        <button type="button" role="tab" id="srMobileTab" aria-selected="true" aria-controls="srProjectTabContent" data-view="mobile">Mobile App</button>
+        <button type="button" role="tab" id="srAdminTab" aria-selected="false" aria-controls="srProjectTabContent" data-view="admin" tabindex="-1">Admin Panel</button>
+      </div>
+      <div id="srProjectTabContent" role="tabpanel" aria-labelledby="srMobileTab">
       <p id="srModalDescription"></p>
       <h3>Built with</h3><div id="srModalTech" class="sr-modal-tech"></div>
       <div class="sr-modal-links"><a id="srModalLive" href="#" target="_blank" rel="noopener noreferrer">Live website ↗</a><a id="srModalCode" href="#" target="_blank" rel="noopener noreferrer">View code ↗</a></div>
+      </div>
    </div>
  </div>
 </dialog>
@@ -2636,7 +2643,7 @@ try {
  const progress=document.getElementById("srWorkProgress"),counter=document.getElementById("srWorkCounter");
  const modal=document.getElementById("srProjectDialog");
  if(!work||!pin||!track||!progress||!counter||!modal)return;
- const projects=[{"title":"RabbitxLogistics","description":"RabbitxLogistics is a Full-Stack courier service website built for Code Thread to attract users and collect shipment details through interactive forms. It features a clean UI, responsive design, and streamlined user flow for lead generation.","tech":["JavaScript","TailwindCss","React.js","Node.js","Rest API","Express.js","MongoDB","Shadcn"],"live":"https://rabbitxlogistics.com","github":"","image":"/rabbitxlogistics.webp","builtFor":"Code Thread"},{"title":"RabbitxLogistics Admin Dashboard","description":"RabbitxLogistics Admin Dashboard is a Full-Stack demo panel to help admins manage orders and assign them to riders efficiently. This is a demonstration version only; official dashboard access is not available.","tech":["JavaScript","TailwindCss","React.js","Node.js","Rest API","Express.js","MongoDB","Web-Sockets.","Shadcn"],"live":"https://rabbit-courier.vercel.app","github":"","image":"/rabbitxlogistocs-dashboard.webp","builtFor":"Code Thread"},{"title":"Raast Point Of Sale","description":"Raast Point of Sale is a Full-Stack full-featured POS system designed to manage restaurants, orders, riders, and admin controls. This is a demo version only; it is not yet deployed to production.","tech":["JavaScript","TailwindCss","React.js","Node.js","Rest API","Express.js","MongoDB","Web-Sockets.","Shadcn"],"live":"https://raastposdemo.vercel.app","github":"","image":"/raastpos.webp","builtFor":"Practice"},{"title":"Dil Se Buy","description":"Dil Se Buy is a full-stack eCommerce platform built using React.js, featuring both a customer-facing site and an admin panel. It was my first complete project in React, handling product listings, orders, and management.","tech":["JavaScript","TailwindCss","React.js","FireBase","FireStore DB","FireBase Bucket"],"live":"https://dilsebuy.vercel.app","github":"https://github.com/samar-raza17/dilsebuy","image":"/dilsebuy.webp","builtFor":"Practice"},{"title":"Smart For Share","description":"SmartForShare is a Text/File-sharing platform built with Next.js, inspired by AirForShare but with broader reach. Unlike AirForShare, it allows users to share and access data from anywhere, not just on the same network.","tech":["JavaScript","TypeScript","TailwindCss","React.js","Next.js","MongoDB","Rest Api"],"live":"https://smartforshare.vercel.app","github":"https://github.com/samar-raza17/smartforshare","image":"/smartforshare.webp","builtFor":"Practice"},{"title":"Friend Flow (Social App)","description":"FriendFlow is a social media app inspired by Facebook, allowing users to post images, videos, and text with full like, comment, share, and follow features. It offers an interactive and engaging user experience built for connection.","tech":["JavaScript","TailwindCss","React.js","FireBase","FireStore DB","FireBase Bucket","OAuth"],"live":"https://friendflow.vercel.app/","github":"https://github.com/samar-raza17/friendflow","image":"/friendflow.webp","builtFor":"Practice"},{"title":"React Image Gallery (Social App)","description":"React Image Gallery is a React-based application that allows users to upload and view images in a clean, responsive gallery layout. It showcases dynamic image handling with real-time preview functionality.","tech":["JavaScript","TailwindCss","React.js","FireBase","FireStore DB","FireBase Bucket","OAuth"],"live":"https://reactimggallery.vercel.app","github":"https://github.com/samar-raza17/react_image_gallery","image":"/reactimggallery.webp","builtFor":"Practice"},{"title":"Quick Post (Social App)","description":"QuickPost is a simple image gallery built with HTML and CSS, allowing users to view uploaded images in a clean, static layout. It's a lightweight project showcasing basic front-end structuring without any frameworks.","tech":["Html","Css","JavaScript","FireBase","FireStore DB","FireBase Bucket","OAuth"],"live":"https://quickpost.vercel.app","github":"https://github.com/samar-raza17/quickpost","image":"/quickpost.webp","builtFor":"Practice"},{"title":"Fake Store","description":"This E-Commerce store is built with HTML and CSS, fetching product data from the Fake Store API. It displays products dynamically, showcasing a basic front-end integration with external APIs.","tech":["Html","Css","JavaScript","Local Storage","Rest Api","FireBase","FireStore DB","FireBase Bucket","OAuth"],"live":"https://fakestorewithapi.vercel.app","github":"https://github.com/samar-raza17/fakestorewithapi","image":"/fakestore.webp","builtFor":"Practice"},{"title":"Djanazah Mobile App","description":"React Native and Expo app for nearby Janazah announcements, notifications, prayer guidance, and Duas.","tech":["React Native","Expo","TypeScript","Redux","Push Notifications"],"live":"https://play.google.com/store/apps/details?id=nl.djanazahgebeden.app&hl=en","github":"https://github.com/samar-raza17/djanazah-mobile-app","image":"https://raw.githubusercontent.com/samar-raza17/djanazah-mobile-app/main/assets/images/app_icon.png","builtFor":"Client"},{"title":"Djanazah Admin Panel","description":"Next.js dashboard to manage Janazah announcements, users, comments, Duas, categories, and settings.","tech":["Next.js","React","Node.js","Express","MongoDB"],"live":"","github":"https://github.com/samar-raza17/janazah-app-admin","image":"./assets/djanazah-admin-cover.svg","builtFor":"Client"}];
+ const projects=[{"title":"RabbitxLogistics","description":"RabbitxLogistics is a Full-Stack courier service website built for Code Thread to attract users and collect shipment details through interactive forms. It features a clean UI, responsive design, and streamlined user flow for lead generation.","tech":["JavaScript","TailwindCss","React.js","Node.js","Rest API","Express.js","MongoDB","Shadcn"],"live":"https://rabbitxlogistics.com","github":"","image":"/rabbitxlogistics.webp","builtFor":"Code Thread"},{"title":"RabbitxLogistics Admin Dashboard","description":"RabbitxLogistics Admin Dashboard is a Full-Stack demo panel to help admins manage orders and assign them to riders efficiently. This is a demonstration version only; official dashboard access is not available.","tech":["JavaScript","TailwindCss","React.js","Node.js","Rest API","Express.js","MongoDB","Web-Sockets.","Shadcn"],"live":"https://rabbit-courier.vercel.app","github":"","image":"/rabbitxlogistocs-dashboard.webp","builtFor":"Code Thread"},{"title":"Raast Point Of Sale","description":"Raast Point of Sale is a Full-Stack full-featured POS system designed to manage restaurants, orders, riders, and admin controls. This is a demo version only; it is not yet deployed to production.","tech":["JavaScript","TailwindCss","React.js","Node.js","Rest API","Express.js","MongoDB","Web-Sockets.","Shadcn"],"live":"https://raastposdemo.vercel.app","github":"","image":"/raastpos.webp","builtFor":"Practice"},{"title":"Dil Se Buy","description":"Dil Se Buy is a full-stack eCommerce platform built using React.js, featuring both a customer-facing site and an admin panel. It was my first complete project in React, handling product listings, orders, and management.","tech":["JavaScript","TailwindCss","React.js","FireBase","FireStore DB","FireBase Bucket"],"live":"https://dilsebuy.vercel.app","github":"https://github.com/samar-raza17/dilsebuy","image":"/dilsebuy.webp","builtFor":"Practice"},{"title":"Smart For Share","description":"SmartForShare is a Text/File-sharing platform built with Next.js, inspired by AirForShare but with broader reach. Unlike AirForShare, it allows users to share and access data from anywhere, not just on the same network.","tech":["JavaScript","TypeScript","TailwindCss","React.js","Next.js","MongoDB","Rest Api"],"live":"https://smartforshare.vercel.app","github":"https://github.com/samar-raza17/smartforshare","image":"/smartforshare.webp","builtFor":"Practice"},{"title":"Friend Flow (Social App)","description":"FriendFlow is a social media app inspired by Facebook, allowing users to post images, videos, and text with full like, comment, share, and follow features. It offers an interactive and engaging user experience built for connection.","tech":["JavaScript","TailwindCss","React.js","FireBase","FireStore DB","FireBase Bucket","OAuth"],"live":"https://friendflow.vercel.app/","github":"https://github.com/samar-raza17/friendflow","image":"/friendflow.webp","builtFor":"Practice"},{"title":"React Image Gallery (Social App)","description":"React Image Gallery is a React-based application that allows users to upload and view images in a clean, responsive gallery layout. It showcases dynamic image handling with real-time preview functionality.","tech":["JavaScript","TailwindCss","React.js","FireBase","FireStore DB","FireBase Bucket","OAuth"],"live":"https://reactimggallery.vercel.app","github":"https://github.com/samar-raza17/react_image_gallery","image":"/reactimggallery.webp","builtFor":"Practice"},{"title":"Quick Post (Social App)","description":"QuickPost is a simple image gallery built with HTML and CSS, allowing users to view uploaded images in a clean, static layout. It's a lightweight project showcasing basic front-end structuring without any frameworks.","tech":["Html","Css","JavaScript","FireBase","FireStore DB","FireBase Bucket","OAuth"],"live":"https://quickpost.vercel.app","github":"https://github.com/samar-raza17/quickpost","image":"/quickpost.webp","builtFor":"Practice"},{"title":"Fake Store","description":"This E-Commerce store is built with HTML and CSS, fetching product data from the Fake Store API. It displays products dynamically, showcasing a basic front-end integration with external APIs.","tech":["Html","Css","JavaScript","Local Storage","Rest Api","FireBase","FireStore DB","FireBase Bucket","OAuth"],"live":"https://fakestorewithapi.vercel.app","github":"https://github.com/samar-raza17/fakestorewithapi","image":"/fakestore.webp","builtFor":"Practice"},{"title":"Djanazah Platform","description":"A connected Janazah platform combining the Expo mobile app for community prayer announcements, notifications and Duas with a Next.js administration dashboard for managing posts, users, categories and app content.","tech":["React Native","Expo","Next.js","Node.js","MongoDB"],"live":"https://play.google.com/store/apps/details?id=nl.djanazahgebeden.app&hl=en","github":"https://github.com/samar-raza17/djanazah-mobile-app","image":"https://raw.githubusercontent.com/samar-raza17/djanazah-mobile-app/main/assets/images/app_icon.png","builtFor":"Client","tabs":{"mobile":{"title":"Mobile App","description":"The mobile app helps people browse Janazah announcements, explore Duas, receive notifications, and find relevant local prayer information.","tech":["React Native","Expo","TypeScript","Redux","Push Notifications"],"image":"https://raw.githubusercontent.com/samar-raza17/djanazah-mobile-app/main/assets/images/app_icon.png","live":"https://play.google.com/store/apps/details?id=nl.djanazahgebeden.app&hl=en","github":"https://github.com/samar-raza17/djanazah-mobile-app","liveLabel":"Google Play Store ↗"},"admin":{"title":"Admin Panel","description":"The web admin dashboard supports managing Janazah announcements, users, comments, Duas, categories, and application settings through a shared backend.","tech":["Next.js","React","Node.js","Express","MongoDB"],"image":"./assets/djanazah-admin-cover.svg","live":"","github":"https://github.com/samar-raza17/janazah-app-admin","liveLabel":"Live dashboard ↗"}}}];
  const items=[...track.querySelectorAll(".sr-hang-item")];
  const rope=work.querySelector(".sr-hang-string");
  const close=modal.querySelector(".sr-dialog-close");
@@ -2681,16 +2688,44 @@ try {
  window.addEventListener("scroll",schedule,{passive:true});
  window.addEventListener("resize",syncGeometry);
  if(window.ResizeObserver){const ro=new ResizeObserver(()=>{const at=work.getBoundingClientRect();if(at.width)syncGeometry()});ro.observe(track)}
+ const tabGroup=document.getElementById("srProjectTabs");
+ const tabPanel=document.getElementById("srProjectTabContent");
+ const mobileTab=document.getElementById("srMobileTab"),adminTab=document.getElementById("srAdminTab");
+ let selectedProject=null;
+ const imageUrl=value=>!value?"":(value.startsWith("https://")||value.startsWith("./assets/")?value:"https://samarraza.vercel.app"+value);
+ function showProjectView(view){
+   if(!selectedProject)return;
+   const platform=!!selectedProject.tabs;
+   const active=platform?(selectedProject.tabs[view]||selectedProject.tabs.mobile):selectedProject;
+   tabGroup.hidden=!platform;
+   mobileTab.setAttribute("aria-selected",String(view==="mobile"));
+   adminTab.setAttribute("aria-selected",String(view==="admin"));
+   mobileTab.tabIndex=view==="mobile"?0:-1;
+   adminTab.tabIndex=view==="admin"?0:-1;
+   tabPanel.setAttribute("aria-labelledby",view==="admin"?"srAdminTab":"srMobileTab");
+   desc.textContent=active.description;
+   image.src=imageUrl(active.image);image.alt=selectedProject.title+" — "+(active.title||"project")+" visual";
+   tags.replaceChildren(...active.tech.map(t=>{const tag=document.createElement("span");tag.textContent=t;return tag}));
+   live.hidden=!active.live;if(active.live)live.href=active.live;
+   live.textContent=active.liveLabel||"Live website ↗";
+   code.hidden=!active.github?.trim();if(active.github?.trim())code.href=active.github;
+ }
  function openProject(i){
    const p=projects[i];if(!p)return;
-   title.textContent=p.title;desc.textContent=p.description;
+   selectedProject=p;
+   title.textContent=p.title;
    index.textContent=String(i+1).padStart(2,"0")+" / "+String(projects.length).padStart(2,"0");
-   image.src=p.image.startsWith("https://")||p.image.startsWith("./assets/")?p.image:("https://samarraza.vercel.app"+p.image);image.alt=p.title+" project visual";
-   tags.replaceChildren(...p.tech.map(t=>{const tag=document.createElement("span");tag.textContent=t;return tag}));
-   live.hidden=!p.live;if(p.live)live.href=p.live;code.hidden=!p.github?.trim();if(p.github?.trim())code.href=p.github;
+   showProjectView("mobile");
    if(typeof modal.showModal==="function")modal.showModal();else modal.setAttribute("open","");
    close.focus();
  }
+ for(const button of [mobileTab,adminTab])button.addEventListener("click",()=>showProjectView(button.dataset.view));
+ tabGroup.addEventListener("keydown",e=>{
+   if(e.key!=="ArrowLeft"&&e.key!=="ArrowRight")return;
+   e.preventDefault();
+   const dest=e.key==="ArrowRight"?adminTab:mobileTab;
+   dest.focus();showProjectView(dest.dataset.view);
+ });
  for(const btn of work.querySelectorAll(".sr-detail-btn"))btn.addEventListener("click",()=>openProject(Number(btn.dataset.project)));
  // Clicking the image on mobile or desktop opens the same details.
  for(const frame of work.querySelectorAll(".sr-hang-image"))frame.addEventListener("click",e=>{if(e.target.closest("button"))return;const btn=frame.closest(".sr-hang-item")?.querySelector(".sr-detail-btn");if(btn)openProject(Number(btn.dataset.project))});
