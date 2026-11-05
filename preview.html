@@ -802,6 +802,98 @@ body{background-color:#fbf8f3}
 .sr-scroll-work .sr-rock-window .sr-hang-image.sr-real-shot{border-color:#ab7d57!important}
 :focus-visible{outline-color:#ea7728}
 @media(prefers-reduced-motion:reduce){.btn,.cta,.pz-tool,.sr-project-action,.sr-detail-btn{transition:none}}
+</style><style id="sr-about-woodshop-v1">
+/* About: handmade timber joinery, real nail heads, no changes to layout/content. */
+.about .ab-photo{
+  position:relative;isolation:isolate;overflow:visible;
+  padding:17px 17px 0;
+  background:
+    repeating-linear-gradient(178deg,transparent 0 21px,#391e1023 22px 23px,transparent 25px 51px),
+    repeating-linear-gradient(93deg,#e2b987 0 5px,#b37b4b 9px 17px,#cb9864 21px 29px,#9d653b 35px 41px,#d5a873 48px 66px);
+  border:7px ridge #855131;
+  border-radius:2px;
+  box-shadow:inset 3px 3px 0 #f2d09b,inset -4px -5px 0 #6d3c22,10px 12px 0 #40261a,13px 15px 9px #3d231a38!important;
+  transform:rotate(-1.2deg);
+  transition:transform .4s cubic-bezier(.15,.9,.25,1),box-shadow .4s;
+}
+.about .ab-photo:hover{transform:rotate(0deg) translateY(-3px);box-shadow:inset 3px 3px 0 #f2d09b,inset -4px -5px 0 #6d3c22,12px 15px 0 #40261a,15px 18px 12px #3d231a38!important}
+.about .ab-photo img{
+  position:relative;z-index:1;
+  display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;
+  border:4px solid #412b1e;
+  border-radius:0;
+  box-shadow:inset 0 0 0 2px #d4a36d,0 0 0 3px #d4a574,3px 4px 8px #301b14a6;
+}
+.about .ab-photo figcaption{
+  position:relative;z-index:1;
+  padding:18px 6px 20px;
+  color:#2e1b13;font-weight:700;
+  text-shadow:0 1px 0 #f7d4a0;
+  border-top:1px solid #71452d70;
+  margin-top:10px;
+}
+.about .ab-wood-nail{
+  position:absolute;z-index:3;width:15px;height:15px;
+  background:radial-gradient(circle at 29% 24%,#faf8ec 0 9%,#c1c4c1 25%,#747b78 56%,#323d3d 76%,#202a2b 100%);
+  border:1px solid #3b3b32;border-radius:50%;
+  box-shadow:inset 1px 1px 1px #fff8,1px 2px 2px #24180f91,0 0 0 2px #6a422b57;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.about .ab-wood-nail:after{content:"";position:absolute;top:50%;left:22%;width:56%;height:1.5px;background:#323a39;transform:rotate(-32deg);box-shadow:0 1px #c9cec6}
+.about .ab-photo .nail-tl{top:14px;left:14px}
+.about .ab-photo .nail-tr{top:14px;left:calc(100% - 14px)}
+.about .ab-photo .nail-bl{bottom:14px;left:14px;top:auto;transform:translate(-50%,50%)}
+.about .ab-photo .nail-br{bottom:14px;left:calc(100% - 14px);top:auto;transform:translate(-50%,50%)}
+/* Wooden data plaques instead of taped sticky notes. */
+.about .ab-notes .sticky{
+  border:3px solid #6d432b!important;border-radius:2px;
+  background:
+    repeating-linear-gradient(176deg,transparent 0 27px,#5c351922 28px 29px,transparent 30px 55px),
+    linear-gradient(125deg,#edc18a,#c28a53 48%,#a86e3f)!important;
+  box-shadow:inset 2px 2px 0 #fae2b6,inset -3px -3px 0 #8a5838,5px 6px 0 #422819!important;
+  color:#3c261a;
+}
+.about .ab-notes .sticky .tape{display:none}
+.about .ab-notes .sticky:before{
+  content:"";position:absolute;top:9px;left:50%;width:10px;height:10px;
+  border-radius:50%;background:radial-gradient(circle at 30% 24%,#fcfbf5,#a3a5a0 45%,#3b4240 90%);
+  box-shadow:1px 2px 1px #2a1a12a8;transform:translateX(-50%);
+}
+.about .ab-resume{
+  position:relative;isolation:isolate;
+  border:4px solid #7b4c30!important;border-radius:3px;
+  background:
+    repeating-linear-gradient(180deg,transparent 0 28px,#693d2522 30px 31px,transparent 33px 58px),
+    linear-gradient(105deg,#dfb27c,#c18a55 47%,#a87040)!important;
+  color:#322016;
+  box-shadow:inset 3px 3px 0 #f3d09d,inset -4px -5px 0 #85542f,6px 7px 0 #4a2e1c;
+  transform:rotate(-.35deg);
+  padding:18px 23px;
+}
+.about .ab-resume:before,.about .ab-resume:after{
+  content:"";position:absolute;top:10px;width:11px;height:11px;border-radius:50%;
+  background:radial-gradient(circle at 35% 25%,#f4f3e6,#89908a 58%,#323b3b);
+  box-shadow:1px 2px 1px #39221493;pointer-events:none;
+}
+.about .ab-resume:before{left:10px}.about .ab-resume:after{right:10px}
+.about .ab-resume p{color:#312016;font-weight:600;text-shadow:0 1px #f6d4a6}
+.about .ab-resume .cta{
+  position:relative;min-height:53px;
+  color:#fff2da!important;background:linear-gradient(145deg,#865536,#593520 54%,#3d261b)!important;
+  border:3px solid #382219!important;border-radius:2px!important;
+  box-shadow:inset 2px 2px 0 #bb8050,inset -3px -3px 0 #26160e,4px 5px 0 #2e1c12!important;
+  text-shadow:0 1px 1px #190e09;
+}
+.about .ab-resume .cta:hover{background:linear-gradient(145deg,#ad7044,#734426 54%,#4f2d1b)!important;transform:translateY(-2px);box-shadow:inset 2px 2px 0 #d4955f,inset -3px -3px 0 #26160e,6px 7px 0 #2e1c12!important}
+.about .ab-resume .cta:active{transform:translateY(2px);box-shadow:inset 1px 1px 0 #a46b40,2px 2px 0 #2e1c12!important}
+@media(max-width:680px){
+ .about .ab-photo{padding:13px 13px 0;border-width:5px}
+ .about .ab-wood-nail{width:12px;height:12px}
+ .about .ab-photo .nail-tl,.about .ab-photo .nail-tr{top:11px}
+ .about .ab-resume{padding:17px 21px}
+}
+@media(prefers-reduced-motion:reduce){.about .ab-photo{transition:none!important}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -1205,7 +1297,7 @@ body{background-color:#fbf8f3}
     <div class="ab-grid">
       <div class="ab-left">
         <figure class="ab-photo">
-          <span class="tape a" aria-hidden="true"></span><span class="tape b" aria-hidden="true"></span>
+          <span class="ab-wood-nail nail-tl" aria-hidden="true"></span><span class="ab-wood-nail nail-tr" aria-hidden="true"></span><span class="ab-wood-nail nail-bl" aria-hidden="true"></span><span class="ab-wood-nail nail-br" aria-hidden="true"></span>
           <img src="https://avatars.githubusercontent.com/samar-raza17?size=800" alt="Samar Raza profile portrait" width="600" height="800" loading="lazy">
           <figcaption>building thoughtful digital experiences</figcaption>
         </figure>
