@@ -650,58 +650,51 @@ nav a[data-target="studio"]{white-space:nowrap}
 @media(max-width:670px){.site-nav .nav{gap:8px}.site-nav .nav ul{gap:2px}.site-nav .nav a.link{font-size:11px;padding:8px 7px;min-height:36px}.site-nav .nav ul li:nth-child(3){display:none}.site-nav .logo{width:56px;height:50px;font-size:16px}.site-nav .logo svg{width:56px;height:52px}}
 @media(max-width:440px){.site-nav .nav a.link{font-size:10px;padding:8px 6px}.site-nav .nav ul li:nth-child(4){display:none}.site-nav .nav ul{gap:1px}.site-nav .nav{min-height:66px}}
 @media(prefers-reduced-motion:reduce){.site-nav .logo,.site-nav .logo svg,.site-nav .nav a.link,.site-nav .nav a.link:before,.site-nav .nav a.link:after{transition:none}}
-</style><style id="sr-minecraft-masonry-gallery">
-/* Individual bevelled stones, not a flat panel or metal/glass windows. */
-.sr-scroll-work .sr-hanging-wrap{position:relative;isolation:isolate;overflow:visible;transform:translateZ(0);background:#66716d;border:0;box-shadow:7px 10px 0 #22332f38;clip-path:polygon(0 1%,3% 0,9% 1%,14% 0,22% 1%,32% 0,45% 1%,58% 0,67% 1%,77% 0,91% 1%,98% 0,100% 2%,100% 99%,95% 100%,86% 99%,78% 100%,65% 99%,51% 100%,38% 99%,25% 100%,13% 99%,2% 100%,0 99%)}
+</style><style id="sr-architectural-stone-windows">
+/* Carved architectural windows like the supplied brick-building reference:
+   actual gray block masonry, white stone surrounds, openable double sashes. */
+.sr-scroll-work .sr-hanging-wrap{isolation:isolate;position:relative;overflow:hidden;background:#626a63;clip-path:none;box-shadow:5px 8px 0 #34403842;border:4px solid #555e56;border-top:0}
 .sr-scroll-work .sr-hanging-wrap:before,.sr-scroll-work .sr-hanging-wrap:after{display:none!important}
-.sr-masonry-wall{position:absolute;inset:0;z-index:-1;overflow:hidden;background:#333d3a;pointer-events:none;display:grid;grid-template-columns:repeat(14,1fr);grid-template-rows:repeat(8,1fr);gap:3px;padding:3px}
-.sr-masonry-brick{position:relative;display:block;min-width:0;min-height:0;background:linear-gradient(142deg,#d0d3cc 0 5%,#a6afa7 5% 17%,#818e86 40%,#68766d 72%,#495850 100%);box-shadow:inset 3px 3px 0 #e3e5dc,inset -5px -6px 0 #34463e,3px 4px 0 #25342e;clip-path:polygon(3% 0,90% 1%,100% 9%,98% 87%,87% 100%,6% 98%,0 88%,1% 12%);transform:translateX(var(--brick-shift,0px))}
-.sr-masonry-brick:nth-child(7n+2){background:linear-gradient(136deg,#d2d6cc,#9ca89e 37%,#65766b 74%,#394c42)}
-.sr-masonry-brick:nth-child(6n+3){background:linear-gradient(144deg,#afb8ae,#808d82 48%,#495c50 100%)}
-.sr-masonry-brick:nth-child(9n+1){filter:brightness(.88)}
-.sr-scroll-work .sr-hang-track{position:relative;z-index:2;padding:clamp(22px,3vh,32px) clamp(19px,2.5vw,35px) 24px!important;gap:clamp(17px,2vw,28px);align-items:flex-start}
-.sr-scroll-work .sr-rock-window{position:relative;isolation:isolate;perspective:1050px;transform-style:preserve-3d;--sr-rope-offset:0px!important;--sr-rotate:0deg!important;transform:none!important;padding-top:0!important;flex-basis:calc((100% - 2 * clamp(17px,2vw,28px))/3)!important;margin:0!important;filter:none!important;transition:filter .32s,transform .32s!important;z-index:2}
-.sr-scroll-work .sr-rock-window:hover,.sr-scroll-work .sr-rock-window:focus-within,.sr-scroll-work .sr-rock-window.is-open{z-index:5;filter:drop-shadow(2px 5px 5px #14241d7a)!important}
-.sr-scroll-work .sr-rock-window:before{content:"";pointer-events:none;position:absolute;z-index:-1;inset:-13px -12px 10px;clip-path:polygon(0 3%,8% 0,21% 2%,33% 0,50% 2%,68% 0,83% 1%,100% 0,98% 25%,100% 49%,98% 74%,100% 98%,85% 100%,69% 98%,52% 100%,31% 98%,12% 100%,0 97%,2% 70%,0 49%,2% 21%)!important;background:linear-gradient(140deg,#e2e5d9 0 3%,#9daaa0 4% 10%,#5d7264 30%,#3b5246 87%,#1e3028 100%)!important;box-shadow:4px 5px 0 #243a31}
-.sr-scroll-work .sr-rock-window:after{content:"";pointer-events:none;position:absolute;inset:-4px -4px 20px;z-index:-1;background:#182920!important;transform:translate(6px,7px)!important;clip-path:polygon(0 2%,98% 0,100% 97%,2% 100%)!important}
-.sr-scroll-work .sr-rock-window .sr-hang-photo{position:relative;display:flex;flex-direction:column;height:clamp(372px,52vh,515px)!important;min-height:0;background:linear-gradient(135deg,#24362e,#182720)!important;border:9px solid #354940!important;box-shadow:inset 6px 9px 10px #0a1d16,0 2px 0 #aeb6a9!important;margin:5px 6px 0;padding:8px!important;overflow:hidden;border-radius:0!important}
-.sr-scroll-work .sr-rock-window .sr-hang-photo:after{content:"";pointer-events:none;position:absolute;inset:0;z-index:3;border:3px solid #17271e;box-shadow:inset 4px 6px 8px #07181055}
-.sr-scroll-work .sr-rock-window .sr-hang-image.sr-real-shot{height:clamp(182px,26vh,275px)!important;background:#eaeee9!important;border:3px solid #394c42!important;outline:0;box-shadow:0 8px 16px #0a171160!important;opacity:.78;transform:scale(.96);transition:opacity .45s,transform .6s;flex-shrink:0}
-.sr-scroll-work .sr-rock-window:is(:hover,:focus-within,.is-open) .sr-hang-image.sr-real-shot{opacity:1;transform:scale(1)}
-.sr-scroll-work .sr-rock-window .sr-real-shot>img{object-fit:contain!important}
-.sr-scroll-work .sr-rock-window .sr-project-card-copy{background:#e9e6d8!important;color:#1b2924;padding:13px 11px!important;flex:1;opacity:.08;transform:translateY(12px);transition:opacity .3s .12s,transform .4s .1s}
+.sr-masonry-wall{position:absolute;inset:0;z-index:0;pointer-events:none;display:grid;grid-template-columns:repeat(14,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));gap:3px;background:#38463b;padding:0;overflow:hidden}
+.sr-masonry-brick{display:block;min-width:0;min-height:0;background:linear-gradient(150deg,#d1d2c6 0 5%,#a8b0a4 9% 26%,#788478 51%,#646e63 75%,#4c564c 100%);box-shadow:inset 2px 2px #eef0e24d,inset -3px -4px #182b1f63;clip-path:polygon(1% 1%,96% 0,100% 11%,98% 91%,92% 100%,3% 98%,0 85%)}
+.sr-masonry-brick:nth-child(3n){background:linear-gradient(145deg,#bdc3b7,#939e94 42%,#5d6d61 100%)}
+.sr-masonry-brick:nth-child(7n){background:linear-gradient(130deg,#aeb7ac,#7f8b80 57%,#506052)}
+.sr-masonry-brick:nth-child(11n){background:linear-gradient(140deg,#d5d6c9,#8f9d8d 59%,#546252)}
+.sr-scroll-work .sr-hang-track{isolation:isolate;position:relative;z-index:2;gap:clamp(18px,2vw,28px);padding:clamp(22px,3.4vh,36px) clamp(25px,3vw,45px) 25px!important;align-items:flex-start;overflow:hidden}
+.sr-scroll-work .sr-rock-window{--sr-rope-offset:0px!important;--sr-rotate:0deg!important;position:relative;isolation:isolate;perspective:1200px;transform:none!important;margin:0!important;padding:28px 0 0!important;flex-basis:calc((100% - 2 * clamp(18px,2vw,28px))/3)!important;max-height:none;filter:none!important;transform-style:preserve-3d}
+.sr-scroll-work .sr-rock-window:before{content:"";pointer-events:none;position:absolute;inset:13px -13px 20px!important;z-index:-1!important;background:#273329!important;border:0!important;clip-path:polygon(0 2%,100% 0,100% 99%,0 100%)!important;box-shadow:inset 8px 8px 18px #0d201a,5px 5px 0 #314234!important}
+.sr-scroll-work .sr-rock-window:after{content:"";pointer-events:none;position:absolute;inset:19px -18px 18px!important;z-index:-1!important;border-left:11px solid #c1c3b9;border-right:11px solid #c1c3b9;border-bottom:10px solid #a6aea4;border-top:8px solid #e7e8db;box-shadow:inset 5px 7px 3px #4e5e55,3px 4px 1px #1f302642;background:transparent!important;transform:none!important;clip-path:none!important}
+.sr-scroll-work .sr-window-keystone{position:absolute;z-index:8;top:-3px;left:-13px;right:-13px;height:64px;pointer-events:none;border-radius:50% 50% 5px 5px / 100% 100% 0 0;background:linear-gradient(180deg,#fffef7 2%,#e8e7dc 36%,#c6c9bd 65%,#a9b1a8 100%);border:3px solid #f4f4e9;border-bottom:7px solid #b4bcb1;box-shadow:3px 6px 0 #25362c67,inset 0 7px 7px #fff,0 -3px #47594c;transform:translateZ(6px)}
+.sr-scroll-work .sr-window-keystone:after{content:"";position:absolute;inset:9px 12px 6px;border:2px solid #a5b1a5;border-bottom:0;border-radius:50% 50% 0 0 / 100% 100% 0 0}
+.sr-scroll-work .sr-rock-window .sr-hang-photo{position:relative;display:flex;flex-direction:column;height:clamp(355px,51vh,510px)!important;min-height:0;background:#22322b!important;border:11px solid #e4e6da!important;border-left-color:#f8f7ee!important;border-right-color:#b3bdb1!important;border-bottom-color:#c7cabe!important;margin:28px 0 0;padding:8px!important;overflow:hidden;border-radius:0!important;box-shadow:inset 7px 5px 12px #0d2119,0 5px 0 #7b8f7e!important}
+.sr-scroll-work .sr-rock-window .sr-hang-photo:after{content:"";position:absolute;inset:0;z-index:3;border:3px solid #4e6555;box-shadow:inset 6px 7px 12px #15291d8a;pointer-events:none}
+.sr-scroll-work .sr-rock-window .sr-hang-image.sr-real-shot{height:clamp(182px,26vh,275px)!important;background:#ecf0eb!important;border:2px solid #7e9380!important;outline:none;opacity:.97;box-shadow:inset 3px 5px 9px #213b2880}
+.sr-scroll-work .sr-rock-window .sr-project-card-copy{flex:1;min-height:0;padding:12px 11px!important;background:#f4f3ed!important;color:#23332a;opacity:.04;transform:translateY(18px);transition:opacity .34s .11s,transform .36s .11s}
 .sr-scroll-work .sr-rock-window:is(:hover,:focus-within,.is-open) .sr-project-card-copy{opacity:1;transform:translateY(0)}
-.sr-scroll-work .sr-rock-window .sr-project-desc{color:#4d5d52}
-.sr-scroll-work .sr-rock-window .sr-hang-caption{color:#20352a}
-.sr-scroll-work .sr-rock-window .sr-hang-meta{color:#fff3d5;text-shadow:0 1px 2px #1c2a20;background:#495e4e;margin:6px 11px 0;padding:6px 8px;font-weight:600;font-size:10px;border:1px solid #728374}
-.sr-scroll-work .sr-rock-window .sr-project-action{background:#efe6c9;border:2px solid #38463d;color:#1f332a;box-shadow:3px 3px 0 #263d2e}
-.sr-scroll-work .sr-rock-window .sr-project-action:hover{background:#f9d8a7}
-.sr-scroll-work .sr-stone-shutter{position:absolute;top:0;bottom:23px;width:50%;z-index:8;pointer-events:none;backface-visibility:hidden;transform-style:preserve-3d;transition:transform .86s cubic-bezier(.19,.8,.2,1),opacity .45s .3s,filter .6s;overflow:hidden;border:0!important;box-shadow:inset 4px 4px 0 #c1cabe,inset -6px -8px 0 #30473a,4px 6px 0 #17291d;clip-path:polygon(0 1%,18% 0,40% 2%,65% 0,88% 2%,100% 0,99% 22%,100% 44%,98% 72%,100% 99%,79% 100%,52% 98%,29% 100%,0 98%,1% 75%,0 48%,2% 23%);background:#75867a}
-.sr-scroll-work .sr-stone-shutter-left{left:0;transform-origin:0 53%}
-.sr-scroll-work .sr-stone-shutter-right{right:0;transform-origin:100% 53%}
-.sr-scroll-work .sr-stone-shutter i{display:block;position:absolute;width:52%;height:26%;left:var(--sx,0%);top:var(--sy,0%);clip-path:polygon(2% 2%,91% 0,100% 11%,98% 89%,87% 100%,9% 98%,0 87%,2% 14%);background:linear-gradient(135deg,#d1d5cb 0 7%,#9eaca1 8% 26%,#74867b 63%,#4f6758 100%);box-shadow:inset 3px 3px 0 #e4e8da,inset -5px -7px 0 #3d5746,3px 4px 1px #293d31;transition:transform .82s cubic-bezier(.16,1,.3,1),opacity .55s}
-.sr-scroll-work .sr-stone-shutter i:nth-child(1){--sx:0%;--sy:0%;width:98%;height:27%}
-.sr-scroll-work .sr-stone-shutter i:nth-child(2){--sx:0%;--sy:25%;width:58%;height:28%;filter:brightness(.89)}
-.sr-scroll-work .sr-stone-shutter i:nth-child(3){--sx:55%;--sy:25%;width:46%;height:52%;filter:brightness(1.08)}
-.sr-scroll-work .sr-stone-shutter i:nth-child(4){--sx:0%;--sy:51%;width:59%;height:49%;filter:brightness(.95)}
-.sr-scroll-work .sr-stone-shutter:before,.sr-scroll-work .sr-stone-shutter:after{display:none!important}
-.sr-scroll-work .sr-stone-nameplate{position:absolute;z-index:9;top:32%;left:13%;width:74%;min-height:84px;pointer-events:none;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:12px;background:linear-gradient(135deg,#d6d8c9,#929e8b 46%,#707e6e);clip-path:polygon(3% 0,93% 2%,100% 14%,98% 87%,89% 100%,8% 98%,0 84%,2% 15%);box-shadow:inset 3px 3px 0 #f4f2df,3px 5px 0 #2b4435;transition:opacity .3s,transform .6s}
-.sr-scroll-work .sr-stone-nameplate span{font:700 clamp(12px,1.1vw,17px)/1.25 var(--font-mono);color:#213629;overflow-wrap:anywhere;text-shadow:0 1px #fafbed}
-.sr-scroll-work .sr-stone-nameplate small{color:#a44b14;font:700 10px var(--font-mono);letter-spacing:.055em}
-.sr-scroll-work .sr-window-toggle{position:absolute;z-index:11;top:14px;right:14px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;background:linear-gradient(145deg,#c1c8b8,#778b78);border:3px solid #344b3c;box-shadow:3px 4px 0 #233c2c;color:#1d3525;font:700 26px/1 var(--font-mono);clip-path:polygon(8% 0,91% 2%,100% 16%,98% 87%,87% 100%,7% 98%,0 86%,2% 14%)}
-.sr-scroll-work .sr-window-toggle:hover{background:#f5c286}
-.sr-scroll-work .sr-window-toggle:focus-visible{outline:3px solid #f97316;outline-offset:5px}
-.sr-scroll-work .sr-rock-window:is(:hover,:focus-within,.is-open) .sr-stone-shutter-left{transform:rotateY(-118deg) translateX(-4px);opacity:.76;filter:brightness(.82)}
-.sr-scroll-work .sr-rock-window:is(:hover,:focus-within,.is-open) .sr-stone-shutter-right{transform:rotateY(118deg) translateX(4px);opacity:.76;filter:brightness(.82)}
-.sr-scroll-work .sr-rock-window:is(:hover,:focus-within,.is-open) .sr-stone-shutter-left i:nth-child(1){transform:translate(-10px,-14px) rotate(-4deg)}
-.sr-scroll-work .sr-rock-window:is(:hover,:focus-within,.is-open) .sr-stone-shutter-right i:nth-child(4){transform:translate(18px,19px) rotate(5deg)}
-.sr-scroll-work .sr-rock-window:is(:hover,:focus-within,.is-open) .sr-stone-nameplate{opacity:0;transform:translateY(-24px) scale(.92)}
+.sr-scroll-work .sr-rock-window .sr-hang-caption{color:#24362d}
+.sr-scroll-work .sr-rock-window .sr-project-desc{color:#506058}
+.sr-scroll-work .sr-rock-window .sr-hang-meta{background:#536655;color:#fff7e2;text-align:center;padding:6px 4px;margin:7px 0 0;border:2px solid #9fac9a;font-size:10px}
+.sr-scroll-work .sr-stone-shutter{position:absolute;z-index:7;top:78px;bottom:31px;width:50%;pointer-events:none;backface-visibility:hidden;transform-style:preserve-3d;overflow:visible;background:linear-gradient(130deg,#fefef7,#e7ede7 40%,#bccabd 100%);border:7px solid #f8fbf2!important;border-bottom-color:#b3c1b5!important;box-shadow:inset 0 0 0 2px #8da599,3px 3px 4px #233b2a70;transition:transform .8s cubic-bezier(.22,.72,.23,1),filter .4s;clip-path:none!important}
+.sr-scroll-work .sr-stone-shutter-left{left:0;transform-origin:0% 50%;border-right:4px solid #97a99a!important}
+.sr-scroll-work .sr-stone-shutter-right{right:0;transform-origin:100% 50%;border-left:4px solid #97a99a!important}
+.sr-scroll-work .sr-stone-shutter:before{content:"";position:absolute;inset:13px 7px 14px;background:linear-gradient(150deg,#acc2b7aa,#dae7db48);border:3px solid #d9e6da;box-shadow:inset 0 0 0 2px #758f7f,inset 0 4px 12px #2d40393a,0 0 0 1px #a5b7a9}
+.sr-scroll-work .sr-stone-shutter:after{content:"";position:absolute;inset:13px 7px 14px;background:linear-gradient(90deg,transparent calc(50% - 3px),#e3e9de calc(50% - 3px),#e3e9de calc(50% + 3px),transparent calc(50% + 3px)),linear-gradient(0deg,transparent calc(51% - 3px),#e3e9de calc(51% - 3px),#e3e9de calc(51% + 3px),transparent calc(51% + 3px));border:1px solid #b9cdb8}
+.sr-scroll-work .sr-stone-shutter i{display:none!important}
+.sr-scroll-work .sr-stone-nameplate{position:absolute;z-index:9;left:10%;width:80%;top:43%;min-height:70px;background:#f3f1e8;border:3px solid #afb6a6;box-shadow:3px 4px #2638287d,inset 2px 2px #fff;clip-path:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 12px;text-align:center;pointer-events:none;transition:opacity .25s,transform .38s}
+.sr-scroll-work .sr-stone-nameplate span{font:700 clamp(12px,1vw,17px)/1.26 var(--font-mono);color:#24382c;overflow-wrap:anywhere}
+.sr-scroll-work .sr-stone-nameplate small{font:600 9px var(--font-mono);letter-spacing:.075em;color:#a3531f}
+.sr-scroll-work .sr-window-toggle{position:absolute;z-index:11;top:85px;right:12px;width:38px;height:38px;background:#f6f4e9;border:2px solid #7c9282;box-shadow:2px 3px 0 #243c2e88;color:#2c4833;font:700 24px var(--font-mono);cursor:pointer;border-radius:1px}
+.sr-scroll-work .sr-window-toggle:hover{background:#f9dbb4}
+.sr-scroll-work .sr-window-toggle:focus-visible{outline:2px solid #f97316;outline-offset:5px}
+.sr-scroll-work .sr-rock-window:is(:hover,:focus-within,.is-open) .sr-stone-shutter-left{transform:rotateY(-118deg);filter:brightness(.92)}
+.sr-scroll-work .sr-rock-window:is(:hover,:focus-within,.is-open) .sr-stone-shutter-right{transform:rotateY(118deg);filter:brightness(.92)}
+.sr-scroll-work .sr-rock-window:is(:hover,:focus-within,.is-open) .sr-stone-nameplate{opacity:0;transform:translateY(-16px)}
 .sr-scroll-work .sr-rock-window.is-open .sr-window-toggle span{transform:rotate(45deg)}
 .sr-scroll-work .sr-hang-string,.sr-scroll-work .sr-hang-pin{display:none!important}
-@media(min-width:681px) and (max-width:1050px){.sr-scroll-work .sr-rock-window{flex-basis:calc((100% - clamp(17px,2vw,28px))/2)!important}}
-@media(max-width:680px){.sr-scroll-work .sr-rock-window{flex-basis:84%!important}.sr-scroll-work .sr-rock-window .sr-hang-photo{height:clamp(345px,51vh,460px)!important}.sr-scroll-work .sr-rock-window .sr-hang-image.sr-real-shot{height:clamp(155px,25vh,230px)!important}.sr-scroll-work .sr-hang-track{padding:17px 15px 20px!important}}
-@media(max-height:670px) and (min-width:681px){.sr-scroll-work .sr-rock-window .sr-hang-photo{height:clamp(275px,45vh,350px)!important}.sr-scroll-work .sr-rock-window .sr-hang-image.sr-real-shot{height:clamp(115px,21vh,175px)!important}}
-@media(prefers-reduced-motion:reduce){.sr-scroll-work .sr-stone-shutter,.sr-scroll-work .sr-stone-nameplate,.sr-scroll-work .sr-stone-shutter i{transition:none!important}}
+@media(min-width:681px) and (max-width:1050px){.sr-scroll-work .sr-rock-window{flex-basis:calc((100% - clamp(18px,2vw,28px))/2)!important}}
+@media(max-width:680px){.sr-scroll-work .sr-rock-window{flex-basis:85%!important}.sr-scroll-work .sr-rock-window .sr-hang-photo{height:clamp(335px,50vh,470px)!important}.sr-scroll-work .sr-rock-window .sr-hang-image.sr-real-shot{height:clamp(150px,24vh,230px)!important}.sr-scroll-work .sr-hang-track{padding:18px 17px 25px!important}}
+@media(max-height:690px) and (min-width:681px){.sr-scroll-work .sr-rock-window .sr-hang-photo{height:clamp(280px,45vh,355px)!important}.sr-scroll-work .sr-rock-window .sr-hang-image.sr-real-shot{height:clamp(110px,20vh,180px)!important}}
+@media(prefers-reduced-motion:reduce){.sr-scroll-work .sr-stone-shutter,.sr-scroll-work .sr-stone-nameplate{transition:none!important}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -786,9 +779,10 @@ nav a[data-target="studio"]{white-space:nowrap}
      <div class="sr-masonry-wall" aria-hidden="true"><span class="sr-masonry-brick" style="--r:0;--c:0;--v:0;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:1;--v:2;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:2;--v:4;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:3;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:4;--v:3;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:5;--v:0;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:6;--v:2;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:7;--v:4;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:8;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:9;--v:3;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:10;--v:0;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:11;--v:2;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:12;--v:4;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:0;--c:13;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:1;--c:0;--v:1;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:1;--v:3;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:2;--v:0;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:3;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:4;--v:4;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:5;--v:1;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:6;--v:3;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:7;--v:0;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:8;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:9;--v:4;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:10;--v:1;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:11;--v:3;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:12;--v:0;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:1;--c:13;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:2;--c:0;--v:2;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:1;--v:4;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:2;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:3;--v:3;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:4;--v:0;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:5;--v:2;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:6;--v:4;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:7;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:8;--v:3;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:9;--v:0;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:10;--v:2;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:11;--v:4;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:12;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:2;--c:13;--v:3;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:3;--c:0;--v:3;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:1;--v:0;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:2;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:3;--v:4;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:4;--v:1;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:5;--v:3;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:6;--v:0;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:7;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:8;--v:4;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:9;--v:1;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:10;--v:3;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:11;--v:0;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:12;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:3;--c:13;--v:4;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:4;--c:0;--v:4;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:1;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:2;--v:3;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:3;--v:0;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:4;--v:2;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:5;--v:4;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:6;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:7;--v:3;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:8;--v:0;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:9;--v:2;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:10;--v:4;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:11;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:12;--v:3;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:4;--c:13;--v:0;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:5;--c:0;--v:0;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:1;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:2;--v:4;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:3;--v:1;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:4;--v:3;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:5;--v:0;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:6;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:7;--v:4;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:8;--v:1;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:9;--v:3;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:10;--v:0;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:11;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:12;--v:4;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:5;--c:13;--v:1;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:6;--c:0;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:1;--v:3;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:2;--v:0;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:3;--v:2;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:4;--v:4;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:5;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:6;--v:3;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:7;--v:0;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:8;--v:2;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:9;--v:4;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:10;--v:1;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:11;--v:3;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:12;--v:0;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:6;--c:13;--v:2;--brick-shift:0px"></span><span class="sr-masonry-brick" style="--r:7;--c:0;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:1;--v:4;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:2;--v:1;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:3;--v:3;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:4;--v:0;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:5;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:6;--v:4;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:7;--v:1;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:8;--v:3;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:9;--v:0;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:10;--v:2;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:11;--v:4;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:12;--v:1;--brick-shift:-14px"></span><span class="sr-masonry-brick" style="--r:7;--c:13;--v:3;--brick-shift:-14px"></span></div>
       <div class="sr-hang-track" id="srWorkTrack" tabindex="0" role="region" aria-roledescription="scroll-driven portfolio" aria-label="Projects move horizontally as you scroll the page">
       <article class="sr-hang-item sr-rock-window" style="--sr-rotate:-2deg" aria-label="RabbitxLogistics">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>RabbitxLogistics</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>RabbitxLogistics</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open RabbitxLogistics stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button>
       
       <div class="sr-hang-photo">
@@ -802,9 +796,10 @@ nav a[data-target="studio"]{white-space:nowrap}
       <span class="sr-hang-meta">Client project · JavaScript / TailwindCss</span>
       </article>
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:1.5deg" aria-label="RabbitxLogistics Admin Dashboard">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>RabbitxLogistics Admin Dashboard</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>RabbitxLogistics Admin Dashboard</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open RabbitxLogistics Admin Dashboard stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button>
       
       <div class="sr-hang-photo">
@@ -818,9 +813,10 @@ nav a[data-target="studio"]{white-space:nowrap}
       <span class="sr-hang-meta">Client project · JavaScript / TailwindCss</span>
       </article>
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:-1.3deg" aria-label="Raast Point Of Sale">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>Raast Point Of Sale</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>Raast Point Of Sale</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open Raast Point Of Sale stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button>
       
       <div class="sr-hang-photo">
@@ -834,9 +830,10 @@ nav a[data-target="studio"]{white-space:nowrap}
       <span class="sr-hang-meta">Independent project · JavaScript / TailwindCss</span>
       </article>
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:2.5deg" aria-label="Dil Se Buy">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>Dil Se Buy</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>Dil Se Buy</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open Dil Se Buy stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button>
       
       <div class="sr-hang-photo">
@@ -850,9 +847,10 @@ nav a[data-target="studio"]{white-space:nowrap}
       <span class="sr-hang-meta">Independent project · JavaScript / TailwindCss</span>
       </article>
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:-1deg" aria-label="Smart For Share">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>Smart For Share</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>Smart For Share</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open Smart For Share stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button>
       
       <div class="sr-hang-photo">
@@ -866,9 +864,10 @@ nav a[data-target="studio"]{white-space:nowrap}
       <span class="sr-hang-meta">Independent project · JavaScript / TypeScript</span>
       </article>
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:1.7deg" aria-label="Friend Flow (Social App)">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>Friend Flow (Social App)</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>Friend Flow (Social App)</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open Friend Flow (Social App) stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button>
       
       <div class="sr-hang-photo">
@@ -882,9 +881,10 @@ nav a[data-target="studio"]{white-space:nowrap}
       <span class="sr-hang-meta">Independent project · JavaScript / TailwindCss</span>
       </article>
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:-1.5deg" aria-label="React Image Gallery (Social App)">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>React Image Gallery (Social App)</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>React Image Gallery (Social App)</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open React Image Gallery (Social App) stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button>
       
       <div class="sr-hang-photo">
@@ -898,9 +898,10 @@ nav a[data-target="studio"]{white-space:nowrap}
       <span class="sr-hang-meta">Independent project · JavaScript / TailwindCss</span>
       </article>
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:2deg" aria-label="Quick Post (Social App)">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>Quick Post (Social App)</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>Quick Post (Social App)</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open Quick Post (Social App) stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button>
       
       <div class="sr-hang-photo">
@@ -914,9 +915,10 @@ nav a[data-target="studio"]{white-space:nowrap}
       <span class="sr-hang-meta">Independent project · Html / Css</span>
       </article>
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:-1deg" aria-label="Fake Store">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>Fake Store</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>Fake Store</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open Fake Store stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button>
       
       <div class="sr-hang-photo">
@@ -930,9 +932,10 @@ nav a[data-target="studio"]{white-space:nowrap}
       <span class="sr-hang-meta">Independent project · Html / Css</span>
       </article>
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:1.4deg" aria-label="Djanazah — Mobile App and Admin Panel">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>Djanazah — Mobile App and Admin Panel</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>Djanazah — Mobile App and Admin Panel</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open Djanazah — Mobile App and Admin Panel stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button>
  
  <div class="sr-hang-photo">
@@ -943,9 +946,10 @@ nav a[data-target="studio"]{white-space:nowrap}
  </div></div><span class="sr-hang-meta">Client platform · React Native / Next.js</span></article>
 
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:-1.25deg" aria-label="Zarnur — digital commerce platform">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>Zarnur — digital commerce platform</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>Zarnur — digital commerce platform</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open Zarnur — digital commerce platform stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button>
  
  <div class="sr-hang-photo">
@@ -961,14 +965,16 @@ nav a[data-target="studio"]{white-space:nowrap}
  <span class="sr-hang-meta">Full-stack platform · Next.js / React Native</span>
  </article>
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:1.2deg" aria-label="Shaoor Institute LMS">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>Shaoor Institute LMS</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>Shaoor Institute LMS</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open Shaoor Institute LMS stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button><div class="sr-hang-photo"><div class="sr-hang-image sr-real-shot sr-shaoor-shot"><img src="./assets/shaoor-lms-live.png" alt="Original website hero asset from Shaoor repository; not a browser screenshot" loading="lazy" draggable="false"></div><div class="sr-project-card-copy"><div class="sr-hang-caption"><span>Shaoor Institute LMS</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div><p class="sr-project-desc">A bilingual English–Urdu learning ecosystem with course publishing, quizzes, learner progress, certificates, and five role-based portals.</p><button class="sr-detail-btn sr-project-action" data-project="11" type="button" aria-label="View Shaoor Institute LMS details">View project details <span aria-hidden="true">↗</span></button></div></div><span class="sr-hang-meta">Full-stack website · Next.js / NestJS</span></article>
 <article class="sr-hang-item sr-rock-window" style="--sr-rotate:-1.4deg" aria-label="Tahir Madani — Islamic Calculators">
-        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="sr-stone-nameplate" aria-hidden="true"><span>Tahir Madani — Islamic Calculators</span><small>BREAK TO REVEAL</small></div>
+        <div class="sr-window-keystone" aria-hidden="true"></div>
+        <div class="sr-stone-shutter sr-stone-shutter-left" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-shutter sr-stone-shutter-right" aria-hidden="true"><i></i></div>
+        <div class="sr-stone-nameplate" aria-hidden="true"><span>Tahir Madani — Islamic Calculators</span><small>HOVER TO OPEN</small></div>
         <button class="sr-window-toggle" type="button" aria-label="Open Tahir Madani — Islamic Calculators stone opening" aria-expanded="false"><span aria-hidden="true">+</span></button><div class="sr-hang-photo"><div class="sr-hang-image sr-real-shot sr-tahir-shot"><img src="./assets/tahir-madani-live.png" alt="Actual Tahir Madani calculator website screenshot, Urdu layout" loading="lazy" draggable="false"></div><div class="sr-project-card-copy"><div class="sr-hang-caption"><span>Tahir Madani — Islamic Calculators</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div><p class="sr-project-desc">Multilingual Next.js website with Hanafi inheritance and Zakat calculators, educational resources and contact features.</p><button class="sr-detail-btn sr-project-action" data-project="12" type="button" aria-label="View Tahir Madani — Islamic Calculators details">View project details <span aria-hidden="true">↗</span></button></div></div><span class="sr-hang-meta">Full-stack website · Next.js / TypeScript</span></article>
       </div>
    </div>
