@@ -1,1 +1,0 @@
-import './globals.css';export const metadata={title:'Samar Raza — Portfolio Preview',description:'Samar Raza, Full-Stack Developer portfolio preview.'};export default function RootLayout({children}){return <html lang="en"><body>{children}</body></html>}
