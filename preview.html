@@ -1450,10 +1450,12 @@ nav a[data-target="studio"]{white-space:nowrap}
   let drag = null, hovered = null;
   let buildActive=false, buildTimers=[], mortarMarkup='';
   let finishPlane=null;
+  let seamsFinished=false;
   const buildLater=(fn,delay)=>buildTimers.push(setTimeout(fn,delay));
   function cancelConstruction(){
     buildTimers.forEach(clearTimeout);buildTimers=[];
     buildActive=false;
+    seamsFinished=false;
     const site=stage.querySelector('.construction-site');
     if(site){site.remove();}
     if(finishPlane){finishPlane.visible=false;finishPlane.material.opacity=0;}
@@ -1642,7 +1644,7 @@ nav a[data-target="studio"]{white-space:nowrap}
     if(reduced){
       remaining.forEach(p=>p.placed=true);
       complete=true;buildActive=false;
-      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
+      if(finishPlane){finishPlane.visible=false;finishPlane.material.opacity=1;}
       edgeMat.opacity=0;$('win').hidden=false;updateUI();return;
     }
     const site=document.createElement('div');
@@ -1753,8 +1755,8 @@ nav a[data-target="studio"]{white-space:nowrap}
       ladder.classList.remove('visible');
     },finish);
     buildLater(()=>{
-      site.classList.add('polished');complete=true;
-      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=0;}
+      site.classList.add('polished');complete=true;seamsFinished=true;
+      if(finishPlane){finishPlane.visible=false;finishPlane.material.opacity=0;}
     },finish+1550);
     buildLater(()=>{
       label.textContent='construction complete';
@@ -1763,7 +1765,7 @@ nav a[data-target="studio"]{white-space:nowrap}
     buildLater(()=>{
       site.remove();buildActive=false;complete=true;
       pieces.forEach(p=>p.placed=true);
-      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
+      if(finishPlane){finishPlane.visible=false;finishPlane.material.opacity=1;}
       edgeMat.opacity=0;
       $('winText').textContent=auto?'Every stone fitted and finished!':'Wall restored — nice work!';
       $('win').hidden=false;updateUI();
@@ -1911,7 +1913,7 @@ nav a[data-target="studio"]{white-space:nowrap}
     const dt = Math.min((now - last) / 1000, 0.05); last = now;
     const k = reduced ? 1 : 1 - Math.exp(-dt * 14);
     const kSlow = reduced ? 1 : 1 - Math.exp(-dt * 10);
-    edgeMat.opacity += (((complete && !buildActive) ? 0 : (playing ? 0.55 : 0.26)) - edgeMat.opacity) * kSlow;
+    edgeMat.opacity += (((seamsFinished || (complete && !buildActive)) ? 0 : (playing ? 0.55 : 0.26)) - edgeMat.opacity) * kSlow;
     if(finishPlane && finishPlane.visible && complete){finishPlane.material.opacity+=(1-finishPlane.material.opacity)*(1-Math.exp(-dt*3.6));}
     for (const p of pieces) {
       const isDrag = drag && drag.p === p;
@@ -2638,10 +2640,12 @@ try {
   let drag = null, hovered = null;
   let buildActive=false, buildTimers=[], mortarMarkup='';
   let finishPlane=null;
+  let seamsFinished=false;
   const buildLater=(fn,delay)=>buildTimers.push(setTimeout(fn,delay));
   function cancelConstruction(){
     buildTimers.forEach(clearTimeout);buildTimers=[];
     buildActive=false;
+    seamsFinished=false;
     const site=stage.querySelector('.construction-site');
     if(site){site.remove();}
     if(finishPlane){finishPlane.visible=false;finishPlane.material.opacity=0;}
@@ -2830,7 +2834,7 @@ try {
     if(reduced){
       remaining.forEach(p=>p.placed=true);
       complete=true;buildActive=false;
-      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
+      if(finishPlane){finishPlane.visible=false;finishPlane.material.opacity=1;}
       edgeMat.opacity=0;$('win').hidden=false;updateUI();return;
     }
     const site=document.createElement('div');
@@ -2941,8 +2945,8 @@ try {
       ladder.classList.remove('visible');
     },finish);
     buildLater(()=>{
-      site.classList.add('polished');complete=true;
-      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=0;}
+      site.classList.add('polished');complete=true;seamsFinished=true;
+      if(finishPlane){finishPlane.visible=false;finishPlane.material.opacity=0;}
     },finish+1550);
     buildLater(()=>{
       label.textContent='construction complete';
@@ -2951,7 +2955,7 @@ try {
     buildLater(()=>{
       site.remove();buildActive=false;complete=true;
       pieces.forEach(p=>p.placed=true);
-      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
+      if(finishPlane){finishPlane.visible=false;finishPlane.material.opacity=1;}
       edgeMat.opacity=0;
       $('winText').textContent=auto?'Every stone fitted and finished!':'Wall restored — nice work!';
       $('win').hidden=false;updateUI();
@@ -3099,7 +3103,7 @@ try {
     const dt = Math.min((now - last) / 1000, 0.05); last = now;
     const k = reduced ? 1 : 1 - Math.exp(-dt * 14);
     const kSlow = reduced ? 1 : 1 - Math.exp(-dt * 10);
-    edgeMat.opacity += (((complete && !buildActive) ? 0 : (playing ? 0.55 : 0.26)) - edgeMat.opacity) * kSlow;
+    edgeMat.opacity += (((seamsFinished || (complete && !buildActive)) ? 0 : (playing ? 0.55 : 0.26)) - edgeMat.opacity) * kSlow;
     if(finishPlane && finishPlane.visible && complete){finishPlane.material.opacity+=(1-finishPlane.material.opacity)*(1-Math.exp(-dt*3.6));}
     for (const p of pieces) {
       const isDrag = drag && drag.p === p;
