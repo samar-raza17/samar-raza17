@@ -1679,7 +1679,7 @@ nav a[data-target="studio"]{white-space:nowrap}
       $('photoLabel').textContent = 'photo 1/' + textures.length;
       buildPieces(breakpointN());
       requestAnimationFrame(tick);
-      if (!reduced) setTimeout(() => { if (!playing) beginStoneBreak(); }, 500);
+      if (!reduced) requestAnimationFrame(() => { if (!playing) beginStoneBreak(); });
     });
   });
 })();
