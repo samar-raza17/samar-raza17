@@ -435,71 +435,100 @@ nav a[data-target="studio"]{white-space:nowrap}
 @media(max-width:600px){.sr-pg-gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 8px 18px 0}.sr-pg-card{flex:0 0 min(82vw,340px);scroll-snap-align:start}.sr-pg-gallery .sr-pg-card:last-child{grid-column:auto}.sr-pg-preview{height:242px}.sr-pg-intro .slot-title{font-size:clamp(43px,11vw,62px)}.sr-career-heading{display:block}.sr-career-heading>p{margin-top:17px}.sr-career-card{padding:21px 19px;min-height:0}.sr-career-list{gap:14px}.sr-career-item{grid-template-columns:25px minmax(0,1fr)}.sr-career-card h4{font-size:20px}.sr-career-heading h3{font-size:clamp(43px,10vw,63px)}.sr-pg-footnote{text-align:left}}
 @media(prefers-reduced-motion:reduce){.sr-pg-card,.sr-pg-window,.sr-pg-interface,.sr-career-card,.sr-pg-orbit{transition:none!important}}
 
-/* Interactive three-dimensional Career Wall */
+
+/* Career Wall V2 — orange/ivory Minecraft-inspired hammer and falling pixel stone */
 .sr-career-wall{margin-top:clamp(95px,10vw,150px);isolation:isolate}
 .sr-wall-heading{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:32px}
 .sr-wall-heading h3{margin:18px 0 0;font-size:clamp(52px,6.2vw,94px);font-weight:900;letter-spacing:-.075em;line-height:.99}
 .sr-wall-heading>p{max-width:350px;color:#625c55;font-size:16px;line-height:1.65;margin:0 0 7px}
 .sr-wall-heading>p b{color:#d95c14}
-.sr-wall-guide{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #d7c5b4;padding:16px 0;color:#b2541a;font:700 11px var(--font-mono);letter-spacing:.06em}
-.sr-wall-grid{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(21px,2.5vw,35px);margin:0;padding:15px 9px 24px;perspective:1400px}
-.sr-wall-item{height:clamp(290px,23vw,352px);min-width:0;position:relative;transform:rotate(var(--tilt));transition:transform .36s cubic-bezier(.22,.8,.18,1);perspective:950px}
-.sr-wall-item:nth-child(even){margin-top:18px}
-.sr-wall-item:hover,.sr-wall-item:focus-within,.sr-wall-item.is-broken{transform:translateY(-8px) rotate(0deg);z-index:10}
-.sr-wall-trigger{display:block;width:100%;height:100%;border:0;padding:0;margin:0;cursor:pointer;background:transparent;text-align:left;color:inherit;font:inherit;outline-offset:8px;isolation:isolate}
+.sr-wall-guide{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #d7c5b4;padding:16px 0;color:#b2541a;font:700 11px var(--font-mono);letter-spacing:.04em}
+.sr-wall-grid{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(23px,2.7vw,39px);margin:0;padding:19px 14px 32px;perspective:1100px}
+.sr-wall-item{height:clamp(305px,24vw,365px);min-width:0;position:relative;transform:rotate(var(--tilt));transition:transform .36s cubic-bezier(.22,.8,.18,1);perspective:950px;isolation:isolate}
+.sr-wall-item:nth-child(even){margin-top:14px}
+.sr-wall-item:hover,.sr-wall-item:focus-within,.sr-wall-item.is-breaking,.sr-wall-item.is-shattering,.sr-wall-item.is-revealed{transform:translateY(-5px) rotate(0deg);z-index:10}
+.sr-wall-trigger{display:block;width:100%;height:100%;border:0;padding:0;margin:0;cursor:pointer;background:transparent;text-align:left;color:inherit;font:inherit;outline-offset:8px;isolation:isolate;-webkit-tap-highlight-color:transparent}
 .sr-wall-trigger:focus-visible{outline:3px dashed #f97316}
-.sr-wall-depth{display:block;position:relative;width:100%;height:100%;filter:drop-shadow(7px 10px 0 #171717);transform-style:preserve-3d}
-.sr-wall-item:nth-child(3n+2) .sr-wall-depth{filter:drop-shadow(8px 11px 0 #49332a)}
-.sr-wall-item:nth-child(3n+3) .sr-wall-depth{filter:drop-shadow(8px 11px 0 #d56013)}
-.sr-wall-inside{box-sizing:border-box;position:absolute;inset:0;background:radial-gradient(circle at 95% 0,#f9731625,transparent 47%),linear-gradient(145deg,#272623,#121514);border:2px solid #f97316;color:#fff;z-index:0;display:flex;flex-direction:column;padding:clamp(18px,1.7vw,29px);overflow:hidden;box-shadow:inset 0 0 40px #0008}
-.sr-wall-inside:after{content:"";width:170px;height:170px;position:absolute;top:-75px;right:-55px;border:1px dashed #f9731680;transform:rotate(30deg)}
+.sr-wall-depth{display:block;position:relative;width:100%;height:100%;filter:drop-shadow(7px 10px 0 #171717);transform-style:flat}
+.sr-wall-item:nth-child(3n+2) .sr-wall-depth{filter:drop-shadow(7px 10px 0 #42322c)}
+.sr-wall-item:nth-child(3n+3) .sr-wall-depth{filter:drop-shadow(7px 10px 0 #db6d23)}
+.sr-wall-inside{box-sizing:border-box;position:absolute;inset:0;background:radial-gradient(circle at 90% 5%,#f973161d,transparent 50%),linear-gradient(145deg,#28231f,#121516);border:2px solid #e76a1b;color:#fff;z-index:1;display:flex;flex-direction:column;padding:clamp(17px,1.55vw,25px);overflow:hidden;box-shadow:inset 0 0 40px #0008}
+.sr-wall-inside:after{content:"";width:160px;height:160px;position:absolute;top:-80px;right:-70px;border:1px dashed #f9731670;transform:rotate(30deg)}
 .sr-wall-inside-eyebrow{font:700 9px/1.5 var(--font-mono);color:#f5a46b;display:flex;justify-content:space-between;gap:10px;position:relative;z-index:1}
 .sr-wall-inside-eyebrow i{font-style:normal}
-.sr-wall-job{display:block;position:relative;z-index:1;font-size:clamp(20px,1.72vw,29px);letter-spacing:-.05em;line-height:1.17;margin:clamp(14px,2vw,27px) 0 10px;overflow-wrap:break-word}
+.sr-wall-job{display:block;position:relative;z-index:1;font-size:clamp(20px,1.68vw,29px);letter-spacing:-.05em;line-height:1.13;margin:clamp(11px,1.4vw,20px) 0 7px;overflow-wrap:break-word}
 .sr-wall-years{font:11px/1.5 var(--font-mono);color:#ffb47e}
-.sr-wall-story{font-size:clamp(11px,.86vw,13px);line-height:1.56;color:#d4d2ce;margin-top:clamp(10px,1.5vw,21px);display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
-.sr-wall-inner-company{margin-top:auto;padding-top:7px;font:11px/1.4 var(--font-mono);color:#ffae6d;position:relative;z-index:1}
+.sr-wall-story{font-size:clamp(11px,.86vw,13px);line-height:1.52;color:#d4d2ce;margin-top:clamp(10px,1.3vw,19px);display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+.sr-wall-inner-company{margin-top:auto;padding-top:8px;font:11px/1.4 var(--font-mono);color:#ffae6d;position:relative;z-index:1}
 .sr-wall-inner-company small{color:#a1d6b1;font-size:9px}
-.sr-wall-plaster{display:block;position:absolute;inset:0;z-index:2;pointer-events:none;transform-style:preserve-3d}
-.sr-wall-fragments{position:absolute;inset:0;transform-style:preserve-3d}
-.sr-wall-fragment{position:absolute;inset:0;display:block;transform:translate3d(0,0,2px);backface-visibility:hidden;will-change:transform;transition:transform .7s cubic-bezier(.17,.72,.17,1);
- background:radial-gradient(circle at 15% 10%,#fffaf2 0,transparent 50%),radial-gradient(circle at 75% 90%,#b6a28f44 0,transparent 40%),repeating-linear-gradient(0deg,transparent 0 22px,#ae9c8920 23px),linear-gradient(125deg,#e1d7c9,#f5ede1 52%,#d2c3b0);
- box-shadow:inset 5px 8px 13px #fff9,inset -7px -7px 13px #8c726344;border:1px solid #cbbbaf}
+.sr-wall-inside>*:not(:last-child){transition:opacity .25s ease,transform .35s;opacity:.9}
+.sr-wall-item.is-revealed .sr-wall-inside>*{opacity:1;transform:none}
+.sr-wall-plaster{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;transform-style:flat}
+.sr-wall-fragments{position:absolute;inset:0;z-index:1}
+.sr-wall-fragment{position:absolute;inset:0;display:block;transform:translate(0,0);backface-visibility:hidden;will-change:transform,opacity;
+ background:repeating-linear-gradient(90deg,transparent 0 24px,#fff6e81a 24px 25px),repeating-linear-gradient(0deg,transparent 0 24px,#8d77671a 24px 25px),linear-gradient(130deg,#e0d3c1,#f4e9dc 51%,#d3c1ae);
+ box-shadow:inset 4px 5px 0 #fff9,inset -5px -5px 0 #b5a38e70;border:1px solid #c5b19c;filter:none}
 .sr-wall-fragment.one{clip-path:polygon(0 0,45% 0,49% 29%,30% 42%,0 33%)}
 .sr-wall-fragment.two{clip-path:polygon(45% 0,100% 0,100% 39%,68% 33%,49% 29%)}
 .sr-wall-fragment.three{clip-path:polygon(0 33%,30% 42%,39% 58%,0 75%)}
 .sr-wall-fragment.four{clip-path:polygon(49% 29%,68% 33%,100% 39%,100% 75%,69% 63%,39% 58%,30% 42%)}
 .sr-wall-fragment.five{clip-path:polygon(0 75%,39% 58%,69% 63%,58% 100%,0 100%)}
 .sr-wall-fragment.six{clip-path:polygon(69% 63%,100% 75%,100% 100%,58% 100%)}
-.sr-wall-crack-lines{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;color:#62554a;opacity:.2;transition:opacity .3s}
-.sr-wall-crack-lines path{stroke-dasharray:850;stroke-dashoffset:850;transition:stroke-dashoffset .3s ease}
-.sr-wall-front{position:absolute;inset:0;z-index:3;padding:clamp(22px,2.1vw,35px);display:flex;flex-direction:column;overflow:hidden;transition:opacity .18s ease,transform .28s;pointer-events:none}
-.sr-wall-front-row{display:flex;justify-content:space-between;gap:8px;font:700 10px/1.4 var(--font-mono);letter-spacing:.035em;color:#8b6041}
-.sr-wall-front-row span:last-child{color:#ad5b23}
-.sr-wall-front strong{margin:auto 0 14px;font-size:clamp(23px,2.05vw,35px);line-height:1.11;letter-spacing:-.05em;color:#292622;font-weight:900;overflow-wrap:break-word;text-shadow:0 1px 0 #fff7}
-.sr-wall-front-date{color:#756a60;font:11px var(--font-mono)}
-.sr-wall-action{border-top:1px solid #c9b8a8;margin-top:20px;padding-top:12px;color:#c45418;font:700 10px var(--font-mono);display:flex;align-items:center;gap:7px}
-.sr-wall-action i{font-size:19px;font-style:normal;margin-left:auto}
-.sr-wall-tap-word{display:none}
-.sr-wall-item:hover .sr-wall-crack-lines,.sr-wall-item:focus-within .sr-wall-crack-lines,.sr-wall-item.is-broken .sr-wall-crack-lines{opacity:1}
-.sr-wall-item:hover .sr-wall-crack-lines path,.sr-wall-item:focus-within .sr-wall-crack-lines path,.sr-wall-item.is-broken .sr-wall-crack-lines path{stroke-dashoffset:0}
-.sr-wall-item:hover .sr-wall-front,.sr-wall-item:focus-within .sr-wall-front,.sr-wall-item.is-broken .sr-wall-front{opacity:0;transform:scale(.94);transition-delay:.13s}
-.sr-wall-item:hover .sr-wall-crack-lines,.sr-wall-item:focus-within .sr-wall-crack-lines,.sr-wall-item.is-broken .sr-wall-crack-lines{opacity:0;transition-delay:.38s}
-.sr-wall-item:hover .sr-wall-fragment.one,.sr-wall-item:focus-within .sr-wall-fragment.one,.sr-wall-item.is-broken .sr-wall-fragment.one{transform:translate3d(-46px,-54px,100px) rotate(-9deg)}
-.sr-wall-item:hover .sr-wall-fragment.two,.sr-wall-item:focus-within .sr-wall-fragment.two,.sr-wall-item.is-broken .sr-wall-fragment.two{transform:translate3d(48px,-37px,115px) rotate(10deg)}
-.sr-wall-item:hover .sr-wall-fragment.three,.sr-wall-item:focus-within .sr-wall-fragment.three,.sr-wall-item.is-broken .sr-wall-fragment.three{transform:translate3d(-65px,11px,95px) rotate(-13deg)}
-.sr-wall-item:hover .sr-wall-fragment.four,.sr-wall-item:focus-within .sr-wall-fragment.four,.sr-wall-item.is-broken .sr-wall-fragment.four{transform:translate3d(80px,12px,110px) rotate(11deg)}
-.sr-wall-item:hover .sr-wall-fragment.five,.sr-wall-item:focus-within .sr-wall-fragment.five,.sr-wall-item.is-broken .sr-wall-fragment.five{transform:translate3d(-28px,76px,110px) rotate(9deg)}
-.sr-wall-item:hover .sr-wall-fragment.six,.sr-wall-item:focus-within .sr-wall-fragment.six,.sr-wall-item.is-broken .sr-wall-fragment.six{transform:translate3d(49px,67px,110px) rotate(-10deg)}
-.sr-wall-finale{grid-column:span 2;min-height:290px;display:flex;flex-direction:column;justify-content:space-between;border:2px dashed #d1bdaa;padding:28px 38px;transform:rotate(.4deg);position:relative}
+.sr-wall-crack-lines{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;color:#715746;opacity:0}
+.sr-wall-crack-lines path{stroke-dasharray:850;stroke-dashoffset:850}
+.sr-wall-front{position:absolute;inset:0;z-index:8;padding:clamp(22px,2vw,33px);display:flex;flex-direction:column;overflow:hidden;pointer-events:none;background:transparent;color:#292622;opacity:1;visibility:visible}
+.sr-wall-front-row{display:flex;justify-content:space-between;gap:8px;font:700 10px/1.4 var(--font-mono);letter-spacing:.04em;color:#875b3c}
+.sr-wall-front-row span:last-child{color:#a94d1c}
+.sr-wall-front strong{display:block;margin:auto 0 13px;font-size:clamp(23px,2vw,35px);line-height:1.11;letter-spacing:-.05em;color:#25211e;font-weight:900;overflow-wrap:break-word;text-shadow:0 1px 0 #fff7}
+.sr-wall-front-date{color:#77675c;font:11px var(--font-mono)}
+.sr-wall-action{border-top:1px solid #c8b3a0;margin-top:18px;padding-top:12px;color:#c45418;font:700 10px var(--font-mono);display:flex;align-items:center;gap:7px}
+.sr-wall-action i{font-size:19px;font-style:normal;margin-left:auto}.sr-wall-tap-word{display:none}
+/* hammer rendered as a crisp SVG sprite; only appears while striking */
+.sr-wall-hammer{position:absolute;z-index:25;width:clamp(100px,9vw,142px);height:clamp(100px,9vw,142px);right:-8px;top:-44px;opacity:0;pointer-events:none;transform:translate(74px,-72px) rotate(-55deg) scale(.75);transform-origin:60% 85%;filter:drop-shadow(5px 6px 0 #0005)}
+.sr-wall-hammer svg{display:block;width:100%;height:100%}
+.sr-wall-item.is-breaking .sr-wall-hammer{opacity:1;animation:srHammerStrike .66s cubic-bezier(.45,.02,.2,1) both}
+@keyframes srHammerStrike{0%{transform:translate(74px,-72px) rotate(-60deg) scale(.7);opacity:0}12%{opacity:1}39%{transform:translate(35px,-32px) rotate(-42deg) scale(.98)}59%{transform:translate(-64px,103px) rotate(31deg) scale(1.16)}67%{transform:translate(-59px,97px) rotate(22deg) scale(1.13)}100%{transform:translate(25px,-28px) rotate(-37deg) scale(.92);opacity:0}}
+.sr-wall-item.is-impact .sr-wall-crack-lines{animation:srWallCracks .4s steps(4,end) forwards;opacity:1}
+.sr-wall-item.is-impact .sr-wall-crack-lines path{animation:srWallCrackDraw .32s steps(5,end) both}
+@keyframes srWallCracks{0%{opacity:0}30%{opacity:1}100%{opacity:.85}}
+@keyframes srWallCrackDraw{0%{stroke-dashoffset:850}100%{stroke-dashoffset:0}}
+.sr-wall-item.is-impact .sr-wall-depth{animation:srWallShake .25s steps(3,end) 1}
+@keyframes srWallShake{0%,100%{transform:translate(0)}25%{transform:translate(-4px,2px)}50%{transform:translate(4px,-3px)}75%{transform:translate(-2px,1px)}}
+.sr-wall-impact{position:absolute;inset:0;z-index:26;pointer-events:none;overflow:visible}
+.sr-wall-impact i{--a:calc(var(--spark) * 28deg);position:absolute;top:51%;left:47%;height:clamp(6px,.75vw,11px);width:clamp(6px,.75vw,11px);background:#f97316;border:2px solid #171717;opacity:0;transform:translate(-50%,-50%) rotate(var(--a));}
+.sr-wall-impact i:nth-child(even){background:#d6b99b}
+.sr-wall-item.is-impact .sr-wall-impact i{animation:srPixelDust .68s cubic-bezier(.18,.52,.2,1) both;animation-delay:calc(var(--spark) * 13ms)}
+@keyframes srPixelDust{0%{opacity:1;transform:translate(-50%,-50%) rotate(var(--a))}72%{opacity:1;transform:translate(calc(-50% + cos(var(--a))*100px),calc(-50% + sin(var(--a))*76px)) rotate(100deg)}100%{opacity:0;transform:translate(calc(-50% + cos(var(--a))*125px),calc(-50% + 145px)) rotate(180deg)}}
+/* each plaster chunk tumbles down past the complete text */
+.sr-wall-item.is-shattering .sr-wall-front{animation:srWallTextVanish .14s linear both}
+@keyframes srWallTextVanish{to{opacity:0;visibility:hidden}}
+.sr-wall-item.is-shattering .sr-wall-crack-lines{opacity:0}
+.sr-wall-item.is-shattering .sr-wall-fragment{transform-origin:center;animation-duration:1.05s;animation-timing-function:cubic-bezier(.35,.12,.78,.56);animation-fill-mode:forwards}
+.sr-wall-item.is-shattering .sr-wall-fragment.one{animation-name:srFallOne}
+.sr-wall-item.is-shattering .sr-wall-fragment.two{animation-name:srFallTwo}
+.sr-wall-item.is-shattering .sr-wall-fragment.three{animation-name:srFallThree}
+.sr-wall-item.is-shattering .sr-wall-fragment.four{animation-name:srFallFour}
+.sr-wall-item.is-shattering .sr-wall-fragment.five{animation-name:srFallFive}
+.sr-wall-item.is-shattering .sr-wall-fragment.six{animation-name:srFallSix}
+@keyframes srFallOne{0%{transform:translate(0,0) rotate(0);opacity:1}22%{transform:translate(-38px,-24px) rotate(-11deg);opacity:1}100%{transform:translate(-150px,660px) rotate(-110deg);opacity:0}}
+@keyframes srFallTwo{0%{transform:translate(0,0) rotate(0);opacity:1}22%{transform:translate(35px,-23px) rotate(10deg);opacity:1}100%{transform:translate(125px,715px) rotate(95deg);opacity:0}}
+@keyframes srFallThree{0%{transform:translate(0,0) rotate(0);opacity:1}22%{transform:translate(-57px,6px) rotate(-15deg);opacity:1}100%{transform:translate(-188px,730px) rotate(-155deg);opacity:0}}
+@keyframes srFallFour{0%{transform:translate(0,0) rotate(0);opacity:1}22%{transform:translate(50px,-3px) rotate(12deg);opacity:1}100%{transform:translate(173px,690px) rotate(145deg);opacity:0}}
+@keyframes srFallFive{0%{transform:translate(0,0) rotate(0);opacity:1}22%{transform:translate(-30px,19px) rotate(-13deg);opacity:1}100%{transform:translate(-113px,730px) rotate(-94deg);opacity:0}}
+@keyframes srFallSix{0%{transform:translate(0,0) rotate(0);opacity:1}22%{transform:translate(37px,20px) rotate(13deg);opacity:1}100%{transform:translate(145px,780px) rotate(125deg);opacity:0}}
+.sr-wall-item.is-revealed .sr-wall-front,.sr-wall-item.is-revealed .sr-wall-fragment,.sr-wall-item.is-revealed .sr-wall-crack-lines{visibility:hidden!important;opacity:0!important;animation:none!important}
+.sr-wall-item.is-revealed .sr-wall-inside{box-shadow:inset 0 0 42px #000a,0 0 0 1px #f9731699}
+.sr-wall-item.is-revealed .sr-wall-job{animation:srWallTextIn .55s .08s both}
+.sr-wall-item.is-revealed .sr-wall-story{animation:srWallTextIn .55s .16s both}
+@keyframes srWallTextIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.sr-wall-finale{grid-column:span 2;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;border:2px dashed #d1bdaa;padding:28px 38px;transform:rotate(.4deg);position:relative}
 .sr-wall-finale:before,.sr-wall-finale:after{content:"+";position:absolute;color:#eb6d1f;font:27px var(--font-mono)}.sr-wall-finale:before{top:-19px;left:-14px}.sr-wall-finale:after{bottom:-19px;right:-11px}
 .sr-wall-finale>span{font:700 11px var(--font-mono);color:#a44917;letter-spacing:.05em}
-.sr-wall-finale strong{font-size:clamp(46px,5vw,78px);line-height:.96;letter-spacing:-.07em}
-.sr-wall-finale strong em{font-style:normal;color:#f97316}
+.sr-wall-finale strong{font-size:clamp(46px,5vw,78px);line-height:.96;letter-spacing:-.07em}.sr-wall-finale strong em{font-style:normal;color:#f97316}
 .sr-wall-footer{text-align:center;font:11px var(--font-mono);color:#a28d7b;margin:27px 0 0}
 @media(max-width:1050px){.sr-wall-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sr-wall-item{height:320px}.sr-wall-finale{grid-column:auto;min-height:320px}}
-@media(max-width:680px){.sr-wall-heading{display:block}.sr-wall-heading h3{font-size:clamp(48px,10.5vw,70px)}.sr-wall-heading>p{margin-top:20px}.sr-wall-guide{display:block;font-size:10px}.sr-wall-guide span:last-child{display:block;margin-top:8px}.sr-wall-grid{grid-template-columns:1fr;gap:33px;padding-inline:13px}.sr-wall-item{height:330px;margin-top:0!important}.sr-wall-finale{min-height:250px;padding:23px}.sr-wall-hover-word{display:none}.sr-wall-tap-word{display:inline}.sr-wall-job{font-size:clamp(23px,5.7vw,30px)}.sr-wall-story{font-size:12px}.sr-wall-item:hover .sr-wall-fragment.four,.sr-wall-item.is-broken .sr-wall-fragment.four{transform:translate3d(37px,8px,80px) rotate(10deg)}}
-@media(prefers-reduced-motion:reduce){.sr-wall-item,.sr-wall-fragment,.sr-wall-front,.sr-wall-crack-lines,.sr-wall-crack-lines path{transition-duration:.01ms!important}}
+@media(max-width:680px){.sr-wall-heading{display:block}.sr-wall-heading h3{font-size:clamp(48px,10.5vw,70px)}.sr-wall-heading>p{margin-top:20px}.sr-wall-guide{display:block;font-size:10px}.sr-wall-guide span:last-child{display:block;margin-top:8px}.sr-wall-grid{grid-template-columns:1fr;gap:36px;padding-inline:11px}.sr-wall-item{height:340px;margin-top:0!important}.sr-wall-finale{min-height:255px;padding:23px}.sr-wall-hover-word{display:none}.sr-wall-tap-word{display:inline}.sr-wall-job{font-size:clamp(23px,5.7vw,30px)}.sr-wall-story{font-size:12px}.sr-wall-hammer{right:-6px;top:-30px;width:116px;height:116px}}
+@media(prefers-reduced-motion:reduce){.sr-wall-item,.sr-wall-fragment,.sr-wall-front,.sr-wall-crack-lines,.sr-wall-hammer,.sr-wall-inside>*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -853,10 +882,19 @@ nav a[data-target="studio"]{white-space:nowrap}
  <div class="sr-wall-heading"><div><p class="eyebrow">( built through experience ) <span class="pen-note">7 chapters, still building</span></p>
  <h3 id="sr-career-title">The Career <span class="hl">Wall.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FDBA74"/></svg></span></h3></div>
  <p>Every role left its mark. <b>Break the surface</b> to see what I learned, built and explored along the way.</p></div>
- <div class="sr-wall-guide"><span>✳ HOVER TO CRACK THE WALL</span><span>OR TAP A TILE TO DISCOVER ↘</span></div>
+ <div class="sr-wall-guide"><span>⛏ HOVER — HAMMER STRIKES THE WALL</span><span>TAP TO SMASH A TILE ↘</span></div>
  <ol class="sr-wall-grid"><li class="sr-wall-item active-role" style="--tilt:-1.2deg">
  <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal 12Monday Technologies experience">
-  <span class="sr-wall-depth">
+  <span class="sr-wall-depth"><span class="sr-wall-hammer" aria-hidden="true"><svg viewBox="0 0 160 160" role="presentation" shape-rendering="crispEdges">
+ <path d="M63 40 H121 V51 H131 V83 H116 V93 H67 V82 H48 V57 H63 Z" fill="#171717"/>
+ <path d="M67 43 H117 V53 H127 V72 H58 V56 H67 Z" fill="#a2a7ab"/>
+ <path d="M67 44 H113 V50 H67 Z" fill="#e9eef0"/>
+ <path d="M58 61 H126 V72 H58 Z" fill="#66707a"/>
+ <path d="M79 82 H101 V141 H91 V151 H81 V139 H73 V92 H79 Z" fill="#171717"/>
+ <path d="M83 83 H96 V135 H83 Z" fill="#a15e37"/>
+ <path d="M87 91 H92 V132 H87 Z" fill="#f69b53"/>
+ <path d="M76 86 H103 V95 H76 Z" fill="#f97316"/>
+ </svg></span><span class="sr-wall-impact" aria-hidden="true"><i style="--spark:0"></i><i style="--spark:1"></i><i style="--spark:2"></i><i style="--spark:3"></i><i style="--spark:4"></i><i style="--spark:5"></i><i style="--spark:6"></i><i style="--spark:7"></i><i style="--spark:8"></i><i style="--spark:9"></i><i style="--spark:10"></i><i style="--spark:11"></i><i style="--spark:12"></i></span>
    <span class="sr-wall-inside">
     <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>01 / 07</i></span>
     <strong class="sr-wall-job">Full-Stack Developer</strong>
@@ -871,7 +909,7 @@ nav a[data-target="studio"]{white-space:nowrap}
      <span class="sr-wall-front-row"><span>CHAPTER 01</span><span>● PRESENT</span></span>
      <strong>12Monday Technologies</strong>
      <span class="sr-wall-front-date">Nov 2025 - Present</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO SMASH</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -879,7 +917,16 @@ nav a[data-target="studio"]{white-space:nowrap}
 </li>
 <li class="sr-wall-item active-role" style="--tilt:0.8deg">
  <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal Code Thread experience">
-  <span class="sr-wall-depth">
+  <span class="sr-wall-depth"><span class="sr-wall-hammer" aria-hidden="true"><svg viewBox="0 0 160 160" role="presentation" shape-rendering="crispEdges">
+ <path d="M63 40 H121 V51 H131 V83 H116 V93 H67 V82 H48 V57 H63 Z" fill="#171717"/>
+ <path d="M67 43 H117 V53 H127 V72 H58 V56 H67 Z" fill="#a2a7ab"/>
+ <path d="M67 44 H113 V50 H67 Z" fill="#e9eef0"/>
+ <path d="M58 61 H126 V72 H58 Z" fill="#66707a"/>
+ <path d="M79 82 H101 V141 H91 V151 H81 V139 H73 V92 H79 Z" fill="#171717"/>
+ <path d="M83 83 H96 V135 H83 Z" fill="#a15e37"/>
+ <path d="M87 91 H92 V132 H87 Z" fill="#f69b53"/>
+ <path d="M76 86 H103 V95 H76 Z" fill="#f97316"/>
+ </svg></span><span class="sr-wall-impact" aria-hidden="true"><i style="--spark:0"></i><i style="--spark:1"></i><i style="--spark:2"></i><i style="--spark:3"></i><i style="--spark:4"></i><i style="--spark:5"></i><i style="--spark:6"></i><i style="--spark:7"></i><i style="--spark:8"></i><i style="--spark:9"></i><i style="--spark:10"></i><i style="--spark:11"></i><i style="--spark:12"></i></span>
    <span class="sr-wall-inside">
     <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>02 / 07</i></span>
     <strong class="sr-wall-job">Junior Full-Stack Developer</strong>
@@ -894,7 +941,7 @@ nav a[data-target="studio"]{white-space:nowrap}
      <span class="sr-wall-front-row"><span>CHAPTER 02</span><span>● PRESENT</span></span>
      <strong>Code Thread</strong>
      <span class="sr-wall-front-date">May 2025 - Present</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -902,7 +949,16 @@ nav a[data-target="studio"]{white-space:nowrap}
 </li>
 <li class="sr-wall-item" style="--tilt:-0.6deg">
  <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal DigiEnder experience">
-  <span class="sr-wall-depth">
+  <span class="sr-wall-depth"><span class="sr-wall-hammer" aria-hidden="true"><svg viewBox="0 0 160 160" role="presentation" shape-rendering="crispEdges">
+ <path d="M63 40 H121 V51 H131 V83 H116 V93 H67 V82 H48 V57 H63 Z" fill="#171717"/>
+ <path d="M67 43 H117 V53 H127 V72 H58 V56 H67 Z" fill="#a2a7ab"/>
+ <path d="M67 44 H113 V50 H67 Z" fill="#e9eef0"/>
+ <path d="M58 61 H126 V72 H58 Z" fill="#66707a"/>
+ <path d="M79 82 H101 V141 H91 V151 H81 V139 H73 V92 H79 Z" fill="#171717"/>
+ <path d="M83 83 H96 V135 H83 Z" fill="#a15e37"/>
+ <path d="M87 91 H92 V132 H87 Z" fill="#f69b53"/>
+ <path d="M76 86 H103 V95 H76 Z" fill="#f97316"/>
+ </svg></span><span class="sr-wall-impact" aria-hidden="true"><i style="--spark:0"></i><i style="--spark:1"></i><i style="--spark:2"></i><i style="--spark:3"></i><i style="--spark:4"></i><i style="--spark:5"></i><i style="--spark:6"></i><i style="--spark:7"></i><i style="--spark:8"></i><i style="--spark:9"></i><i style="--spark:10"></i><i style="--spark:11"></i><i style="--spark:12"></i></span>
    <span class="sr-wall-inside">
     <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>03 / 07</i></span>
     <strong class="sr-wall-job">Junior Full-Stack Developer</strong>
@@ -917,7 +973,7 @@ nav a[data-target="studio"]{white-space:nowrap}
      <span class="sr-wall-front-row"><span>CHAPTER 03</span><span>ARCHIVE</span></span>
      <strong>DigiEnder</strong>
      <span class="sr-wall-front-date">Feb 2025 - Jul 2025</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -925,7 +981,16 @@ nav a[data-target="studio"]{white-space:nowrap}
 </li>
 <li class="sr-wall-item active-role" style="--tilt:1.2deg">
  <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal SMIT (Saylani Mass IT Training) experience">
-  <span class="sr-wall-depth">
+  <span class="sr-wall-depth"><span class="sr-wall-hammer" aria-hidden="true"><svg viewBox="0 0 160 160" role="presentation" shape-rendering="crispEdges">
+ <path d="M63 40 H121 V51 H131 V83 H116 V93 H67 V82 H48 V57 H63 Z" fill="#171717"/>
+ <path d="M67 43 H117 V53 H127 V72 H58 V56 H67 Z" fill="#a2a7ab"/>
+ <path d="M67 44 H113 V50 H67 Z" fill="#e9eef0"/>
+ <path d="M58 61 H126 V72 H58 Z" fill="#66707a"/>
+ <path d="M79 82 H101 V141 H91 V151 H81 V139 H73 V92 H79 Z" fill="#171717"/>
+ <path d="M83 83 H96 V135 H83 Z" fill="#a15e37"/>
+ <path d="M87 91 H92 V132 H87 Z" fill="#f69b53"/>
+ <path d="M76 86 H103 V95 H76 Z" fill="#f97316"/>
+ </svg></span><span class="sr-wall-impact" aria-hidden="true"><i style="--spark:0"></i><i style="--spark:1"></i><i style="--spark:2"></i><i style="--spark:3"></i><i style="--spark:4"></i><i style="--spark:5"></i><i style="--spark:6"></i><i style="--spark:7"></i><i style="--spark:8"></i><i style="--spark:9"></i><i style="--spark:10"></i><i style="--spark:11"></i><i style="--spark:12"></i></span>
    <span class="sr-wall-inside">
     <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>04 / 07</i></span>
     <strong class="sr-wall-job">Full Stack Web &amp; App Development (Teaching Assistant)</strong>
@@ -940,7 +1005,7 @@ nav a[data-target="studio"]{white-space:nowrap}
      <span class="sr-wall-front-row"><span>CHAPTER 04</span><span>● PRESENT</span></span>
      <strong>SMIT (Saylani Mass IT Training)</strong>
      <span class="sr-wall-front-date">May 2025 - Present</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -948,7 +1013,16 @@ nav a[data-target="studio"]{white-space:nowrap}
 </li>
 <li class="sr-wall-item" style="--tilt:-1.4deg">
  <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal DigiEnder experience">
-  <span class="sr-wall-depth">
+  <span class="sr-wall-depth"><span class="sr-wall-hammer" aria-hidden="true"><svg viewBox="0 0 160 160" role="presentation" shape-rendering="crispEdges">
+ <path d="M63 40 H121 V51 H131 V83 H116 V93 H67 V82 H48 V57 H63 Z" fill="#171717"/>
+ <path d="M67 43 H117 V53 H127 V72 H58 V56 H67 Z" fill="#a2a7ab"/>
+ <path d="M67 44 H113 V50 H67 Z" fill="#e9eef0"/>
+ <path d="M58 61 H126 V72 H58 Z" fill="#66707a"/>
+ <path d="M79 82 H101 V141 H91 V151 H81 V139 H73 V92 H79 Z" fill="#171717"/>
+ <path d="M83 83 H96 V135 H83 Z" fill="#a15e37"/>
+ <path d="M87 91 H92 V132 H87 Z" fill="#f69b53"/>
+ <path d="M76 86 H103 V95 H76 Z" fill="#f97316"/>
+ </svg></span><span class="sr-wall-impact" aria-hidden="true"><i style="--spark:0"></i><i style="--spark:1"></i><i style="--spark:2"></i><i style="--spark:3"></i><i style="--spark:4"></i><i style="--spark:5"></i><i style="--spark:6"></i><i style="--spark:7"></i><i style="--spark:8"></i><i style="--spark:9"></i><i style="--spark:10"></i><i style="--spark:11"></i><i style="--spark:12"></i></span>
    <span class="sr-wall-inside">
     <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>05 / 07</i></span>
     <strong class="sr-wall-job">Full-Stack Developer (Internship)</strong>
@@ -963,7 +1037,7 @@ nav a[data-target="studio"]{white-space:nowrap}
      <span class="sr-wall-front-row"><span>CHAPTER 05</span><span>ARCHIVE</span></span>
      <strong>DigiEnder</strong>
      <span class="sr-wall-front-date">Nov 2024 - Feb 2025</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -971,7 +1045,16 @@ nav a[data-target="studio"]{white-space:nowrap}
 </li>
 <li class="sr-wall-item" style="--tilt:0.6deg">
  <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal Start Kids Learning Institute experience">
-  <span class="sr-wall-depth">
+  <span class="sr-wall-depth"><span class="sr-wall-hammer" aria-hidden="true"><svg viewBox="0 0 160 160" role="presentation" shape-rendering="crispEdges">
+ <path d="M63 40 H121 V51 H131 V83 H116 V93 H67 V82 H48 V57 H63 Z" fill="#171717"/>
+ <path d="M67 43 H117 V53 H127 V72 H58 V56 H67 Z" fill="#a2a7ab"/>
+ <path d="M67 44 H113 V50 H67 Z" fill="#e9eef0"/>
+ <path d="M58 61 H126 V72 H58 Z" fill="#66707a"/>
+ <path d="M79 82 H101 V141 H91 V151 H81 V139 H73 V92 H79 Z" fill="#171717"/>
+ <path d="M83 83 H96 V135 H83 Z" fill="#a15e37"/>
+ <path d="M87 91 H92 V132 H87 Z" fill="#f69b53"/>
+ <path d="M76 86 H103 V95 H76 Z" fill="#f97316"/>
+ </svg></span><span class="sr-wall-impact" aria-hidden="true"><i style="--spark:0"></i><i style="--spark:1"></i><i style="--spark:2"></i><i style="--spark:3"></i><i style="--spark:4"></i><i style="--spark:5"></i><i style="--spark:6"></i><i style="--spark:7"></i><i style="--spark:8"></i><i style="--spark:9"></i><i style="--spark:10"></i><i style="--spark:11"></i><i style="--spark:12"></i></span>
    <span class="sr-wall-inside">
     <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>06 / 07</i></span>
     <strong class="sr-wall-job">Front-End Development (Teaching)</strong>
@@ -986,7 +1069,7 @@ nav a[data-target="studio"]{white-space:nowrap}
      <span class="sr-wall-front-row"><span>CHAPTER 06</span><span>ARCHIVE</span></span>
      <strong>Start Kids Learning Institute</strong>
      <span class="sr-wall-front-date">Apr 2024 - Nov 2024</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -994,7 +1077,16 @@ nav a[data-target="studio"]{white-space:nowrap}
 </li>
 <li class="sr-wall-item" style="--tilt:-0.8deg">
  <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal Tria Tech Solution Pvt Ltd. experience">
-  <span class="sr-wall-depth">
+  <span class="sr-wall-depth"><span class="sr-wall-hammer" aria-hidden="true"><svg viewBox="0 0 160 160" role="presentation" shape-rendering="crispEdges">
+ <path d="M63 40 H121 V51 H131 V83 H116 V93 H67 V82 H48 V57 H63 Z" fill="#171717"/>
+ <path d="M67 43 H117 V53 H127 V72 H58 V56 H67 Z" fill="#a2a7ab"/>
+ <path d="M67 44 H113 V50 H67 Z" fill="#e9eef0"/>
+ <path d="M58 61 H126 V72 H58 Z" fill="#66707a"/>
+ <path d="M79 82 H101 V141 H91 V151 H81 V139 H73 V92 H79 Z" fill="#171717"/>
+ <path d="M83 83 H96 V135 H83 Z" fill="#a15e37"/>
+ <path d="M87 91 H92 V132 H87 Z" fill="#f69b53"/>
+ <path d="M76 86 H103 V95 H76 Z" fill="#f97316"/>
+ </svg></span><span class="sr-wall-impact" aria-hidden="true"><i style="--spark:0"></i><i style="--spark:1"></i><i style="--spark:2"></i><i style="--spark:3"></i><i style="--spark:4"></i><i style="--spark:5"></i><i style="--spark:6"></i><i style="--spark:7"></i><i style="--spark:8"></i><i style="--spark:9"></i><i style="--spark:10"></i><i style="--spark:11"></i><i style="--spark:12"></i></span>
    <span class="sr-wall-inside">
     <span class="sr-wall-inside-eyebrow">BEHIND THE WALL <i>07 / 07</i></span>
     <strong class="sr-wall-job">Front-End Developer (Internship)</strong>
@@ -1009,7 +1101,7 @@ nav a[data-target="studio"]{white-space:nowrap}
      <span class="sr-wall-front-row"><span>CHAPTER 07</span><span>ARCHIVE</span></span>
      <strong>Tria Tech Solution Pvt Ltd.</strong>
      <span class="sr-wall-front-date">Apr 2024 - Aug 2024</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO BREAK</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -3084,14 +3176,36 @@ try {
 })();
 </script><script>
 (()=>{
- const list=[...document.querySelectorAll('.sr-wall-item')];
- const close=()=>list.forEach(card=>{card.classList.remove('is-broken');card.querySelector('.sr-wall-trigger')?.setAttribute('aria-expanded','false')});
- list.forEach(card=>card.querySelector('.sr-wall-trigger')?.addEventListener('click',()=>{
-  const willOpen=!card.classList.contains('is-broken');close();
-  if(willOpen){card.classList.add('is-broken');card.querySelector('.sr-wall-trigger')?.setAttribute('aria-expanded','true')}
- }));
- document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
- document.addEventListener('click',e=>{if(!e.target.closest('.sr-wall-item'))close()});
+ const cards=[...document.querySelectorAll('.sr-wall-item')];
+ const allStates=['is-breaking','is-impact','is-shattering','is-revealed'];
+ const hasHover=window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+ const clearTimers=card=>{(card._wallTimers||[]).forEach(clearTimeout);card._wallTimers=[]};
+ const reset=card=>{clearTimers(card);card.classList.remove(...allStates);card.querySelector('.sr-wall-trigger')?.setAttribute('aria-expanded','false')};
+ const closeOthers=except=>cards.forEach(card=>{if(card!==except)reset(card)});
+ const breakWall=card=>{
+  if(card.classList.contains('is-breaking')||card.classList.contains('is-revealed')||card.classList.contains('is-shattering'))return;
+  closeOthers(card);clearTimers(card);
+  card.classList.add('is-breaking');
+  card.querySelector('.sr-wall-trigger')?.setAttribute('aria-expanded','true');
+  const schedule=(fn,ms)=>card._wallTimers.push(setTimeout(fn,ms));
+  schedule(()=>card.classList.add('is-impact'),350);
+  schedule(()=>{card.classList.remove('is-impact');card.classList.add('is-shattering')},730);
+  schedule(()=>{card.classList.remove('is-breaking','is-shattering');card.classList.add('is-revealed')},1840);
+ };
+ cards.forEach(card=>{
+  const btn=card.querySelector('.sr-wall-trigger');
+  if(hasHover){
+   btn?.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')breakWall(card)});
+   btn?.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')reset(card)});
+  }
+  btn?.addEventListener('click',()=>{
+   if(card.classList.contains('is-revealed')||card.classList.contains('is-breaking')||card.classList.contains('is-shattering'))reset(card);
+   else breakWall(card);
+  });
+  btn?.addEventListener('focus',()=>{if(!hasHover)breakWall(card)});
+ });
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')cards.forEach(reset)});
+ document.addEventListener('click',e=>{if(!e.target.closest('.sr-wall-item'))cards.forEach(reset)});
 })();
 </script>
 </body></html>
