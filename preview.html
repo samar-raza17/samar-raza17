@@ -540,6 +540,9 @@ nav a[data-target="studio"]{white-space:nowrap}
 @keyframes heroHammerStrike{0%{opacity:0;transform:translate(115px,-110px) rotate(-55deg)}15%{opacity:1}47%{transform:translate(65px,-35px) rotate(-29deg)}78%{transform:translate(-8px,24px) rotate(39deg)}100%{opacity:0;transform:translate(20px,-24px) rotate(-10deg)}}
 @keyframes heroImpactFlash{15%{opacity:1;transform:translate(-50%,-50%) scale(1.6)}100%{opacity:0;transform:translate(-50%,-50%) scale(17)}}
 @media(prefers-reduced-motion:reduce){.hero-break-fx{display:none}}
+</style><style id="puzzle-hints-clean-board">
+#hintBtn:disabled{opacity:.4;cursor:not-allowed;box-shadow:1px 1px 0 #161616;transform:none}
+#hintBtn:not(:disabled):hover{background:#fff3d5}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -595,6 +598,7 @@ nav a[data-target="studio"]{white-space:nowrap}
         <div class="pz-tools">
           <button class="pz-tool" id="shuffleBtn" type="button">&#9874; break</button>
           <button class="pz-tool" id="photoBtn" type="button">&#8644; next photo</button>
+          <button class="pz-tool" id="hintBtn" type="button" aria-label="Use a hint, three available">&#9788; hint (3)</button>
           <button class="pz-tool" id="solveBtn" type="button">&#10003; solve</button>
         </div>
         <p class="readout">in place <b id="count">0/0</b> &middot; <span id="photoLabel">photo 1/3</span></p>
@@ -1362,19 +1366,26 @@ nav a[data-target="studio"]{white-space:nowrap}
   let N = 4, B = 6, s = 1.5;
   let pieces = [];
   let complete = false, playing = false, moves = 0, startTime = 0, zCounter = 1;
+  const MAX_HINTS=3;
+  let hintsLeft=MAX_HINTS;
   let drag = null, hovered = null;
   const boardGroup = new THREE.Group(); scene.add(boardGroup);
 
   function buildBoard() {
+    // Only an outer dashed perimeter: no permanent 3x3 / 4x4 square guides.
+    // This makes the rebuilt image look like one continuous wall.
     boardGroup.clear();
-    const outline = new THREE.LineLoop(unitSquare.clone(), new THREE.LineDashedMaterial({ color: INK, dashSize: 0.018, gapSize: 0.016, transparent: true, opacity: 0.6 }));
+    const geometry=new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-.5,-.5,0),new THREE.Vector3(.5,-.5,0),
+      new THREE.Vector3(.5,.5,0),new THREE.Vector3(-.5,.5,0),
+      new THREE.Vector3(-.5,-.5,0)
+    ]);
+    const outline=new THREE.Line(geometry,new THREE.LineDashedMaterial({
+      color:INK,dashSize:.02,gapSize:.017,transparent:true,opacity:.45,depthTest:false
+    }));
     outline.computeLineDistances();
     boardGroup.add(outline);
-    const pts = [];
-    for (let k = 1; k < N; k++) { const t = -0.5 + k / N; pts.push(t, -0.5, 0, t, 0.5, 0, -0.5, t, 0, 0.5, t, 0); }
-    const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
-    boardGroup.add(new THREE.LineSegments(lg, new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: 0.16 })));
-    boardGroup.position.z = -0.01;
+    boardGroup.position.z=-.04;
   }
 
   function slotOf(p) { return { x: -B / 2 + s * (p.c + 0.5), y: B / 2 - s * (p.r + 0.5) }; }
@@ -1463,6 +1474,8 @@ nav a[data-target="studio"]{white-space:nowrap}
 
   function scatter(stagger) {
     complete = false; $('win').hidden = true;
+    hintsLeft=MAX_HINTS;
+    updateUI();
     const taken = [];
     pieces.forEach((p, i) => {
       const spot = looseSpot(taken); taken.push(spot);
@@ -1496,8 +1509,28 @@ nav a[data-target="studio"]{white-space:nowrap}
     $('win').hidden = false;
   }
   function updateUI() {
-    $('count').textContent = String(placedCount()).padStart(2, '0') + '/' + String(pieces.length).padStart(2, '0');
-    
+    $('count').textContent=String(placedCount()).padStart(2,'0')+'/'+String(pieces.length).padStart(2,'0');
+    const btn=$('hintBtn');
+    btn.textContent='☼ hint ('+hintsLeft+')';
+    btn.disabled=hintsLeft===0 || complete || breaking || pieces.every(p=>p.placed);
+    btn.setAttribute('aria-label',hintsLeft+' hints remaining. Place one missing stone piece automatically.');
+  }
+
+  function useHint(){
+    if(breaking || !playing || complete || hintsLeft<=0)return;
+    const unplaced=pieces.filter(p=>!p.placed && (!drag || drag.p!==p));
+    if(!unplaced.length)return;
+    // Prefer the piece nearest its own slot for a satisfying assisted snap.
+    const p=unplaced.reduce((a,b)=>{
+      const da=Math.hypot(a.x-slotOf(a).x,a.y-slotOf(a).y);
+      const db=Math.hypot(b.x-slotOf(b).x,b.y-slotOf(b).y);
+      return db<da?b:a;
+    });
+    hintsLeft--;
+    p.placed=true;p.rz0=0;p.zOrder=++zCounter;
+    p.hintFlash=performance.now()+850;
+    updateUI();
+    checkComplete(false);
   }
 
   /* ---------- pointer ---------- */
@@ -1548,11 +1581,12 @@ nav a[data-target="studio"]{white-space:nowrap}
   canvas.addEventListener('pointerleave', () => { if (!drag) hovered = null; });
 
   $('shuffleBtn').addEventListener('click', () => beginStoneBreak());
+  $('hintBtn').addEventListener('click',useHint);
   $('solveBtn').addEventListener('click', () => { if (!playing) { playing = true; startTime = performance.now(); } solve(); });
   $('photoBtn').addEventListener('click', nextPhoto);
   document.addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
-    if (e.key === 's' || e.key === 'S') scatter(true);
+    if (e.key === 's' || e.key === 'S') beginStoneBreak();
     if (e.key === 'n' || e.key === 'N') nextPhoto();
   });
 
@@ -1564,6 +1598,7 @@ nav a[data-target="studio"]{white-space:nowrap}
     if(breaking || !pieces.length)return;
     if(reduced){scatter(false);return;}
     breaking=true;
+    hintsLeft=MAX_HINTS;
     complete=false;playing=false;
     $('win').hidden=true;
     // On repeat, smoothly reconstruct the image before striking it.
@@ -1639,6 +1674,8 @@ nav a[data-target="studio"]{white-space:nowrap}
       }
 
       const baseZ = p.placed && !isDrag ? 0 : 0.02 + (p.zOrder % 4000) * 0.0004;
+      const hintGlow = p.hintFlash && now<p.hintFlash;
+      p.front.color.setHex(hintGlow ? 0xffe2a8 : 0xffffff);
       p.mesh.position.set(p.x, p.y, baseZ + p.lift + s * 0.05);
       p.mesh.rotation.set(p.tiltX, p.tiltY + flip, p.rz);
       p.mesh.scale.set(s * p.seam, s * p.seam, s);
