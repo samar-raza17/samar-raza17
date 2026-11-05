@@ -359,7 +359,82 @@ body{background-color:#fcfaf7!important}
 .sr-project-tabs{flex-wrap:wrap}
 .sr-project-dialog .sr-modal-photo img{max-height:clamp(240px,58vh,600px);object-fit:contain}
 @media(max-width:700px){.sr-project-tabs button{font-size:10px;padding:9px 10px}}
-.sr-scroll-work .sr-shaoor-shot{background:#eef2eb}.sr-scroll-work .sr-tahir-shot{background:#fff3e6}.sr-scroll-work .sr-shaoor-shot img,.sr-scroll-work .sr-tahir-shot img{object-fit:contain}</style></head><body>
+.sr-scroll-work .sr-shaoor-shot{background:#eef2eb}.sr-scroll-work .sr-tahir-shot{background:#fff3e6}.sr-scroll-work .sr-shaoor-shot img,.sr-scroll-work .sr-tahir-shot img{object-fit:contain}
+/* Beyond the Code: original CSS illustrations, no template stock photos */
+.sr-playground{padding-top:clamp(100px,10vw,148px);padding-bottom:22px}
+.sr-pg-intro{display:grid;grid-template-columns:1.2fr .8fr;align-items:end;gap:clamp(32px,5vw,96px);margin-bottom:42px}
+.sr-pg-intro .slot-title{font-size:clamp(48px,6vw,96px);line-height:1.02;letter-spacing:-.065em}
+.sr-pg-intro-copy{max-width:450px;padding-bottom:12px}
+.sr-pg-intro-copy p{color:#505050;font-size:clamp(16px,1.3vw,19px);line-height:1.7;margin:0 0 20px}
+.sr-pg-textlink{font-family:var(--font-mono);font-size:13px;color:#e85d04;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:6px}
+.sr-pg-textlink span{display:inline-block;transition:transform .25s}
+.sr-pg-textlink:hover span{transform:translate(3px,-3px)}
+.sr-pg-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
+.sr-pg-card{display:flex;flex-direction:column;min-width:0;text-decoration:none;color:#171717;background:#fff;border:1.5px solid #171717;box-shadow:5px 5px 0 #171717;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.sr-pg-card:hover{transform:translateY(-8px);box-shadow:8px 11px 0 #171717}
+.sr-pg-preview{min-height:235px;height:clamp(235px,24vw,325px);position:relative;overflow:hidden;display:grid;place-items:center}
+.sr-pg-preview-build{background:#1d252b;padding:25px}
+.sr-pg-window{width:100%;max-width:325px;background:#12191e;border:1px solid #64717a;box-shadow:12px 14px 0 #0c12156b;transform:rotate(-3deg);transition:transform .35s}
+.sr-pg-card:hover .sr-pg-window{transform:rotate(0deg) translateY(-5px)}
+.sr-pg-window-head{display:flex;gap:5px;align-items:center;padding:11px;border-bottom:1px solid #34454b}
+.sr-pg-window-head span{width:7px;height:7px;border-radius:50%;background:#f97316}.sr-pg-window-head span:nth-child(2){background:#eec078}.sr-pg-window-head span:nth-child(3){background:#91a29e}
+.sr-pg-window-head i{margin-left:auto;color:#91a29e;font:10px var(--font-mono);font-style:normal}
+.sr-pg-code{display:flex;gap:11px;padding:10px 14px 0;color:#f2eee9;font:11px/1.7 var(--font-mono);white-space:nowrap}
+.sr-pg-code-num{color:#73858a}.sr-pg-code-line em{color:#ffad67;font-style:normal}.sr-pg-code-line strong{color:#b6e5b8;font-weight:400}
+.sr-pg-indent{padding-left:13px}
+.sr-pg-window-status{margin:28px 12px 12px;background:#202c2c;color:#d1e4dc;font:10px var(--font-mono);padding:12px}
+.sr-pg-status-dot{display:inline-block;width:6px;height:6px;background:#8dd79f;border-radius:50%;margin-right:7px}
+.sr-pg-preview-explore{background:#ffddbb}
+.sr-pg-orbit{width:clamp(155px,16vw,225px);aspect-ratio:1;border:2px dashed #e96a12;border-radius:50%;position:relative;display:grid;place-items:center;transition:transform 1s ease}
+.sr-pg-card:hover .sr-pg-orbit{transform:rotate(25deg)}
+.sr-pg-orbit-inner{width:65%;aspect-ratio:1;border:2px solid #171717;border-radius:50%;transform:rotate(-24deg)}
+.sr-pg-orbit-core{position:absolute;font-size:clamp(70px,8vw,115px);color:#ef6411;line-height:1}
+.sr-pg-orbit-dot{position:absolute;width:17px;height:17px;border:2px solid #171717;border-radius:50%;background:#fff}
+.sr-pg-orbit-dot.dot-one{top:9%;left:19%}.sr-pg-orbit-dot.dot-two{bottom:9%;right:14%;background:#171717}
+.sr-pg-explore-note{position:absolute;bottom:15px;left:20px;color:#8e3d13;font:12px var(--font-mono);transform:rotate(-5deg)}
+.sr-pg-explore-plus{position:absolute;right:23px;top:12px;font-size:38px;color:#df6519}
+.sr-pg-preview-refine{background:#ece8e1;padding:25px}
+.sr-pg-interface{background:#fff;max-width:325px;width:100%;border:2px solid #171717;box-shadow:10px 10px 0 #f97316;padding:18px;transform:rotate(3deg);transition:transform .35s}
+.sr-pg-card:hover .sr-pg-interface{transform:rotate(0deg)}
+.sr-pg-interface-head{display:flex;justify-content:space-between;font:10px var(--font-mono);letter-spacing:.14em;border-bottom:1px solid #ddd;padding-bottom:9px}
+.sr-pg-interface-title{font-size:clamp(29px,3.4vw,50px);font-weight:850;letter-spacing:-.055em;line-height:1.08;margin:22px 0}
+.sr-pg-interface-title i{font-style:normal;color:#f97316}
+.sr-pg-interface-row{display:flex;gap:7px}.sr-pg-interface-row span{height:9px;width:30%;background:#eae7e4}.sr-pg-interface-row span:first-child{background:#f97316;width:54%}
+.sr-pg-interface-foot{font:10px var(--font-mono);margin-top:21px;color:#777}
+.sr-pg-card-info{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:24px 23px 26px;flex:1}
+.sr-pg-card-info small{color:#e85d04;font:11px var(--font-mono)}
+.sr-pg-card-info h3{margin:12px 0 9px;font-size:clamp(21px,1.8vw,28px);letter-spacing:-.045em;line-height:1.1}
+.sr-pg-card-info p{font-size:13px;line-height:1.55;color:#666;max-width:29ch;margin:0}
+.sr-pg-arrow{flex:none;font-size:23px;color:#e85d04;transition:transform .3s}
+.sr-pg-card:hover .sr-pg-arrow{transform:translate(3px,-3px)}
+.sr-pg-footnote{color:#8a817c;text-align:right;font:11px var(--font-mono);margin:23px 0 0}
+nav a[data-target="studio"]{white-space:nowrap}
+/* Full-width career journey: no cramped title/date table */
+.sr-career{margin-top:clamp(95px,10vw,150px)}
+.sr-career-heading{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:39px}
+.sr-career-heading h3{font-size:clamp(45px,6vw,85px);line-height:1.04;letter-spacing:-.065em;margin:15px 0 0;font-weight:900}
+.sr-career-heading>p{max-width:340px;color:#65615d;line-height:1.7;font-size:15px}
+.sr-career-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 26px;counter-reset:career}
+.sr-career-item{display:grid;grid-template-columns:31px minmax(0,1fr);position:relative;min-width:0}
+.sr-career-rail{position:relative;padding-top:31px}
+.sr-career-rail:before{content:"";position:absolute;top:37px;bottom:-20px;width:1px;background:#dfd1c3;left:8px}
+.sr-career-item:nth-last-child(-n+2) .sr-career-rail:before{bottom:25px}
+.sr-career-dot{display:block;width:16px;height:16px;background:#f97316;border:3px solid #171717;border-radius:50%;position:relative;z-index:1}
+.sr-career-index{font:10px var(--font-mono);color:#a6a09a;display:block;margin-top:17px;white-space:nowrap}
+.sr-career-card{background:#fffdfa;border:1px solid #dfd8cf;padding:26px 27px 25px;min-height:208px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.sr-career-item:hover .sr-career-card{border-color:#f97316;transform:translateY(-3px);box-shadow:4px 5px 0 #ffdebd}
+.sr-career-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.sr-career-company{font:600 12px var(--font-mono);color:#a34b1d}
+.sr-career-live{font:600 10px var(--font-mono);color:#17734b;background:#e4f4ea;border:1px solid #a3dbc1;padding:5px 8px}
+.sr-career-card h4{font-size:clamp(19px,1.65vw,25px);line-height:1.26;letter-spacing:-.035em;margin:15px 0 9px;color:#171717}
+.sr-career-date{font:11px var(--font-mono);color:#73716d}
+.sr-career-card p{font-size:13px;line-height:1.65;color:#666;max-width:60ch;margin:18px 0 0}
+.sr-career-item.is-current .sr-career-card{border-top:3px solid #f97316}
+.sr-career-item.is-current .sr-career-dot{background:#fff;border-color:#f97316}
+@media(max-width:900px){.sr-pg-intro{grid-template-columns:1fr;gap:12px}.sr-pg-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.sr-pg-gallery .sr-pg-card:last-child{grid-column:1/-1}.sr-career-list{grid-template-columns:1fr}}
+@media(max-width:600px){.sr-pg-gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 8px 18px 0}.sr-pg-card{flex:0 0 min(82vw,340px);scroll-snap-align:start}.sr-pg-gallery .sr-pg-card:last-child{grid-column:auto}.sr-pg-preview{height:242px}.sr-pg-intro .slot-title{font-size:clamp(43px,11vw,62px)}.sr-career-heading{display:block}.sr-career-heading>p{margin-top:17px}.sr-career-card{padding:21px 19px;min-height:0}.sr-career-list{gap:14px}.sr-career-item{grid-template-columns:25px minmax(0,1fr)}.sr-career-card h4{font-size:20px}.sr-career-heading h3{font-size:clamp(43px,10vw,63px)}.sr-pg-footnote{text-align:left}}
+@media(prefers-reduced-motion:reduce){.sr-pg-card,.sr-pg-window,.sr-pg-interface,.sr-career-card,.sr-pg-orbit{transition:none!important}}
+</style></head><body>
 
 <header class="site-nav" id="siteNav">
   <div class="shell">
@@ -371,7 +446,7 @@ body{background-color:#fcfaf7!important}
         <li class="hide-sm"><a class="link" href="#home" data-target="home">Home<svg class="squiggle" viewBox="0 0 68 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 10 2, 16 11, 24 6 S 38 2, 46 6 S 58 11, 66 5" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round"/></svg></a></li>
         <li><a class="link" href="#work" data-target="work">Work<svg class="squiggle" viewBox="0 0 68 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 10 2, 16 11, 24 6 S 38 2, 46 6 S 58 11, 66 5" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round"/></svg></a></li>
         <li><a class="link" href="#ai" data-target="ai">AI Lab<svg class="squiggle" viewBox="0 0 68 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 10 2, 16 11, 24 6 S 38 2, 46 6 S 58 11, 66 5" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round"/></svg></a></li>
-        <li><a class="link" href="#studio" data-target="studio">Studio<svg class="squiggle" viewBox="0 0 68 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 10 2, 16 11, 24 6 S 38 2, 46 6 S 58 11, 66 5" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round"/></svg></a></li>
+        <li><a class="link" href="#studio" data-target="studio">Playground<svg class="squiggle" viewBox="0 0 68 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 10 2, 16 11, 24 6 S 38 2, 46 6 S 58 11, 66 5" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round"/></svg></a></li>
         <li><a class="link" href="#about" data-target="about">About<svg class="squiggle" viewBox="0 0 68 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 10 2, 16 11, 24 6 S 38 2, 46 6 S 58 11, 66 5" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round"/></svg></a></li>
         <li><a class="link" href="#contact" data-target="contact">Contact<svg class="squiggle" viewBox="0 0 68 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 10 2, 16 11, 24 6 S 38 2, 46 6 S 58 11, 66 5" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round"/></svg></a></li>
       </ul>
@@ -639,54 +714,48 @@ body{background-color:#fcfaf7!important}
     <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="paw"><g transform="rotate(75 15 12)"><ellipse cx="14" cy="18" rx="8" ry="7"/><ellipse cx="5" cy="8" rx="3.4" ry="4.4"/><ellipse cx="12" cy="3.6" rx="3.4" ry="4.4"/><ellipse cx="20" cy="4.6" rx="3.4" ry="4.4"/><ellipse cx="26" cy="11" rx="3.2" ry="4.2"/></g></g></defs></svg>
   </section>
 
-  <!-- ================= STUDIO ================= -->
-  <section class="shell studio reveal" id="studio" aria-labelledby="studio-title">
-    <div class="st-head">
+  <!-- ================= PLAYGROUND ================= -->
+  <section class="shell studio sr-playground reveal" id="studio" aria-labelledby="studio-title">
+    <div class="sr-pg-intro">
       <div>
-        <p class="eyebrow">( studio ) <span class="pen-note">my small business</span></p>
-        <h2 class="slot-title" id="studio-title">Studio <span class="hl">Payal.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FDBA74"/></svg></span></h2>
-        <p class="st-sub">Hand-strung jewellery,<br>made one piece at a time.</p>
+        <p class="eyebrow">( playground ) <span class="pen-note">the curious side of building</span></p>
+        <h2 class="slot-title" id="studio-title">Beyond the <span class="hl">Code.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FDBA74"/></svg></span></h2>
       </div>
-      <div class="st-copy">
-        <p>When I&rsquo;m not designing screens, I make jewellery by hand: beaded chokers, wire earrings and a few fun one-offs. I shape, string and pack every piece myself, usually with a cup of chai going cold next to me.</p>
-        <a class="cta primary" href="https://www.instagram.com/p/CN2MbVTBK6U/" target="_blank" rel="noopener">follow on instagram <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 L12 4 M6 4 H12 V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <div class="sr-pg-intro-copy">
+        <p>Good products start with curiosity. I like turning rough ideas into smooth interactions, finding simple answers to complex problems and polishing every last detail.</p>
+        <a href="#work" class="sr-pg-textlink">Explore what I've built <span aria-hidden="true">↗</span></a>
       </div>
     </div>
-
-    <div class="line-wrap">
-      <svg class="string" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true"><path d="M8 20 Q 600 150 1192 20" fill="none" stroke="#161616" stroke-width="2"/><circle cx="8" cy="20" r="6" fill="#161616"/><circle cx="1192" cy="20" r="6" fill="#161616"/></svg>
-      <ul class="st-line" aria-label="Jewellery pieces, each opens on Instagram">
-        <li class="pc" style="--r:-4deg;--d:0s">
-          <span class="pin" aria-hidden="true"></span>
-          <a class="polaroid" href="https://www.instagram.com/p/CN2MbVTBK6U/" target="_blank" rel="noopener" data-video="1">
-            <span class="st-ph"><img src="https://avatars.githubusercontent.com/samar-raza17?size=800" alt="Gold hoop earrings with cowrie shells and coin charms, held in a hand" width="574" height="710" loading="lazy"><video class="st-vid" muted loop playsinline preload="none" poster="https://avatars.githubusercontent.com/samar-raza17?size=800" aria-hidden="true"><source src="https://avatars.githubusercontent.com/samar-raza17?size=800" type="video/mp4"></video>
-            <span class="cap">beachy earring <i>video</i><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 L12 4 M6 4 H12 V10" fill="none" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </a>
-        </li>
-        <li class="pc" style="--r:2deg;--d:.4s">
-          <span class="pin" aria-hidden="true"></span>
-          <a class="polaroid" href="https://www.instagram.com/p/CN45RU6FHY9/" target="_blank" rel="noopener">
-            <span class="st-ph"><img src="https://avatars.githubusercontent.com/samar-raza17?size=800" alt="Gold wire earring bent into a flamingo, worn on the ear" width="576" height="616" loading="lazy"></span>
-            <span class="cap">abstract flamingo<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 L12 4 M6 4 H12 V10" fill="none" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </a>
-        </li>
-        <li class="pc" style="--r:-1.5deg;--d:.8s">
-          <span class="pin" aria-hidden="true"></span>
-          <a class="polaroid" href="https://www.instagram.com/reel/CNkNif1Bfjc/" target="_blank" rel="noopener" data-video="1">
-            <span class="st-ph"><img src="https://avatars.githubusercontent.com/samar-raza17?size=800" alt="Hands knotting cream cord into macrame hoop earrings" width="574" height="710" loading="lazy"><video class="st-vid" muted loop playsinline preload="none" poster="https://avatars.githubusercontent.com/samar-raza17?size=800" aria-hidden="true"><source src="https://avatars.githubusercontent.com/samar-raza17?size=800" type="video/mp4"></video>
-            <span class="cap">macrame hoops <i>reel</i><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 L12 4 M6 4 H12 V10" fill="none" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </a>
-        </li>
-        <li class="pc" style="--r:3.5deg;--d:1.2s">
-          <span class="pin" aria-hidden="true"></span>
-          <a class="polaroid" href="https://www.instagram.com/p/CQODOsCha67/" target="_blank" rel="noopener">
-            <span class="st-ph"><img src="https://avatars.githubusercontent.com/samar-raza17?size=800" alt="White daisy earrings with yellow centres on a white table" width="576" height="710" loading="lazy"></span>
-            <span class="cap">daisy earring<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 L12 4 M6 4 H12 V10" fill="none" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </a>
-        </li>
-      </ul>
+    <div class="sr-pg-gallery">
+      <a href="#work" class="sr-pg-card sr-pg-build">
+        <div class="sr-pg-preview sr-pg-preview-build" aria-hidden="true">
+          <div class="sr-pg-window">
+            <div class="sr-pg-window-head"><span></span><span></span><span></span><i>idea-to-interface.tsx</i></div>
+            <div class="sr-pg-code"><span class="sr-pg-code-num">01</span><span class="sr-pg-code-line"><em>const</em> idea = <strong>"something useful"</strong>;</span></div>
+            <div class="sr-pg-code"><span class="sr-pg-code-num">02</span><span class="sr-pg-code-line"><em>function</em> build() {</span></div>
+            <div class="sr-pg-code"><span class="sr-pg-code-num">03</span><span class="sr-pg-code-line sr-pg-indent"><strong>return</strong> &lt;Experience /&gt;;</span></div>
+            <div class="sr-pg-code"><span class="sr-pg-code-num">04</span><span class="sr-pg-code-line">}</span></div>
+            <div class="sr-pg-window-status"><span class="sr-pg-status-dot"></span> Building what's next</div>
+          </div>
+        </div>
+        <div class="sr-pg-card-info"><div><small>01 / craft</small><h3>Make it work.</h3><p>Thoughtful engineering, from first sketch to the working product.</p></div><span class="sr-pg-arrow" aria-hidden="true">↗</span></div>
+      </a>
+      <a href="#ai" class="sr-pg-card sr-pg-explore">
+        <div class="sr-pg-preview sr-pg-preview-explore" aria-hidden="true">
+          <div class="sr-pg-orbit"><span class="sr-pg-orbit-inner"></span><span class="sr-pg-orbit-core">✳</span><i class="sr-pg-orbit-dot dot-one"></i><i class="sr-pg-orbit-dot dot-two"></i></div>
+          <span class="sr-pg-explore-note">what if...?</span>
+          <span class="sr-pg-explore-plus">+</span>
+        </div>
+        <div class="sr-pg-card-info"><div><small>02 / curiosity</small><h3>See what happens.</h3><p>AI ideas, motion experiments and playful ways to interact.</p></div><span class="sr-pg-arrow" aria-hidden="true">↗</span></div>
+      </a>
+      <a href="#contact" class="sr-pg-card sr-pg-refine">
+        <div class="sr-pg-preview sr-pg-preview-refine" aria-hidden="true">
+          <div class="sr-pg-interface"><div class="sr-pg-interface-head"><span>DETAILS MATTER</span><span>↗</span></div><div class="sr-pg-interface-title">Simple.<br><i>Intentional.</i></div><div class="sr-pg-interface-row"><span></span><span></span><span></span></div><div class="sr-pg-interface-foot">Less noise. Better experiences.</div></div>
+        </div>
+        <div class="sr-pg-card-info"><div><small>03 / detail</small><h3>Make it feel right.</h3><p>Clean typography, restrained motion and a polished finish.</p></div><span class="sr-pg-arrow" aria-hidden="true">↗</span></div>
+      </a>
     </div>
-    <p class="swipe-hint" aria-hidden="true">&larr; swipe the line &rarr;</p>
+    <p class="sr-pg-footnote">A little personality between the projects and the résumé. Made to explore, not to decorate.</p>
   </section>
 
   <!-- ================= ABOUT ================= -->
@@ -701,18 +770,90 @@ body{background-color:#fcfaf7!important}
         </figure>
         <div class="ab-notes">
           <div class="sticky y"><span class="tape" aria-hidden="true"></span><b><span class="count" data-to="2">2</span>+ yrs</b><span>building things</span></div>
-          <div class="sticky b"><span class="tape" aria-hidden="true"></span><b>9</b><span>portfolio projects</span></div>
+          <div class="sticky b"><span class="tape" aria-hidden="true"></span><b>13</b><span>portfolio projects</span></div>
         </div>
       </div>
       <div class="ab-right">
         <h2 class="ab-title" id="about-title">A developer who loves building <span class="hl">useful digital experiences.</span></h2>
         <p class="ab-sub">I develop responsive websites, scalable web apps and mobile experiences for businesses and people.</p>
         <p class="ab-body">I build full-stack web applications and engaging user experiences — working across React, Next.js, Node.js, APIs, and databases. From client products to independent experiments, I focus on practical, maintainable solutions.</p>
-        <p class="ab-label">experience &amp; roles <svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 8 C 20 4, 30 14, 26 32" fill="none" stroke="#F97316" stroke-width="2.5" stroke-linecap="round"/><path d="M19 27 L 26 34 L 32 26" fill="none" stroke="#F97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
-        <ol class="timeline sr-experience-timeline"><li><span class="when now">Nov 2025 - Present</span><b>Full-Stack Developer</b><span class="where">12Monday Technologies</span><p class="sr-exp-description">Developing and maintaining full-stack applications using modern web technologies. Collaborating with cross-functional teams to design, implement, and optimize features, ensuring performance and scalability.</p></li><li><span class="when now">May 2025 - Present</span><b>Junior Full-Stack Developer</b><span class="where">Code Thread</span><p class="sr-exp-description">Working remotely as a full-stack developer, building scalable web applications using modern technologies. Handling both frontend and backend responsibilities in a fast-paced environment.</p></li><li><span class="when">Feb 2025 - Jul 2025</span><b>Junior Full-Stack Developer</b><span class="where">DigiEnder</span><p class="sr-exp-description">Currently working on full-stack web applications using modern technologies. Contributing to both frontend and backend development while learning advanced development practices.</p></li><li><span class="when now">May 2025 - Present</span><b>Full Stack Web &amp; App Development (Teaching Assistant)</b><span class="where">SMIT (Saylani Mass IT Training)</span><p class="sr-exp-description">Assisting in teaching full stack web and app development courses. Helping students understand core programming concepts, resolving their queries, and supporting hands-on project work.</p></li><li><span class="when">Nov 2024 - Feb 2025</span><b>Full-Stack Developer (Internship)</b><span class="where">DigiEnder</span><p class="sr-exp-description">Completed a comprehensive internship focusing on full-stack development. Gained hands-on experience with modern web technologies and development workflows.</p></li><li><span class="when">Apr 2024 - Nov 2024</span><b>Front-End Development (Teaching)</b><span class="where">Start Kids Learning Institute</span><p class="sr-exp-description">Taught front-end development concepts to students, creating curriculum and hands-on projects. Developed teaching materials and mentored aspiring developers.</p></li><li><span class="when">Apr 2024 - Aug 2024</span><b>Front-End Developer (Internship)</b><span class="where">Tria Tech Solution Pvt Ltd.</span><p class="sr-exp-description">Started my professional journey with front-end development internship. Learned modern frontend technologies and best practices while working on real projects.</p></li></ol>
-        <div class="ab-resume"><p>Explore more about my projects and professional journey.</p><a class="cta" href="https://samarraza.vercel.app/" target="_blank" rel="noopener">old portfolio ↗</a></div>
+        
+        <div class="ab-resume"><p>Want to collaborate on something useful?</p><a class="cta" href="#contact">Let's talk ↗</a></div>
+
       </div>
     </div>
+
+    <section class="sr-career" aria-labelledby="sr-career-title">
+      <div class="sr-career-heading">
+        <div><p class="eyebrow">( the journey so far )</p>
+          <h3 id="sr-career-title">Where I've <span class="hl">worked.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FDBA74"/></svg></span></h3></div>
+        <p>From internships and teaching to building production web and mobile products—every role shaped how I work today.</p>
+      </div>
+      <ol class="sr-career-list">      <li class="sr-career-item is-current">
+        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">01</span></div>
+        <article class="sr-career-card">
+          <div class="sr-career-top"><span class="sr-career-company">12Monday Technologies</span><span class="sr-career-live">Current</span></div>
+          <h4>Full-Stack Developer</h4>
+          <div class="sr-career-meta"><span class="sr-career-date">Nov 2025 - Present</span></div>
+          <p>Developing and maintaining full-stack applications using modern web technologies. Collaborating with cross-functional teams to design, implement, and optimize features, ensuring performance and scalability.</p>
+        </article>
+      </li>
+      <li class="sr-career-item is-current">
+        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">02</span></div>
+        <article class="sr-career-card">
+          <div class="sr-career-top"><span class="sr-career-company">Code Thread</span><span class="sr-career-live">Current</span></div>
+          <h4>Junior Full-Stack Developer</h4>
+          <div class="sr-career-meta"><span class="sr-career-date">May 2025 - Present</span></div>
+          <p>Working remotely as a full-stack developer, building scalable web applications using modern technologies. Handling both frontend and backend responsibilities in a fast-paced environment.</p>
+        </article>
+      </li>
+      <li class="sr-career-item">
+        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">03</span></div>
+        <article class="sr-career-card">
+          <div class="sr-career-top"><span class="sr-career-company">DigiEnder</span></div>
+          <h4>Junior Full-Stack Developer</h4>
+          <div class="sr-career-meta"><span class="sr-career-date">Feb 2025 - Jul 2025</span></div>
+          <p>Worked on full-stack applications across frontend and backend, building features and improving implementation skills.</p>
+        </article>
+      </li>
+      <li class="sr-career-item is-current">
+        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">04</span></div>
+        <article class="sr-career-card">
+          <div class="sr-career-top"><span class="sr-career-company">SMIT (Saylani Mass IT Training)</span><span class="sr-career-live">Current</span></div>
+          <h4>Full Stack Web &amp; App Development (Teaching Assistant)</h4>
+          <div class="sr-career-meta"><span class="sr-career-date">May 2025 - Present</span></div>
+          <p>Assisting in teaching full stack web and app development courses. Helping students understand core programming concepts, resolving their queries, and supporting hands-on project work.</p>
+        </article>
+      </li>
+      <li class="sr-career-item">
+        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">05</span></div>
+        <article class="sr-career-card">
+          <div class="sr-career-top"><span class="sr-career-company">DigiEnder</span></div>
+          <h4>Full-Stack Developer (Internship)</h4>
+          <div class="sr-career-meta"><span class="sr-career-date">Nov 2024 - Feb 2025</span></div>
+          <p>Completed a comprehensive internship focusing on full-stack development. Gained hands-on experience with modern web technologies and development workflows.</p>
+        </article>
+      </li>
+      <li class="sr-career-item">
+        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">06</span></div>
+        <article class="sr-career-card">
+          <div class="sr-career-top"><span class="sr-career-company">Start Kids Learning Institute</span></div>
+          <h4>Front-End Development (Teaching)</h4>
+          <div class="sr-career-meta"><span class="sr-career-date">Apr 2024 - Nov 2024</span></div>
+          <p>Taught front-end development concepts to students, creating curriculum and hands-on projects. Developed teaching materials and mentored aspiring developers.</p>
+        </article>
+      </li>
+      <li class="sr-career-item">
+        <div class="sr-career-rail"><span class="sr-career-dot"></span><span class="sr-career-index">07</span></div>
+        <article class="sr-career-card">
+          <div class="sr-career-top"><span class="sr-career-company">Tria Tech Solution Pvt Ltd.</span></div>
+          <h4>Front-End Developer (Internship)</h4>
+          <div class="sr-career-meta"><span class="sr-career-date">Apr 2024 - Aug 2024</span></div>
+          <p>Started my professional journey with front-end development internship. Learned modern frontend technologies and best practices while working on real projects.</p>
+        </article>
+      </li>
+      </ol>
+    </section>
   </section>
 
   <!-- ================= SKILLS STRIP ================= -->
