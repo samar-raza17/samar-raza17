@@ -1703,14 +1703,23 @@ nav a[data-target="studio"]{white-space:nowrap}
     jobs.forEach((p,k)=>{
       const when=buildStart+k*pieceDuration;
       buildLater(()=>{
-        label.textContent='lifting stone '+(k+1)+' / '+jobs.length;
-        move(p.c,p.r,p.r<N/2);site.classList.add('placing');
-        const pos=point(p.c,p.r);picked.style.left=pos.x+'%';picked.style.top=pos.y+'%';
+        label.textContent='collecting stone '+(k+1)+' / '+jobs.length;
+        const looseX=Math.max(8,Math.min(92,(p.x/viewW+.5)*100));
+        const looseY=Math.max(12,Math.min(86,(.5-p.y/VIEW_H)*100));
+        worker.style.left=looseX+'%';worker.style.top=looseY+'%';
+        ladder.classList.remove('visible');site.classList.add('placing');
+        picked.style.left=looseX+'%';picked.style.top=looseY+'%';
         picked.classList.remove('lift');void picked.offsetWidth;picked.classList.add('lift');
       },when);
       buildLater(()=>{
+        label.textContent='fitting stone '+(k+1)+' / '+jobs.length;
+        move(p.c,p.r,p.r<N/2);
+        const pos=point(p.c,p.r);
+        picked.style.left=pos.x+'%';picked.style.top=pos.y+'%';
+      },when+350);
+      buildLater(()=>{
         p.placed=true;p.rz0=0;p.hintFlash=performance.now()+400;updateUI();
-      },when+700);
+      },when+850);
     });
     const cementStart=jobs.length?buildStart+jobs.length*pieceDuration+300:drive+600;
     buildLater(()=>{
@@ -2882,14 +2891,23 @@ try {
     jobs.forEach((p,k)=>{
       const when=buildStart+k*pieceDuration;
       buildLater(()=>{
-        label.textContent='lifting stone '+(k+1)+' / '+jobs.length;
-        move(p.c,p.r,p.r<N/2);site.classList.add('placing');
-        const pos=point(p.c,p.r);picked.style.left=pos.x+'%';picked.style.top=pos.y+'%';
+        label.textContent='collecting stone '+(k+1)+' / '+jobs.length;
+        const looseX=Math.max(8,Math.min(92,(p.x/viewW+.5)*100));
+        const looseY=Math.max(12,Math.min(86,(.5-p.y/VIEW_H)*100));
+        worker.style.left=looseX+'%';worker.style.top=looseY+'%';
+        ladder.classList.remove('visible');site.classList.add('placing');
+        picked.style.left=looseX+'%';picked.style.top=looseY+'%';
         picked.classList.remove('lift');void picked.offsetWidth;picked.classList.add('lift');
       },when);
       buildLater(()=>{
+        label.textContent='fitting stone '+(k+1)+' / '+jobs.length;
+        move(p.c,p.r,p.r<N/2);
+        const pos=point(p.c,p.r);
+        picked.style.left=pos.x+'%';picked.style.top=pos.y+'%';
+      },when+350);
+      buildLater(()=>{
         p.placed=true;p.rz0=0;p.hintFlash=performance.now()+400;updateUI();
-      },when+700);
+      },when+850);
     });
     const cementStart=jobs.length?buildStart+jobs.length*pieceDuration+300:drive+600;
     buildLater(()=>{
