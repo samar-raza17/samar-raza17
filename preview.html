@@ -584,6 +584,44 @@ nav a[data-target="studio"]{white-space:nowrap}
 @keyframes finishSpark{0%{opacity:0;transform:scale(.6)}35%{opacity:1}100%{opacity:0;transform:scale(1.5)}}
 @media(max-width:520px){.construction-worker{left:22%}.construction-bowl{left:12%}.construction-status{bottom:0}}
 @media(prefers-reduced-motion:reduce){.construction-site{display:none}}
+</style><style id="construction-character-styles">
+.cw-scene{z-index:30;pointer-events:none;isolation:isolate}
+.cw-truck{position:absolute;left:0;bottom:1%;width:clamp(170px,45%,340px);z-index:2;transform:translateX(-120%);filter:drop-shadow(4px 7px 5px #172f4040)}
+.cw-truck>svg{display:block;width:100%;height:auto}
+.cw-scene.arriving .cw-truck{animation:cwDrive 1.5s ease-out forwards}
+.cw-scene.departing .cw-truck{animation:cwLeave 1.15s ease-in forwards}
+.cw-spout{position:absolute;left:93%;top:58%;height:35px;width:7px;background:linear-gradient(90deg,#697e89,#e0e7eb,#75838a);transform:rotate(18deg)}
+.cw-pour{position:absolute;left:94%;top:74%;width:6px;height:0;background:#d8d3c7;border-radius:4px;opacity:0}
+.cw-scene.pouring .cw-pour{animation:cwPour 1.1s ease-in-out infinite alternate}
+.cw-worker{position:absolute;left:26%;top:80%;z-index:5;width:clamp(72px,19%,128px);opacity:0;transform:translate(-50%,-45%);transition:left .6s ease-in-out,top .6s ease-in-out,opacity .4s;filter:drop-shadow(2px 4px 3px #243f5240)}
+.cw-worker>svg{display:block;width:100%;height:auto}
+.cw-scene.worker-in .cw-worker{opacity:1}
+.cw-active-arm{transform-origin:83px 85px}
+.cw-scene.placing .cw-active-arm,.cw-scene.plastering .cw-active-arm{animation:cwArm .55s ease-in-out infinite alternate}
+.cw-bowl{position:absolute;top:60%;left:-7%;width:40%;height:16px;border-radius:6px 6px 55% 55%;background:linear-gradient(#b7c2c6,#526a75);border:3px solid #445966;overflow:hidden}
+.cw-bowl i{position:absolute;left:3px;right:3px;bottom:2px;height:0;background:#d7d0c1;border-radius:50%;transition:height .65s}
+.cw-scene.loaded .cw-bowl i,.cw-scene.pouring .cw-bowl i{height:12px}
+.cw-trowel{position:absolute;top:47%;left:75%;width:58%;opacity:0;transform-origin:10% 60%}
+.cw-trowel svg{width:100%;display:block}
+.cw-scene.plastering .cw-trowel,.cw-scene.finishing .cw-trowel{opacity:1;animation:cwTool .45s ease-in-out infinite alternate}
+.cw-ladder{position:absolute;bottom:8%;height:44%;width:47px;left:40%;z-index:4;border-left:6px solid #ac784c;border-right:6px solid #ac784c;background:repeating-linear-gradient(to bottom,transparent 0 20px,#bd895b 20px 26px,transparent 26px 30px);opacity:0;transform:rotate(-6deg);transition:opacity .3s,left .55s}
+.cw-ladder.visible{opacity:1}
+.cw-picked{position:absolute;z-index:8;font-size:26px;opacity:0;color:#697887;text-shadow:3px 3px #283646;transform:translate(-50%,-50%)}
+.cw-picked.lift{animation:cwStoneLift .75s ease-out}
+.cw-spark{position:absolute;left:42%;top:30%;letter-spacing:15px;color:#ffbb55;font-size:22px;opacity:0}
+.cw-scene.finishing .cw-spark{animation:finishSpark 1.2s ease-out forwards}
+.cw-label{position:absolute;z-index:9;bottom:1%;left:50%;transform:translateX(-50%);background:#f4f4f2ed;color:#ad6420;font:500 11px var(--font-mono);white-space:nowrap;padding:4px 8px;border:1px solid #d8cfbc}
+.cw-scene.plastering .construction-mortar{opacity:1}
+.construction-mortar path.painted{animation:cwMortar .85s ease-out forwards}
+.cw-scene.polished .construction-mortar{opacity:0;transition:opacity 1.4s}
+@keyframes cwDrive{from{transform:translateX(-120%)}to{transform:translateX(-6%)}}
+@keyframes cwLeave{from{transform:translateX(-6%)}to{transform:translateX(-145%)}}
+@keyframes cwPour{0%{height:0;opacity:0}40%{height:45px;opacity:1}100%{height:45px;opacity:1}}
+@keyframes cwArm{from{transform:rotate(-21deg)}to{transform:rotate(29deg)}}
+@keyframes cwTool{from{transform:rotate(-30deg)}to{transform:rotate(38deg)}}
+@keyframes cwStoneLift{0%{opacity:0;transform:translate(-50%,-10%) scale(.5)}40%{opacity:1;transform:translate(-50%,-65%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-50%) scale(.7)}}
+@keyframes cwMortar{to{stroke-dashoffset:0}}
+@media(max-width:620px){.cw-truck{width:53%}.cw-ladder{width:32px}.cw-label{font-size:9px}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -1577,12 +1615,11 @@ nav a[data-target="studio"]{white-space:nowrap}
   }
 
   function solve() {
-    if(building())return;
-    if(complete)return;
-    pieces.forEach((p, i) => {
-      const apply = () => { p.placed = true; updateUI(); checkComplete(true); };
-      if (!reduced) setTimeout(apply, i * 40); else apply();
-    });
+    if(buildActive || breaking || complete)return;
+    if(!playing){playing=true;startTime=performance.now();}
+    const missing=pieces.filter(p=>!p.placed);
+    if(!missing.length){checkComplete(true);return;}
+    startConstruction('auto',missing);
   }
 
   function nextPhoto() {
@@ -1595,83 +1632,139 @@ nav a[data-target="studio"]{white-space:nowrap}
 
   const placedCount = () => pieces.filter(p => p.placed).length;
 
+
   const building=()=>buildActive;
-  function startConstruction(){
+  function startConstruction(mode='manual',missing=[]){
     if(buildActive || !pieces.length)return;
-    if(reduced){
-      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
-      edgeMat.opacity=0;
-      $('win').hidden=false;
-      return;
-    }
     buildActive=true;
+    const auto=mode==='auto',remaining=auto?missing.filter(p=>!p.placed):[];
+    $('win').hidden=true;
+    if(reduced){
+      remaining.forEach(p=>p.placed=true);
+      complete=true;buildActive=false;
+      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
+      edgeMat.opacity=0;$('win').hidden=false;updateUI();return;
+    }
     const site=document.createElement('div');
-    site.className='construction-site';
+    site.className='construction-site cw-scene';
     site.setAttribute('aria-hidden','true');
     site.innerHTML=`
       <div class="construction-mortar"><svg viewBox="0 0 ${N} ${N}" preserveAspectRatio="none">${mortarMarkup}</svg></div>
-      <div class="construction-truck" aria-hidden="true">
-        <svg viewBox="0 0 258 148"><ellipse cx="130" cy="133" rx="108" ry="9" fill="#142b3930"/>
-          <rect x="10" y="76" width="166" height="51" rx="8" fill="#e99137" stroke="#243546" stroke-width="5"/>
-          <path d="M167 78H204L232 101V126H167Z" fill="#f4ac52" stroke="#243546" stroke-width="5"/>
-          <rect x="184" y="88" width="22" height="19" rx="2" fill="#bde5e7" stroke="#243546" stroke-width="3"/>
-          <path d="M28 69L51 22L147 22L170 69Z" fill="#e8ece8" stroke="#344350" stroke-width="5"/>
-          <path d="M42 68L63 31L132 31L152 68Z" fill="#5c7480" stroke="#263744" stroke-width="3"/>
-          <path d="M58 38L139 58M62 57L129 35" stroke="#d2d9d4" stroke-width="5"/>
-          <path d="M28 73L8 100" fill="none" stroke="#475967" stroke-width="9" stroke-linecap="round"/>
-          <circle cx="62" cy="129" r="17" fill="#2a3945"/><circle cx="62" cy="129" r="8" fill="#bdc4c2"/>
-          <circle cx="191" cy="129" r="17" fill="#2a3945"/><circle cx="191" cy="129" r="8" fill="#bdc4c2"/>
-        </svg>
-      </div>
-      <div class="construction-worker" aria-hidden="true">
-        <svg viewBox="0 0 140 185">
-          <ellipse cx="69" cy="176" rx="56" ry="6" fill="#142b3930"/>
-          <path d="M45 122L36 168L53 171L72 132L84 171L103 171L98 121Z" fill="#2b5067" stroke="#233442" stroke-width="4"/>
-          <path d="M47 166L29 174H55M85 169L111 175H87" fill="#4d3a2a" stroke="#322b25" stroke-width="9" stroke-linecap="round"/>
-          <path d="M42 67Q67 51 96 69L105 133H40Z" fill="#f3a746" stroke="#273644" stroke-width="4"/>
-          <path d="M54 78V128M84 78V128" stroke="#fff1b8" stroke-width="5"/>
-          <path d="M38 84L21 118L46 122M100 82L117 113L93 121" fill="none" stroke="#b7794c" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
-          <rect x="53" y="43" width="31" height="26" rx="10" fill="#b7794c"/>
-          <ellipse cx="69" cy="34" rx="25" ry="29" fill="#c38b5c" stroke="#613f2c" stroke-width="2"/>
-          <path d="M40 22H98L91 11Q69-3 48 11Z" fill="#f3ad37" stroke="#263644" stroke-width="4"/>
-          <path d="M38 23H101" stroke="#cc8327" stroke-width="8" stroke-linecap="round"/>
-          <circle cx="61" cy="35" r="2.5" fill="#302c28"/><circle cx="78" cy="35" r="2.5" fill="#302c28"/>
-          <path d="M63 49Q70 54 78 49" fill="none" stroke="#70442e" stroke-width="2"/>
-        </svg>
-        <div class="construction-trowel"><svg viewBox="0 0 90 54"><path d="M9 30L55 12L73 27L27 43Z" fill="#9faeb8" stroke="#253746" stroke-width="3"/><path d="M65 27L86 15" stroke="#775031" stroke-width="10" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="construction-bowl"><span class="construction-cement"></span></div>
-      <div class="construction-dust">✦ ✧ ✦</div>
-      <div class="construction-status">restoring the wall...</div>`;
+      <div class="cw-truck"><svg viewBox="0 0 330 210">
+        <defs><linearGradient id="mixdrum" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9fdff"/><stop offset=".55" stop-color="#b7c5d3"/><stop offset="1" stop-color="#5b748b"/></linearGradient><linearGradient id="mixblue"><stop stop-color="#183c92"/><stop offset=".5" stop-color="#3d70c9"/><stop offset="1" stop-color="#0c285a"/></linearGradient><linearGradient id="mixyellow"><stop stop-color="#ffda63"/><stop offset="1" stop-color="#b88017"/></linearGradient></defs>
+        <ellipse cx="173" cy="198" rx="143" ry="9" fill="#182d4050"/>
+        <path d="M104 131H305L323 170H83Z" fill="url(#mixyellow)" stroke="#805522" stroke-width="3"/>
+        <path d="M146 65L196 27L260 45L292 101L274 135L187 144L139 113Z" fill="url(#mixdrum)" stroke="#607180" stroke-width="4"/>
+        <path d="M193 36L255 48L280 96L253 121L196 109L169 68Z" fill="#214ca8" stroke="#103274" stroke-width="3"/>
+        <path d="M185 47L239 55" stroke="#b1c7fc" stroke-width="8" opacity=".6"/>
+        <path d="M281 47L307 35L318 63L316 136L296 143Z" fill="url(#mixyellow)" stroke="#966011" stroke-width="3"/>
+        <path d="M301 110L325 112L322 144L306 146Z" fill="#a8b4bb"/>
+        <path d="M315 138L321 163" stroke="#7e8c91" stroke-width="7"/>
+        <path d="M33 101L69 74L129 74L148 114L157 175L19 182L14 143Z" fill="url(#mixblue)" stroke="#142c56" stroke-width="4"/>
+        <path d="M66 80H123L139 115H49Z" fill="#a8c8e1" stroke="#182c4f" stroke-width="4"/>
+        <path d="M91 85L124 87L135 111L92 111Z" fill="#526e93"/>
+        <path d="M18 159L53 157L67 172L18 173Z" fill="#faf8e1"/>
+        <path d="M12 171L139 174L134 189L13 195Z" fill="#e7e8e8" stroke="#74818b" stroke-width="3"/>
+        <circle cx="67" cy="183" r="24" fill="#171c25"/><circle cx="67" cy="183" r="11" fill="#abb5be"/><circle cx="251" cy="182" r="23" fill="#161d25"/><circle cx="251" cy="182" r="11" fill="#b2bac2"/><circle cx="299" cy="179" r="22" fill="#151b22"/><circle cx="299" cy="179" r="10" fill="#b0bbc2"/>
+      </svg><span class="cw-spout"></span><span class="cw-pour"></span></div>
+      <div class="cw-ladder"></div>
+      <div class="cw-worker"><svg viewBox="0 0 110 170">
+        <defs><linearGradient id="cwskin"><stop stop-color="#99572e"/><stop offset=".5" stop-color="#d7a174"/><stop offset="1" stop-color="#a9663d"/></linearGradient><linearGradient id="cwvest"><stop stop-color="#ffce69"/><stop offset="1" stop-color="#c57b15"/></linearGradient></defs>
+        <ellipse cx="52" cy="166" rx="43" ry="5" fill="#132d4340"/>
+        <path d="M29 108L26 153L44 155L55 122L67 153L84 155L82 108Z" fill="#29445c" stroke="#1a3046" stroke-width="3"/>
+        <path d="M25 150L14 161H48L44 151M67 151L65 161H96L85 152" fill="#503e31" stroke="#352a23" stroke-width="4"/>
+        <path d="M26 69H80L86 119H24Z" fill="url(#cwvest)" stroke="#805516" stroke-width="3"/>
+        <path d="M35 73L39 116M70 73L68 116" stroke="#fff0bb" stroke-width="6"/>
+        <path d="M28 78L12 109L22 120" stroke="url(#cwskin)" stroke-width="12" stroke-linecap="round" fill="none"/>
+        <g class="cw-active-arm"><path d="M79 81L99 110L82 122" stroke="url(#cwskin)" stroke-width="12" stroke-linecap="round" fill="none"/></g>
+        <path d="M45 57H66V74H45Z" fill="url(#cwskin)"/>
+        <rect x="32" y="18" width="45" height="47" rx="18" fill="url(#cwskin)" stroke="#8a5035" stroke-width="2"/>
+        <path d="M28 22L34 8Q55-5 78 8L85 22Z" fill="#eda32c" stroke="#765019" stroke-width="3"/><path d="M28 23H87" stroke="#bd7925" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="48" cy="39" r="2" fill="#332c25"/><circle cx="64" cy="39" r="2" fill="#332c25"/><path d="M49 52Q57 56 65 51" fill="none" stroke="#67412c" stroke-width="2"/>
+      </svg><div class="cw-bowl"><i></i></div><div class="cw-trowel"><svg viewBox="0 0 72 35"><path d="M4 25L45 4L55 18L16 33Z" fill="#a5b4bd" stroke="#324554" stroke-width="3"/><path d="M54 17L69 5" stroke="#835b39" stroke-width="8" stroke-linecap="round"/></svg></div></div>
+      <div class="cw-picked">◆</div><div class="cw-spark">✦ ✧ ✦</div><p class="cw-label">construction in progress</p>`;
     stage.appendChild(site);
     const mortar=site.querySelector('.construction-mortar');
-    mortar.style.width=(B/viewW*100)+'%';
-    mortar.style.height=(B/VIEW_H*100)+'%';
-    site.classList.add('is-arriving');
-    buildLater(()=>site.classList.add('is-filling'),1300);
-    buildLater(()=>site.classList.add('is-plastering'),2550);
-    buildLater(()=>site.classList.add('is-finishing'),5900);
+    mortar.style.width=(B/viewW*100)+'%';mortar.style.height=(B/VIEW_H*100)+'%';
+    const worker=site.querySelector('.cw-worker'),ladder=site.querySelector('.cw-ladder');
+    const label=site.querySelector('.cw-label'),picked=site.querySelector('.cw-picked');
+    const point=(x,y)=>({x:((viewW-B)/2+(x+.5)*s)/viewW*100,y:((VIEW_H-B)/2+(y+.5)*s)/VIEW_H*100});
+    const move=(x,y,up=false)=>{
+      const t=point(x,y);
+      worker.style.left=Math.max(8,Math.min(92,t.x))+'%';
+      worker.style.top=Math.max(11,Math.min(86,t.y))+'%';
+      ladder.style.left=Math.max(4,Math.min(88,t.x-7))+'%';
+      ladder.classList.toggle('visible',up);
+    };
+    const jobs=remaining.slice().sort((p,q)=>q.r-p.r||p.c-q.c);
+    const drive=1500,pieceDuration=1100,buildStart=drive+1000;
+    site.classList.add('arriving');
+    buildLater(()=>{site.classList.add('worker-in');move(0,N-1);},drive);
+    jobs.forEach((p,k)=>{
+      const when=buildStart+k*pieceDuration;
+      buildLater(()=>{
+        label.textContent='lifting stone '+(k+1)+' / '+jobs.length;
+        move(p.c,p.r,p.r<N/2);site.classList.add('placing');
+        const pos=point(p.c,p.r);picked.style.left=pos.x+'%';picked.style.top=pos.y+'%';
+        picked.classList.remove('lift');void picked.offsetWidth;picked.classList.add('lift');
+      },when);
+      buildLater(()=>{
+        p.placed=true;p.rz0=0;p.hintFlash=performance.now()+400;updateUI();
+      },when+700);
+    });
+    const cementStart=jobs.length?buildStart+jobs.length*pieceDuration+300:drive+600;
     buildLater(()=>{
+      label.textContent='collecting cement from truck';
+      move(0,N-1);site.classList.remove('placing');
+      site.classList.add('filling');ladder.classList.remove('visible');
+    },cementStart);
+    buildLater(()=>site.classList.add('pouring'),cementStart+450);
+    buildLater(()=>{site.classList.remove('pouring');site.classList.add('loaded');},cementStart+1650);
+    const paths=[...mortar.querySelectorAll('path')];
+    const paintStart=cementStart+2150;
+    const paintDuration=9000;
+    paths.forEach((path,k)=>{
+      const when=paintStart+k*paintDuration/Math.max(paths.length,1);
+      buildLater(()=>{
+        const bounds=path.getBBox();
+        // Real position of each mortar joint, including upper courses requiring a ladder.
+        const x=Math.max(0,Math.min(N-1,bounds.x+bounds.width/2-.5));
+        const y=Math.max(0,Math.min(N-1,bounds.y+bounds.height/2-.5));
+        move(x,y,y<N/2);
+        label.textContent='sealing joint '+(k+1)+' / '+paths.length;
+        site.classList.add('plastering');
+        path.classList.add('painted');
+      },when);
+    });
+    const finish=paintStart+paintDuration+400;
+    buildLater(()=>{
+      label.textContent='smoothing and polishing';
+      site.classList.remove('plastering');site.classList.add('finishing');
+      move(Math.floor(N/2),Math.floor(N/2));
+      ladder.classList.remove('visible');
+    },finish);
+    buildLater(()=>{
+      site.classList.add('polished');complete=true;
       if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=0;}
-      site.classList.add('is-polished');
-    },6450);
-    buildLater(()=>site.classList.add('is-leaving'),6800);
+    },finish+1550);
     buildLater(()=>{
-      site.remove();buildActive=false;
+      label.textContent='construction complete';
+      site.classList.add('departing');
+    },finish+2500);
+    buildLater(()=>{
+      site.remove();buildActive=false;complete=true;
+      pieces.forEach(p=>p.placed=true);
       if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
       edgeMat.opacity=0;
-      $('win').hidden=false;
-      updateUI();
-    },7800);
+      $('winText').textContent=auto?'Every stone fitted and finished!':'Wall restored — nice work!';
+      $('win').hidden=false;updateUI();
+    },finish+3750);
+    updateUI();
   }
   function checkComplete(viaSolve){
-    if(complete || !playing || placedCount()!==pieces.length)return;
+    if(complete || buildActive || !playing || placedCount()!==pieces.length)return;
     complete=true;
-    const secs=Math.max(0,Math.round((performance.now()-startTime)/1000));
-    const t=Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0');
-    $('winText').textContent=viaSolve?'The wall is restored. Break it again?':'Nice! You rebuilt my wall in '+t+'.';
-    $('win').hidden=true;
-    startConstruction();
+    startConstruction('manual',[]);
   }
   function updateUI() {
     $('count').textContent=String(placedCount()).padStart(2,'0')+'/'+String(pieces.length).padStart(2,'0');
@@ -2701,12 +2794,11 @@ try {
   }
 
   function solve() {
-    if(building())return;
-    if(complete)return;
-    pieces.forEach((p, i) => {
-      const apply = () => { p.placed = true; updateUI(); checkComplete(true); };
-      if (!reduced) setTimeout(apply, i * 40); else apply();
-    });
+    if(buildActive || breaking || complete)return;
+    if(!playing){playing=true;startTime=performance.now();}
+    const missing=pieces.filter(p=>!p.placed);
+    if(!missing.length){checkComplete(true);return;}
+    startConstruction('auto',missing);
   }
 
   function nextPhoto() {
@@ -2719,83 +2811,139 @@ try {
 
   const placedCount = () => pieces.filter(p => p.placed).length;
 
+
   const building=()=>buildActive;
-  function startConstruction(){
+  function startConstruction(mode='manual',missing=[]){
     if(buildActive || !pieces.length)return;
-    if(reduced){
-      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
-      edgeMat.opacity=0;
-      $('win').hidden=false;
-      return;
-    }
     buildActive=true;
+    const auto=mode==='auto',remaining=auto?missing.filter(p=>!p.placed):[];
+    $('win').hidden=true;
+    if(reduced){
+      remaining.forEach(p=>p.placed=true);
+      complete=true;buildActive=false;
+      if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
+      edgeMat.opacity=0;$('win').hidden=false;updateUI();return;
+    }
     const site=document.createElement('div');
-    site.className='construction-site';
+    site.className='construction-site cw-scene';
     site.setAttribute('aria-hidden','true');
     site.innerHTML=`
       <div class="construction-mortar"><svg viewBox="0 0 ${N} ${N}" preserveAspectRatio="none">${mortarMarkup}</svg></div>
-      <div class="construction-truck" aria-hidden="true">
-        <svg viewBox="0 0 258 148"><ellipse cx="130" cy="133" rx="108" ry="9" fill="#142b3930"/>
-          <rect x="10" y="76" width="166" height="51" rx="8" fill="#e99137" stroke="#243546" stroke-width="5"/>
-          <path d="M167 78H204L232 101V126H167Z" fill="#f4ac52" stroke="#243546" stroke-width="5"/>
-          <rect x="184" y="88" width="22" height="19" rx="2" fill="#bde5e7" stroke="#243546" stroke-width="3"/>
-          <path d="M28 69L51 22L147 22L170 69Z" fill="#e8ece8" stroke="#344350" stroke-width="5"/>
-          <path d="M42 68L63 31L132 31L152 68Z" fill="#5c7480" stroke="#263744" stroke-width="3"/>
-          <path d="M58 38L139 58M62 57L129 35" stroke="#d2d9d4" stroke-width="5"/>
-          <path d="M28 73L8 100" fill="none" stroke="#475967" stroke-width="9" stroke-linecap="round"/>
-          <circle cx="62" cy="129" r="17" fill="#2a3945"/><circle cx="62" cy="129" r="8" fill="#bdc4c2"/>
-          <circle cx="191" cy="129" r="17" fill="#2a3945"/><circle cx="191" cy="129" r="8" fill="#bdc4c2"/>
-        </svg>
-      </div>
-      <div class="construction-worker" aria-hidden="true">
-        <svg viewBox="0 0 140 185">
-          <ellipse cx="69" cy="176" rx="56" ry="6" fill="#142b3930"/>
-          <path d="M45 122L36 168L53 171L72 132L84 171L103 171L98 121Z" fill="#2b5067" stroke="#233442" stroke-width="4"/>
-          <path d="M47 166L29 174H55M85 169L111 175H87" fill="#4d3a2a" stroke="#322b25" stroke-width="9" stroke-linecap="round"/>
-          <path d="M42 67Q67 51 96 69L105 133H40Z" fill="#f3a746" stroke="#273644" stroke-width="4"/>
-          <path d="M54 78V128M84 78V128" stroke="#fff1b8" stroke-width="5"/>
-          <path d="M38 84L21 118L46 122M100 82L117 113L93 121" fill="none" stroke="#b7794c" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
-          <rect x="53" y="43" width="31" height="26" rx="10" fill="#b7794c"/>
-          <ellipse cx="69" cy="34" rx="25" ry="29" fill="#c38b5c" stroke="#613f2c" stroke-width="2"/>
-          <path d="M40 22H98L91 11Q69-3 48 11Z" fill="#f3ad37" stroke="#263644" stroke-width="4"/>
-          <path d="M38 23H101" stroke="#cc8327" stroke-width="8" stroke-linecap="round"/>
-          <circle cx="61" cy="35" r="2.5" fill="#302c28"/><circle cx="78" cy="35" r="2.5" fill="#302c28"/>
-          <path d="M63 49Q70 54 78 49" fill="none" stroke="#70442e" stroke-width="2"/>
-        </svg>
-        <div class="construction-trowel"><svg viewBox="0 0 90 54"><path d="M9 30L55 12L73 27L27 43Z" fill="#9faeb8" stroke="#253746" stroke-width="3"/><path d="M65 27L86 15" stroke="#775031" stroke-width="10" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="construction-bowl"><span class="construction-cement"></span></div>
-      <div class="construction-dust">✦ ✧ ✦</div>
-      <div class="construction-status">restoring the wall...</div>`;
+      <div class="cw-truck"><svg viewBox="0 0 330 210">
+        <defs><linearGradient id="mixdrum" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9fdff"/><stop offset=".55" stop-color="#b7c5d3"/><stop offset="1" stop-color="#5b748b"/></linearGradient><linearGradient id="mixblue"><stop stop-color="#183c92"/><stop offset=".5" stop-color="#3d70c9"/><stop offset="1" stop-color="#0c285a"/></linearGradient><linearGradient id="mixyellow"><stop stop-color="#ffda63"/><stop offset="1" stop-color="#b88017"/></linearGradient></defs>
+        <ellipse cx="173" cy="198" rx="143" ry="9" fill="#182d4050"/>
+        <path d="M104 131H305L323 170H83Z" fill="url(#mixyellow)" stroke="#805522" stroke-width="3"/>
+        <path d="M146 65L196 27L260 45L292 101L274 135L187 144L139 113Z" fill="url(#mixdrum)" stroke="#607180" stroke-width="4"/>
+        <path d="M193 36L255 48L280 96L253 121L196 109L169 68Z" fill="#214ca8" stroke="#103274" stroke-width="3"/>
+        <path d="M185 47L239 55" stroke="#b1c7fc" stroke-width="8" opacity=".6"/>
+        <path d="M281 47L307 35L318 63L316 136L296 143Z" fill="url(#mixyellow)" stroke="#966011" stroke-width="3"/>
+        <path d="M301 110L325 112L322 144L306 146Z" fill="#a8b4bb"/>
+        <path d="M315 138L321 163" stroke="#7e8c91" stroke-width="7"/>
+        <path d="M33 101L69 74L129 74L148 114L157 175L19 182L14 143Z" fill="url(#mixblue)" stroke="#142c56" stroke-width="4"/>
+        <path d="M66 80H123L139 115H49Z" fill="#a8c8e1" stroke="#182c4f" stroke-width="4"/>
+        <path d="M91 85L124 87L135 111L92 111Z" fill="#526e93"/>
+        <path d="M18 159L53 157L67 172L18 173Z" fill="#faf8e1"/>
+        <path d="M12 171L139 174L134 189L13 195Z" fill="#e7e8e8" stroke="#74818b" stroke-width="3"/>
+        <circle cx="67" cy="183" r="24" fill="#171c25"/><circle cx="67" cy="183" r="11" fill="#abb5be"/><circle cx="251" cy="182" r="23" fill="#161d25"/><circle cx="251" cy="182" r="11" fill="#b2bac2"/><circle cx="299" cy="179" r="22" fill="#151b22"/><circle cx="299" cy="179" r="10" fill="#b0bbc2"/>
+      </svg><span class="cw-spout"></span><span class="cw-pour"></span></div>
+      <div class="cw-ladder"></div>
+      <div class="cw-worker"><svg viewBox="0 0 110 170">
+        <defs><linearGradient id="cwskin"><stop stop-color="#99572e"/><stop offset=".5" stop-color="#d7a174"/><stop offset="1" stop-color="#a9663d"/></linearGradient><linearGradient id="cwvest"><stop stop-color="#ffce69"/><stop offset="1" stop-color="#c57b15"/></linearGradient></defs>
+        <ellipse cx="52" cy="166" rx="43" ry="5" fill="#132d4340"/>
+        <path d="M29 108L26 153L44 155L55 122L67 153L84 155L82 108Z" fill="#29445c" stroke="#1a3046" stroke-width="3"/>
+        <path d="M25 150L14 161H48L44 151M67 151L65 161H96L85 152" fill="#503e31" stroke="#352a23" stroke-width="4"/>
+        <path d="M26 69H80L86 119H24Z" fill="url(#cwvest)" stroke="#805516" stroke-width="3"/>
+        <path d="M35 73L39 116M70 73L68 116" stroke="#fff0bb" stroke-width="6"/>
+        <path d="M28 78L12 109L22 120" stroke="url(#cwskin)" stroke-width="12" stroke-linecap="round" fill="none"/>
+        <g class="cw-active-arm"><path d="M79 81L99 110L82 122" stroke="url(#cwskin)" stroke-width="12" stroke-linecap="round" fill="none"/></g>
+        <path d="M45 57H66V74H45Z" fill="url(#cwskin)"/>
+        <rect x="32" y="18" width="45" height="47" rx="18" fill="url(#cwskin)" stroke="#8a5035" stroke-width="2"/>
+        <path d="M28 22L34 8Q55-5 78 8L85 22Z" fill="#eda32c" stroke="#765019" stroke-width="3"/><path d="M28 23H87" stroke="#bd7925" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="48" cy="39" r="2" fill="#332c25"/><circle cx="64" cy="39" r="2" fill="#332c25"/><path d="M49 52Q57 56 65 51" fill="none" stroke="#67412c" stroke-width="2"/>
+      </svg><div class="cw-bowl"><i></i></div><div class="cw-trowel"><svg viewBox="0 0 72 35"><path d="M4 25L45 4L55 18L16 33Z" fill="#a5b4bd" stroke="#324554" stroke-width="3"/><path d="M54 17L69 5" stroke="#835b39" stroke-width="8" stroke-linecap="round"/></svg></div></div>
+      <div class="cw-picked">◆</div><div class="cw-spark">✦ ✧ ✦</div><p class="cw-label">construction in progress</p>`;
     stage.appendChild(site);
     const mortar=site.querySelector('.construction-mortar');
-    mortar.style.width=(B/viewW*100)+'%';
-    mortar.style.height=(B/VIEW_H*100)+'%';
-    site.classList.add('is-arriving');
-    buildLater(()=>site.classList.add('is-filling'),1300);
-    buildLater(()=>site.classList.add('is-plastering'),2550);
-    buildLater(()=>site.classList.add('is-finishing'),5900);
+    mortar.style.width=(B/viewW*100)+'%';mortar.style.height=(B/VIEW_H*100)+'%';
+    const worker=site.querySelector('.cw-worker'),ladder=site.querySelector('.cw-ladder');
+    const label=site.querySelector('.cw-label'),picked=site.querySelector('.cw-picked');
+    const point=(x,y)=>({x:((viewW-B)/2+(x+.5)*s)/viewW*100,y:((VIEW_H-B)/2+(y+.5)*s)/VIEW_H*100});
+    const move=(x,y,up=false)=>{
+      const t=point(x,y);
+      worker.style.left=Math.max(8,Math.min(92,t.x))+'%';
+      worker.style.top=Math.max(11,Math.min(86,t.y))+'%';
+      ladder.style.left=Math.max(4,Math.min(88,t.x-7))+'%';
+      ladder.classList.toggle('visible',up);
+    };
+    const jobs=remaining.slice().sort((p,q)=>q.r-p.r||p.c-q.c);
+    const drive=1500,pieceDuration=1100,buildStart=drive+1000;
+    site.classList.add('arriving');
+    buildLater(()=>{site.classList.add('worker-in');move(0,N-1);},drive);
+    jobs.forEach((p,k)=>{
+      const when=buildStart+k*pieceDuration;
+      buildLater(()=>{
+        label.textContent='lifting stone '+(k+1)+' / '+jobs.length;
+        move(p.c,p.r,p.r<N/2);site.classList.add('placing');
+        const pos=point(p.c,p.r);picked.style.left=pos.x+'%';picked.style.top=pos.y+'%';
+        picked.classList.remove('lift');void picked.offsetWidth;picked.classList.add('lift');
+      },when);
+      buildLater(()=>{
+        p.placed=true;p.rz0=0;p.hintFlash=performance.now()+400;updateUI();
+      },when+700);
+    });
+    const cementStart=jobs.length?buildStart+jobs.length*pieceDuration+300:drive+600;
     buildLater(()=>{
+      label.textContent='collecting cement from truck';
+      move(0,N-1);site.classList.remove('placing');
+      site.classList.add('filling');ladder.classList.remove('visible');
+    },cementStart);
+    buildLater(()=>site.classList.add('pouring'),cementStart+450);
+    buildLater(()=>{site.classList.remove('pouring');site.classList.add('loaded');},cementStart+1650);
+    const paths=[...mortar.querySelectorAll('path')];
+    const paintStart=cementStart+2150;
+    const paintDuration=9000;
+    paths.forEach((path,k)=>{
+      const when=paintStart+k*paintDuration/Math.max(paths.length,1);
+      buildLater(()=>{
+        const bounds=path.getBBox();
+        // Real position of each mortar joint, including upper courses requiring a ladder.
+        const x=Math.max(0,Math.min(N-1,bounds.x+bounds.width/2-.5));
+        const y=Math.max(0,Math.min(N-1,bounds.y+bounds.height/2-.5));
+        move(x,y,y<N/2);
+        label.textContent='sealing joint '+(k+1)+' / '+paths.length;
+        site.classList.add('plastering');
+        path.classList.add('painted');
+      },when);
+    });
+    const finish=paintStart+paintDuration+400;
+    buildLater(()=>{
+      label.textContent='smoothing and polishing';
+      site.classList.remove('plastering');site.classList.add('finishing');
+      move(Math.floor(N/2),Math.floor(N/2));
+      ladder.classList.remove('visible');
+    },finish);
+    buildLater(()=>{
+      site.classList.add('polished');complete=true;
       if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=0;}
-      site.classList.add('is-polished');
-    },6450);
-    buildLater(()=>site.classList.add('is-leaving'),6800);
+    },finish+1550);
     buildLater(()=>{
-      site.remove();buildActive=false;
+      label.textContent='construction complete';
+      site.classList.add('departing');
+    },finish+2500);
+    buildLater(()=>{
+      site.remove();buildActive=false;complete=true;
+      pieces.forEach(p=>p.placed=true);
       if(finishPlane){finishPlane.visible=true;finishPlane.material.opacity=1;}
       edgeMat.opacity=0;
-      $('win').hidden=false;
-      updateUI();
-    },7800);
+      $('winText').textContent=auto?'Every stone fitted and finished!':'Wall restored — nice work!';
+      $('win').hidden=false;updateUI();
+    },finish+3750);
+    updateUI();
   }
   function checkComplete(viaSolve){
-    if(complete || !playing || placedCount()!==pieces.length)return;
+    if(complete || buildActive || !playing || placedCount()!==pieces.length)return;
     complete=true;
-    const secs=Math.max(0,Math.round((performance.now()-startTime)/1000));
-    const t=Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0');
-    $('winText').textContent=viaSolve?'The wall is restored. Break it again?':'Nice! You rebuilt my wall in '+t+'.';
-    $('win').hidden=true;
-    startConstruction();
+    startConstruction('manual',[]);
   }
   function updateUI() {
     $('count').textContent=String(placedCount()).padStart(2,'0')+'/'+String(pieces.length).padStart(2,'0');
