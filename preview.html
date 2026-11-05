@@ -57,9 +57,9 @@ body > main, body > .site-foot {
 .sr-hang-track::-webkit-scrollbar{display:none}
 .sr-hang-track:focus-visible{outline:2px dashed var(--pen);outline-offset:2px}
 .sr-hang-track.dragging{cursor:grabbing;scroll-behavior:auto;scroll-snap-type:none}
-.sr-hang-item{position:relative;flex:0 0 calc((100% - 3 * clamp(16px,2.4vw,34px)) / 4);min-width:0;scroll-snap-align:start;transform:rotate(var(--sr-rotate));transform-origin:50% 4%;padding-top:18px;transition:transform .3s;z-index:2}
+.sr-hang-item{position:relative;flex:0 0 calc((100% - 3 * clamp(16px,2.4vw,34px)) / 4);min-width:0;scroll-snap-align:start;transform:translateY(var(--sr-rope-offset,0px)) rotate(var(--sr-rotate));transform-origin:50% 4%;padding-top:18px;transition:filter .25s;z-index:2}
 .sr-hang-item:nth-child(4n+2),.sr-hang-item:nth-child(4n+3){margin-top:42px}
-.sr-hang-item:hover{transform:rotate(0deg) translateY(-6px)}
+.sr-hang-item:hover{filter:drop-shadow(0 5px 4px rgba(16,43,54,.12))}
 .sr-hang-pin{position:absolute;z-index:5;top:0;left:50%;transform:translateX(-50%);width:17px;height:34px;border:2px solid #182B34;border-radius:3px;background:#DBC49D}
 .sr-hang-pin:after{content:"";position:absolute;top:13px;left:3px;right:3px;border-top:2px solid #182B34}
 .sr-hang-photo{display:block;overflow:hidden;padding:11px 11px 0;background:#fff;border:2px solid var(--ink);box-shadow:7px 9px 0 var(--ink);border-radius:3px;color:var(--ink);text-decoration:none}
@@ -2305,9 +2305,38 @@ try {
  const track=document.getElementById("srWorkTrack"),prev=document.getElementById("srWorkPrev"),next=document.getElementById("srWorkNext"),counter=document.getElementById("srWorkCounter");
  if(!track||!prev||!next||!counter)return;
  const items=[...track.querySelectorAll(".sr-hang-item")];let down=false,startX=0,startScroll=0,moved=false,suppressClick=false;
+ const rope=document.querySelector(".sr-hang-string");let ropeScheduled=false;
+ // Calculate the actual y of the curved SVG rope beneath each wooden clip.
+ // Keep the clip physically attached even as cards move through the carousel.
+ function alignClips(){
+  ropeScheduled=false;
+  if(!rope)return;
+  const rr=rope.getBoundingClientRect();
+  if(!rr.width||!rr.height)return;
+  for(const item of items){
+   const pin=item.querySelector(".sr-hang-pin");
+   if(!pin)continue;
+   const rect=pin.getBoundingClientRect();
+   const oldOffset=parseFloat(item.style.getPropertyValue("--sr-rope-offset"))||0;
+   const x=rect.left+rect.width/2;
+   const t=Math.min(1,Math.max(0,((x-rr.left)/rr.width*1200-8)/1184));
+   // Quadratic Bezier: M8 16 Q600 151 1192 16, in the 1200x145 viewBox.
+   const y=(16+270*t*(1-t))*rr.height/145;
+   // Rope crosses the clip around 70% down from the clip's top.
+   const targetTop=rr.top+y-rect.height*.7;
+   const unshiftedTop=rect.top-oldOffset;
+   const offset=Math.round((targetTop-unshiftedTop)*100)/100;
+   if(Math.abs(offset-oldOffset)>.5)item.style.setProperty("--sr-rope-offset",offset+"px");
+  }
+ }
+ function scheduleRope(){
+  if(ropeScheduled)return;
+  ropeScheduled=true;
+  requestAnimationFrame(alignClips);
+ }
  function stride(){return items.length>1?items[1].offsetLeft-items[0].offsetLeft:track.clientWidth}
  function current(){return Math.max(0,Math.min(items.length-1,Math.round(track.scrollLeft/Math.max(1,stride()))))}
- function update(){const i=current();counter.textContent=String(i+1).padStart(2,"0")+" / "+String(items.length).padStart(2,"0");prev.disabled=track.scrollLeft<3;next.disabled=track.scrollLeft>=track.scrollWidth-track.clientWidth-3;}
+ function update(){const i=current();counter.textContent=String(i+1).padStart(2,"0")+" / "+String(items.length).padStart(2,"0");prev.disabled=track.scrollLeft<3;next.disabled=track.scrollLeft>=track.scrollWidth-track.clientWidth-3;scheduleRope();}
  function go(delta){track.scrollBy({left:delta*stride(),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});setTimeout(update,400)}
  prev.addEventListener("click",()=>go(-1));next.addEventListener("click",()=>go(1));
  track.addEventListener("scroll",()=>requestAnimationFrame(update),{passive:true});window.addEventListener("resize",update);
