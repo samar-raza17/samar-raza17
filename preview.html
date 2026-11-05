@@ -60,8 +60,30 @@ body > main, body > .site-foot {
 .sr-hang-item{position:relative;flex:0 0 calc((100% - 3 * clamp(16px,2.4vw,34px)) / 4);min-width:0;scroll-snap-align:start;transform:translateY(var(--sr-rope-offset,0px)) rotate(var(--sr-rotate));transform-origin:50% 4%;padding-top:18px;transition:filter .25s;z-index:2}
 .sr-hang-item:nth-child(4n+2),.sr-hang-item:nth-child(4n+3){margin-top:42px}
 .sr-hang-item:hover{filter:drop-shadow(0 5px 4px rgba(16,43,54,.12))}
-.sr-hang-pin{position:absolute;z-index:5;top:0;left:50%;transform:translateX(-50%);width:17px;height:34px;border:2px solid #182B34;border-radius:3px;background:#DBC49D}
-.sr-hang-pin:after{content:"";position:absolute;top:13px;left:3px;right:3px;border-top:2px solid #182B34}
+
+/* Slim colourful plastic clothespins with small metallic spring */
+.sr-hang-pin{
+--clip:#44c8d9;--clip-light:#a1edf1;--clip-dark:#1597ac;
+position:absolute;z-index:6;top:0;left:50%;transform:translateX(-50%) rotate(2deg);
+width:15px;height:43px;border:1px solid rgba(15,45,53,.75);border-radius:4px 4px 3px 3px;
+background:linear-gradient(90deg,rgba(255,255,255,.55),transparent 30%,rgba(10,38,44,.1) 80%,rgba(10,38,44,.28)),linear-gradient(180deg,var(--clip-light) 0%,var(--clip) 46%,var(--clip-dark) 100%);
+box-shadow:2px 2px 1px rgba(22,43,54,.18),inset 1px 0 0 rgba(255,255,255,.55)
+}
+.sr-hang-pin::before{
+content:"";position:absolute;top:15px;left:-2px;right:-2px;height:5px;border-radius:2px;
+background:linear-gradient(180deg,#dbe4de 0%,#6c7c7e 50%,#f6f5e9 85%,#60747a 100%);border:1px solid rgba(15,45,53,.55);box-shadow:0 1px 0 rgba(255,255,255,.5)
+}
+.sr-hang-pin::after{
+content:"";position:absolute;left:4px;top:22px;width:4px;height:16px;
+border-left:1px solid rgba(0,0,0,.24);border-right:1px solid rgba(255,255,255,.35);border-radius:2px
+}
+.sr-hang-item:nth-child(6n+1) .sr-hang-pin{--clip:#4bc7e6;--clip-light:#b2eeff;--clip-dark:#2392bd}
+.sr-hang-item:nth-child(6n+2) .sr-hang-pin{--clip:#f9cd62;--clip-light:#fff0ad;--clip-dark:#d49a32}
+.sr-hang-item:nth-child(6n+3) .sr-hang-pin{--clip:#f5909b;--clip-light:#ffd1d8;--clip-dark:#d45c70}
+.sr-hang-item:nth-child(6n+4) .sr-hang-pin{--clip:#80dba5;--clip-light:#c9fbd6;--clip-dark:#40a979}
+.sr-hang-item:nth-child(6n+5) .sr-hang-pin{--clip:#ac9eea;--clip-light:#e1dcff;--clip-dark:#8071c7}
+.sr-hang-item:nth-child(6n+6) .sr-hang-pin{--clip:#f5af77;--clip-light:#ffe1bc;--clip-dark:#d07e49}
+
 .sr-hang-photo{display:block;overflow:hidden;padding:11px 11px 0;background:#fff;border:2px solid var(--ink);box-shadow:7px 9px 0 var(--ink);border-radius:3px;color:var(--ink);text-decoration:none}
 .sr-hang-photo:focus-visible{outline:3px solid var(--pen);outline-offset:4px}
 .sr-hang-image{display:block;width:100%;aspect-ratio:4/5;background:#E0E9E7;overflow:hidden}
