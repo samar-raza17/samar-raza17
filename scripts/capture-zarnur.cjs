@@ -6,7 +6,8 @@ const browser=await chromium.launch({headless:true,...(chrome?{executablePath:ch
 fs.mkdirSync('assets',{recursive:true});
 const targets=[
 {url:'https://zarnur.vercel.app/',name:'zarnur-marketing.png'},
-{url:'https://zarnur-ecomm-shop.vercel.app/',name:'zarnur-shop.png'}
+{url:'https://zarnur-ecomm-shop.vercel.app/',name:'zarnur-shop.png'},
+{url:'https://tahir-madani.vercel.app/',name:'tahir-madani-live.png'}
 ];
 for(const {url,name} of targets){
  try{
