@@ -2355,7 +2355,7 @@ try {
 
   /* ---------- shared materials ---------- */
   const sideMat = new THREE.MeshBasicMaterial({ color: INK });
-  const edgeMat = new THREE.LineBasicMaterial({ color: INK, transparent: true });
+  const edgeMat = new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: 0.26 });
   const tapeMat = new THREE.MeshBasicMaterial({ color: 0xEFE6C6, transparent: true, opacity: 0.88, depthWrite: false });
   const unitSquare = (() => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute([-.5,-.5,0, .5,-.5,0, .5,.5,0, -.5,.5,0], 3)); return g; })();
 
@@ -2364,19 +2364,26 @@ try {
   let N = 4, B = 6, s = 1.5;
   let pieces = [];
   let complete = false, playing = false, moves = 0, startTime = 0, zCounter = 1;
+  const MAX_HINTS=3;
+  let hintsLeft=MAX_HINTS;
   let drag = null, hovered = null;
   const boardGroup = new THREE.Group(); scene.add(boardGroup);
 
   function buildBoard() {
+    // Only an outer dashed perimeter: no permanent 3x3 / 4x4 square guides.
+    // This makes the rebuilt image look like one continuous wall.
     boardGroup.clear();
-    const outline = new THREE.LineLoop(unitSquare.clone(), new THREE.LineDashedMaterial({ color: INK, dashSize: 0.018, gapSize: 0.016, transparent: true, opacity: 0.6 }));
+    const geometry=new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-.5,-.5,0),new THREE.Vector3(.5,-.5,0),
+      new THREE.Vector3(.5,.5,0),new THREE.Vector3(-.5,.5,0),
+      new THREE.Vector3(-.5,-.5,0)
+    ]);
+    const outline=new THREE.Line(geometry,new THREE.LineDashedMaterial({
+      color:INK,dashSize:.02,gapSize:.017,transparent:true,opacity:.45,depthTest:false
+    }));
     outline.computeLineDistances();
     boardGroup.add(outline);
-    const pts = [];
-    for (let k = 1; k < N; k++) { const t = -0.5 + k / N; pts.push(t, -0.5, 0, t, 0.5, 0, -0.5, t, 0, 0.5, t, 0); }
-    const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
-    boardGroup.add(new THREE.LineSegments(lg, new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: 0.16 })));
-    boardGroup.position.z = -0.01;
+    boardGroup.position.z=-.04;
   }
 
   function slotOf(p) { return { x: -B / 2 + s * (p.c + 0.5), y: B / 2 - s * (p.r + 0.5) }; }
@@ -2385,28 +2392,54 @@ try {
     pieces.forEach(p => { scene.remove(p.mesh); scene.remove(p.shadow); p.mesh.geometry.dispose(); p.front.dispose(); p.shadow.material.dispose(); });
     pieces = []; N = n;
     buildBoard(); layout();
-    const tapeIdx = new Set([2, n * n - 2]);
-    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
-      const geo = new THREE.BoxGeometry(1, 1, 0.1);
-      const uv = geo.attributes.uv;
-      for (let i = 16; i < 20; i++) uv.setXY(i, (c + uv.getX(i)) / n, (n - 1 - r + uv.getY(i)) / n);
-      uv.needsUpdate = true;
-      const front = new THREE.MeshBasicMaterial({ map: textures[photoIndex] });
-      const mesh = new THREE.Mesh(geo, [sideMat, sideMat, sideMat, sideMat, front, sideMat]);
-      const edge = new THREE.LineLoop(unitSquare, edgeMat); edge.position.z = 0.051; mesh.add(edge);
-      let tape = null;
-      if (tapeIdx.has(r * n + c)) {
-        tape = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.17), tapeMat);
-        tape.position.set(0.12, 0.5, 0.06); tape.rotation.z = (r + c) % 2 ? 0.28 : -0.24;
-        mesh.add(tape);
+
+    // Shared, deterministically jagged mortar lines. Adjacent stone edges line up
+    // exactly, unlike independent clipped square puzzle pieces.
+    const jitter = (a,b,k) => {
+      const z = Math.sin(a*127.1 + b*311.7 + k*74.7)*43758.5453;
+      return z - Math.floor(z);
+    };
+    const corner = (x,y) => [
+      x - .5 + (x>0 && x<n ? (jitter(x,y,1)-.5)*.18 : 0),
+      .5-y + (y>0 && y<n ? (jitter(x,y,2)-.5)*.18 : 0)
+    ];
+    const mid = (a,b,vertical,x,y) => {
+      const shift=(jitter(x,y,vertical?3:4)-.5)*.38;
+      return vertical ? [(a[0]+b[0])/2+shift,(a[1]+b[1])/2] :
+        [(a[0]+b[0])/2,(a[1]+b[1])/2+shift];
+    };
+    for (let r=0;r<n;r++) for(let c=0;c<n;c++){
+      const tl=corner(c,r),tr=corner(c+1,r),br=corner(c+1,r+1),bl=corner(c,r+1);
+      const vertices=[tl,mid(tl,tr,false,c,r),tr,mid(tr,br,true,c+1,r),
+        br,mid(br,bl,false,c,r+1),bl,mid(bl,tl,true,c,r)];
+      const poly=vertices.map(([x,y])=>new THREE.Vector2(x,y));
+      const shape=new THREE.Shape();
+      poly.forEach((v,i)=>i?shape.lineTo(v.x,v.y):shape.moveTo(v.x,v.y));
+      shape.closePath();
+      const geo=new THREE.ExtrudeGeometry(shape,{depth:.115,bevelEnabled:true,bevelThickness:.013,bevelSize:.014,bevelSegments:1,steps:1,curveSegments:1});
+      // Shape coordinates are local to the stone; sample the original photograph
+      // from the stone's absolute location in the complete wall.
+      const uv=geo.attributes.uv,position=geo.attributes.position;
+      for(let i=0;i<uv.count;i++){
+        const u=position.getX(i)+.5, v=position.getY(i)+n-.5;
+        uv.setXY(i, u/n, v/n);
       }
-      const shadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ color: INK, transparent: true, opacity: 0, depthWrite: false }));
-      const p = { r, c, mesh, front, shadow, tape, placed: true, nx: 0, ny: 0, rz0: 0, x: 0, y: 0, tx: 0, ty: 0, rz: 0, lift: 0, tiltX: 0, tiltY: 0, seam: 0.97, zOrder: 0, flipStart: 0, flipTo: null, swapped: true, vx: 0, hx: 0, hy: 0, loose: 0 };
-      const sl = slotOf(p); p.x = sl.x; p.y = sl.y;
-      mesh.userData.piece = p;
-      scene.add(shadow); scene.add(mesh); pieces.push(p);
+      uv.needsUpdate=true;
+      const front=new THREE.MeshBasicMaterial({map:textures[photoIndex],side:THREE.DoubleSide});
+      const mesh=new THREE.Mesh(geo,[front,sideMat]);
+      const outlineGeo=new THREE.BufferGeometry().setFromPoints([...poly,new THREE.Vector2(poly[0].x,poly[0].y)]);
+      const edge=new THREE.Line(outlineGeo,edgeMat);edge.position.z=.13;mesh.add(edge);
+      const shadow=new THREE.Mesh(new THREE.ShapeGeometry(shape),new THREE.MeshBasicMaterial({color:INK,transparent:true,opacity:0,depthWrite:false}));
+      const p={r,c,mesh,front,shadow,tape:null,placed:true,nx:0,ny:0,rz0:0,x:0,y:0,tx:0,ty:0,rz:0,lift:0,tiltX:0,tiltY:0,seam:1,zOrder:0,flipStart:0,flipTo:null,swapped:true,vx:0,hx:0,hy:0,loose:0};
+      const sl=slotOf(p);p.x=sl.x;p.y=sl.y;
+      // Convert the absolute (wall-space) polygons into each piece's local space.
+      mesh.geometry.translate(-c,r,0);
+      shadow.geometry.translate(-c,r,0);
+      edge.geometry.translate(-c,r,0);
+      mesh.userData.piece=p;
+      scene.add(shadow);scene.add(mesh);pieces.push(p);
     }
-    complete = false; $('win').hidden = true; updateUI();
+    complete = false; playing = false; $('win').hidden = true; updateUI();
   }
 
   function layout() {
@@ -2439,6 +2472,8 @@ try {
 
   function scatter(stagger) {
     complete = false; $('win').hidden = true;
+    hintsLeft=MAX_HINTS;
+    updateUI();
     const taken = [];
     pieces.forEach((p, i) => {
       const spot = looseSpot(taken); taken.push(spot);
@@ -2472,8 +2507,28 @@ try {
     $('win').hidden = false;
   }
   function updateUI() {
-    $('count').textContent = String(placedCount()).padStart(2, '0') + '/' + String(pieces.length).padStart(2, '0');
-    
+    $('count').textContent=String(placedCount()).padStart(2,'0')+'/'+String(pieces.length).padStart(2,'0');
+    const btn=$('hintBtn');
+    btn.textContent='☼ hint ('+hintsLeft+')';
+    btn.disabled=hintsLeft===0 || complete || breaking || pieces.every(p=>p.placed);
+    btn.setAttribute('aria-label',hintsLeft+' hints remaining. Place one missing stone piece automatically.');
+  }
+
+  function useHint(){
+    if(breaking || !playing || complete || hintsLeft<=0)return;
+    const unplaced=pieces.filter(p=>!p.placed && (!drag || drag.p!==p));
+    if(!unplaced.length)return;
+    // Prefer the piece nearest its own slot for a satisfying assisted snap.
+    const p=unplaced.reduce((a,b)=>{
+      const da=Math.hypot(a.x-slotOf(a).x,a.y-slotOf(a).y);
+      const db=Math.hypot(b.x-slotOf(b).x,b.y-slotOf(b).y);
+      return db<da?b:a;
+    });
+    hintsLeft--;
+    p.placed=true;p.rz0=0;p.zOrder=++zCounter;
+    p.hintFlash=performance.now()+850;
+    updateUI();
+    checkComplete(false);
   }
 
   /* ---------- pointer ---------- */
@@ -2490,6 +2545,7 @@ try {
     return hits.length ? hits[0].object.userData.piece : null;
   }
   canvas.addEventListener('pointerdown', e => {
+    if (breaking) return;
     const p = pick(e); if (!p) return;
     e.preventDefault();
     const w = toWorld(e);
@@ -2522,14 +2578,59 @@ try {
   canvas.addEventListener('pointercancel', endDrag);
   canvas.addEventListener('pointerleave', () => { if (!drag) hovered = null; });
 
-  $('shuffleBtn').addEventListener('click', () => scatter(true));
+  $('shuffleBtn').addEventListener('click', () => beginStoneBreak());
+  $('hintBtn').addEventListener('click',useHint);
   $('solveBtn').addEventListener('click', () => { if (!playing) { playing = true; startTime = performance.now(); } solve(); });
   $('photoBtn').addEventListener('click', nextPhoto);
   document.addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
-    if (e.key === 's' || e.key === 'S') scatter(true);
+    if (e.key === 's' || e.key === 'S') beginStoneBreak();
     if (e.key === 'n' || e.key === 'N') nextPhoto();
   });
+
+
+  // The assembled photograph IS the stone wall: no fake masonry overlay.
+  // The hammer strikes the real image and scatters its irregular fragments.
+  let breaking=false;
+  function beginStoneBreak(){
+    if(breaking || !pieces.length)return;
+    if(reduced){scatter(false);return;}
+    breaking=true;
+    hintsLeft=MAX_HINTS;
+    complete=false;playing=false;
+    $('win').hidden=true;
+    // On repeat, smoothly reconstruct the image before striking it.
+    const wasBroken=pieces.some(p=>!p.placed);
+    pieces.forEach(p=>{p.placed=true;p.rz0=0;});
+    updateUI();
+    let fx=stage.querySelector('.hero-break-fx');
+    if(!fx){
+      fx=document.createElement('div');
+      fx.className='hero-break-fx';
+      fx.setAttribute('aria-hidden','true');
+      const hammer=document.createElement('div');
+      hammer.className='hero-hammer';
+      hammer.innerHTML='<svg viewBox="0 0 150 180" role="presentation"><path d="M95 70L45 163" stroke="#49301e" stroke-width="18" stroke-linecap="round"/><path d="M96 74L45 163" stroke="#ac7546" stroke-width="8" stroke-linecap="round"/><path d="M41 32H125L134 43V81L119 91H41L27 76V47Z" fill="#5a6875" stroke="#263646" stroke-width="7" stroke-linejoin="round"/><path d="M48 44H121" stroke="#afbdc8" stroke-width="8" stroke-linecap="round"/><path d="M41 78H119" stroke="#364554" stroke-width="6"/></svg>';
+      const flash=document.createElement('div');
+      flash.className='hero-impact-flash';
+      fx.append(hammer,flash);stage.appendChild(fx);
+    }
+    fx.classList.remove('is-striking','is-crumbling');
+    const strike=()=>{
+      if(!breaking)return;
+      void fx.offsetWidth;
+      fx.classList.add('is-striking');
+      setTimeout(()=>{
+        fx.classList.add('is-crumbling');
+        scatter(true);
+      },590);
+      setTimeout(()=>{
+        fx.classList.remove('is-striking','is-crumbling');
+        breaking=false;
+      },1850);
+    };
+    if(wasBroken)setTimeout(strike,650);else strike();
+  }
 
   /* ---------- loop ---------- */
   const ease = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -2540,7 +2641,7 @@ try {
     const dt = Math.min((now - last) / 1000, 0.05); last = now;
     const k = reduced ? 1 : 1 - Math.exp(-dt * 14);
     const kSlow = reduced ? 1 : 1 - Math.exp(-dt * 10);
-    edgeMat.opacity += ((complete ? 0 : 1) - edgeMat.opacity) * kSlow;
+    edgeMat.opacity += ((playing ? 0.55 : 0.26) - edgeMat.opacity) * kSlow;
     for (const p of pieces) {
       const isDrag = drag && drag.p === p;
       let tx, ty, trz;
@@ -2560,7 +2661,7 @@ try {
       if (isHover) { tTiltX = -p.hy * 0.35; tTiltY = p.hx * 0.35; }
       if (isDrag) { tTiltY = Math.max(-0.35, Math.min(0.35, p.vx * 1.5)); p.vx *= 0.85; }
       p.tiltX += (tTiltX - p.tiltX) * kSlow; p.tiltY += (tTiltY - p.tiltY) * kSlow;
-      p.seam += ((complete ? 1.0 : 0.97) - p.seam) * kSlow;
+      p.seam += (1 - p.seam) * kSlow;
 
       let flip = 0;
       if (p.flipTo && now >= p.flipStart) {
@@ -2571,6 +2672,8 @@ try {
       }
 
       const baseZ = p.placed && !isDrag ? 0 : 0.02 + (p.zOrder % 4000) * 0.0004;
+      const hintGlow = p.hintFlash && now<p.hintFlash;
+      p.front.color.setHex(hintGlow ? 0xffe2a8 : 0xffffff);
       p.mesh.position.set(p.x, p.y, baseZ + p.lift + s * 0.05);
       p.mesh.rotation.set(p.tiltX, p.tiltY + flip, p.rz);
       p.mesh.scale.set(s * p.seam, s * p.seam, s);
@@ -2602,7 +2705,7 @@ try {
       $('photoLabel').textContent = 'photo 1/' + textures.length;
       buildPieces(breakpointN());
       requestAnimationFrame(tick);
-      if (!reduced) setTimeout(() => { if (!playing) scatter(true); }, 1600);
+      if (!reduced) requestAnimationFrame(() => { if (!playing) beginStoneBreak(); });
     });
   });
 })();
