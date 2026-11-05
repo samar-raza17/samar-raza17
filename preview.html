@@ -43,6 +43,38 @@ body > main, body > .site-foot {
 .sr-project-links{display:flex;flex-wrap:wrap;gap:19px;border-top:1px solid #d6e2dc;padding-top:16px}.sr-project-links a{font:600 13px var(--mono);color:#155e63;text-decoration:none}.sr-project-links a:hover{text-decoration:underline}
 .sr-experience-timeline li{display:grid;grid-template-columns:150px minmax(0,1fr);column-gap:10px;row-gap:4px;padding:17px 0;border-bottom:1px solid #dae5df}.sr-experience-timeline .when{grid-column:1;grid-row:1 / span 3;font-size:11px;white-space:normal}.sr-experience-timeline b,.sr-experience-timeline .where,.sr-exp-description{grid-column:2}.sr-exp-description{font:13px/1.7 var(--font-text);color:#536a6d;margin:5px 0 0}
 @media(max-width:800px){.sr-project-grid{grid-template-columns:1fr;gap:25px}.sr-project-info>p{min-height:0}.sr-work-intro{margin:15px 0 0}.sr-experience-timeline li{grid-template-columns:1fr}.sr-experience-timeline .when,.sr-experience-timeline b,.sr-experience-timeline .where,.sr-exp-description{grid-column:1;grid-row:auto}}
+
+/* Selected work — manual-only hanging photo carousel */
+.sr-hang-head{display:flex;justify-content:space-between;align-items:end;gap:24px}
+.sr-work-nav{display:flex;gap:12px;align-items:center;white-space:nowrap;padding-bottom:7px}
+.sr-work-nav button{border:1.8px solid var(--ink);box-shadow:3px 3px 0 var(--ink);background:#fff;color:var(--ink);width:44px;height:44px;border-radius:3px;font-size:24px;line-height:1;cursor:pointer;transition:transform .2s}
+.sr-work-nav button:not(:disabled):hover{transform:translateY(-3px)}
+.sr-work-nav button:disabled{opacity:.38;cursor:not-allowed}
+#srWorkCounter{min-width:65px;text-align:center;font:500 12px var(--font-mono);letter-spacing:.04em;color:var(--ink)}
+.sr-hanging-wrap{margin-top:30px;position:relative;max-width:100%}
+.sr-hang-string{position:absolute;top:0;left:0;width:100%;height:145px;pointer-events:none;z-index:1}
+.sr-hang-track{display:flex;gap:clamp(16px,2.4vw,34px);overflow-x:auto;overflow-y:hidden;padding:42px 8px 32px;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-inline:contain;touch-action:pan-x pan-y;cursor:grab;user-select:none}
+.sr-hang-track::-webkit-scrollbar{display:none}
+.sr-hang-track:focus-visible{outline:2px dashed var(--pen);outline-offset:2px}
+.sr-hang-track.dragging{cursor:grabbing;scroll-behavior:auto;scroll-snap-type:none}
+.sr-hang-item{position:relative;flex:0 0 calc((100% - 3 * clamp(16px,2.4vw,34px)) / 4);min-width:0;scroll-snap-align:start;transform:rotate(var(--sr-rotate));transform-origin:50% 4%;padding-top:18px;transition:transform .3s;z-index:2}
+.sr-hang-item:nth-child(4n+2),.sr-hang-item:nth-child(4n+3){margin-top:42px}
+.sr-hang-item:hover{transform:rotate(0deg) translateY(-6px)}
+.sr-hang-pin{position:absolute;z-index:5;top:0;left:50%;transform:translateX(-50%);width:17px;height:34px;border:2px solid #182B34;border-radius:3px;background:#DBC49D}
+.sr-hang-pin:after{content:"";position:absolute;top:13px;left:3px;right:3px;border-top:2px solid #182B34}
+.sr-hang-photo{display:block;overflow:hidden;padding:11px 11px 0;background:#fff;border:2px solid var(--ink);box-shadow:7px 9px 0 var(--ink);border-radius:3px;color:var(--ink);text-decoration:none}
+.sr-hang-photo:focus-visible{outline:3px solid var(--pen);outline-offset:4px}
+.sr-hang-image{display:block;width:100%;aspect-ratio:4/5;background:#E0E9E7;overflow:hidden}
+.sr-hang-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;pointer-events:none}
+.sr-hang-caption{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:62px;padding:10px 4px;font:600 clamp(12px,1.12vw,17px)/1.3 var(--font-mono);letter-spacing:-.045em}
+.sr-hang-caption span:first-child{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sr-hang-arrow{color:#147d83;font-size:21px;font-weight:700;flex:none}
+.sr-hang-meta{display:block;margin-top:18px;text-align:center;font:500 11px/1.5 var(--font-mono);color:#587477}
+.sr-hang-hint{text-align:right;margin:8px 8px 0;color:#647574;font:500 12px var(--font-mono)}
+@media(max-width:1100px){.sr-hang-item{flex-basis:calc((100% - 2 * clamp(16px,2.4vw,34px)) / 3)}}
+@media(max-width:750px){.sr-hang-item{flex-basis:calc((100% - clamp(16px,2.4vw,34px)) / 2)}.sr-hang-head{align-items:start;flex-direction:column}.sr-work-nav{align-self:flex-end}}
+@media(max-width:500px){.sr-hang-item{flex-basis:78%}.sr-hang-item:nth-child(4n+2),.sr-hang-item:nth-child(4n+3){margin-top:20px}.sr-hang-caption{font-size:15px}.sr-hang-meta{font-size:10px}.sr-hang-hint{text-align:center}}
+@media(prefers-reduced-motion:reduce){.sr-hang-track{scroll-behavior:auto}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -106,92 +138,98 @@ body > main, body > .site-foot {
   </section>
 
   <section class="shell work reveal" id="work" aria-labelledby="work-title">
-  <div class="work-head"><div><p class="eyebrow">( selected work / 09 projects )</p>
-  <h2 class="slot-title" id="work-title">Things I've <span class="hl">built.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#C6E9E4"/></svg></span></h2>
-  </div><p class="sr-work-intro">Real websites, dashboards and apps — from client work to independent experiments.</p></div>
-  <div class="sr-project-grid"><article class="sr-project-card reveal" aria-label="RabbitxLogistics">
-    <a class="sr-project-image" href="https://rabbitxlogistics.com" target="_blank" rel="noopener noreferrer" aria-label="View RabbitxLogistics">
-      <img src="https://samarraza.vercel.app/rabbitxlogistics.webp" alt="RabbitxLogistics project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
-      <span class="sr-project-number">01</span>
-    </a>
-    <div class="sr-project-info"><div class="sr-project-category">CLIENT PROJECT</div>
-    <h3>RabbitxLogistics</h3><p>RabbitxLogistics is a Full-Stack courier service website built for Code Thread to attract users and collect shipment details through interactive forms. It features a clean UI, responsive design, and streamlined user flow for lead generation.</p>
-    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>Node.js</span><span>Rest API</span><span>Express.js</span><span>MongoDB</span></div>
-    <div class="sr-project-links"><a href="https://rabbitxlogistics.com" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a></div>
-    </div></article><article class="sr-project-card reveal" aria-label="RabbitxLogistics Admin Dashboard">
-    <a class="sr-project-image" href="https://rabbit-courier.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View RabbitxLogistics Admin Dashboard">
-      <img src="https://samarraza.vercel.app/rabbitxlogistocs-dashboard.webp" alt="RabbitxLogistics Admin Dashboard project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
-      <span class="sr-project-number">02</span>
-    </a>
-    <div class="sr-project-info"><div class="sr-project-category">CLIENT PROJECT · DEMO</div>
-    <h3>RabbitxLogistics Admin Dashboard</h3><p>RabbitxLogistics Admin Dashboard is a Full-Stack demo panel to help admins manage orders and assign them to riders efficiently. This is a demonstration version only; official dashboard access is not available.</p>
-    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>Node.js</span><span>Rest API</span><span>Express.js</span><span>MongoDB</span></div>
-    <div class="sr-project-links"><a href="https://rabbit-courier.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a></div>
-    </div></article><article class="sr-project-card reveal" aria-label="Raast Point Of Sale">
-    <a class="sr-project-image" href="https://raastposdemo.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View Raast Point Of Sale">
-      <img src="https://samarraza.vercel.app/raastpos.webp" alt="Raast Point Of Sale project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
-      <span class="sr-project-number">03</span>
-    </a>
-    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT · DEMO</div>
-    <h3>Raast Point Of Sale</h3><p>Raast Point of Sale is a Full-Stack full-featured POS system designed to manage restaurants, orders, riders, and admin controls. This is a demo version only; it is not yet deployed to production.</p>
-    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>Node.js</span><span>Rest API</span><span>Express.js</span><span>MongoDB</span></div>
-    <div class="sr-project-links"><a href="https://raastposdemo.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a></div>
-    </div></article><article class="sr-project-card reveal" aria-label="Dil Se Buy">
-    <a class="sr-project-image" href="https://dilsebuy.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View Dil Se Buy">
-      <img src="https://samarraza.vercel.app/dilsebuy.webp" alt="Dil Se Buy project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
-      <span class="sr-project-number">04</span>
-    </a>
-    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
-    <h3>Dil Se Buy</h3><p>Dil Se Buy is a full-stack eCommerce platform built using React.js, featuring both a customer-facing site and an admin panel. It was my first complete project in React, handling product listings, orders, and management.</p>
-    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>FireBase</span><span>FireStore DB</span><span>FireBase Bucket</span></div>
-    <div class="sr-project-links"><a href="https://dilsebuy.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/dilsebuy" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
-    </div></article><article class="sr-project-card reveal" aria-label="Smart For Share">
-    <a class="sr-project-image" href="https://smartforshare.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View Smart For Share">
-      <img src="https://samarraza.vercel.app/smartforshare.webp" alt="Smart For Share project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
-      <span class="sr-project-number">05</span>
-    </a>
-    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
-    <h3>Smart For Share</h3><p>SmartForShare is a Text/File-sharing platform built with Next.js, inspired by AirForShare but with broader reach. Unlike AirForShare, it allows users to share and access data from anywhere, not just on the same network.</p>
-    <div class="sr-tech-list"><span>JavaScript</span><span>TypeScript</span><span>TailwindCss</span><span>React.js</span><span>Next.js</span><span>MongoDB</span><span>Rest Api</span></div>
-    <div class="sr-project-links"><a href="https://smartforshare.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/smartforshare" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
-    </div></article><article class="sr-project-card reveal" aria-label="Friend Flow (Social App)">
-    <a class="sr-project-image" href="https://friendflow.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="View Friend Flow (Social App)">
-      <img src="https://samarraza.vercel.app/friendflow.webp" alt="Friend Flow (Social App) project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
-      <span class="sr-project-number">06</span>
-    </a>
-    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
-    <h3>Friend Flow (Social App)</h3><p>FriendFlow is a social media app inspired by Facebook, allowing users to post images, videos, and text with full like, comment, share, and follow features. It offers an interactive and engaging user experience built for connection.</p>
-    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>FireBase</span><span>FireStore DB</span><span>FireBase Bucket</span><span>OAuth</span></div>
-    <div class="sr-project-links"><a href="https://friendflow.vercel.app/" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/friendflow" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
-    </div></article><article class="sr-project-card reveal" aria-label="React Image Gallery (Social App)">
-    <a class="sr-project-image" href="https://reactimggallery.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View React Image Gallery (Social App)">
-      <img src="https://samarraza.vercel.app/reactimggallery.webp" alt="React Image Gallery (Social App) project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
-      <span class="sr-project-number">07</span>
-    </a>
-    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
-    <h3>React Image Gallery (Social App)</h3><p>React Image Gallery is a React-based application that allows users to upload and view images in a clean, responsive gallery layout. It showcases dynamic image handling with real-time preview functionality.</p>
-    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>FireBase</span><span>FireStore DB</span><span>FireBase Bucket</span><span>OAuth</span></div>
-    <div class="sr-project-links"><a href="https://reactimggallery.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/react_image_gallery" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
-    </div></article><article class="sr-project-card reveal" aria-label="Qiuck Post (Social App)">
-    <a class="sr-project-image" href="https://quickpost.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View Qiuck Post (Social App)">
-      <img src="https://samarraza.vercel.app/quickpost.webp" alt="Qiuck Post (Social App) project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
-      <span class="sr-project-number">08</span>
-    </a>
-    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
-    <h3>Quick Post</h3><p>QuickPost is a simple image gallery built with HTML and CSS, allowing users to view uploaded images in a clean, static layout. It's a lightweight project showcasing basic front-end structuring without any frameworks.</p>
-    <div class="sr-tech-list"><span>Html</span><span>Css</span><span>JavaScript</span><span>FireBase</span><span>FireStore DB</span><span>FireBase Bucket</span><span>OAuth</span></div>
-    <div class="sr-project-links"><a href="https://quickpost.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/quickpost" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
-    </div></article><article class="sr-project-card reveal" aria-label="fake Store">
-    <a class="sr-project-image" href="https://fakestorewithapi.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View fake Store">
-      <img src="https://samarraza.vercel.app/fakestore.webp" alt="fake Store project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
-      <span class="sr-project-number">09</span>
-    </a>
-    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
-    <h3>Fake Store</h3><p>This E-Commerce store is built with HTML and CSS, fetching product data from the Fake Store API. It displays products dynamically, showcasing a basic front-end integration with external APIs.</p>
-    <div class="sr-tech-list"><span>Html</span><span>Css</span><span>JavaScript</span><span>Local Storage</span><span>Rest Api</span><span>FireBase</span><span>FireStore DB</span></div>
-    <div class="sr-project-links"><a href="https://fakestorewithapi.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/fakestorewithapi" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
-    </div></article></div>
+  <div class="work-head sr-hang-head">
+    <div><p class="eyebrow">( selected work / 09 projects )</p>
+    <h2 class="slot-title" id="work-title">Things I've <span class="hl">built.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#C6E9E4"/></svg></span></h2></div>
+    <div class="sr-work-nav" aria-label="Project carousel controls">
+      <button id="srWorkPrev" type="button" aria-label="Previous projects" disabled>←</button>
+      <span id="srWorkCounter" aria-live="polite">01 / 09</span>
+      <button id="srWorkNext" type="button" aria-label="Next projects">→</button>
+    </div>
+  </div>
+  <div class="sr-hanging-wrap">
+    <svg class="sr-hang-string" viewBox="0 0 1200 145" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M8 16 Q 600 151 1192 16" fill="none" stroke="#182B34" stroke-width="2.5"/>
+      <circle cx="8" cy="16" r="6.5" fill="#182B34"/><circle cx="1192" cy="16" r="6.5" fill="#182B34"/>
+    </svg>
+    <div class="sr-hang-track" id="srWorkTrack" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Samar Raza portfolio projects; drag or use arrow buttons to browse">
+    <article class="sr-hang-item" style="--sr-rotate:-3deg" aria-label="RabbitxLogistics">
+      <span class="sr-hang-pin" aria-hidden="true"></span>
+      <a class="sr-hang-photo" href="https://rabbitxlogistics.com" target="_blank" rel="noopener noreferrer" aria-label="Open RabbitxLogistics live project">
+        <span class="sr-hang-image"><img loading="lazy" src="https://samarraza.vercel.app/rabbitxlogistics.webp" alt="Screenshot of RabbitxLogistics" width="574" height="710" draggable="false"></span>
+        <span class="sr-hang-caption"><span>RabbitxLogistics</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></span>
+      </a>
+      <span class="sr-hang-meta">Client project · JavaScript / TailwindCss</span>
+    </article>
+<article class="sr-hang-item" style="--sr-rotate:2deg" aria-label="RabbitxLogistics Admin Dashboard">
+      <span class="sr-hang-pin" aria-hidden="true"></span>
+      <a class="sr-hang-photo" href="https://rabbit-courier.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open RabbitxLogistics Admin Dashboard live project">
+        <span class="sr-hang-image"><img loading="lazy" src="https://samarraza.vercel.app/rabbitxlogistocs-dashboard.webp" alt="Screenshot of RabbitxLogistics Admin Dashboard" width="574" height="710" draggable="false"></span>
+        <span class="sr-hang-caption"><span>RabbitxLogistics Admin Dashboard</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></span>
+      </a>
+      <span class="sr-hang-meta">Client project · JavaScript / TailwindCss</span>
+    </article>
+<article class="sr-hang-item" style="--sr-rotate:-1.3deg" aria-label="Raast Point Of Sale">
+      <span class="sr-hang-pin" aria-hidden="true"></span>
+      <a class="sr-hang-photo" href="https://raastposdemo.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open Raast Point Of Sale live project">
+        <span class="sr-hang-image"><img loading="lazy" src="https://samarraza.vercel.app/raastpos.webp" alt="Screenshot of Raast Point Of Sale" width="574" height="710" draggable="false"></span>
+        <span class="sr-hang-caption"><span>Raast Point Of Sale</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></span>
+      </a>
+      <span class="sr-hang-meta">Independent project · JavaScript / TailwindCss</span>
+    </article>
+<article class="sr-hang-item" style="--sr-rotate:3.1deg" aria-label="Dil Se Buy">
+      <span class="sr-hang-pin" aria-hidden="true"></span>
+      <a class="sr-hang-photo" href="https://dilsebuy.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open Dil Se Buy live project">
+        <span class="sr-hang-image"><img loading="lazy" src="https://samarraza.vercel.app/dilsebuy.webp" alt="Screenshot of Dil Se Buy" width="574" height="710" draggable="false"></span>
+        <span class="sr-hang-caption"><span>Dil Se Buy</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></span>
+      </a>
+      <span class="sr-hang-meta">Independent project · JavaScript / TailwindCss</span>
+    </article>
+<article class="sr-hang-item" style="--sr-rotate:-2.2deg" aria-label="Smart For Share">
+      <span class="sr-hang-pin" aria-hidden="true"></span>
+      <a class="sr-hang-photo" href="https://smartforshare.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open Smart For Share live project">
+        <span class="sr-hang-image"><img loading="lazy" src="https://samarraza.vercel.app/smartforshare.webp" alt="Screenshot of Smart For Share" width="574" height="710" draggable="false"></span>
+        <span class="sr-hang-caption"><span>Smart For Share</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></span>
+      </a>
+      <span class="sr-hang-meta">Independent project · JavaScript / TypeScript</span>
+    </article>
+<article class="sr-hang-item" style="--sr-rotate:1.6deg" aria-label="Friend Flow (Social App)">
+      <span class="sr-hang-pin" aria-hidden="true"></span>
+      <a class="sr-hang-photo" href="https://friendflow.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open Friend Flow (Social App) live project">
+        <span class="sr-hang-image"><img loading="lazy" src="https://samarraza.vercel.app/friendflow.webp" alt="Screenshot of Friend Flow (Social App)" width="574" height="710" draggable="false"></span>
+        <span class="sr-hang-caption"><span>Friend Flow (Social App)</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></span>
+      </a>
+      <span class="sr-hang-meta">Independent project · JavaScript / TailwindCss</span>
+    </article>
+<article class="sr-hang-item" style="--sr-rotate:-1.2deg" aria-label="React Image Gallery (Social App)">
+      <span class="sr-hang-pin" aria-hidden="true"></span>
+      <a class="sr-hang-photo" href="https://reactimggallery.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open React Image Gallery (Social App) live project">
+        <span class="sr-hang-image"><img loading="lazy" src="https://samarraza.vercel.app/reactimggallery.webp" alt="Screenshot of React Image Gallery (Social App)" width="574" height="710" draggable="false"></span>
+        <span class="sr-hang-caption"><span>React Image Gallery (Social App)</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></span>
+      </a>
+      <span class="sr-hang-meta">Independent project · JavaScript / TailwindCss</span>
+    </article>
+<article class="sr-hang-item" style="--sr-rotate:2.3deg" aria-label="Quick Post (Social App)">
+      <span class="sr-hang-pin" aria-hidden="true"></span>
+      <a class="sr-hang-photo" href="https://quickpost.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open Quick Post (Social App) live project">
+        <span class="sr-hang-image"><img loading="lazy" src="https://samarraza.vercel.app/quickpost.webp" alt="Screenshot of Quick Post (Social App)" width="574" height="710" draggable="false"></span>
+        <span class="sr-hang-caption"><span>Quick Post (Social App)</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></span>
+      </a>
+      <span class="sr-hang-meta">Independent project · Html / Css</span>
+    </article>
+<article class="sr-hang-item" style="--sr-rotate:-1.8deg" aria-label="Fake Store">
+      <span class="sr-hang-pin" aria-hidden="true"></span>
+      <a class="sr-hang-photo" href="https://fakestorewithapi.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open Fake Store live project">
+        <span class="sr-hang-image"><img loading="lazy" src="https://samarraza.vercel.app/fakestore.webp" alt="Screenshot of Fake Store" width="574" height="710" draggable="false"></span>
+        <span class="sr-hang-caption"><span>Fake Store</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></span>
+      </a>
+      <span class="sr-hang-meta">Independent project · Html / Css</span>
+    </article>
+    </div>
+  </div>
+  <p class="sr-hang-hint">← drag or swipe to browse projects → &nbsp; · &nbsp; no autoplay</p>
 </section>
+
 <section class="shell ai reveal" id="ai" aria-labelledby="ai-title">
     <div class="work-head">
       <div>
@@ -2261,4 +2299,24 @@ try {
 (() => { const t = document.getElementById('top'); if (t) t.onclick = () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); })();
 
 } catch (err) { console.error('[Portfolio module 6]', err); }}
+</script><script>
+/* Manual-only projects carousel: arrows, horizontal drag, touch swipe and keyboard. */
+(function(){
+ const track=document.getElementById("srWorkTrack"),prev=document.getElementById("srWorkPrev"),next=document.getElementById("srWorkNext"),counter=document.getElementById("srWorkCounter");
+ if(!track||!prev||!next||!counter)return;
+ const items=[...track.querySelectorAll(".sr-hang-item")];let down=false,startX=0,startScroll=0,moved=false,suppressClick=false;
+ function stride(){return items.length>1?items[1].offsetLeft-items[0].offsetLeft:track.clientWidth}
+ function current(){return Math.max(0,Math.min(items.length-1,Math.round(track.scrollLeft/Math.max(1,stride()))))}
+ function update(){const i=current();counter.textContent=String(i+1).padStart(2,"0")+" / "+String(items.length).padStart(2,"0");prev.disabled=track.scrollLeft<3;next.disabled=track.scrollLeft>=track.scrollWidth-track.clientWidth-3;}
+ function go(delta){track.scrollBy({left:delta*stride(),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});setTimeout(update,400)}
+ prev.addEventListener("click",()=>go(-1));next.addEventListener("click",()=>go(1));
+ track.addEventListener("scroll",()=>requestAnimationFrame(update),{passive:true});window.addEventListener("resize",update);
+ track.addEventListener("pointerdown",e=>{if(e.pointerType==="touch"||e.button!==0)return;down=true;startX=e.clientX;startScroll=track.scrollLeft;moved=false;track.classList.add("dragging")});
+ window.addEventListener("pointermove",e=>{if(!down)return;const dx=e.clientX-startX;if(Math.abs(dx)>6)moved=true;track.scrollLeft=startScroll-dx});
+ const release=()=>{if(!down)return;down=false;track.classList.remove("dragging");if(moved){suppressClick=true;setTimeout(()=>suppressClick=false,80)}update()};
+ window.addEventListener("pointerup",release);window.addEventListener("pointercancel",release);
+ track.addEventListener("click",e=>{if(suppressClick){e.preventDefault();e.stopPropagation();suppressClick=false}},true);
+ track.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();go(e.key==="ArrowRight"?1:-1)}});
+ update();
+})();
 </script></body></html>
