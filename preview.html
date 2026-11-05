@@ -27,6 +27,22 @@ body > main, body > .site-foot {
 }
 /* Keep the navigation above the translucent paper overlay. */
 .site-nav { z-index: 40; }
+/* Portfolio data migration — source: Samar's earlier portfolio repository */
+.sr-work-intro{max-width:420px;color:#52676b;font-size:15px;line-height:1.7;margin:0 0 0 auto}
+.sr-project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:38px 30px;margin-top:48px}
+.sr-project-card{overflow:hidden;min-width:0;background:rgba(255,255,255,.83);border:1px solid #d4dfdb;box-shadow:5px 6px 0 #162b36;border-radius:5px;transition:transform .25s,box-shadow .25s}
+.sr-project-card:hover{transform:translateY(-5px);box-shadow:7px 11px 0 #162b36}
+.sr-project-image{display:block;position:relative;aspect-ratio:16/10;overflow:hidden;background:#e6efeb;border-bottom:1px solid #c6d4cf}
+.sr-project-image img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s}
+.sr-project-card:hover .sr-project-image img{transform:scale(1.035)}
+.sr-project-number{position:absolute;top:15px;left:16px;background:#f8f8f5;border:1px solid #162b36;padding:4px 10px;font:500 12px var(--mono)}
+.sr-project-info{padding:26px}.sr-project-category{font:600 11px var(--mono);color:#147d83;letter-spacing:.1em}
+.sr-project-info h3{font-size:clamp(23px,2.3vw,34px);letter-spacing:-.04em;line-height:1.12;margin:14px 0 12px}
+.sr-project-info>p{font-size:14px;line-height:1.8;color:#546369;margin:0;min-height:105px}
+.sr-tech-list{display:flex;flex-wrap:wrap;gap:7px;margin:20px 0}.sr-tech-list span{font:500 11px var(--mono);background:#eaf3f0;border:1px solid #d0e2dc;padding:6px 9px}
+.sr-project-links{display:flex;flex-wrap:wrap;gap:19px;border-top:1px solid #d6e2dc;padding-top:16px}.sr-project-links a{font:600 13px var(--mono);color:#155e63;text-decoration:none}.sr-project-links a:hover{text-decoration:underline}
+.sr-experience-timeline li{display:grid;grid-template-columns:150px minmax(0,1fr);column-gap:10px;row-gap:4px;padding:17px 0;border-bottom:1px solid #dae5df}.sr-experience-timeline .when{grid-column:1;grid-row:1 / span 3;font-size:11px;white-space:normal}.sr-experience-timeline b,.sr-experience-timeline .where,.sr-exp-description{grid-column:2}.sr-exp-description{font:13px/1.7 var(--font-text);color:#536a6d;margin:5px 0 0}
+@media(max-width:800px){.sr-project-grid{grid-template-columns:1fr;gap:25px}.sr-project-info>p{min-height:0}.sr-work-intro{margin:15px 0 0}.sr-experience-timeline li{grid-template-columns:1fr}.sr-experience-timeline .when,.sr-experience-timeline b,.sr-experience-timeline .where,.sr-exp-description{grid-column:1;grid-row:auto}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -90,101 +106,93 @@ body > main, body > .site-foot {
   </section>
 
   <section class="shell work reveal" id="work" aria-labelledby="work-title">
-    <div class="work-head">
-      <div>
-        <p class="eyebrow">( selected work )</p>
-        <h2 class="slot-title" id="work-title">Things I&rsquo;ve <span class="hl">made.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FFE45C"/></svg></span></h2>
-      </div>
-    </div>
-
-    <div class="projects">
-      <!-- 01 Balloon Rise -->
-      <article class="proj reveal" style="--tilt:-1.6deg">
-        <div class="proj-media">
-          <span class="tape t1" aria-hidden="true"></span><span class="tape t2" aria-hidden="true"></span>
-          <a class="thumb" href="https://rabbitxlogistics.com" target="_blank" rel="noopener" aria-label="RabbitxLogistics case study on Behance">
-            <img src="https://avatars.githubusercontent.com/samar-raza17?size=800" alt="Balloon Rise game event: title art with a cat in a hot-air balloon, beside two phone screens of the event" width="832" height="642">
-          </a>
-          <svg class="float-balloon" viewBox="0 0 60 84" aria-hidden="true"><path d="M30 4 C 12 4, 4 18, 6 30 C 8 42, 18 50, 22 56 L 38 56 C 42 50, 52 42, 54 30 C 56 18, 48 4, 30 4 Z" fill="#FF6B6B" stroke="#161616" stroke-width="2.5"/><path d="M30 4 C 22 14, 20 40, 24 56 M30 4 C 38 14, 40 40, 36 56" fill="none" stroke="#161616" stroke-width="2"/><path d="M30 4 C 26 20, 26 40, 30 56 C 34 40, 34 20, 30 4 Z" fill="#FFC93C"/><path d="M23 56 L 25 66 M37 56 L 35 66" stroke="#161616" stroke-width="2"/><rect x="22" y="66" width="16" height="12" rx="2" fill="#C98A4B" stroke="#161616" stroke-width="2.5"/></svg>
-        </div>
-        <div class="proj-info">
-          <p class="idx"><svg viewBox="0 0 58 46" aria-hidden="true"><path d="M34 4 C 14 2, 3 12, 4 24 C 5 38, 26 44, 42 40 C 56 36, 57 18, 46 9 C 38 3, 26 4, 20 7" fill="none" stroke="#161616" stroke-width="2" stroke-linecap="round"/></svg>01</p>
-          <h3>Balloon Rise Web Development</h3>
-          <p class="summary">Full-stack logistics website with responsive pages, shipment forms and a streamlined customer journey.</p>
-          <dl class="pmeta">
-            <div><dt>role</dt><dd>Full-Stack Developer</dd></div>
-            <div><dt>year</dt><dd>2026</dd></div>
-            <div><dt>platform</dt><dd>Web</dd></div>
-          </dl>
-          <ul class="tags"><li>React.js</li><li>Flows</li><li>Node.js</li><li>MongoDB</li></ul>
-          <p class="result"><span>Day-7 retention up to 20%</span></p>
-          <a class="cta" href="https://rabbitxlogistics.com" target="_blank" rel="noopener">read case study <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 L12 4 M6 4 H12 V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
-      </article>
-
-      <!-- 02 Spin the Wheel -->
-      <article class="proj reveal" style="--tilt:1.4deg">
-        <div class="proj-media">
-          <span class="tape t1" aria-hidden="true"></span><span class="tape t2" aria-hidden="true"></span>
-          <a class="thumb" href="https://rabbitxlogistics.com" target="_blank" rel="noopener" aria-label="RabbitxLogistics Admin Dashboard case study on Behance">
-            <img src="https://avatars.githubusercontent.com/samar-raza17?size=800" alt="Spin the Wheel event title art over a colourful bakery storefront" width="1000" height="749">
-          </a>
-          <div class="wheel-wrap">
-            <p class="wheel-note">go on, spin it!</p>
-            <span class="wheel-pointer" aria-hidden="true"></span>
-            <button class="wheel-btn" id="wheelBtn" type="button" aria-label="Spin the wheel for a little prize">
-              <svg class="wheel" id="wheel" viewBox="-104 -104 208 208" aria-hidden="true"></svg>
-              <span class="wheel-hub" aria-hidden="true">spin</span>
-            </button>
-            <p class="wheel-result" id="wheelResult" aria-live="polite" hidden></p>
-          </div>
-        </div>
-        <div class="proj-info">
-          <p class="idx"><svg viewBox="0 0 58 46" aria-hidden="true"><path d="M34 4 C 14 2, 3 12, 4 24 C 5 38, 26 44, 42 40 C 56 36, 57 18, 46 9 C 38 3, 26 4, 20 7" fill="none" stroke="#161616" stroke-width="2" stroke-linecap="round"/></svg>02</p>
-          <h3>Spin the Wheel Web Development</h3>
-          <p class="summary">Order management demo for dispatchers to manage courier operations and assign riders.</p>
-          <dl class="pmeta">
-            <div><dt>role</dt><dd>Full-Stack Developer</dd></div>
-            <div><dt>year</dt><dd>2025</dd></div>
-            <div><dt>platform</dt><dd>Web</dd></div>
-          </dl>
-          <ul class="tags"><li>Game Web Development</li><li>Game development</li><li>Reward design</li><li>Motion</li></ul>
-          <p class="result"><span>Spin, reveal and claim in one flow</span></p>
-          <a class="cta" href="https://rabbitxlogistics.com" target="_blank" rel="noopener">read case study <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 L12 4 M6 4 H12 V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
-      </article>
-
-      <!-- 03 Raast Point of Sale -->
-      <article class="proj reveal" style="--tilt:-1.2deg">
-        <div class="proj-media">
-          <span class="tape t1" aria-hidden="true"></span><span class="tape t2" aria-hidden="true"></span>
-          <a class="thumb dark stv" href="https://rabbitxlogistics.com" target="_blank" rel="noopener" aria-label="Story TV case study on Behance">
-            <span class="rec"><i></i>mobile app &middot; iOS + Android</span>
-            <span class="scr s1"><img src="https://avatars.githubusercontent.com/samar-raza17?size=800" alt="Story TV home screen with a featured show, a Watch Now button and the Top 10 row" width="402" height="874" loading="lazy"></span>
-            <span class="scr s2"><img src="https://avatars.githubusercontent.com/samar-raza17?size=800" alt="Story TV home feed with Top 10, Shows You Will Like and Binge Worthy Series rows" width="402" height="874" loading="lazy"></span>
-            <!-- <span class="tv-note n1">hero + top 10<br>up front</span> -->
-            <!-- <span class="tv-note n2">rows made<br>for bingeing</span> -->
-          </a>
-        </div>
-        <div class="proj-info">
-          <p class="idx"><svg viewBox="0 0 58 46" aria-hidden="true"><path d="M34 4 C 14 2, 3 12, 4 24 C 5 38, 26 44, 42 40 C 56 36, 57 18, 46 9 C 38 3, 26 4, 20 7" fill="none" stroke="#161616" stroke-width="2" stroke-linecap="round"/></svg>03</p>
-          <h3>Story TV</h3>
-          <p class="summary">A product design exploration for Story TV, rethinking content discovery and the viewing experience. Designed with a focus on engagement, simplicity, and better retention.</p>
-          <dl class="pmeta">
-            <div><dt>role</dt><dd>Product Designer</dd></div>
-            <div><dt>year</dt><dd>2026</dd></div>
-            <div><dt>platform</dt><dd>Mobile app</dd></div>
-          </dl>
-          <ul class="tags"><li>Product design</li><li>Content discovery</li><li>Onboarding</li></ul>
-          <p class="result"><span>A 7-step guided tour for new viewers</span></p>
-          <a class="cta" href="https://rabbitxlogistics.com" target="_blank" rel="noopener">read case study <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 L12 4 M6 4 H12 V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
-      </article>
-    </div>
-    <div class="view-cursor" id="viewCursor" aria-hidden="true">view <svg width="13" height="13" viewBox="0 0 16 16"><path d="M4 12 L12 4 M6 4 H12 V10" fill="none" stroke="#161616" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-  </section>
-
-  <section class="shell ai reveal" id="ai" aria-labelledby="ai-title">
+  <div class="work-head"><div><p class="eyebrow">( selected work / 09 projects )</p>
+  <h2 class="slot-title" id="work-title">Things I've <span class="hl">built.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#C6E9E4"/></svg></span></h2>
+  </div><p class="sr-work-intro">Real websites, dashboards and apps — from client work to independent experiments.</p></div>
+  <div class="sr-project-grid"><article class="sr-project-card reveal" aria-label="RabbitxLogistics">
+    <a class="sr-project-image" href="https://rabbitxlogistics.com" target="_blank" rel="noopener noreferrer" aria-label="View RabbitxLogistics">
+      <img src="https://samarraza.vercel.app/rabbitxlogistics.webp" alt="RabbitxLogistics project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
+      <span class="sr-project-number">01</span>
+    </a>
+    <div class="sr-project-info"><div class="sr-project-category">CLIENT PROJECT</div>
+    <h3>RabbitxLogistics</h3><p>RabbitxLogistics is a Full-Stack courier service website built for Code Thread to attract users and collect shipment details through interactive forms. It features a clean UI, responsive design, and streamlined user flow for lead generation.</p>
+    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>Node.js</span><span>Rest API</span><span>Express.js</span><span>MongoDB</span></div>
+    <div class="sr-project-links"><a href="https://rabbitxlogistics.com" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a></div>
+    </div></article><article class="sr-project-card reveal" aria-label="RabbitxLogistics Admin Dashboard">
+    <a class="sr-project-image" href="https://rabbit-courier.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View RabbitxLogistics Admin Dashboard">
+      <img src="https://samarraza.vercel.app/rabbitxlogistocs-dashboard.webp" alt="RabbitxLogistics Admin Dashboard project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
+      <span class="sr-project-number">02</span>
+    </a>
+    <div class="sr-project-info"><div class="sr-project-category">CLIENT PROJECT · DEMO</div>
+    <h3>RabbitxLogistics Admin Dashboard</h3><p>RabbitxLogistics Admin Dashboard is a Full-Stack demo panel to help admins manage orders and assign them to riders efficiently. This is a demonstration version only; official dashboard access is not available.</p>
+    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>Node.js</span><span>Rest API</span><span>Express.js</span><span>MongoDB</span></div>
+    <div class="sr-project-links"><a href="https://rabbit-courier.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a></div>
+    </div></article><article class="sr-project-card reveal" aria-label="Raast Point Of Sale">
+    <a class="sr-project-image" href="https://raastposdemo.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View Raast Point Of Sale">
+      <img src="https://samarraza.vercel.app/raastpos.webp" alt="Raast Point Of Sale project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
+      <span class="sr-project-number">03</span>
+    </a>
+    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT · DEMO</div>
+    <h3>Raast Point Of Sale</h3><p>Raast Point of Sale is a Full-Stack full-featured POS system designed to manage restaurants, orders, riders, and admin controls. This is a demo version only; it is not yet deployed to production.</p>
+    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>Node.js</span><span>Rest API</span><span>Express.js</span><span>MongoDB</span></div>
+    <div class="sr-project-links"><a href="https://raastposdemo.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a></div>
+    </div></article><article class="sr-project-card reveal" aria-label="Dil Se Buy">
+    <a class="sr-project-image" href="https://dilsebuy.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View Dil Se Buy">
+      <img src="https://samarraza.vercel.app/dilsebuy.webp" alt="Dil Se Buy project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
+      <span class="sr-project-number">04</span>
+    </a>
+    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
+    <h3>Dil Se Buy</h3><p>Dil Se Buy is a full-stack eCommerce platform built using React.js, featuring both a customer-facing site and an admin panel. It was my first complete project in React, handling product listings, orders, and management.</p>
+    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>FireBase</span><span>FireStore DB</span><span>FireBase Bucket</span></div>
+    <div class="sr-project-links"><a href="https://dilsebuy.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/dilsebuy" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    </div></article><article class="sr-project-card reveal" aria-label="Smart For Share">
+    <a class="sr-project-image" href="https://smartforshare.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View Smart For Share">
+      <img src="https://samarraza.vercel.app/smartforshare.webp" alt="Smart For Share project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
+      <span class="sr-project-number">05</span>
+    </a>
+    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
+    <h3>Smart For Share</h3><p>SmartForShare is a Text/File-sharing platform built with Next.js, inspired by AirForShare but with broader reach. Unlike AirForShare, it allows users to share and access data from anywhere, not just on the same network.</p>
+    <div class="sr-tech-list"><span>JavaScript</span><span>TypeScript</span><span>TailwindCss</span><span>React.js</span><span>Next.js</span><span>MongoDB</span><span>Rest Api</span></div>
+    <div class="sr-project-links"><a href="https://smartforshare.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/smartforshare" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    </div></article><article class="sr-project-card reveal" aria-label="Friend Flow (Social App)">
+    <a class="sr-project-image" href="https://friendflow.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="View Friend Flow (Social App)">
+      <img src="https://samarraza.vercel.app/friendflow.webp" alt="Friend Flow (Social App) project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
+      <span class="sr-project-number">06</span>
+    </a>
+    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
+    <h3>Friend Flow (Social App)</h3><p>FriendFlow is a social media app inspired by Facebook, allowing users to post images, videos, and text with full like, comment, share, and follow features. It offers an interactive and engaging user experience built for connection.</p>
+    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>FireBase</span><span>FireStore DB</span><span>FireBase Bucket</span><span>OAuth</span></div>
+    <div class="sr-project-links"><a href="https://friendflow.vercel.app/" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/friendflow" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    </div></article><article class="sr-project-card reveal" aria-label="React Image Gallery (Social App)">
+    <a class="sr-project-image" href="https://reactimggallery.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View React Image Gallery (Social App)">
+      <img src="https://samarraza.vercel.app/reactimggallery.webp" alt="React Image Gallery (Social App) project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
+      <span class="sr-project-number">07</span>
+    </a>
+    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
+    <h3>React Image Gallery (Social App)</h3><p>React Image Gallery is a React-based application that allows users to upload and view images in a clean, responsive gallery layout. It showcases dynamic image handling with real-time preview functionality.</p>
+    <div class="sr-tech-list"><span>JavaScript</span><span>TailwindCss</span><span>React.js</span><span>FireBase</span><span>FireStore DB</span><span>FireBase Bucket</span><span>OAuth</span></div>
+    <div class="sr-project-links"><a href="https://reactimggallery.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/react_image_gallery" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    </div></article><article class="sr-project-card reveal" aria-label="Qiuck Post (Social App)">
+    <a class="sr-project-image" href="https://quickpost.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View Qiuck Post (Social App)">
+      <img src="https://samarraza.vercel.app/quickpost.webp" alt="Qiuck Post (Social App) project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
+      <span class="sr-project-number">08</span>
+    </a>
+    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
+    <h3>Quick Post</h3><p>QuickPost is a simple image gallery built with HTML and CSS, allowing users to view uploaded images in a clean, static layout. It's a lightweight project showcasing basic front-end structuring without any frameworks.</p>
+    <div class="sr-tech-list"><span>Html</span><span>Css</span><span>JavaScript</span><span>FireBase</span><span>FireStore DB</span><span>FireBase Bucket</span><span>OAuth</span></div>
+    <div class="sr-project-links"><a href="https://quickpost.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/quickpost" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    </div></article><article class="sr-project-card reveal" aria-label="fake Store">
+    <a class="sr-project-image" href="https://fakestorewithapi.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View fake Store">
+      <img src="https://samarraza.vercel.app/fakestore.webp" alt="fake Store project screenshot" loading="lazy" onerror="this.style.opacity='.15'">
+      <span class="sr-project-number">09</span>
+    </a>
+    <div class="sr-project-info"><div class="sr-project-category">PERSONAL PROJECT</div>
+    <h3>Fake Store</h3><p>This E-Commerce store is built with HTML and CSS, fetching product data from the Fake Store API. It displays products dynamically, showcasing a basic front-end integration with external APIs.</p>
+    <div class="sr-tech-list"><span>Html</span><span>Css</span><span>JavaScript</span><span>Local Storage</span><span>Rest Api</span><span>FireBase</span><span>FireStore DB</span></div>
+    <div class="sr-project-links"><a href="https://fakestorewithapi.vercel.app" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a><a href="https://github.com/samar-raza17/fakestorewithapi" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    </div></article></div>
+</section>
+<section class="shell ai reveal" id="ai" aria-labelledby="ai-title">
     <div class="work-head">
       <div>
         <p class="eyebrow">( ai explorations )</p>
@@ -292,19 +300,16 @@ body > main, body > .site-foot {
         </figure>
         <div class="ab-notes">
           <div class="sticky y"><span class="tape" aria-hidden="true"></span><b><span class="count" data-to="2">2</span>+ yrs</b><span>building things</span></div>
-          <div class="sticky b"><span class="tape" aria-hidden="true"></span><b><span class="count" data-to="50">50</span>+</b><span>projects shipped</span></div>
+          <div class="sticky b"><span class="tape" aria-hidden="true"></span><b>9</b><span>portfolio projects</span></div>
         </div>
       </div>
       <div class="ab-right">
-        <h2 class="ab-title" id="about-title">Karachi-based <span class="circ">Web Development<svg viewBox="0 0 200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M30 12 C 90 0, 190 6, 192 40 C 194 72, 70 80, 18 62 C -6 52, 8 18, 60 10" fill="none" stroke="#2B59F0" stroke-width="3" stroke-linecap="round"/></svg></span> designer with a foundation in <span class="hl">web development.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FFE45C"/></svg></span></h2>
+        <h2 class="ab-title" id="about-title">A developer who loves building <span class="hl">useful digital experiences.</span></h2>
         <p class="ab-sub">I develop responsive websites, scalable web apps and mobile experiences for businesses and people.</p>
-        <p class="ab-body">I like working across different kinds of design. I started out in web development, so I care a lot about how things look. I also love adding motion and making apps easy to use. Whether it&rsquo;s a brand-new app or a game screen that needs to come alive, I stay with it from the first idea to the final, finished screens.</p>
-        <p class="ab-label">where I&rsquo;ve been <svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 8 C 20 4, 30 14, 26 32" fill="none" stroke="#2B59F0" stroke-width="2.5" stroke-linecap="round"/><path d="M19 27 L 26 34 L 32 26" fill="none" stroke="#2B59F0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
-        <ol class="timeline"><li><span class="when now">now</span><b>Full-Stack Developer</b><span class="where">12Monday Technologies</span></li><li><span class="when">2025</span><b>Junior Full-Stack Developer</b><span class="where">Code Thread</span></li><li><span class="when">2025</span><b>Full-Stack Developer</b><span class="where">DigiEnder</span></li><li><span class="when">2024</span><b>Developer Internship</b><span class="where">Tria Tech Solution</span></li></ol>
-        <div class="ab-resume">
-          <p>Want the full story? My resume has every role, project and tool in one place.</p>
-          <a class="cta" href="https://samarraza.vercel.app/" target="_blank" rel="noopener">download resume <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2 V11 M4 7 L8 11 L12 7 M3 14 H13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
+        <p class="ab-body">I build full-stack web applications and engaging user experiences — working across React, Next.js, Node.js, APIs, and databases. From client products to independent experiments, I focus on practical, maintainable solutions.</p>
+        <p class="ab-label">experience &amp; roles <svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 8 C 20 4, 30 14, 26 32" fill="none" stroke="#2B59F0" stroke-width="2.5" stroke-linecap="round"/><path d="M19 27 L 26 34 L 32 26" fill="none" stroke="#2B59F0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+        <ol class="timeline sr-experience-timeline"><li><span class="when now">Nov 2025 - Present</span><b>Full-Stack Developer</b><span class="where">12Monday Technologies</span><p class="sr-exp-description">Developing and maintaining full-stack applications using modern web technologies. Collaborating with cross-functional teams to design, implement, and optimize features, ensuring performance and scalability.</p></li><li><span class="when now">May 2025 - Present</span><b>Junior Full-Stack Developer</b><span class="where">Code Thread</span><p class="sr-exp-description">Working remotely as a full-stack developer, building scalable web applications using modern technologies. Handling both frontend and backend responsibilities in a fast-paced environment.</p></li><li><span class="when">Feb 2025 - Jul 2025</span><b>Junior Full-Stack Developer</b><span class="where">DigiEnder</span><p class="sr-exp-description">Currently working on full-stack web applications using modern technologies. Contributing to both frontend and backend development while learning advanced development practices.</p></li><li><span class="when now">May 2025 - Present</span><b>Full Stack Web &amp; App Development (Teaching Assistant)</b><span class="where">SMIT (Saylani Mass IT Training)</span><p class="sr-exp-description">Assisting in teaching full stack web and app development courses. Helping students understand core programming concepts, resolving their queries, and supporting hands-on project work.</p></li><li><span class="when">Nov 2024 - Feb 2025</span><b>Full-Stack Developer (Internship)</b><span class="where">DigiEnder</span><p class="sr-exp-description">Completed a comprehensive internship focusing on full-stack development. Gained hands-on experience with modern web technologies and development workflows.</p></li><li><span class="when">Apr 2024 - Nov 2024</span><b>Front-End Development (Teaching)</b><span class="where">Start Kids Learning Institute</span><p class="sr-exp-description">Taught front-end development concepts to students, creating curriculum and hands-on projects. Developed teaching materials and mentored aspiring developers.</p></li><li><span class="when">Apr 2024 - Aug 2024</span><b>Front-End Developer (Internship)</b><span class="where">Tria Tech Solution Pvt Ltd.</span><p class="sr-exp-description">Started my professional journey with front-end development internship. Learned modern frontend technologies and best practices while working on real projects.</p></li></ol>
+        <div class="ab-resume"><p>Explore more about my projects and professional journey.</p><a class="cta" href="https://samarraza.vercel.app/" target="_blank" rel="noopener">old portfolio ↗</a></div>
       </div>
     </div>
   </section>
