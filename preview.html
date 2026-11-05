@@ -622,13 +622,51 @@ nav a[data-target="studio"]{white-space:nowrap}
 @keyframes cwStoneLift{0%{opacity:0;transform:translate(-50%,-10%) scale(.5)}40%{opacity:1;transform:translate(-50%,-65%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-50%) scale(.7)}}
 @keyframes cwMortar{to{stroke-dashoffset:0}}
 @media(max-width:620px){.cw-truck{width:53%}.cw-ladder{width:32px}.cw-label{font-size:9px}}
+</style><style id="sr-rock-navbar">
+/* Quiet carved-stone navigation: keeps the portfolio clean and readable. */
+.site-nav{background:#fbf9f5f5;border-bottom:1px solid #d7d5ce;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.site-nav.scrolled{background:#f8f7f3f5;box-shadow:0 5px 17px #26313a0b}
+.site-nav .nav{padding-block:15px;min-height:86px;gap:20px}
+.site-nav .logo{width:78px;height:62px;flex:none;color:#25333b;font-weight:900;font-size:19px;letter-spacing:-.06em;text-shadow:0 1px #fff9f0;filter:drop-shadow(2px 4px 0 #2b353b19);transition:filter .25s,transform .25s}
+.site-nav .logo svg{width:76px;height:66px;inset:-2px 0 auto 0;transition:transform .36s cubic-bezier(.2,.75,.2,1)}
+.site-nav .logo .sr-rock-monogram{z-index:1;position:relative;transform:translateY(-1px);font-family:var(--font-mono);font-weight:900}
+.site-nav .logo:hover{transform:translateY(-3px) rotate(-3deg);filter:drop-shadow(3px 7px 0 #2b353b23)}
+.site-nav .logo:hover svg{transform:rotate(0)}
+.site-nav .nav ul{gap:clamp(5px,.8vw,12px);align-items:center}
+.site-nav .nav ul li{position:relative;min-width:0}
+.site-nav .nav a.link{isolation:isolate;display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px clamp(12px,1.3vw,21px);font-size:clamp(12px,1.04vw,15px);font-weight:500;line-height:1.15;white-space:nowrap;letter-spacing:-.02em;transition:transform .26s cubic-bezier(.2,.8,.2,1),color .2s;text-shadow:0 1px #fff}
+.site-nav .nav a.link:before,.site-nav .nav a.link:after{content:"";position:absolute;pointer-events:none;z-index:-1;inset:1px 0 2px;clip-path:polygon(5% 4%,25% 0,44% 5%,72% 1%,95% 9%,100% 24%,96% 76%,100% 88%,85% 99%,53% 94%,28% 100%,4% 91%,0 69%,3% 30%)}
+.site-nav .nav a.link:before{background:#c5c5c1;transform:translate(2px,4px);opacity:.5;transition:opacity .2s,transform .25s}
+.site-nav .nav a.link:after{background:linear-gradient(157deg,#faf9f5 0%,#e7e6e1 42%,#d5d6d3 76%,#b4b9b8 100%);box-shadow:inset 2px 2px #fff,inset -3px -4px #87929733;transition:background .25s,filter .25s}
+.site-nav .nav a.link:hover{transform:translateY(-4px) rotate(-1deg);color:#1b2932}
+.site-nav .nav a.link:hover:before{transform:translate(3px,6px);opacity:.78}
+.site-nav .nav a.link:hover:after{background:linear-gradient(157deg,#fffdfa,#ece8df 42%,#c4cdcd 100%)}
+.site-nav .nav a.link.current{color:#a65017;font-weight:600;text-shadow:0 1px #fff}
+.site-nav .nav a.link.current:after{background:linear-gradient(150deg,#fff2db,#edddc9 57%,#c9b39d 100%);filter:drop-shadow(0 1px 0 #d58b49)}
+.site-nav .nav a.link .squiggle{display:none!important}
+.site-nav .nav a.link.current:before{opacity:.65}
+.site-nav .nav a.link:focus-visible,.site-nav .logo:focus-visible{outline:2px dashed var(--pen);outline-offset:4px}
+@media(max-width:900px){.site-nav .nav{min-height:76px;padding-block:10px}.site-nav .logo{width:66px;height:55px}.site-nav .logo svg{width:66px;height:58px}.site-nav .nav ul{gap:4px}.site-nav .nav a.link{min-height:39px;padding:9px 10px;font-size:12px}}
+@media(max-width:670px){.site-nav .nav{gap:8px}.site-nav .nav ul{gap:2px}.site-nav .nav a.link{font-size:11px;padding:8px 7px;min-height:36px}.site-nav .nav ul li:nth-child(3){display:none}.site-nav .logo{width:56px;height:50px;font-size:16px}.site-nav .logo svg{width:56px;height:52px}}
+@media(max-width:440px){.site-nav .nav a.link{font-size:10px;padding:8px 6px}.site-nav .nav ul li:nth-child(4){display:none}.site-nav .nav ul{gap:1px}.site-nav .nav{min-height:66px}}
+@media(prefers-reduced-motion:reduce){.site-nav .logo,.site-nav .logo svg,.site-nav .nav a.link,.site-nav .nav a.link:before,.site-nav .nav a.link:after{transition:none}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
   <div class="shell">
     <nav class="nav" aria-label="Main">
       <a class="logo" href="#home" aria-label="Samar Raza, back to the top">
-        <svg viewBox="0 0 58 46" aria-hidden="true"><path d="M34 4 C 14 2, 3 12, 4 24 C 5 38, 26 44, 42 40 C 56 36, 57 18, 46 9 C 38 3, 26 4, 20 7" fill="none" stroke="#161616" stroke-width="2.2" stroke-linecap="round"/></svg> SR
+        <svg viewBox="0 0 76 66" aria-hidden="true" focusable="false">
+<defs><linearGradient id="srRockBase" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#f4f0e7"/><stop offset=".55" stop-color="#d1cec5"/><stop offset="1" stop-color="#92999c"/></linearGradient></defs>
+<path d="M13 13L29 5L52 7L67 21L71 46L58 59L26 62L9 50L5 28Z" fill="#343d43" opacity=".20" transform="translate(1 3)"/>
+<path d="M13 13L29 5L52 7L67 21L71 46L58 59L26 62L9 50L5 28Z" fill="url(#srRockBase)" stroke="#31383a" stroke-width="2.8" stroke-linejoin="round"/>
+<path d="M13 13L29 5L34 17L19 33L5 28Z" fill="#f8f6ef" opacity=".8"/>
+<path d="M52 7L67 21L71 46L55 42L49 19Z" fill="#afb4b4" opacity=".72"/>
+<path d="M9 50L26 62L58 59L55 42L27 49Z" fill="#939c9e" opacity=".46"/>
+<path d="M19 33L34 17L49 19L55 42L27 49Z" fill="#e4e0d6" opacity=".6"/>
+<path d="M13 13L29 5L52 7" fill="none" stroke="#ffffff" stroke-width="2" opacity=".6" stroke-linecap="round"/>
+<path d="M20 44L29 49M52 14L55 18" fill="none" stroke="#6d7676" stroke-width="1.2" opacity=".5"/>
+</svg><span class="sr-rock-monogram">SR</span>
       </a>
       <ul>
         <li class="hide-sm"><a class="link" href="#home" data-target="home">Home<svg class="squiggle" viewBox="0 0 68 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 10 2, 16 11, 24 6 S 38 2, 46 6 S 58 11, 66 5" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round"/></svg></a></li>
