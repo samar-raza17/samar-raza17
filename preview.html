@@ -307,78 +307,42 @@ body{background-color:#fcfaf7!important}
 }
 @media(prefers-reduced-motion:reduce){.sr-cover-browser,.sr-project-action{transition:none!important}}
 
-/* Work gallery viewport fit: keep complete project cards, their action button,
-   shadow, labels and rope visible inside the sticky viewport. */
-.sr-scroll-work .sr-scroll-pin{
-  box-sizing:border-box;
-  justify-content:flex-start;
-  gap:clamp(9px,1.4vh,16px);
-  padding-top:clamp(8px,1.4vh,17px);
-  padding-bottom:clamp(12px,2vh,24px);
-  min-height:0;
-}
-.sr-scroll-work .sr-hang-head{flex:0 0 auto;align-items:flex-end}
-.sr-scroll-work .sr-hang-head .slot-title{font-size:clamp(43px,4.25vw,76px);line-height:1.04}
-.sr-scroll-work .sr-hanging-wrap{flex:1 1 auto;min-height:0;max-height:none;overflow:visible}
-.sr-scroll-work .sr-hang-track{
-  height:100%;
-  min-height:0;
-  box-sizing:border-box;
-  padding-top:clamp(18px,2.6vh,27px);
-  padding-bottom:clamp(12px,2vh,24px);
-}
-.sr-scroll-work .sr-hang-item{height:max-content}
-.sr-scroll-work .sr-hang-image.sr-orange-cover{
-  height:clamp(140px,23vh,210px)!important;
-}
-.sr-scroll-work .sr-cover-browser{inset:13% 9% 8%}
-.sr-scroll-work .sr-project-card-copy{
-  min-height:145px;
-  padding:6px 9px 11px;
-}
-.sr-scroll-work .sr-hang-caption{
-  font-size:clamp(13px,1vw,16px);
-  min-height:0;
-  padding:5px 0 3px;
-}
-.sr-scroll-work .sr-project-desc{
-  font-size:clamp(10px,.76vw,12px);
-  line-height:1.45;
-  min-height:0;
-  margin:5px 0 8px;
-  -webkit-line-clamp:2;
-}
-.sr-scroll-work .sr-project-action{
-  min-height:35px;
-  padding:8px 10px;
-  font-size:10px;
-  flex-shrink:0;
-}
-.sr-scroll-work .sr-hang-meta{
-  margin-top:8px;
-  font-size:9px;
-  line-height:1.35;
-}
-.sr-scroll-work .sr-scroll-progress{flex:0 0 3px}
-@media(max-height:730px) and (min-width:681px){
- .sr-scroll-work .sr-hang-head .slot-title{font-size:clamp(37px,3.6vw,60px)}
- .sr-scroll-work .sr-hang-image.sr-orange-cover{height:clamp(120px,20vh,175px)!important}
- .sr-scroll-work .sr-project-card-copy{min-height:132px}
- .sr-scroll-work .sr-hang-track{padding-top:16px}
+
+/* PROJECT GALLERY FINAL: unmodified images, original tall shape, no nested browsers */
+.sr-scroll-work .sr-scroll-pin{box-sizing:border-box;justify-content:flex-start;gap:clamp(10px,1.4vh,18px);padding:clamp(9px,1.4vh,17px) 0 clamp(10px,1.8vh,20px);height:calc(100svh - var(--stk,84px));min-height:0}
+.sr-scroll-work .sr-hang-head{flex-shrink:0}
+.sr-scroll-work .sr-hang-head .slot-title{font-size:clamp(38px,4.3vw,80px);line-height:1.04}
+.sr-scroll-work .sr-hanging-wrap{flex:1;min-height:0;max-height:none;overflow:visible}
+.sr-scroll-work .sr-hang-track{height:100%;box-sizing:border-box;min-height:0;align-items:flex-start;padding:clamp(16px,2.4vh,26px) 8px 19px}
+.sr-scroll-work .sr-hang-item{height:auto;max-height:none;align-self:flex-start}
+.sr-scroll-work .sr-hang-photo{box-sizing:border-box;display:flex;flex-direction:column;height:clamp(385px,55vh,535px);padding:8px 8px 0;overflow:hidden;background:#fff}
+.sr-scroll-work .sr-hang-image.sr-real-shot{position:relative;flex:0 0 auto;width:100%;height:clamp(190px,29vh,290px);aspect-ratio:auto;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f4f4f4;isolation:isolate}
+.sr-scroll-work .sr-real-shot:before,.sr-scroll-work .sr-real-shot:after{display:none}
+.sr-scroll-work .sr-real-shot>img{display:block;position:static;inset:auto;width:100%;height:100%;max-height:100%;object-fit:contain;object-position:center;transform:none;box-shadow:none}
+.sr-scroll-work .sr-hang-item:hover .sr-real-shot>img{transform:scale(1.015)}
+.sr-scroll-work .sr-project-card-copy{flex:1;min-height:0;padding:12px 10px 13px;display:flex;flex-direction:column}
+.sr-scroll-work .sr-hang-caption{font-size:clamp(14px,1.05vw,17px);line-height:1.3;min-height:0;padding:0}
+.sr-scroll-work .sr-project-desc{min-height:0;margin:9px 0 12px;font-size:clamp(11px,.82vw,13px);line-height:1.5;-webkit-line-clamp:3}
+.sr-scroll-work .sr-project-action{margin-top:auto;flex-shrink:0;min-height:38px;padding:9px 12px}
+.sr-scroll-work .sr-hang-meta{margin-top:8px;font-size:10px}
+.sr-scroll-work .sr-djanazah-brand{background:#ecf1e8}
+.sr-scroll-work .sr-app-source{height:100%;width:100%;display:flex;gap:13px;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:18px;box-sizing:border-box;text-decoration:none;color:#3B5424;font:600 12px var(--font-mono)}
+.sr-scroll-work .sr-app-source img{max-width:55%;height:min(65%,145px);object-fit:contain;border-radius:16px;box-shadow:0 7px 20px #3b54242d}
+.sr-scroll-work .sr-admin-cover{background:#f3f0eb}
+@media(min-width:681px) and (max-height:780px){
+.sr-scroll-work .sr-hang-photo{height:clamp(345px,51vh,440px)}
+.sr-scroll-work .sr-hang-image.sr-real-shot{height:clamp(160px,26vh,235px)}
+.sr-scroll-work .sr-hang-head .slot-title{font-size:clamp(36px,3.8vw,65px)}
+.sr-scroll-work .sr-project-desc{-webkit-line-clamp:2}
 }
 @media(max-width:680px){
- .sr-scroll-work .sr-scroll-pin{height:calc(100svh - 80px);padding-top:10px;padding-bottom:14px}
- .sr-scroll-work .sr-hang-head .slot-title{font-size:clamp(34px,8vw,52px)}
- .sr-scroll-work .sr-hang-image.sr-orange-cover{height:clamp(155px,24vh,220px)!important}
- .sr-scroll-work .sr-project-card-copy{min-height:150px}
- .sr-scroll-work .sr-project-desc{font-size:11px}
- .sr-scroll-work .sr-hang-track{padding-top:23px;padding-bottom:16px}
+.sr-scroll-work .sr-scroll-pin{height:calc(100svh - 80px)}
+.sr-scroll-work .sr-hang-photo{height:clamp(350px,54vh,490px)}
+.sr-scroll-work .sr-hang-image.sr-real-shot{height:clamp(170px,27vh,255px)}
+.sr-scroll-work .sr-project-desc{font-size:12px}
+.sr-scroll-work .sr-project-action{opacity:1;visibility:visible;transform:none}
 }
-@media(max-height:600px){
- .sr-scroll-work .sr-hang-image.sr-orange-cover{height:120px!important}
- .sr-scroll-work .sr-project-card-copy{min-height:125px}
- .sr-scroll-work .sr-hang-head .slot-title{font-size:34px}
-}
+@media(max-height:620px){.sr-scroll-work .sr-hang-photo{height:clamp(275px,51vh,350px)}.sr-scroll-work .sr-hang-image.sr-real-shot{height:clamp(115px,22vh,180px)}.sr-scroll-work .sr-project-desc{-webkit-line-clamp:2}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -457,15 +421,8 @@ body{background-color:#fcfaf7!important}
       <article class="sr-hang-item" style="--sr-rotate:-2deg" aria-label="RabbitxLogistics">
       <span class="sr-hang-pin" aria-hidden="true"></span>
       <div class="sr-hang-photo">
-   <div class="sr-hang-image sr-orange-cover" style="--project-bg:url('https://samarraza.vercel.app/rabbitxlogistics.webp')">
-     <div class="sr-cover-top"><span class="sr-cover-brand">SAMAR / WORK</span><span class="sr-cover-dot">●</span></div>
-     <div class="sr-cover-browser">
-       <div class="sr-cover-browser-top"><i></i><i></i><i></i><span>PROJECT PREVIEW</span></div>
-       <div class="sr-cover-screen"><img src="https://samarraza.vercel.app/rabbitxlogistics.webp" alt="RabbitxLogistics website screenshot" width="574" height="710" loading="lazy" draggable="false"></div>
-     </div>
-     <span class="sr-cover-index">01</span>
-   </div>
-   <div class="sr-project-card-copy">
+   <div class="sr-hang-image sr-real-shot"><img src="https://samarraza.vercel.app/rabbitxlogistics.webp" alt="RabbitxLogistics original screenshot" loading="lazy" draggable="false"></div>
+<div class="sr-project-card-copy">
      <div class="sr-hang-caption"><span>RabbitxLogistics</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
      <p class="sr-project-desc">A responsive courier platform for shipment inquiries, customer leads, and a smoother logistics experience.</p>
      <button class="sr-detail-btn sr-project-action" data-project="0" type="button" aria-label="View details for RabbitxLogistics">View project details <span aria-hidden="true">↗</span></button>
@@ -476,15 +433,8 @@ body{background-color:#fcfaf7!important}
 <article class="sr-hang-item" style="--sr-rotate:1.5deg" aria-label="RabbitxLogistics Admin Dashboard">
       <span class="sr-hang-pin" aria-hidden="true"></span>
       <div class="sr-hang-photo">
-   <div class="sr-hang-image sr-orange-cover" style="--project-bg:url('https://samarraza.vercel.app/rabbitxlogistocs-dashboard.webp')">
-     <div class="sr-cover-top"><span class="sr-cover-brand">SAMAR / WORK</span><span class="sr-cover-dot">●</span></div>
-     <div class="sr-cover-browser">
-       <div class="sr-cover-browser-top"><i></i><i></i><i></i><span>PROJECT PREVIEW</span></div>
-       <div class="sr-cover-screen"><img src="https://samarraza.vercel.app/rabbitxlogistocs-dashboard.webp" alt="RabbitxLogistics Admin Dashboard website screenshot" width="574" height="710" loading="lazy" draggable="false"></div>
-     </div>
-     <span class="sr-cover-index">02</span>
-   </div>
-   <div class="sr-project-card-copy">
+   <div class="sr-hang-image sr-real-shot"><img src="https://samarraza.vercel.app/rabbitxlogistocs-dashboard.webp" alt="RabbitxLogistics Admin Dashboard original screenshot" loading="lazy" draggable="false"></div>
+<div class="sr-project-card-copy">
      <div class="sr-hang-caption"><span>RabbitxLogistics Admin Dashboard</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
      <p class="sr-project-desc">An operations dashboard for managing courier orders, rider assignments, and delivery workflows. Demo project.</p>
      <button class="sr-detail-btn sr-project-action" data-project="1" type="button" aria-label="View details for RabbitxLogistics Admin Dashboard">View project details <span aria-hidden="true">↗</span></button>
@@ -495,15 +445,8 @@ body{background-color:#fcfaf7!important}
 <article class="sr-hang-item" style="--sr-rotate:-1.3deg" aria-label="Raast Point Of Sale">
       <span class="sr-hang-pin" aria-hidden="true"></span>
       <div class="sr-hang-photo">
-   <div class="sr-hang-image sr-orange-cover" style="--project-bg:url('https://samarraza.vercel.app/raastpos.webp')">
-     <div class="sr-cover-top"><span class="sr-cover-brand">SAMAR / WORK</span><span class="sr-cover-dot">●</span></div>
-     <div class="sr-cover-browser">
-       <div class="sr-cover-browser-top"><i></i><i></i><i></i><span>PROJECT PREVIEW</span></div>
-       <div class="sr-cover-screen"><img src="https://samarraza.vercel.app/raastpos.webp" alt="Raast Point Of Sale website screenshot" width="574" height="710" loading="lazy" draggable="false"></div>
-     </div>
-     <span class="sr-cover-index">03</span>
-   </div>
-   <div class="sr-project-card-copy">
+   <div class="sr-hang-image sr-real-shot"><img src="https://samarraza.vercel.app/raastpos.webp" alt="Raast Point Of Sale original screenshot" loading="lazy" draggable="false"></div>
+<div class="sr-project-card-copy">
      <div class="sr-hang-caption"><span>Raast Point Of Sale</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
      <p class="sr-project-desc">A full-stack restaurant POS demo for handling orders, restaurant operations, riders, and admin controls.</p>
      <button class="sr-detail-btn sr-project-action" data-project="2" type="button" aria-label="View details for Raast Point Of Sale">View project details <span aria-hidden="true">↗</span></button>
@@ -514,15 +457,8 @@ body{background-color:#fcfaf7!important}
 <article class="sr-hang-item" style="--sr-rotate:2.5deg" aria-label="Dil Se Buy">
       <span class="sr-hang-pin" aria-hidden="true"></span>
       <div class="sr-hang-photo">
-   <div class="sr-hang-image sr-orange-cover" style="--project-bg:url('https://samarraza.vercel.app/dilsebuy.webp')">
-     <div class="sr-cover-top"><span class="sr-cover-brand">SAMAR / WORK</span><span class="sr-cover-dot">●</span></div>
-     <div class="sr-cover-browser">
-       <div class="sr-cover-browser-top"><i></i><i></i><i></i><span>PROJECT PREVIEW</span></div>
-       <div class="sr-cover-screen"><img src="https://samarraza.vercel.app/dilsebuy.webp" alt="Dil Se Buy website screenshot" width="574" height="710" loading="lazy" draggable="false"></div>
-     </div>
-     <span class="sr-cover-index">04</span>
-   </div>
-   <div class="sr-project-card-copy">
+   <div class="sr-hang-image sr-real-shot"><img src="https://samarraza.vercel.app/dilsebuy.webp" alt="Dil Se Buy original screenshot" loading="lazy" draggable="false"></div>
+<div class="sr-project-card-copy">
      <div class="sr-hang-caption"><span>Dil Se Buy</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
      <p class="sr-project-desc">An e-commerce storefront and admin system built with React and Firebase for products and orders.</p>
      <button class="sr-detail-btn sr-project-action" data-project="3" type="button" aria-label="View details for Dil Se Buy">View project details <span aria-hidden="true">↗</span></button>
@@ -533,15 +469,8 @@ body{background-color:#fcfaf7!important}
 <article class="sr-hang-item" style="--sr-rotate:-1deg" aria-label="Smart For Share">
       <span class="sr-hang-pin" aria-hidden="true"></span>
       <div class="sr-hang-photo">
-   <div class="sr-hang-image sr-orange-cover" style="--project-bg:url('https://samarraza.vercel.app/smartforshare.webp')">
-     <div class="sr-cover-top"><span class="sr-cover-brand">SAMAR / WORK</span><span class="sr-cover-dot">●</span></div>
-     <div class="sr-cover-browser">
-       <div class="sr-cover-browser-top"><i></i><i></i><i></i><span>PROJECT PREVIEW</span></div>
-       <div class="sr-cover-screen"><img src="https://samarraza.vercel.app/smartforshare.webp" alt="Smart For Share website screenshot" width="574" height="710" loading="lazy" draggable="false"></div>
-     </div>
-     <span class="sr-cover-index">05</span>
-   </div>
-   <div class="sr-project-card-copy">
+   <div class="sr-hang-image sr-real-shot"><img src="https://samarraza.vercel.app/smartforshare.webp" alt="Smart For Share original screenshot" loading="lazy" draggable="false"></div>
+<div class="sr-project-card-copy">
      <div class="sr-hang-caption"><span>Smart For Share</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
      <p class="sr-project-desc">A Next.js platform for sharing text and files with people across different networks and locations.</p>
      <button class="sr-detail-btn sr-project-action" data-project="4" type="button" aria-label="View details for Smart For Share">View project details <span aria-hidden="true">↗</span></button>
@@ -552,15 +481,8 @@ body{background-color:#fcfaf7!important}
 <article class="sr-hang-item" style="--sr-rotate:1.7deg" aria-label="Friend Flow (Social App)">
       <span class="sr-hang-pin" aria-hidden="true"></span>
       <div class="sr-hang-photo">
-   <div class="sr-hang-image sr-orange-cover" style="--project-bg:url('https://samarraza.vercel.app/friendflow.webp')">
-     <div class="sr-cover-top"><span class="sr-cover-brand">SAMAR / WORK</span><span class="sr-cover-dot">●</span></div>
-     <div class="sr-cover-browser">
-       <div class="sr-cover-browser-top"><i></i><i></i><i></i><span>PROJECT PREVIEW</span></div>
-       <div class="sr-cover-screen"><img src="https://samarraza.vercel.app/friendflow.webp" alt="Friend Flow (Social App) website screenshot" width="574" height="710" loading="lazy" draggable="false"></div>
-     </div>
-     <span class="sr-cover-index">06</span>
-   </div>
-   <div class="sr-project-card-copy">
+   <div class="sr-hang-image sr-real-shot"><img src="https://samarraza.vercel.app/friendflow.webp" alt="Friend Flow (Social App) original screenshot" loading="lazy" draggable="false"></div>
+<div class="sr-project-card-copy">
      <div class="sr-hang-caption"><span>Friend Flow (Social App)</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
      <p class="sr-project-desc">A social app supporting posts, media sharing, likes, comments, and following other users.</p>
      <button class="sr-detail-btn sr-project-action" data-project="5" type="button" aria-label="View details for Friend Flow (Social App)">View project details <span aria-hidden="true">↗</span></button>
@@ -571,15 +493,8 @@ body{background-color:#fcfaf7!important}
 <article class="sr-hang-item" style="--sr-rotate:-1.5deg" aria-label="React Image Gallery (Social App)">
       <span class="sr-hang-pin" aria-hidden="true"></span>
       <div class="sr-hang-photo">
-   <div class="sr-hang-image sr-orange-cover" style="--project-bg:url('https://samarraza.vercel.app/reactimggallery.webp')">
-     <div class="sr-cover-top"><span class="sr-cover-brand">SAMAR / WORK</span><span class="sr-cover-dot">●</span></div>
-     <div class="sr-cover-browser">
-       <div class="sr-cover-browser-top"><i></i><i></i><i></i><span>PROJECT PREVIEW</span></div>
-       <div class="sr-cover-screen"><img src="https://samarraza.vercel.app/reactimggallery.webp" alt="React Image Gallery (Social App) website screenshot" width="574" height="710" loading="lazy" draggable="false"></div>
-     </div>
-     <span class="sr-cover-index">07</span>
-   </div>
-   <div class="sr-project-card-copy">
+   <div class="sr-hang-image sr-real-shot"><img src="https://samarraza.vercel.app/reactimggallery.webp" alt="React Image Gallery (Social App) original screenshot" loading="lazy" draggable="false"></div>
+<div class="sr-project-card-copy">
      <div class="sr-hang-caption"><span>React Image Gallery (Social App)</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
      <p class="sr-project-desc">A responsive React gallery for uploading and viewing images with real-time previews.</p>
      <button class="sr-detail-btn sr-project-action" data-project="6" type="button" aria-label="View details for React Image Gallery (Social App)">View project details <span aria-hidden="true">↗</span></button>
@@ -590,15 +505,8 @@ body{background-color:#fcfaf7!important}
 <article class="sr-hang-item" style="--sr-rotate:2deg" aria-label="Quick Post (Social App)">
       <span class="sr-hang-pin" aria-hidden="true"></span>
       <div class="sr-hang-photo">
-   <div class="sr-hang-image sr-orange-cover" style="--project-bg:url('https://samarraza.vercel.app/quickpost.webp')">
-     <div class="sr-cover-top"><span class="sr-cover-brand">SAMAR / WORK</span><span class="sr-cover-dot">●</span></div>
-     <div class="sr-cover-browser">
-       <div class="sr-cover-browser-top"><i></i><i></i><i></i><span>PROJECT PREVIEW</span></div>
-       <div class="sr-cover-screen"><img src="https://samarraza.vercel.app/quickpost.webp" alt="Qiuck Post (Social App) website screenshot" width="574" height="710" loading="lazy" draggable="false"></div>
-     </div>
-     <span class="sr-cover-index">08</span>
-   </div>
-   <div class="sr-project-card-copy">
+   <div class="sr-hang-image sr-real-shot"><img src="https://samarraza.vercel.app/quickpost.webp" alt="Quick Post (Social App) original screenshot" loading="lazy" draggable="false"></div>
+<div class="sr-project-card-copy">
      <div class="sr-hang-caption"><span>Quick Post (Social App)</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
      <p class="sr-project-desc">A lightweight image-sharing/gallery project focused on clean HTML, CSS, and basic JavaScript.</p>
      <button class="sr-detail-btn sr-project-action" data-project="7" type="button" aria-label="View details for Qiuck Post (Social App)">View project details <span aria-hidden="true">↗</span></button>
@@ -609,15 +517,8 @@ body{background-color:#fcfaf7!important}
 <article class="sr-hang-item" style="--sr-rotate:-1deg" aria-label="Fake Store">
       <span class="sr-hang-pin" aria-hidden="true"></span>
       <div class="sr-hang-photo">
-   <div class="sr-hang-image sr-orange-cover" style="--project-bg:url('https://samarraza.vercel.app/fakestore.webp')">
-     <div class="sr-cover-top"><span class="sr-cover-brand">SAMAR / WORK</span><span class="sr-cover-dot">●</span></div>
-     <div class="sr-cover-browser">
-       <div class="sr-cover-browser-top"><i></i><i></i><i></i><span>PROJECT PREVIEW</span></div>
-       <div class="sr-cover-screen"><img src="https://samarraza.vercel.app/fakestore.webp" alt="fake Store website screenshot" width="574" height="710" loading="lazy" draggable="false"></div>
-     </div>
-     <span class="sr-cover-index">09</span>
-   </div>
-   <div class="sr-project-card-copy">
+   <div class="sr-hang-image sr-real-shot"><img src="https://samarraza.vercel.app/fakestore.webp" alt="Fake Store original screenshot" loading="lazy" draggable="false"></div>
+<div class="sr-project-card-copy">
      <div class="sr-hang-caption"><span>Fake Store</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
      <p class="sr-project-desc">A storefront demo displaying live product listings fetched from the Fake Store API.</p>
      <button class="sr-detail-btn sr-project-action" data-project="8" type="button" aria-label="View details for fake Store">View project details <span aria-hidden="true">↗</span></button>
@@ -628,24 +529,16 @@ body{background-color:#fcfaf7!important}
 <article class="sr-hang-item" style="--sr-rotate:1.4deg" aria-label="Djanazah Mobile App">
  <span class="sr-hang-pin" aria-hidden="true"></span>
  <div class="sr-hang-photo">
- <div class="sr-hang-image sr-orange-cover" style="--project-bg:url('./assets/djanazah-mobile-cover.svg')">
-  <div class="sr-cover-top"><span class="sr-cover-brand">SAMAR / WORK</span><span class="sr-cover-dot">●</span></div>
-  <div class="sr-cover-browser"><div class="sr-cover-browser-top"><i></i><i></i><i></i><span>ILLUSTRATIVE PREVIEW</span></div><div class="sr-cover-screen"><img src="./assets/djanazah-mobile-cover.svg" alt="Djanazah Mobile App concept showcase" loading="lazy" width="1200" height="740" draggable="false"></div></div>
-  <span class="sr-cover-index">10</span>
- </div>
- <div class="sr-project-card-copy"><div class="sr-hang-caption"><span>Djanazah Mobile App</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
+ <div class="sr-hang-image sr-real-shot sr-djanazah-brand"><a href="https://play.google.com/store/apps/details?id=nl.djanazahgebeden.app&amp;hl=en" target="_blank" rel="noopener noreferrer" class="sr-app-source"><img src="https://raw.githubusercontent.com/samar-raza17/djanazah-mobile-app/main/assets/images/app_icon.png" alt="Djanazah original app icon"><span>Actual screenshots on Google Play ↗</span></a></div>
+<div class="sr-project-card-copy"><div class="sr-hang-caption"><span>Djanazah Mobile App</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
  <p class="sr-project-desc">React Native and Expo app for nearby Janazah announcements, notifications, prayer guidance, and Duas.</p>
  <button class="sr-detail-btn sr-project-action" data-project="9" type="button" aria-label="View details for Djanazah Mobile App">View project details <span aria-hidden="true">↗</span></button>
  </div></div><span class="sr-hang-meta">Client project · React Native / Expo</span></article>
 <article class="sr-hang-item" style="--sr-rotate:-1.5deg" aria-label="Djanazah Admin Panel">
  <span class="sr-hang-pin" aria-hidden="true"></span>
  <div class="sr-hang-photo">
- <div class="sr-hang-image sr-orange-cover" style="--project-bg:url('./assets/djanazah-admin-cover.svg')">
-  <div class="sr-cover-top"><span class="sr-cover-brand">SAMAR / WORK</span><span class="sr-cover-dot">●</span></div>
-  <div class="sr-cover-browser"><div class="sr-cover-browser-top"><i></i><i></i><i></i><span>ILLUSTRATIVE PREVIEW</span></div><div class="sr-cover-screen"><img src="./assets/djanazah-admin-cover.svg" alt="Djanazah Admin Panel concept showcase" loading="lazy" width="1200" height="740" draggable="false"></div></div>
-  <span class="sr-cover-index">11</span>
- </div>
- <div class="sr-project-card-copy"><div class="sr-hang-caption"><span>Djanazah Admin Panel</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
+ <div class="sr-hang-image sr-real-shot sr-admin-cover"><img src="./assets/djanazah-admin-cover.svg" alt="Illustrative admin panel image" loading="lazy" draggable="false"></div>
+<div class="sr-project-card-copy"><div class="sr-hang-caption"><span>Djanazah Admin Panel</span><span class="sr-hang-arrow" aria-hidden="true">↗</span></div>
  <p class="sr-project-desc">Next.js dashboard to manage Janazah announcements, users, comments, Duas, categories, and settings.</p>
  <button class="sr-detail-btn sr-project-action" data-project="10" type="button" aria-label="View details for Djanazah Admin Panel">View project details <span aria-hidden="true">↗</span></button>
  </div></div><span class="sr-hang-meta">Client project · Next.js / React</span></article>
