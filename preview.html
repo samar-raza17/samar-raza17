@@ -1396,6 +1396,58 @@ body{background-color:#fbf8f3}
 .sr-wood-sound-toggle:focus-visible{outline:3px solid #e87d2e;outline-offset:4px}
 .sr-wood-sound-toggle[aria-pressed="false"]{background:#cbbda8;color:#61493b}
 @media(max-width:680px){.sr-wood-sound-toggle{font-size:9px;padding:7px 8px}}
+</style><style id="sr-project-timber-showcase-v1">
+/* Full wooden showcase with opening shutters, anchored timber rails and nailed badges. */
+.sr-project-dialog{position:fixed;inset:0;margin:auto!important;overflow:visible!important;width:min(1190px,calc(100vw - 44px))!important;max-width:none!important;max-height:min(88vh,880px)!important;height:min(88vh,880px);border:0!important;border-radius:2px!important;background:transparent!important;color:#322217!important;box-shadow:none!important;padding:13px!important;perspective:1700px}
+.sr-project-dialog::backdrop{background:rgba(20,13,8,.83)!important;backdrop-filter:blur(5px)}
+.sr-wood-showcase{position:relative;isolation:isolate;width:100%;height:100%;padding:clamp(14px,1.65vw,24px);background:
+ repeating-linear-gradient(176deg,transparent 0 29px,#47291638 31px 33px,transparent 35px 63px),
+ linear-gradient(133deg,#d1a06a,#a56c3c 34%,#6b4128 67%,#42281d);
+ border:12px ridge #80502f;box-shadow:inset 4px 4px 0 #efc691,inset -6px -6px 0 #382113,13px 17px 0 #1c100ac9,0 22px 65px #0009}
+.sr-wood-showcase:before,.sr-wood-showcase:after{content:"";position:absolute;top:13px;bottom:13px;width:13px;background:linear-gradient(90deg,#3e2317,#cf9154 48%,#663a24);z-index:2;pointer-events:none}
+.sr-wood-showcase:before{left:11px}.sr-wood-showcase:after{right:11px}
+.sr-wood-showcase-top{position:absolute;top:2px;left:30px;right:30px;height:30px;background:linear-gradient(180deg,#f6cd92,#a97544 65%,#603820);border:2px solid #613c24;display:flex;align-items:center;justify-content:space-between;color:#3a2114;font:900 clamp(10px,.95vw,14px) var(--font-mono,monospace);letter-spacing:.09em;text-align:center;z-index:2;box-shadow:0 4px #4c2f1d}
+.sr-wood-showcase-top i{display:block;margin:0 8px;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 28% 23%,#fff,#b8beb8 28%,#5b615b 70%,#252c27);box-shadow:1px 2px 1px #2e1a10}
+.sr-showcase-interior{height:100%;overflow:auto;overscroll-behavior:contain;margin:8px 2px 0;padding:clamp(7px,.8vw,12px);background:repeating-linear-gradient(90deg,#28190f 0 40px,#342118 41px 44px,#24170e 45px 90px);border:5px inset #79502f;box-shadow:inset 6px 7px 18px #140a07b8}
+.sr-project-dialog .sr-modal-grid{display:grid;grid-template-columns:minmax(0,1.14fr) minmax(0,.86fr);gap:clamp(14px,2vw,28px);align-items:stretch;min-height:100%;padding:clamp(8px,1.1vw,16px)!important}
+.sr-project-dialog .sr-modal-photo{position:relative;padding:clamp(9px,1.2vw,18px)!important;min-height:0!important;max-height:none!important;background:repeating-linear-gradient(178deg,#d6ad7f 0 32px,#ae794c 33px 35px,#e1b584 36px 64px)!important;border:9px ridge #96603b!important;box-shadow:inset 4px 4px #ffdfa7,5px 7px 0 #2b1a12!important;display:flex;align-items:center;justify-content:center}
+.sr-project-dialog .sr-modal-photo:before,.sr-project-dialog .sr-modal-photo:after{content:"";position:absolute;top:11px;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 24% 20%,#f6f4e8,#aab1ac 40%,#363d38);box-shadow:1px 2px #3b261a;z-index:2}
+.sr-project-dialog .sr-modal-photo:before{left:11px}.sr-project-dialog .sr-modal-photo:after{right:11px}
+.sr-project-dialog .sr-modal-photo img{display:block;width:100%;height:auto;max-height:min(59vh,520px)!important;max-width:100%;object-fit:contain;background:#f9f5ef;border:4px solid #39271b;box-shadow:0 0 0 4px #e7be8c,inset 0 0 5px #26160f}
+.sr-project-dialog .sr-modal-text{padding:clamp(15px,2vw,28px)!important;background:repeating-linear-gradient(177deg,transparent 0 27px,#6a412825 29px 30px,transparent 32px 58px),linear-gradient(135deg,#f0d6ae,#d6ab7a 47%,#b98654)!important;border:7px ridge #93623b;box-shadow:inset 3px 3px #fff1cf,6px 7px 0 #2e1c13!important;justify-content:flex-start;gap:12px;align-self:stretch}
+.sr-project-dialog .sr-modal-text .eyebrow{font:800 11px var(--font-mono,monospace)!important;color:#9b4c19!important;letter-spacing:.07em}
+.sr-project-dialog .sr-modal-text h2{font-size:clamp(24px,2.7vw,39px)!important;line-height:1.09;color:#342016;overflow-wrap:anywhere;text-shadow:0 1px #fff3da}
+.sr-project-dialog #srModalDescription{font-size:clamp(13px,1vw,15px);line-height:1.63;color:#4b3223;margin:0}
+.sr-project-dialog .sr-modal-text h3{font:900 12px var(--font-mono,monospace);color:#51321f;margin:10px 0 1px}
+.sr-project-dialog .sr-modal-tech{gap:8px}
+.sr-project-dialog .sr-modal-tech span{position:relative;background:linear-gradient(143deg,#e5b57d,#b47a49)!important;border:2px solid #744626;color:#3d2414!important;padding:8px 13px 8px 17px;font:800 11px var(--font-mono,monospace)!important;box-shadow:3px 4px 0 #5a3824!important}
+.sr-project-dialog .sr-modal-tech span:before{content:"";position:absolute;top:50%;left:6px;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:radial-gradient(circle at 27% 20%,#fff,#959994 44%,#41463e);box-shadow:0 1px #3f261b}
+.sr-project-dialog .sr-modal-links{gap:10px;margin-top:auto;padding-top:15px}
+.sr-project-dialog .sr-modal-links a{border:3px solid #4e301e!important;color:#fff1d3!important;background:linear-gradient(144deg,#875230,#4e301e)!important;box-shadow:3px 4px 0 #352014!important;border-radius:1px;padding:12px 15px;font:800 12px var(--font-mono,monospace)}
+.sr-project-dialog .sr-modal-links a:hover{background:linear-gradient(144deg,#ad7241,#674021)!important}
+.sr-project-dialog .sr-project-tabs{gap:8px;border-bottom:2px solid #8e603c;padding-bottom:12px}
+.sr-project-dialog .sr-project-tabs button{position:relative;background:linear-gradient(145deg,#e3b580,#ad7445)!important;border:2px solid #80502e;color:#432719!important;box-shadow:3px 3px 0 #52301f!important;font-weight:800}
+.sr-project-dialog .sr-project-tabs button[aria-selected="true"]{background:linear-gradient(145deg,#835030,#4a2a1a)!important;color:#fff1d9!important;border-color:#4c2a1c!important}
+.sr-project-dialog .sr-dialog-close{position:absolute;top:-16px;right:-16px;z-index:30;background:linear-gradient(135deg,#f7c78a,#a97041)!important;color:#382216!important;border:4px ridge #8c5531!important;box-shadow:3px 5px 0 #291811!important;font:900 25px/1 var(--font-mono,monospace);width:47px;height:47px;cursor:pointer;border-radius:2px}
+.sr-project-dialog .sr-dialog-close:hover{background:#ffdaa2!important}
+.sr-project-dialog .sr-dialog-close:focus-visible{outline:3px solid #ff922d;outline-offset:5px}
+.sr-showcase-door{position:absolute;top:clamp(15px,1.6vw,24px);bottom:clamp(15px,1.6vw,24px);width:calc(50% - clamp(15px,1.6vw,24px));z-index:15;pointer-events:none;backface-visibility:hidden;transform-style:preserve-3d;
+ background:repeating-linear-gradient(90deg,#784527 0 6px,#b9834e 10px 34px,#d49c64 37px 44px,#8b4e2e 48px 54px);
+ border:11px ridge #9f673b;box-shadow:inset 3px 4px #e2b583,inset -4px -4px #3c2517,3px 6px 8px #1b0f09a8;
+ transition:transform 1.05s cubic-bezier(.18,.71,.16,1),opacity .15s .88s;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.sr-showcase-door-left{left:clamp(15px,1.6vw,24px);transform-origin:left center}
+.sr-showcase-door-right{right:clamp(15px,1.6vw,24px);transform-origin:right center}
+.sr-showcase-door:before,.sr-showcase-door:after{content:"";position:absolute;top:14px;width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 27% 20%,#fff,#a5aaa5 40%,#394139 85%);box-shadow:1px 2px 2px #3e2113}
+.sr-showcase-door:before{left:13px}.sr-showcase-door:after{right:13px}
+.sr-door-iron{position:absolute;left:12%;right:12%;top:18%;bottom:18%;border:5px ridge #a46d3f;box-shadow:inset 3px 4px #dca775,inset -4px -5px #422617;pointer-events:none}
+.sr-door-grain{position:absolute;inset:0;background:repeating-linear-gradient(176deg,transparent 0 30px,#54311e21 32px 34px,transparent 36px 60px)}
+.sr-door-emblem{position:relative;z-index:1;border:5px ridge #c18c59;background:linear-gradient(145deg,#6a3e26,#3c2419);padding:16px 22px;color:#ffda9c;font:900 clamp(24px,4vw,58px) var(--font-mono,monospace);box-shadow:5px 6px #2a1a10}
+.sr-door-label{position:relative;z-index:1;font:800 12px var(--font-mono,monospace);color:#f7d7ae;background:#4f3020;padding:10px 13px;margin-top:15px;letter-spacing:.13em}
+.sr-project-dialog.sr-doors-open .sr-showcase-door-left{transform:rotateY(-113deg);opacity:0}
+.sr-project-dialog.sr-doors-open .sr-showcase-door-right{transform:rotateY(113deg);opacity:0}
+.sr-project-dialog:not(.sr-doors-open) .sr-showcase-interior{filter:brightness(.6)}
+@media(max-width:780px){.sr-project-dialog{width:calc(100vw - 16px)!important;max-height:calc(100dvh - 35px)!important;height:calc(100dvh - 35px);padding:8px!important}.sr-wood-showcase{border-width:7px;padding:12px}.sr-project-dialog .sr-modal-grid{grid-template-columns:1fr!important;gap:12px;padding:9px!important}.sr-showcase-interior{height:calc(100% - 6px);overflow:auto}.sr-project-dialog .sr-modal-photo{min-height:180px!important;max-height:38vh!important;padding:10px!important}.sr-project-dialog .sr-modal-photo img{max-height:31vh!important}.sr-project-dialog .sr-modal-text{padding:18px!important;gap:9px}.sr-project-dialog .sr-dialog-close{top:-5px;right:-3px;width:42px;height:42px}.sr-wood-showcase-top{left:20px;right:20px;height:24px;font-size:9px}.sr-project-dialog .sr-modal-links{margin-top:0}.sr-showcase-door{top:13px;bottom:13px;width:calc(50% - 13px)}.sr-showcase-door-left{left:13px}.sr-showcase-door-right{right:13px}}
+@media(prefers-reduced-motion:reduce){.sr-showcase-door{transition:none}.sr-project-dialog.sr-doors-open .sr-showcase-door{visibility:hidden;opacity:0}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -1684,7 +1736,10 @@ body{background-color:#fbf8f3}
 </section>
 <dialog id="srProjectDialog" class="sr-project-dialog" aria-labelledby="srModalTitle">
  <button class="sr-dialog-close" type="button" aria-label="Close project details">×</button>
- <div class="sr-modal-grid">
+ <div class="sr-wood-showcase">
+  <div class="sr-wood-showcase-top" aria-hidden="true"><i></i><span>THE WORKSHOP · PROJECT ARCHIVE</span><i></i></div>
+  <div class="sr-showcase-interior">
+  <div class="sr-modal-grid">
    <div class="sr-modal-photo"><img id="srModalImage" alt="" /></div>
    <div class="sr-modal-text">
       <p class="eyebrow">PROJECT <span id="srModalIndex"></span></p>
@@ -1701,6 +1756,10 @@ body{background-color:#fbf8f3}
       <div class="sr-modal-links"><a id="srModalLive" href="#" target="_blank" rel="noopener noreferrer">Live website ↗</a><a id="srModalCode" href="#" target="_blank" rel="noopener noreferrer">View code ↗</a></div>
       </div>
    </div>
+ </div>
+  </div>
+  <div class="sr-showcase-door sr-showcase-door-left" aria-hidden="true"><span class="sr-door-iron"></span><span class="sr-door-grain"></span><span class="sr-door-emblem">SR</span><span class="sr-door-label">PROJECT</span></div>
+  <div class="sr-showcase-door sr-showcase-door-right" aria-hidden="true"><span class="sr-door-iron"></span><span class="sr-door-grain"></span><span class="sr-door-emblem">↗</span><span class="sr-door-label">SHOWCASE</span></div>
  </div>
 </dialog>
 <section class="shell ai reveal" id="ai" aria-labelledby="ai-title">
@@ -4656,7 +4715,10 @@ try {
    title.textContent=p.title;
    index.textContent=String(i+1).padStart(2,"0")+" / "+String(projects.length).padStart(2,"0");
    showProjectView(p.tabs?.marketing?"marketing":"mobile");
+   modal.classList.remove('sr-doors-open');
    if(typeof modal.showModal==="function")modal.showModal();else modal.setAttribute("open","");
+   // Trigger opening after the initially closed shutters have been painted.
+   requestAnimationFrame(()=>requestAnimationFrame(()=>{if(modal.open)modal.classList.add('sr-doors-open')}));
    close.focus();
  }
  for(const button of allTabs)button.addEventListener("click",()=>showProjectView(button.dataset.view));
@@ -4673,7 +4735,7 @@ try {
  for(const frame of work.querySelectorAll(".sr-hang-image"))frame.addEventListener("click",e=>{if(e.target.closest("button"))return;const btn=frame.closest(".sr-hang-item")?.querySelector(".sr-detail-btn");if(btn)openProject(Number(btn.dataset.project))});
  close.addEventListener("click",()=>modal.close());
  modal.addEventListener("click",e=>{if(e.target===modal)modal.close()});
- modal.addEventListener("close",()=>{image.removeAttribute("src")});
+ modal.addEventListener("close",()=>{modal.classList.remove("sr-doors-open");image.removeAttribute("src")});
  track.addEventListener("keydown",e=>{
    if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;
    e.preventDefault();
