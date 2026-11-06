@@ -1172,6 +1172,116 @@ body{background-color:#fbf8f3}
 @media(max-width:900px){.site-foot footer{align-items:flex-start;flex-direction:column;padding:34px 19px 20px!important}.site-foot footer .btn{align-self:flex-start}}
 @media(max-width:540px){#caps .icard{padding:19px 14px 15px}#kind-words .qcard{border-width:5px!important}.site-foot footer{margin-top:80px!important}}
 @media(prefers-reduced-motion:reduce){#caps .icard{transition:none!important}}
+</style><style id="sr-complete-wood-workshop-v2">
+/* Complete material replacement: WOOD, not stone. Same section layouts and interactions. */
+:root{--wood-ink:#302016;--wood-dark:#50311f;--wood-chestnut:#895332;--wood-honey:#c58a50;--wood-light:#edd0a2}
+.sr-career-wall .sr-wall-plaster{z-index:4!important;background:transparent!important}
+.sr-career-wall .sr-wood-plank-wall{position:absolute;inset:0;z-index:2;display:block;background:#20150f;overflow:visible!important}
+.sr-career-wall .sr-wood-plank{
+ display:block;position:absolute;left:calc(var(--i)*10%);top:0;bottom:0;
+ width:calc(10% - 4px);height:100%;box-sizing:border-box;
+ border:1px solid #512e1b;border-top:5px solid #e6b176;border-bottom:8px solid #4a2919;
+ background:
+ radial-gradient(ellipse 15% 60% at 58% 43%,transparent 67%,#5d301c26 71%,transparent 81%),
+ repeating-linear-gradient(90deg,transparent 0 5px,#4e291c33 6px 7px,transparent 9px 13px,#f1c1831e 15px 16px,transparent 17px 21px),
+ linear-gradient(90deg,#704021,#b17b4a 15%,#c6915d 45%,#986039 78%,#653a24);
+ box-shadow:inset 3px 0 #ffdb9a66,inset -4px 0 #4125158c,3px 4px 2px #24140f7d;
+ transform-origin:50% 12%;
+ backface-visibility:hidden;will-change:transform,opacity;
+}
+.sr-career-wall .sr-wood-plank:nth-child(3n){background:repeating-linear-gradient(90deg,#77482a 0 2px,#af794c 5px 15px,#c48c57 17px 23px,#814b2e 26px 29px)}
+.sr-career-wall .sr-wood-plank:nth-child(4n){background:repeating-linear-gradient(90deg,#8d532f 0 2px,#d2a06b 7px 15px,#ad6e3a 21px 25px)}
+.sr-career-wall .sr-wood-plank:before,.sr-career-wall .sr-wood-plank:after{
+ content:"";position:absolute;left:50%;width:9px;height:9px;border-radius:50%;
+ transform:translateX(-50%);
+ background:radial-gradient(circle at 27% 22%,#fff7e3,#bec1b8 23%,#7d817e 54%,#303432 90%);
+ box-shadow:1px 2px 1px #321f15c5,0 0 0 1px #563723a1;
+ z-index:2;
+}
+.sr-career-wall .sr-wood-plank:before{top:12px}
+.sr-career-wall .sr-wood-plank:after{bottom:12px}
+.sr-career-wall .sr-wall-inside{
+ background:repeating-linear-gradient(90deg,#180f0a 0 30px,#241712 30px 31px,#211610 31px 60px)!important;
+ box-shadow:inset 0 0 24px #0e0806!important;color:#ffebd2!important;
+ border:5px solid #6e432c!important;
+ clip-path:none!important;
+}
+.sr-career-wall .sr-wall-item:not(.is-revealed):not(.is-shattering) .sr-wall-inside{opacity:1!important;visibility:visible!important}
+.sr-career-wall .sr-wall-inside:before,.sr-career-wall .sr-wall-inside:after{display:none!important}
+.sr-career-wall .sr-wall-front{z-index:8!important;text-shadow:0 2px 2px #2e1a10d9}
+.sr-career-wall .sr-wall-front strong{color:#fff2d5!important;text-shadow:2px 3px 0 #3a2014d9}
+.sr-career-wall .sr-wall-front-row,.sr-career-wall .sr-wall-front-date{color:#ffe3ad!important}
+.sr-career-wall .sr-wall-action{color:#ffd18c!important;border-top:1px solid #efd2a574!important}
+.sr-career-wall .sr-wall-front-row span:last-child{color:#ffb56d!important}
+.sr-career-wall .sr-wall-crack-lines{display:none!important}
+.sr-career-wall .sr-wall-item.is-impact .sr-wood-plank{filter:brightness(1.2)}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wood-plank{
+ animation:srPlankBreakFall 1.08s cubic-bezier(.32,.13,.72,.71) var(--fall) both!important
+}
+@keyframes srPlankBreakFall{
+ 0%{transform:translate3d(0,0,0) rotate(0);opacity:1}
+ 19%{transform:translate3d(calc(var(--x)*.12),-12px,0) rotate(5deg);opacity:1}
+ 58%{transform:translate3d(calc(var(--x)*.62),135px,0) rotate(calc(var(--spin)*.52));opacity:1}
+ 100%{transform:translate3d(var(--x),720px,0) rotate(var(--spin));opacity:0}
+}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wall-plaster{opacity:1!important;visibility:visible!important;background:transparent!important}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wood-plank-wall{visibility:visible!important;opacity:1!important;background:transparent!important}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wall-inside{opacity:1!important;visibility:visible!important;clip-path:none!important}
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-inside{clip-path:none!important;background:repeating-linear-gradient(90deg,#1d130e 0 34px,#2b1b14 35px 38px,#21150f 39px 73px)!important;border:6px groove #9a6540!important;box-shadow:inset 7px 8px 18px #120a06b6!important;z-index:6!important}
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-plaster{visibility:hidden!important;opacity:0!important}
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-depth:after{
+ content:"";position:absolute;z-index:7;inset:-2px;pointer-events:none;
+ background:linear-gradient(90deg,#b78450 0 2%,transparent 2% 98%,#704328 98% 100%),
+ linear-gradient(180deg,#d0a06c 0 3%,transparent 3% 96%,#59351e 96% 100%)!important;
+ clip-path:none!important;filter:none!important
+}
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-job{color:#fff0d5!important}
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-story{color:#e5c5a8!important}
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-inner-company{color:#ffac5d!important}
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-inside>*{position:relative;z-index:8!important;opacity:1!important}
+.sr-career-wall .sr-wall-hammer{display:none!important}
+/* Project wall: timber planks instead of rectangular stone bricks. Windows become wooden shutters. */
+.sr-scroll-work .sr-hanging-wrap{background:#6b422a!important;border:6px ridge #6b3c24!important;box-shadow:8px 10px 0 #3c2619!important}
+.sr-masonry-wall{display:flex!important;gap:3px;padding:0!important;background:#3c2518!important;overflow:hidden}
+.sr-masonry-brick{flex:1 0 5.8%;height:100%;clip-path:none!important;
+ background:repeating-linear-gradient(90deg,#a46c42 0 2px,#ce935d 7px 13px,#784629 23px 28px)!important;
+ box-shadow:inset 3px 0 #f1c38b,inset -4px 0 #362117,3px 0 #27170c!important;
+ transform:none!important}
+.sr-masonry-brick:nth-child(3n),.sr-masonry-brick:nth-child(7n),.sr-masonry-brick:nth-child(11n){background:repeating-linear-gradient(90deg,#854e30,#ba8555 9px,#9c6038 19px,#533221 26px)!important}
+.sr-scroll-work .sr-window-keystone{background:linear-gradient(175deg,#e9bb85,#ac7547 65%,#6b4028)!important;border-color:#e8b580!important;border-bottom-color:#5a321d!important}
+.sr-scroll-work .sr-stone-shutter{background:repeating-linear-gradient(90deg,#744528 0 7px,#ba7e4b 12px 23px,#8f5634 26px 31px)!important;border:7px ridge #9a6039!important}
+.sr-scroll-work .sr-stone-shutter:before{background:linear-gradient(145deg,#c3915d,#7c4829)!important;border:4px ridge #d9a771!important}
+.sr-scroll-work .sr-stone-shutter:after{border-color:#a46e43!important}
+.sr-scroll-work .sr-stone-nameplate{background:linear-gradient(140deg,#e2b37b,#b77943)!important;border-color:#734525!important}
+.sr-scroll-work .sr-rock-window .sr-hang-photo{border:10px ridge #a06b3e!important}
+.sr-scroll-work .sr-rock-window .sr-project-card-copy{background:#f1dfc3!important}
+/* Wooden contact signs: no rocky face; top hanger and nails remain. */
+.contact .ct-rock-links a:before,
+.contact .ct-rock-links li:nth-child(2) a:before,
+.contact .ct-rock-links li:nth-child(3) a:before,
+.contact .ct-rock-links li:nth-child(4) a:before{
+ background:
+ radial-gradient(ellipse at 25% 16%,#ffdfaa52,transparent 43%),
+ repeating-linear-gradient(175deg,transparent 0 26px,#643b243a 28px 29px,transparent 32px 51px),
+ linear-gradient(133deg,#b88754,#8b5734 50%,#5a3423)!important;
+ clip-path:polygon(1% 0,100% 0,100% 100%,0 100%)!important;
+ border:4px ridge #956036!important;
+}
+.contact .ct-rock-links a:after{background:#4c2e1d!important;clip-path:none!important}
+.contact .ct-rock-links b{color:#ffebc4!important}
+.contact .ct-rock-links .go{color:#ffbc79!important}
+/* Logo and navigation: bevelled wood rather than carved rock. */
+.site-nav .nav a.link:after,.site-nav .nav a.link.current:after{background:linear-gradient(155deg,#f0c58c,#b77e4d 65%,#835131)!important}
+.site-nav .nav a.link:before{background:#4f3020!important}
+.site-nav .logo svg{filter:sepia(.6) saturate(.85) brightness(.95)}
+/* Remove any cold slate accent from smaller panels. */
+#play .sn-board{border-color:#865432!important;background:#ad7d4c!important}
+#play .sn-notepad{border-color:#865432!important}
+#kind-words .qcard{border-color:#95643a!important;background:linear-gradient(140deg,#ebcf9e,#bc8758 60%,#96653f)!important}
+#caps .icard{border-color:#85502d!important}
+.site-foot footer{border-color:#7b5031!important}
+@media(max-width:720px){.sr-career-wall .sr-wood-plank:before,.sr-career-wall .sr-wood-plank:after{width:7px;height:7px}}
+@media(prefers-reduced-motion:reduce){.sr-career-wall .sr-wall-item.is-shattering .sr-wood-plank{animation-duration:.01ms!important;animation-delay:0ms!important}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -1598,7 +1708,7 @@ body{background-color:#fbf8f3}
  <div class="sr-wall-heading"><div><p class="eyebrow">( built through experience ) <span class="pen-note">7 chapters, still building</span></p>
  <h3 id="sr-career-title">The Career <span class="hl">Wall.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FDBA74"/></svg></span></h3></div>
  <p>Every role left its mark. <b>Break the surface</b> to see what I learned, built and explored along the way.</p></div>
- <div class="sr-wall-guide"><span>⛏ HOVER — HAMMER STRIKES THE WALL</span><span>TAP TO SMASH A TILE ↘</span></div>
+ <div class="sr-wall-guide"><span>🔨 MOVE THE HAMMER · CLICK TO BREAK WOOD</span><span>TAP TO BREAK THE PLANKS ↘</span></div>
  <ol class="sr-wall-grid"><li class="sr-wall-item active-role" style="--tilt:-1.2deg">
  <button type="button" class="sr-wall-trigger" aria-expanded="false" aria-label="Reveal 12Monday Technologies experience">
   <span class="sr-wall-depth"><span class="sr-wall-hammer" aria-hidden="true"><svg viewBox="0 0 160 160" role="presentation" shape-rendering="crispEdges">
@@ -1619,13 +1729,13 @@ body{background-color:#fbf8f3}
     <span class="sr-wall-inner-company">12Monday Technologies <small>● CURRENT</small></span>
    </span>
    <span class="sr-wall-plaster" aria-hidden="true">
-    <span class="sr-wall-fragments sr-medium-stone-wall"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span><span class="sr-wall-fragment seven"></span><span class="sr-wall-fragment eight"></span></span>
+    <span class="sr-wall-fragments sr-wood-plank-wall"><span class="sr-wood-plank" style="--i:0;--x:-99px;--spin:12deg;--fall:0ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:1;--x:-77px;--spin:-17deg;--fall:43ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:2;--x:-55px;--spin:22deg;--fall:86ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:3;--x:-33px;--spin:-27deg;--fall:129ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:4;--x:-11px;--spin:32deg;--fall:172ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:5;--x:11px;--spin:-37deg;--fall:35ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:6;--x:33px;--spin:42deg;--fall:78ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:7;--x:55px;--spin:-47deg;--fall:121ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:8;--x:77px;--spin:52deg;--fall:164ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:9;--x:99px;--spin:-57deg;--fall:27ms" aria-hidden="true"></span></span>
     <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
     <span class="sr-wall-front">
      <span class="sr-wall-front-row"><span>CHAPTER 01</span><span>● PRESENT</span></span>
      <strong>12Monday Technologies</strong>
      <span class="sr-wall-front-date">Nov 2025 - Present</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO SMASH</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">CLICK TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -1651,13 +1761,13 @@ body{background-color:#fbf8f3}
     <span class="sr-wall-inner-company">Code Thread <small>● CURRENT</small></span>
    </span>
    <span class="sr-wall-plaster" aria-hidden="true">
-    <span class="sr-wall-fragments sr-medium-stone-wall"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span><span class="sr-wall-fragment seven"></span><span class="sr-wall-fragment eight"></span></span>
+    <span class="sr-wall-fragments sr-wood-plank-wall"><span class="sr-wood-plank" style="--i:0;--x:-99px;--spin:12deg;--fall:0ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:1;--x:-77px;--spin:-17deg;--fall:43ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:2;--x:-55px;--spin:22deg;--fall:86ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:3;--x:-33px;--spin:-27deg;--fall:129ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:4;--x:-11px;--spin:32deg;--fall:172ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:5;--x:11px;--spin:-37deg;--fall:35ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:6;--x:33px;--spin:42deg;--fall:78ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:7;--x:55px;--spin:-47deg;--fall:121ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:8;--x:77px;--spin:52deg;--fall:164ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:9;--x:99px;--spin:-57deg;--fall:27ms" aria-hidden="true"></span></span>
     <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
     <span class="sr-wall-front">
      <span class="sr-wall-front-row"><span>CHAPTER 02</span><span>● PRESENT</span></span>
      <strong>Code Thread</strong>
      <span class="sr-wall-front-date">May 2025 - Present</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">CLICK TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -1683,13 +1793,13 @@ body{background-color:#fbf8f3}
     <span class="sr-wall-inner-company">DigiEnder</span>
    </span>
    <span class="sr-wall-plaster" aria-hidden="true">
-    <span class="sr-wall-fragments sr-medium-stone-wall"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span><span class="sr-wall-fragment seven"></span><span class="sr-wall-fragment eight"></span></span>
+    <span class="sr-wall-fragments sr-wood-plank-wall"><span class="sr-wood-plank" style="--i:0;--x:-99px;--spin:12deg;--fall:0ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:1;--x:-77px;--spin:-17deg;--fall:43ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:2;--x:-55px;--spin:22deg;--fall:86ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:3;--x:-33px;--spin:-27deg;--fall:129ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:4;--x:-11px;--spin:32deg;--fall:172ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:5;--x:11px;--spin:-37deg;--fall:35ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:6;--x:33px;--spin:42deg;--fall:78ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:7;--x:55px;--spin:-47deg;--fall:121ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:8;--x:77px;--spin:52deg;--fall:164ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:9;--x:99px;--spin:-57deg;--fall:27ms" aria-hidden="true"></span></span>
     <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
     <span class="sr-wall-front">
      <span class="sr-wall-front-row"><span>CHAPTER 03</span><span>ARCHIVE</span></span>
      <strong>DigiEnder</strong>
      <span class="sr-wall-front-date">Feb 2025 - Jul 2025</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">CLICK TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -1715,13 +1825,13 @@ body{background-color:#fbf8f3}
     <span class="sr-wall-inner-company">SMIT (Saylani Mass IT Training) <small>● CURRENT</small></span>
    </span>
    <span class="sr-wall-plaster" aria-hidden="true">
-    <span class="sr-wall-fragments sr-medium-stone-wall"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span><span class="sr-wall-fragment seven"></span><span class="sr-wall-fragment eight"></span></span>
+    <span class="sr-wall-fragments sr-wood-plank-wall"><span class="sr-wood-plank" style="--i:0;--x:-99px;--spin:12deg;--fall:0ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:1;--x:-77px;--spin:-17deg;--fall:43ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:2;--x:-55px;--spin:22deg;--fall:86ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:3;--x:-33px;--spin:-27deg;--fall:129ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:4;--x:-11px;--spin:32deg;--fall:172ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:5;--x:11px;--spin:-37deg;--fall:35ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:6;--x:33px;--spin:42deg;--fall:78ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:7;--x:55px;--spin:-47deg;--fall:121ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:8;--x:77px;--spin:52deg;--fall:164ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:9;--x:99px;--spin:-57deg;--fall:27ms" aria-hidden="true"></span></span>
     <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
     <span class="sr-wall-front">
      <span class="sr-wall-front-row"><span>CHAPTER 04</span><span>● PRESENT</span></span>
      <strong>SMIT (Saylani Mass IT Training)</strong>
      <span class="sr-wall-front-date">May 2025 - Present</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">CLICK TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -1747,13 +1857,13 @@ body{background-color:#fbf8f3}
     <span class="sr-wall-inner-company">DigiEnder</span>
    </span>
    <span class="sr-wall-plaster" aria-hidden="true">
-    <span class="sr-wall-fragments sr-medium-stone-wall"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span><span class="sr-wall-fragment seven"></span><span class="sr-wall-fragment eight"></span></span>
+    <span class="sr-wall-fragments sr-wood-plank-wall"><span class="sr-wood-plank" style="--i:0;--x:-99px;--spin:12deg;--fall:0ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:1;--x:-77px;--spin:-17deg;--fall:43ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:2;--x:-55px;--spin:22deg;--fall:86ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:3;--x:-33px;--spin:-27deg;--fall:129ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:4;--x:-11px;--spin:32deg;--fall:172ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:5;--x:11px;--spin:-37deg;--fall:35ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:6;--x:33px;--spin:42deg;--fall:78ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:7;--x:55px;--spin:-47deg;--fall:121ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:8;--x:77px;--spin:52deg;--fall:164ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:9;--x:99px;--spin:-57deg;--fall:27ms" aria-hidden="true"></span></span>
     <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
     <span class="sr-wall-front">
      <span class="sr-wall-front-row"><span>CHAPTER 05</span><span>ARCHIVE</span></span>
      <strong>DigiEnder</strong>
      <span class="sr-wall-front-date">Nov 2024 - Feb 2025</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">CLICK TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -1779,13 +1889,13 @@ body{background-color:#fbf8f3}
     <span class="sr-wall-inner-company">Start Kids Learning Institute</span>
    </span>
    <span class="sr-wall-plaster" aria-hidden="true">
-    <span class="sr-wall-fragments sr-medium-stone-wall"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span><span class="sr-wall-fragment seven"></span><span class="sr-wall-fragment eight"></span></span>
+    <span class="sr-wall-fragments sr-wood-plank-wall"><span class="sr-wood-plank" style="--i:0;--x:-99px;--spin:12deg;--fall:0ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:1;--x:-77px;--spin:-17deg;--fall:43ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:2;--x:-55px;--spin:22deg;--fall:86ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:3;--x:-33px;--spin:-27deg;--fall:129ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:4;--x:-11px;--spin:32deg;--fall:172ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:5;--x:11px;--spin:-37deg;--fall:35ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:6;--x:33px;--spin:42deg;--fall:78ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:7;--x:55px;--spin:-47deg;--fall:121ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:8;--x:77px;--spin:52deg;--fall:164ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:9;--x:99px;--spin:-57deg;--fall:27ms" aria-hidden="true"></span></span>
     <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
     <span class="sr-wall-front">
      <span class="sr-wall-front-row"><span>CHAPTER 06</span><span>ARCHIVE</span></span>
      <strong>Start Kids Learning Institute</strong>
      <span class="sr-wall-front-date">Apr 2024 - Nov 2024</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">CLICK TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
@@ -1811,13 +1921,13 @@ body{background-color:#fbf8f3}
     <span class="sr-wall-inner-company">Tria Tech Solution Pvt Ltd.</span>
    </span>
    <span class="sr-wall-plaster" aria-hidden="true">
-    <span class="sr-wall-fragments sr-medium-stone-wall"><span class="sr-wall-fragment one"></span><span class="sr-wall-fragment two"></span><span class="sr-wall-fragment three"></span><span class="sr-wall-fragment four"></span><span class="sr-wall-fragment five"></span><span class="sr-wall-fragment six"></span><span class="sr-wall-fragment seven"></span><span class="sr-wall-fragment eight"></span></span>
+    <span class="sr-wall-fragments sr-wood-plank-wall"><span class="sr-wood-plank" style="--i:0;--x:-99px;--spin:12deg;--fall:0ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:1;--x:-77px;--spin:-17deg;--fall:43ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:2;--x:-55px;--spin:22deg;--fall:86ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:3;--x:-33px;--spin:-27deg;--fall:129ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:4;--x:-11px;--spin:32deg;--fall:172ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:5;--x:11px;--spin:-37deg;--fall:35ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:6;--x:33px;--spin:42deg;--fall:78ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:7;--x:55px;--spin:-47deg;--fall:121ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:8;--x:77px;--spin:52deg;--fall:164ms" aria-hidden="true"></span><span class="sr-wood-plank" style="--i:9;--x:99px;--spin:-57deg;--fall:27ms" aria-hidden="true"></span></span>
     <svg class="sr-wall-crack-lines" viewBox="0 0 400 300" preserveAspectRatio="none"><path d="M183 0L194 86 118 126 0 99M194 86 271 100 400 118M118 126 155 175 0 225M155 175 275 187 400 224M275 187 230 300M155 175 194 86" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="155" cy="175" r="6" fill="#f97316"/></svg>
     <span class="sr-wall-front">
      <span class="sr-wall-front-row"><span>CHAPTER 07</span><span>ARCHIVE</span></span>
      <strong>Tria Tech Solution Pvt Ltd.</strong>
      <span class="sr-wall-front-date">Apr 2024 - Aug 2024</span>
-     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">HOVER TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
+     <span class="sr-wall-action">✳ <span class="sr-wall-hover-word">CLICK TO BREAK</span><span class="sr-wall-tap-word">TAP TO SMASH</span><i>↗</i></span>
     </span>
    </span>
   </span>
