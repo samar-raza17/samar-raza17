@@ -4769,12 +4769,10 @@ try {
    }
  }
  const clear=card=>{(card._wallTimers||[]).forEach(clearTimeout);card._wallTimers=[]};
- const reset=card=>{clear(card);card.classList.remove(...states);card.querySelector('.sr-wall-trigger')?.setAttribute('aria-expanded','false')};
- const closeOthers=except=>cards.forEach(c=>{if(c!==except)reset(c)});
+ // A broken wall stays broken for the lifetime of this page; reloading resets it.
  const breakWall=card=>{
-   if(card.classList.contains('is-breaking')||card.classList.contains('is-shattering'))return;
-   if(card.classList.contains('is-revealed')){reset(card);return;}
-   closeOthers(card);clear(card);
+   if(card.classList.contains('is-breaking')||card.classList.contains('is-shattering')||card.classList.contains('is-revealed'))return;
+   clear(card);
    // Resume/create audio synchronously in the user's click, then sync SFX to phases.
    prepareAudio();
    card.classList.add('is-breaking');
@@ -4806,8 +4804,7 @@ try {
    });
    window.addEventListener('blur',()=>cursor.classList.remove('visible','striking'));
  }
- document.addEventListener('keydown',e=>{if(e.key==='Escape')cards.forEach(reset)});
- document.addEventListener('click',e=>{if(!e.target.closest('.sr-wall-item'))cards.forEach(reset)});
+ // No Escape / outside-click closing; visitors can explore multiple open cards.
 })();
 </script>
 <script>
