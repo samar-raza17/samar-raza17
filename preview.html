@@ -1025,6 +1025,22 @@ body{background-color:#fbf8f3}
 .sr-career-wall .sr-wall-item.is-shattering .sr-wall-plaster:after{display:none!important}
 .sr-career-wall .sr-wall-item.is-revealed .sr-wall-inside{pointer-events:auto}
 .sr-career-wall .sr-wall-item.is-revealed .sr-wall-inside:after{display:none!important}
+</style><style id="sr-stone-serpent-game-v1">
+/* Wood-framed quarry: existing game mechanics and keyboard/touch controls preserved. */
+#play .sn-board-wrap>.t1,#play .sn-board-wrap>.t2{display:none}
+#play .sn-board{background:#d9b78e;border:12px ridge #865633!important;border-radius:2px!important;box-shadow:inset 0 0 0 4px #b88b5d,inset 0 0 24px #34221585,9px 11px 0 #3b281e!important}
+#play .sn-overlay{background:#30211699!important;backdrop-filter:blur(1px)}
+#play .sn-card{background:repeating-linear-gradient(175deg,transparent 0 25px,#79513024 26px 27px,transparent 28px 52px),linear-gradient(130deg,#f6dfb9,#d2a270)!important;border:5px ridge #936443!important;border-radius:1px!important;box-shadow:7px 9px 0 #35231a!important;transform:rotate(-.6deg);color:#302016}
+#play .sn-card .tape{display:none}
+#play .sn-card:before,#play .sn-card:after{content:"";position:absolute;top:9px;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#f6f5ee,#9eaaa9 49%,#3f4340 88%);box-shadow:1px 2px 1px #3421199e}
+#play .sn-card:before{left:10px}#play .sn-card:after{right:10px}
+#play .sn-card h3{color:#2c1b13}
+#play .sn-card p,#play .sn-card .sn-keys{color:#5d402c!important}
+#play .sn-card .cta,#play .sn-dpad button,#play .sn-pause{background:linear-gradient(140deg,#835434,#4e301e)!important;color:#fff0d1!important;border:2px solid #29190f!important;border-radius:2px!important;box-shadow:3px 4px 0 #281911!important}
+#play .sn-chip,#play .sn-toast{background:linear-gradient(145deg,#f3ddba,#c99a6d)!important;border-color:#785038!important;color:#422b1e;box-shadow:3px 4px 0 #3c291e!important}
+#play .sn-howto{background:#f3e5cf!important;border:3px solid #a37349!important;box-shadow:4px 5px 0 #61412e}
+#play .sn-howto .tape{display:none}
+#play .sn-notepad{border-color:#8b623f!important;box-shadow:6px 7px 0 #503727!important}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -1745,11 +1761,11 @@ body{background-color:#fbf8f3}
   <div class="sn-head">
     <div>
       <p class="eyebrow">( before you go ) <span class="pen-note">a little throwback</span></p>
-      <h2 class="slot-title" id="sn-snake-title">Feed the <span class="hl">snake.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FDBA74"/></svg></span></h2>
-      <p class="sn-sub">I made this little nostalgic game for you. Remember playing Snake on a phone as kids? Help the snake find 10 apples, then leave a note so I know you were here.</p>
+      <h2 class="slot-title" id="sn-snake-title">Guide the <span class="hl">stone serpent.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 80 16, 190 18, 294 24 L 292 54 C 190 48, 90 50, 8 60 Z" fill="#FDBA74"/></svg></span></h2>
+      <p class="sn-sub">A tiny Minecraft-inspired quarry challenge. Guide the stone serpent to collect 10 glowing amber gems, then leave a note in the workshop journal.</p>
     </div>
     <div class="sn-scores" aria-live="polite">
-      <div class="sn-chip" id="sn-scoreChip"><span>apples</span><b><span id="sn-score">0</span> / 10</b></div>
+      <div class="sn-chip" id="sn-scoreChip"><span>amber gems</span><b><span id="sn-score">0</span> / 10</b></div>
       <div class="sn-chip"><span>your best</span><b id="sn-best">0</b></div>
     </div>
   </div>
@@ -1765,19 +1781,19 @@ body{background-color:#fbf8f3}
 
           <div class="sn-overlay" id="sn-startO">
             <div class="sn-card"><span class="tape" aria-hidden="true"></span>
-              <h3>The snake is hungry!</h3>
-              <p>Steer it to the apples. Find all 10 to win. Don&rsquo;t hit the edges or your own tail.</p>
+              <h3>The quarry awaits!</h3>
+              <p>Guide your stone serpent through the quarry. Collect all 10 amber gems without hitting the walls or your own trail.</p>
               <div class="sn-row"><button class="cta primary" id="sn-playBtn" type="button">play &#9654;</button></div>
               <p class="sn-keys" id="sn-keysHint">arrow keys or WASD &middot; space to pause</p>
             </div>
           </div>
           <div class="sn-overlay" id="sn-pauseO" hidden>
-            <div class="sn-card"><span class="tape" aria-hidden="true"></span><h3>Snack break.</h3><div class="sn-row"><button class="cta primary" id="sn-resumeBtn" type="button">keep going &#9654;</button></div></div>
+            <div class="sn-card"><span class="tape" aria-hidden="true"></span><h3>Workshop break.</h3><div class="sn-row"><button class="cta primary" id="sn-resumeBtn" type="button">keep going &#9654;</button></div></div>
           </div>
           <div class="sn-overlay" id="sn-overO" hidden>
             <div class="sn-card"><span class="tape" aria-hidden="true"></span>
               <h3 id="sn-overTitle">Oops, you bumped into something.</h3>
-              <p class="sn-big"><span id="sn-finalScore">0</span><small id="sn-finalUnit">/ 10 apples</small></p>
+              <p class="sn-big"><span id="sn-finalScore">0</span><small id="sn-finalUnit">/ 10 gems</small></p>
               <span class="sn-newbest" id="sn-newBest" hidden>new personal best!</span>
               <p id="sn-overMsg">So close. Have another go?</p>
               <div class="sn-row">
@@ -2805,7 +2821,7 @@ try {
       const chip = $('sn-scoreChip'); chip.classList.remove('pop'); void chip.offsetWidth; chip.classList.add('pop');
       if (!reduced) for (let k = 0; k < 9; k++) bursts.push({ x: food[0], y: food[1], a: k / 9 * Math.PI * 2, t: 0, c: k % 2 ? '#E5484D' : '#4CAF7A' });
       if (score >= GOAL) { food = null; return end(true); }
-      toast(`<b>${QUIPS[score - 1]}</b> ${score} / ${GOAL} apples`);
+      toast(`<b>${QUIPS[score - 1]}</b> ${score} / ${GOAL} gems`);
       placeFood();
     } else snake.pop();
   }
@@ -2814,7 +2830,7 @@ try {
     if (isBest) { best = score; $('sn-best').textContent = best; try { localStorage.setItem('pb-snake-best', String(best)); } catch (_) {} }
     $('sn-finalScore').textContent = score;
     $('sn-newBest').hidden = !isBest || score === 0 || won;
-    $('sn-overTitle').textContent = won ? 'You found all 10 apples!' : wall ? 'Oops, you hit the edge.' : 'Oops, you bit your own tail.';
+    $('sn-overTitle').textContent = won ? 'You collected all 10 amber gems!' : wall ? 'Oops, you hit the edge.' : 'Oops, you bit your own tail.';
     $('sn-overMsg').innerHTML = won ? 'Just like old times. Now leave a note on the notepad so I know you were here.' : score >= 7 ? 'So close! Have another go?' : 'Happens to the best of us. Have another go?';
     $('sn-againBtn').textContent = won ? 'play again' : 'try again';
     if (won && !reduced) for (let k = 0; k < 40; k++) bursts.push({ x: snake[0][0], y: snake[0][1], a: Math.random() * Math.PI * 2, t: -Math.random() * .6, c: ['#E5484D', '#FDBA74', '#F97316', '#4CAF7A'][k % 4], big: true });
@@ -2828,69 +2844,61 @@ try {
   }
 
   /* ---------- drawing ---------- */
-  const PEN = '#F97316', INK = '#161616';
+  const PEN = '#ad7249', INK = '#38251c';
   const ox = () => (W - cell * COLS) / 2, oy = () => (H - cell * ROWS) / 2;
   function cxy(p) { return [(p[0] + .5) * cell + ox(), (p[1] + .5) * cell + oy()]; }
-  function apple(x, y, r, rot) {
-    ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
-    // shadow offset like the rest of the stickers
-    const body = () => { ctx.beginPath(); ctx.moveTo(0, -r * .62); ctx.bezierCurveTo(r * .55, -r * 1.05, r * 1.15, -r * .55, r * .98, r * .18); ctx.bezierCurveTo(r * .85, r * .9, r * .3, r * 1.05, 0, r * .84); ctx.bezierCurveTo(-r * .3, r * 1.05, -r * .85, r * .9, -r * .98, r * .18); ctx.bezierCurveTo(-r * 1.15, -r * .55, -r * .55, -r * 1.05, 0, -r * .62); ctx.closePath(); };
-    ctx.save(); ctx.translate(2, 2); body(); ctx.fillStyle = INK; ctx.fill(); ctx.restore();
-    body(); ctx.fillStyle = '#E5484D'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = INK; ctx.stroke();
-    ctx.beginPath(); ctx.ellipse(-r * .45, -r * .2, r * .14, r * .26, -.5, 0, 7); ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.fill();
-    ctx.beginPath(); ctx.moveTo(0, -r * .6); ctx.quadraticCurveTo(r * .05, -r * .95, r * .2, -r * 1.12); ctx.lineWidth = 2.2; ctx.lineCap = 'round'; ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(r * .1, -r * .88); ctx.quadraticCurveTo(r * .55, -r * 1.3, r * .85, -r * .95); ctx.quadraticCurveTo(r * .45, -r * .7, r * .1, -r * .88); ctx.fillStyle = '#4CAF7A'; ctx.fill(); ctx.lineWidth = 1.6; ctx.stroke();
-    ctx.restore();
+  // Faceted amber ore, replacing the red apple sticker.
+  function apple(x,y,r,rot){
+    ctx.save();ctx.translate(x,y);ctx.rotate(rot);
+    ctx.fillStyle='#291b14';ctx.beginPath();ctx.moveTo(-r*.9,r*.12);ctx.lineTo(-r*.6,-r*.72);ctx.lineTo(r*.37,-r*.89);ctx.lineTo(r*.96,-r*.2);ctx.lineTo(r*.75,r*.75);ctx.lineTo(-r*.35,r*.95);ctx.closePath();ctx.fill();
+    ctx.translate(-2,-3);
+    ctx.fillStyle='#d07b28';ctx.beginPath();ctx.moveTo(-r*.9,r*.12);ctx.lineTo(-r*.6,-r*.72);ctx.lineTo(r*.37,-r*.89);ctx.lineTo(r*.96,-r*.2);ctx.lineTo(r*.75,r*.75);ctx.lineTo(-r*.35,r*.95);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#f8c56b';ctx.beginPath();ctx.moveTo(-r*.6,-r*.72);ctx.lineTo(r*.37,-r*.89);ctx.lineTo(r*.1,-r*.25);ctx.lineTo(-r*.75,r*.2);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#a95720';ctx.beginPath();ctx.moveTo(r*.1,-r*.25);ctx.lineTo(r*.96,-r*.2);ctx.lineTo(r*.75,r*.75);ctx.lineTo(-r*.35,r*.95);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#ffe6a7';ctx.fillRect(-r*.38,-r*.55,r*.19,r*.19);
+    ctx.strokeStyle='#59391d';ctx.lineWidth=1.5;ctx.stroke();ctx.restore();
   }
-  function draw(k) {
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, W, H);
-    if (cell < 6) return;
-    ctx.fillStyle = 'rgba(22,22,22,.16)';
-    for (let x = 0; x < COLS; x++) for (let y = 0; y < ROWS; y++) { const [px, py] = cxy([x, y]); ctx.beginPath(); ctx.arc(px, py, Math.max(1, cell * .05), 0, 7); ctx.fill(); }
-    if (!snake.length) { idleDoodle(); return; }
-    if (food) {
-      const [fx, fy] = cxy(food), bob = reduced ? 0 : Math.sin(foodT * 4) * cell * .05, g = reduced ? 1 : Math.min(1, foodT * 5);
-      apple(fx, fy + bob, cell * .4 * (g < 1 ? .4 + g * .6 : 1), -.12);
+  function stoneCell(x,y,size,head=false){
+    const z=size*.84,L=x-z/2,T=y-z/2;
+    ctx.fillStyle='#271a15';ctx.fillRect(L+3,T+4,z,z);
+    ctx.fillStyle=head?'#9c7248':'#80674e';ctx.fillRect(L,T,z,z);
+    ctx.fillStyle=head?'#dcb182':'#bba082';ctx.beginPath();ctx.moveTo(L,T);ctx.lineTo(L+z,T);ctx.lineTo(L+z*.78,T+z*.18);ctx.lineTo(L+z*.16,T+z*.18);ctx.closePath();ctx.fill();
+    ctx.fillStyle=head?'#65442c':'#544435';ctx.beginPath();ctx.moveTo(L+z,T);ctx.lineTo(L+z,T+z);ctx.lineTo(L+z*.78,T+z*.83);ctx.lineTo(L+z*.78,T+z*.18);ctx.closePath();ctx.fill();
+    ctx.strokeStyle='#37271c';ctx.lineWidth=1.1;ctx.strokeRect(L+.5,T+.5,z-1,z-1);
+    if(head){ctx.fillStyle='#fff3ce';ctx.fillRect(L+z*.2,T+z*.3,z*.13,z*.13);ctx.fillRect(L+z*.62,T+z*.3,z*.13,z*.13);ctx.fillStyle='#251c18';ctx.fillRect(L+z*.24,T+z*.33,z*.07,z*.08);ctx.fillRect(L+z*.65,T+z*.33,z*.07,z*.08)}
+    else{ctx.strokeStyle='#dcc9a250';ctx.beginPath();ctx.moveTo(L+z*.2,T+z*.58);ctx.lineTo(L+z*.42,T+z*.42);ctx.lineTo(L+z*.52,T+z*.53);ctx.stroke()}
+  }
+  function draw(k){
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,W,H);
+    if(cell<6)return;
+    const bx=ox(),by=oy();
+    // Checker-shaded quarry blocks, no modern dot-grid.
+    for(let y=0;y<ROWS;y++)for(let x=0;x<COLS;x++){
+      const X=bx+x*cell,Y=by+y*cell;
+      ctx.fillStyle=(x+y)%2?'#d9b88e':'#e7cba4';ctx.fillRect(X,Y,cell+.4,cell+.4);
+      ctx.fillStyle='#fff3d84b';ctx.fillRect(X+1,Y+1,cell-2,2);
+      ctx.fillStyle='#79573c3a';ctx.fillRect(X+cell-3,Y+2,2,cell-3);
+      if((x*7+y*13)%11===0){ctx.fillStyle='#8864484f';ctx.fillRect(X+cell*.24,Y+cell*.63,cell*.16,2)}
     }
-    const pts = snake.map((s, i) => { const p = prev[i] || s, a = cxy(p), b = cxy(s); return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]; });
-    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]));
-    ctx.strokeStyle = INK; ctx.lineWidth = cell * .72; ctx.stroke();
-    ctx.strokeStyle = PEN; ctx.lineWidth = cell * .72 - 4; ctx.stroke();
-    ctx.strokeStyle = 'rgba(255,255,255,.28)'; ctx.lineWidth = cell * .14; ctx.stroke();
-    const [hx, hy] = pts[0], dying = state === 'dying' || state === 'over', won = score >= GOAL;
-    ctx.beginPath(); ctx.arc(hx, hy, cell * .46, 0, 7); ctx.fillStyle = PEN; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = INK; ctx.stroke();
-    const [dx, dy] = dir, px = -dy, py = dx;
-    for (const side of [-1, 1]) {
-      const ex = hx + dx * cell * .12 + px * side * cell * .2, ey = hy + dy * cell * .12 + py * side * cell * .2;
-      ctx.beginPath(); ctx.arc(ex, ey, cell * .13, 0, 7); ctx.fillStyle = '#fff'; ctx.fill(); ctx.lineWidth = 1.5; ctx.strokeStyle = INK; ctx.stroke();
-      if (dying && !won) { const r = cell * .08; ctx.beginPath(); ctx.moveTo(ex - r, ey - r); ctx.lineTo(ex + r, ey + r); ctx.moveTo(ex + r, ey - r); ctx.lineTo(ex - r, ey + r); ctx.lineWidth = 1.6; ctx.stroke(); }
-      else if (dying && won) { ctx.beginPath(); ctx.arc(ex, ey + cell * .03, cell * .07, Math.PI * 1.1, Math.PI * 1.9); ctx.lineWidth = 1.8; ctx.stroke(); }
-      else { ctx.beginPath(); ctx.arc(ex + dx * cell * .04, ey + dy * cell * .04, cell * .065, 0, 7); ctx.fillStyle = INK; ctx.fill(); }
-    }
-    if (!dying && !reduced && (performance.now() % 1800) < 220) {
-      const tx = hx + dx * cell * .46, ty = hy + dy * cell * .46, L = cell * .26;
-      ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(tx + dx * L, ty + dy * L);
-      ctx.moveTo(tx + dx * L, ty + dy * L); ctx.lineTo(tx + dx * cell * .34 + px * cell * .08, ty + dy * cell * .34 + py * cell * .08);
-      ctx.moveTo(tx + dx * L, ty + dy * L); ctx.lineTo(tx + dx * cell * .34 - px * cell * .08, ty + dy * cell * .34 - py * cell * .08);
-      ctx.strokeStyle = '#E5484D'; ctx.lineWidth = 2; ctx.stroke();
-    }
-    bursts.forEach(b => {
-      if (b.t < 0) return;
-      const [bx, by] = cxy([b.x, b.y]), sc = b.big ? 4 : 1.4, r1 = cell * (.5 + b.t * sc), r2 = r1 + cell * .3 * (1 - b.t);
-      ctx.beginPath(); ctx.moveTo(bx + Math.cos(b.a) * r1, by + Math.sin(b.a) * r1); ctx.lineTo(bx + Math.cos(b.a) * r2, by + Math.sin(b.a) * r2);
-      ctx.strokeStyle = b.c; ctx.globalAlpha = 1 - b.t; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.stroke(); ctx.globalAlpha = 1;
+    ctx.strokeStyle='#624631';ctx.lineWidth=4;ctx.strokeRect(bx,by,cell*COLS,cell*ROWS);
+    if(!snake.length){idleDoodle();return}
+    if(food){const [fx,fy]=cxy(food);apple(fx,fy+(reduced?0:Math.sin(foodT*4)*cell*.07),cell*.42,-.12)}
+    const pts=snake.map((v,i)=>{const p=prev[i]||v,A=cxy(p),B=cxy(v);return[A[0]+(B[0]-A[0])*k,A[1]+(B[1]-A[1])*k]});
+    for(let i=pts.length-1;i>=0;i--)stoneCell(pts[i][0],pts[i][1],cell,i===0);
+    bursts.forEach(v=>{
+      if(v.t<0)return;
+      const [x,y]=cxy([v.x,v.y]),r=cell*(.25+v.t*(v.big?2.7:1.2));
+      ctx.globalAlpha=1-v.t;ctx.fillStyle=v.c||'#e59034';
+      ctx.fillRect(x+Math.cos(v.a)*r,y+Math.sin(v.a)*r,Math.max(2,cell*.11),Math.max(2,cell*.11));
+      ctx.globalAlpha=1;
     });
   }
-  function idleDoodle() {
-    const y = H * .8, amp = cell * .6, t = reduced ? 0 : performance.now() / 600;
-    ctx.beginPath();
-    for (let i = 0; i <= 40; i++) { const x = W * .14 + (W * .56) * i / 40; ctx.lineTo(x, y + Math.sin(i / 40 * Math.PI * 3 + t) * amp); }
-    ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = INK; ctx.lineWidth = cell * .7; ctx.stroke(); ctx.strokeStyle = PEN; ctx.lineWidth = cell * .7 - 4; ctx.stroke();
-    apple(W * .82, y - cell * .2, cell * .42, -.12);
+  function idleDoodle(){
+    const y=H*.79,x0=W*.18,stepSize=Math.min(cell*.81,W*.075);
+    for(let i=0;i<8;i++)stoneCell(x0+i*stepSize,y+(i%2?cell*.34:0),cell,i===7);
+    apple(W*.82,y,cell*.46,-.12);
   }
-
   /* ---------- loop ---------- */
   let visible = true;
   function loop(now) {
@@ -3995,7 +4003,7 @@ try {
       const chip = $('sn-scoreChip'); chip.classList.remove('pop'); void chip.offsetWidth; chip.classList.add('pop');
       if (!reduced) for (let k = 0; k < 9; k++) bursts.push({ x: food[0], y: food[1], a: k / 9 * Math.PI * 2, t: 0, c: k % 2 ? '#E5484D' : '#4CAF7A' });
       if (score >= GOAL) { food = null; return end(true); }
-      toast(`<b>${QUIPS[score - 1]}</b> ${score} / ${GOAL} apples`);
+      toast(`<b>${QUIPS[score - 1]}</b> ${score} / ${GOAL} gems`);
       placeFood();
     } else snake.pop();
   }
