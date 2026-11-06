@@ -1001,6 +1001,30 @@ body{background-color:#fbf8f3}
 @media(prefers-reduced-motion:reduce){
  .sr-career-wall .sr-wall-item.is-shattering .sr-medium-stone-wall .sr-wall-fragment{animation-duration:.01ms!important;animation-delay:0ms!important}
 }
+</style><style id="sr-wall-no-blank-cavity-v6">
+/* A carved opening exists BEHIND the rocks throughout the break; no blank rectangular card. */
+.sr-career-wall .sr-wall-item.is-breaking:not(.is-shattering):not(.is-revealed) .sr-wall-front{visibility:visible!important;opacity:1!important}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wall-inside,
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-inside{
+ display:flex!important;opacity:1!important;visibility:visible!important;z-index:2!important;
+ clip-path:polygon(3% 4%,12% 6%,25% 2%,35% 6%,46% 1%,56% 5%,70% 2%,83% 7%,95% 3%,98% 15%,95% 27%,100% 40%,96% 52%,99% 68%,94% 80%,98% 94%,84% 97%,71% 93%,60% 99%,47% 95%,33% 100%,21% 95%,8% 98%,2% 88%,6% 75%,1% 60%,5% 49%,1% 32%,5% 20%)!important;
+ border:0!important;
+ background:radial-gradient(ellipse at 78% 14%,#bc6b3140,transparent 48%),linear-gradient(145deg,#4c3325,#2e211a 55%,#1b1511)!important;
+ box-shadow:inset 8px 9px 22px #140a05c9,inset -5px -6px 14px #b58b6255!important;
+ pointer-events:none;
+}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wall-inside>*,
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-inside>*{
+ opacity:1!important;visibility:visible!important;transform:none!important;position:relative;z-index:3
+}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wall-inside .sr-wall-job,
+.sr-career-wall .sr-wall-item.is-shattering .sr-wall-inside .sr-wall-story{animation:srWallTextIn .48s ease-out both!important}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wall-plaster{background:transparent!important;visibility:visible!important;opacity:1!important}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wall-front{visibility:hidden!important;opacity:0!important}
+.sr-career-wall .sr-wall-item.is-shattering .sr-medium-stone-wall{background:transparent!important;visibility:visible!important;opacity:1!important}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wall-plaster:after{display:none!important}
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-inside{pointer-events:auto}
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-inside:after{display:none!important}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
