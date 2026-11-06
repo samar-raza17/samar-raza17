@@ -894,6 +894,50 @@ body{background-color:#fbf8f3}
  .about .ab-resume{padding:17px 21px}
 }
 @media(prefers-reduced-motion:reduce){.about .ab-photo{transition:none!important}}
+</style><style id="sr-hammer-cursor-rubble-v4">
+/* Actual click-to-smash, not auto-break-on-hover. Custom cursor is mouse-only. */
+@media(hover:hover) and (pointer:fine){
+ .sr-career-wall,.sr-career-wall .sr-wall-trigger,.sr-career-wall .sr-wall-grid{cursor:none!important}
+ .sr-career-wall a,.sr-career-wall button{cursor:none!important}
+}
+.sr-cursor-hammer{position:fixed;left:-150px;top:-150px;width:74px;height:78px;z-index:2147483646;pointer-events:none;opacity:0;transform:translate(-18px,-24px) rotate(-35deg);transform-origin:52% 72%;transition:opacity .13s ease;filter:drop-shadow(4px 5px 2px #2b1a1388)}
+.sr-cursor-hammer svg{display:block;width:100%;height:100%}
+.sr-cursor-hammer.visible{opacity:1}
+.sr-cursor-hammer.striking{animation:srCursorSmash .4s cubic-bezier(.15,.65,.35,1) both}
+@keyframes srCursorSmash{0%{transform:translate(-18px,-24px) rotate(-48deg)}55%{transform:translate(-21px,-9px) rotate(27deg) scale(.96)}100%{transform:translate(-18px,-24px) rotate(-35deg)}}
+/* Rough opening carved into the wall, not a clean rectangular flip card. */
+.sr-wall-item.is-revealed .sr-wall-inside{
+ clip-path:polygon(0 7%,5% 4%,18% 6%,25% 2%,38% 5%,49% 0,59% 4%,72% 2%,81% 6%,93% 3%,100% 12%,97% 24%,100% 36%,97% 48%,100% 60%,96% 74%,100% 86%,93% 97%,79% 95%,67% 100%,55% 97%,43% 100%,30% 96%,19% 99%,7% 95%,0 88%,3% 76%,0 61%,3% 48%,0 33%,3% 21%);
+ border:none!important;
+ box-shadow:inset 0 0 26px #000c!important;
+ background:radial-gradient(ellipse at 83% 13%,#c46d2930,transparent 48%),linear-gradient(155deg,#39271f,#171210)!important
+}
+.sr-wall-item.is-revealed .sr-wall-inside:before{
+ content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+ border:8px solid #ac7149;
+ box-shadow:inset 9px 8px 12px #24150db8,inset -7px -8px 10px #b7895559;
+ clip-path:polygon(0 0,100% 0,100% 100%,0 100%,0 0,8% 12%,8% 88%,92% 88%,92% 12%,8% 12%);
+ opacity:.76
+}
+.sr-wall-item.is-revealed .sr-wall-plaster,.sr-wall-item.is-revealed .sr-medium-stone-wall{visibility:hidden!important;opacity:0!important}
+.sr-wall-item.is-revealed .sr-wall-front{visibility:hidden!important;opacity:0!important}
+/* Leftover crumbled edge rubble and chips; never cover the actual text. */
+.sr-wall-item.is-revealed .sr-wall-depth:after{
+ content:"";position:absolute;inset:-7px;pointer-events:none;z-index:7;
+ background:
+ radial-gradient(ellipse 14px 12px at 4% 12%,#c38b60 95%,transparent 100%),
+ radial-gradient(ellipse 16px 13px at 97% 31%,#8b5a3c 95%,transparent 100%),
+ radial-gradient(ellipse 13px 15px at 2% 67%,#a36a49 95%,transparent 100%),
+ radial-gradient(ellipse 23px 10px at 36% 99%,#815037 95%,transparent 100%),
+ radial-gradient(ellipse 14px 14px at 85% 96%,#c18c5c 95%,transparent 100%),
+ linear-gradient(90deg,#a5704d 0 3%,transparent 6% 94%,#7a4b34 97% 100%);
+ filter:drop-shadow(3px 5px 2px #24130c8a);
+ clip-path:polygon(0 0,100% 0,100% 100%,0 100%,0 0,8% 10%,8% 90%,92% 90%,92% 10%,8% 10%)
+}
+.sr-wall-item.is-revealed .sr-wall-inside>*{position:relative;z-index:3;opacity:1!important;visibility:visible!important}
+.sr-wall-item.is-revealed .sr-wall-inside:after{pointer-events:none;opacity:.35}
+@media(hover:none),(pointer:coarse){.sr-cursor-hammer{display:none!important}}
+@media(prefers-reduced-motion:reduce){.sr-cursor-hammer.striking{animation:none}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -4191,34 +4235,48 @@ try {
 })();
 </script><script>
 (()=>{
+ const section=document.querySelector('.sr-career-wall');
  const cards=[...document.querySelectorAll('.sr-wall-item')];
- const allStates=['is-breaking','is-impact','is-shattering','is-revealed'];
- const hasHover=window.matchMedia('(hover: hover) and (pointer: fine)').matches;
- const clearTimers=card=>{(card._wallTimers||[]).forEach(clearTimeout);card._wallTimers=[]};
- const reset=card=>{clearTimers(card);card.classList.remove(...allStates);card.querySelector('.sr-wall-trigger')?.setAttribute('aria-expanded','false')};
- const closeOthers=except=>cards.forEach(card=>{if(card!==except)reset(card)});
+ if(!section||!cards.length)return;
+ const states=['is-breaking','is-impact','is-shattering','is-revealed'];
+ const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ const cursor=document.createElement('span');
+ cursor.className='sr-cursor-hammer';
+ cursor.setAttribute('aria-hidden','true');
+ cursor.innerHTML='<svg viewBox="0 0 130 140" shape-rendering="crispEdges"><path d="M48 28H100V39H109V67H95V78H49V68H32V42H48Z" fill="#2b2621"/><path d="M48 31H98V44H106V59H36V43H48Z" fill="#97a1a6"/><path d="M48 32H97V38H48Z" fill="#f4f4ec"/><path d="M36 56H106V64H36Z" fill="#52616b"/><path d="M65 73H83V112H79V132H64V113H59V86H65Z" fill="#422818"/><path d="M67 76H78V122H67Z" fill="#bb7d4b"/><path d="M62 77H84V85H62Z" fill="#e8792a"/></svg>';
+ document.body.append(cursor);
+ const clear=card=>{(card._wallTimers||[]).forEach(clearTimeout);card._wallTimers=[]};
+ const reset=card=>{clear(card);card.classList.remove(...states);card.querySelector('.sr-wall-trigger')?.setAttribute('aria-expanded','false')};
+ const closeOthers=except=>cards.forEach(c=>{if(c!==except)reset(c)});
  const breakWall=card=>{
-  if(card.classList.contains('is-breaking')||card.classList.contains('is-revealed')||card.classList.contains('is-shattering'))return;
-  closeOthers(card);clearTimers(card);
-  card.classList.add('is-breaking');
-  card.querySelector('.sr-wall-trigger')?.setAttribute('aria-expanded','true');
-  const schedule=(fn,ms)=>card._wallTimers.push(setTimeout(fn,ms));
-  schedule(()=>card.classList.add('is-impact'),350);
-  schedule(()=>{card.classList.remove('is-impact');card.classList.add('is-shattering')},730);
-  schedule(()=>{card.classList.remove('is-breaking','is-shattering');card.classList.add('is-revealed')},1840);
+   if(card.classList.contains('is-breaking')||card.classList.contains('is-shattering'))return;
+   if(card.classList.contains('is-revealed')){reset(card);return;}
+   closeOthers(card);clear(card);
+   card.classList.add('is-breaking');
+   const btn=card.querySelector('.sr-wall-trigger');
+   btn?.setAttribute('aria-expanded','true');
+   const schedule=(fn,ms)=>card._wallTimers.push(setTimeout(fn,ms));
+   schedule(()=>card.classList.add('is-impact'),reduce?0:300);
+   schedule(()=>{card.classList.remove('is-impact');card.classList.add('is-shattering')},reduce?5:680);
+   schedule(()=>{card.classList.remove('is-breaking','is-shattering');card.classList.add('is-revealed')},reduce?20:1910);
  };
  cards.forEach(card=>{
-  const btn=card.querySelector('.sr-wall-trigger');
-  if(hasHover){
-   btn?.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')breakWall(card)});
-   btn?.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')reset(card)});
-  }
-  btn?.addEventListener('click',()=>{
-   if(card.classList.contains('is-revealed')||card.classList.contains('is-breaking')||card.classList.contains('is-shattering'))reset(card);
-   else breakWall(card);
-  });
-  btn?.addEventListener('focus',()=>{if(!hasHover)breakWall(card)});
+   card.querySelector('.sr-wall-trigger')?.addEventListener('click',()=>breakWall(card));
  });
+ if(fine){
+   let inside=false,px=0,py=0,poseTimer=0;
+   const move=e=>{px=e.clientX;py=e.clientY;cursor.style.left=px+'px';cursor.style.top=py+'px'};
+   section.addEventListener('pointerenter',e=>{if(e.pointerType!=='mouse')return;inside=true;cursor.classList.add('visible');move(e)});
+   section.addEventListener('pointermove',e=>{if(inside&&e.pointerType==='mouse')move(e)});
+   section.addEventListener('pointerleave',()=>{inside=false;cursor.classList.remove('visible','striking')});
+   section.addEventListener('pointerdown',e=>{
+     if(!inside||e.pointerType!=='mouse'||!e.target.closest('.sr-wall-trigger'))return;
+     cursor.classList.remove('striking');void cursor.offsetWidth;cursor.classList.add('striking');
+     clearTimeout(poseTimer);poseTimer=setTimeout(()=>cursor.classList.remove('striking'),440);
+   });
+   window.addEventListener('blur',()=>cursor.classList.remove('visible','striking'));
+ }
  document.addEventListener('keydown',e=>{if(e.key==='Escape')cards.forEach(reset)});
  document.addEventListener('click',e=>{if(!e.target.closest('.sr-wall-item'))cards.forEach(reset)});
 })();
