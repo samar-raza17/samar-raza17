@@ -1546,6 +1546,59 @@ body{background-color:#fbf8f3}
  #srProjectDialog .sr-build-overlay{display:none!important}
  #srProjectDialog .sr-showcase-door{transition:none!important}
 }
+</style><style id="sr-workshop-body-and-precision-nailing-v3">
+/* Handworked honey-colored timber backdrop: warms the whole site while retaining contrast. */
+html{background:#e9d3b4!important}
+body{
+ background-color:#e9d3b4!important;
+ background-image:
+  radial-gradient(ellipse at 36% 10%,#fff7e89c,transparent 57%),
+  repeating-linear-gradient(175deg,transparent 0 44px,#9d724022 45px 47px,transparent 49px 98px),
+  repeating-linear-gradient(92deg,#eedfc8 0 8px,#f4e7d4 13px 72px,#e5c9a6 80px 83px,#f2dfc5 90px 164px)!important;
+ background-size:auto,auto,auto!important;background-repeat:repeat!important;background-attachment:fixed!important;
+ color:#2c211a!important;
+}
+body::before,body:before{
+ opacity:1!important;
+ background:repeating-linear-gradient(113deg,transparent 0 140px,#9f744012 143px 146px,transparent 150px 280px)!important;
+ background-size:auto!important;pointer-events:none
+}
+body > main,body > .site-foot{position:relative;z-index:1}
+.site-nav{background:#f6e9d6f5!important}
+#work .sr-scroll-pin,.sr-career-wall,#caps,.about,.contact,#kind-words,#ai,#play{background-color:transparent!important}
+h1,h2,h3,.slot-title,.ct-title{color:#241a14}
+.eyebrow,.sp-kicker{color:#aa521c}
+.sr-scroll-work .sr-scroll-instruct,.sr-scroll-work .sr-scroll-counter{color:#a45119}
+.sr-wall-guide{color:#9a461c}
+/* No visible browser or interior scrollbars while the fullscreen project showcase is open. */
+html.sr-project-open,html.sr-project-open body{overflow:hidden!important;scrollbar-width:none!important}
+html.sr-project-open::-webkit-scrollbar,html.sr-project-open body::-webkit-scrollbar,
+#srProjectDialog::-webkit-scrollbar,#srProjectDialog .sr-showcase-interior::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
+#srProjectDialog,#srProjectDialog .sr-showcase-interior{scrollbar-width:none!important;-ms-overflow-style:none!important}
+#srProjectDialog .sr-build-overlay{background:radial-gradient(ellipse at center,#573925,#1a110c 74%)}
+#srProjectDialog.sr-building .sr-build-beam{opacity:0}
+#srProjectDialog .sr-beam-nail{
+ opacity:1!important;z-index:3;width:20px;height:20px;
+ background:radial-gradient(circle at 32% 21%,#fffaf0,#c5cfca 23%,#68716b 65%,#222b26 93%);
+ border:1px solid #263028;
+ box-shadow:2px 8px 5px #0008,0 0 0 2px #442c1d82;
+ filter:brightness(1.3);
+ transform:translate3d(0,-10px,0) scale(1.65);
+}
+#srProjectDialog .sr-beam-top .sr-beam-nail,#srProjectDialog .sr-beam-bottom .sr-beam-nail,
+#srProjectDialog .sr-beam-left .sr-beam-nail,#srProjectDialog .sr-beam-right .sr-beam-nail{transform:translate3d(0,-10px,0) scale(1.65)}
+#srProjectDialog .sr-build-hammer{z-index:30;opacity:0;pointer-events:none;transition:none!important;transform-origin:50% 45%}
+#srProjectDialog.sr-assembly-running .sr-build-hammer{animation:none!important}
+#srProjectDialog .sr-build-label{font-size:clamp(11px,1.2vw,16px);opacity:.9}
+#srProjectDialog .sr-build-beam{transition:none!important}
+#srProjectDialog .sr-build-overlay .sr-beam-nail{transition:none!important}
+@media(max-width:720px){
+ body{background-attachment:scroll!important}
+ #srProjectDialog .sr-build-label{max-width:60vw}
+}
+@media(prefers-reduced-motion:reduce){
+ #srProjectDialog .sr-build-hammer{display:none!important}
+}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -4787,6 +4840,58 @@ try {
  window.addEventListener("scroll",schedule,{passive:true});
  window.addEventListener("resize",syncGeometry);
  if(window.ResizeObserver){const ro=new ResizeObserver(()=>{const at=work.getBoundingClientRect();if(at.width)syncGeometry()});ro.observe(track)}
+ // Mount timber by driving each raised iron nail into its real screen position.
+ async function startWoodAssembly(token){
+   const overlay=modal.querySelector('.sr-build-overlay');
+   const hammer=overlay?.querySelector('.sr-build-hammer');
+   const beams=[...overlay.querySelectorAll('.sr-build-beam')];
+   const active=()=>modal.open&&modal._buildToken===token;
+   const play=async(el,frames,options)=>{
+     const anim=el.animate(frames,{...options,fill:'forwards'});
+     try{await anim.finished}catch(e){}
+     return active();
+   };
+   // No layout-dependent guesses: the hammer is positioned from each nail's measured bounds.
+   const strike=async(nail)=>{
+     if(!active())return;
+     const o=overlay.getBoundingClientRect(),n=nail.getBoundingClientRect();
+     const x=n.left+n.width/2-o.left,y=n.top+n.height/2-o.top;
+     const hw=hammer.getBoundingClientRect().width||80,hh=hammer.getBoundingClientRect().height||80;
+     hammer.style.left=(x-hw*.49)+'px';hammer.style.top=(y-hh*.36)+'px';
+     const hammerMove=hammer.animate([
+       {opacity:1,transform:'translate(-12px,-18px) rotate(-48deg)',offset:0},
+       {opacity:1,transform:'translate(0,-8px) rotate(-32deg)',offset:.3},
+       {opacity:1,transform:'translate(4px,7px) rotate(24deg)',offset:.60},
+       {opacity:1,transform:'translate(0,0) rotate(-19deg)',offset:.83},
+       {opacity:0,transform:'translate(-6px,-10px) rotate(-34deg)',offset:1}
+     ],{duration:315,easing:'ease-in-out',fill:'forwards'});
+     await new Promise(done=>setTimeout(done,150));
+     if(!active()){hammerMove.cancel();return;}
+     await play(nail,[
+       {opacity:1,transform:'translate3d(0,-10px,0) scale(1.65)',filter:'brightness(1.5)',boxShadow:'2px 8px 5px #000a'},
+       {opacity:1,transform:'translate3d(0,-3px,0) scale(1.22)',filter:'brightness(1.2)',offset:.45},
+       {opacity:1,transform:'translate3d(0,0,0) scale(1)',filter:'brightness(1)',boxShadow:'1px 2px 1px #24160c'}
+     ],{duration:170,easing:'cubic-bezier(.18,.9,.3,1)'});
+     await hammerMove.finished.catch(()=>{});
+   };
+   for(const beam of beams){
+     if(!active())return;
+     const direction=beam.classList.contains('sr-beam-left')?[-125,0]:beam.classList.contains('sr-beam-right')?[125,0]:beam.classList.contains('sr-beam-bottom')?[0,125]:[0,-125];
+     const mounted=await play(beam,[
+       {opacity:0,transform:`translate3d(${direction[0]}px,${direction[1]}px,0) rotate(-3deg)`},
+       {opacity:1,transform:'translate3d(0,5px,0) rotate(.5deg)',offset:.76},
+       {opacity:1,transform:'translate3d(0,0,0) rotate(0deg)'}
+     ],{duration:390,easing:'cubic-bezier(.18,.76,.23,1)'});
+     if(!mounted)return;
+     const nails=beam.querySelectorAll('.sr-beam-nail');
+     for(const nail of nails){await strike(nail);if(!active())return}
+   }
+   if(!active())return;
+   modal.classList.remove('sr-building');
+   modal.classList.add('sr-ready');
+   hammer.style.opacity='0';
+   requestAnimationFrame(()=>requestAnimationFrame(()=>{if(active())modal.classList.add('sr-doors-open')}));
+ }
  const tabGroup=document.getElementById("srProjectTabs");
  const tabPanel=document.getElementById("srProjectTabContent");
  const allTabs=[...tabGroup.querySelectorAll('[role="tab"]')];
@@ -4822,22 +4927,14 @@ try {
    index.textContent=String(i+1).padStart(2,"0")+" / "+String(projects.length).padStart(2,"0");
    showProjectView(p.tabs?.marketing?"marketing":"mobile");
    if(modal._assemblyTimer)clearTimeout(modal._assemblyTimer);
-   modal.classList.remove('sr-doors-open','sr-ready');
+   modal._buildToken=(modal._buildToken||0)+1;
+   modal.classList.remove('sr-doors-open','sr-ready','sr-assembly-running');
    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
    modal.classList.toggle('sr-building',!reduced);
+   document.documentElement.classList.add('sr-project-open');
    if(typeof modal.showModal==="function")modal.showModal();else modal.setAttribute("open","");
-   // Sequential timber assembly: top, right, bottom, left; hammer and nails follow.
-   // Focus stays in the native dialog, while its image and links remain preserved.
    if(reduced){modal.classList.add('sr-ready','sr-doors-open');}
-   else{
-     requestAnimationFrame(()=>requestAnimationFrame(()=>modal.classList.add('sr-assembly-running')));
-     modal._assemblyTimer=setTimeout(()=>{
-       if(!modal.open)return;
-       modal.classList.remove('sr-building','sr-assembly-running');
-       modal.classList.add('sr-ready');
-       requestAnimationFrame(()=>requestAnimationFrame(()=>modal.classList.add('sr-doors-open')));
-     },3650);
-   }
+   else startWoodAssembly(modal._buildToken);
    close.focus();
  }
  for(const button of allTabs)button.addEventListener("click",()=>showProjectView(button.dataset.view));
@@ -4855,8 +4952,11 @@ try {
  close.addEventListener("click",()=>modal.close());
  modal.addEventListener("click",e=>{if(e.target===modal)modal.close()});
  modal.addEventListener("close",()=>{
+   modal._buildToken=(modal._buildToken||0)+1;
    clearTimeout(modal._assemblyTimer);
    modal.classList.remove("sr-doors-open","sr-building","sr-ready","sr-assembly-running");
+   document.documentElement.classList.remove('sr-project-open');
+   modal.querySelectorAll('.sr-build-beam,.sr-beam-nail,.sr-build-hammer').forEach(el=>el.getAnimations().forEach(a=>a.cancel()));
    image.removeAttribute("src");
  });
  track.addEventListener("keydown",e=>{
