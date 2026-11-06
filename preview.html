@@ -1389,6 +1389,13 @@ body{background-color:#fbf8f3}
  .site-nav .nav a.link:after{border-width:1px;border-bottom-width:3px}
 }
 @media(prefers-reduced-motion:reduce){.site-nav .nav a.link{transition:none!important}}
+</style><style id="sr-wood-sfx-toggle-v1">
+.sr-wall-guide{flex-wrap:wrap;gap:9px 14px}
+.sr-wood-sound-toggle{appearance:none;background:linear-gradient(145deg,#e3b37c,#b47540);color:#352014;border:2px solid #75482c;border-bottom:4px solid #4a2d1d;box-shadow:2px 3px 0 #42271a;padding:7px 11px;font:800 10px/1.2 var(--font-mono,monospace);letter-spacing:.02em;cursor:pointer}
+.sr-wood-sound-toggle:hover{background:#f6c48a}
+.sr-wood-sound-toggle:focus-visible{outline:3px solid #e87d2e;outline-offset:4px}
+.sr-wood-sound-toggle[aria-pressed="false"]{background:#cbbda8;color:#61493b}
+@media(max-width:680px){.sr-wood-sound-toggle{font-size:9px;padding:7px 8px}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -4690,6 +4697,77 @@ try {
  cursor.setAttribute('aria-hidden','true');
  cursor.innerHTML='<svg viewBox="0 0 130 140" shape-rendering="crispEdges"><path d="M48 28H100V39H109V67H95V78H49V68H32V42H48Z" fill="#2b2621"/><path d="M48 31H98V44H106V59H36V43H48Z" fill="#97a1a6"/><path d="M48 32H97V38H48Z" fill="#f4f4ec"/><path d="M36 56H106V64H36Z" fill="#52616b"/><path d="M65 73H83V112H79V132H64V113H59V86H65Z" fill="#422818"/><path d="M67 76H78V122H67Z" fill="#bb7d4b"/><path d="M62 77H84V85H62Z" fill="#e8792a"/></svg>';
  document.body.append(cursor);
+ // All sound is synthesized locally with Web Audio (no downloads or autoplay).
+ let audioCtx=null,noiseBuffer=null,soundEnabled=true;
+ const soundToggle=document.createElement('button');
+ soundToggle.type='button';soundToggle.className='sr-wood-sound-toggle';
+ soundToggle.setAttribute('aria-label','Mute wooden wall sound effects');
+ soundToggle.setAttribute('aria-pressed','true');
+ soundToggle.textContent='🔊 WOOD SOUNDS ON';
+ section.querySelector('.sr-wall-guide')?.append(soundToggle);
+ soundToggle.addEventListener('click',()=>{
+   soundEnabled=!soundEnabled;
+   soundToggle.textContent=soundEnabled?'🔊 WOOD SOUNDS ON':'🔇 WOOD SOUNDS OFF';
+   soundToggle.setAttribute('aria-pressed',String(soundEnabled));
+   soundToggle.setAttribute('aria-label',soundEnabled?'Mute wooden wall sound effects':'Unmute wooden wall sound effects');
+ });
+ function prepareAudio(){
+   if(!soundEnabled)return false;
+   try{
+     const AC=window.AudioContext||window.webkitAudioContext;
+     if(!AC)return false;
+     if(!audioCtx){
+       audioCtx=new AC();
+       noiseBuffer=audioCtx.createBuffer(1,Math.floor(audioCtx.sampleRate*.7),audioCtx.sampleRate);
+       const data=noiseBuffer.getChannelData(0);
+       for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1);
+     }
+     if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});
+     return true;
+   }catch(e){return false}
+ }
+ function woodNoise(start,duration,volume,low,high){
+   if(!audioCtx||audioCtx.state==='closed'||!noiseBuffer)return;
+   const t=audioCtx.currentTime+start;
+   const source=audioCtx.createBufferSource();source.buffer=noiseBuffer;
+   const band=audioCtx.createBiquadFilter();band.type='bandpass';band.frequency.setValueAtTime(low,t);
+   band.frequency.exponentialRampToValueAtTime(Math.max(100,high),t+duration);
+   band.Q.value=.7;
+   const env=audioCtx.createGain();
+   env.gain.setValueAtTime(.0001,t);env.gain.exponentialRampToValueAtTime(Math.max(.001,volume),t+.008);
+   env.gain.exponentialRampToValueAtTime(.0001,t+duration);
+   source.connect(band);band.connect(env);env.connect(audioCtx.destination);
+   source.start(t);source.stop(t+duration+.02);
+ }
+ function woodTone(start,duration,volume,freq){
+   if(!audioCtx||audioCtx.state==='closed')return;
+   const t=audioCtx.currentTime+start;
+   const osc=audioCtx.createOscillator(),env=audioCtx.createGain();
+   osc.type='triangle';osc.frequency.setValueAtTime(freq,t);
+   osc.frequency.exponentialRampToValueAtTime(freq*.42,t+duration);
+   env.gain.setValueAtTime(.0001,t);
+   env.gain.exponentialRampToValueAtTime(Math.max(.001,volume),t+.008);
+   env.gain.exponentialRampToValueAtTime(.0001,t+duration);
+   osc.connect(env);env.connect(audioCtx.destination);
+   osc.start(t);osc.stop(t+duration+.015);
+ }
+ function woodSound(type,index=0){
+   if(!soundEnabled||!audioCtx||audioCtx.state!=='running')return;
+   if(type==='hit'){
+     woodTone(0,.20,.18,155);woodNoise(0,.13,.14,650,170);
+     woodTone(.035,.12,.075,88);
+   }else if(type==='break'){
+     woodNoise(0,.38,.20,2500,490);
+     woodNoise(.055,.32,.12,3800,750);
+     woodTone(.012,.19,.10,195);
+     for(let i=0;i<4;i++){woodNoise(.07+i*.07,.095,.065,3100-i*360,670);}
+   }else if(type==='fall'){
+     const weight=1-(index%4)*.14;
+     woodTone(0,.14,.105*weight,95+(index%3)*24);
+     woodNoise(0,.15,.12*weight,380+(index%2)*110,140);
+     woodNoise(.027,.08,.035,1350,250);
+   }
+ }
  const clear=card=>{(card._wallTimers||[]).forEach(clearTimeout);card._wallTimers=[]};
  const reset=card=>{clear(card);card.classList.remove(...states);card.querySelector('.sr-wall-trigger')?.setAttribute('aria-expanded','false')};
  const closeOthers=except=>cards.forEach(c=>{if(c!==except)reset(c)});
@@ -4697,12 +4775,19 @@ try {
    if(card.classList.contains('is-breaking')||card.classList.contains('is-shattering'))return;
    if(card.classList.contains('is-revealed')){reset(card);return;}
    closeOthers(card);clear(card);
+   // Resume/create audio synchronously in the user's click, then sync SFX to phases.
+   prepareAudio();
    card.classList.add('is-breaking');
    const btn=card.querySelector('.sr-wall-trigger');
    btn?.setAttribute('aria-expanded','true');
    const schedule=(fn,ms)=>card._wallTimers.push(setTimeout(fn,ms));
-   schedule(()=>card.classList.add('is-impact'),reduce?0:300);
-   schedule(()=>{card.classList.remove('is-impact');card.classList.add('is-shattering')},reduce?5:680);
+   schedule(()=>{card.classList.add('is-impact');woodSound('hit')},reduce?0:300);
+   schedule(()=>{
+     card.classList.remove('is-impact');card.classList.add('is-shattering');
+     woodSound('break');
+     // A cluster of staggered floor impacts tracks the individual falling planks.
+     [370,540,710,890,1050].forEach((ms,i)=>schedule(()=>woodSound('fall',i),reduce?10+i*8:ms));
+   },reduce?5:680);
    schedule(()=>{card.classList.remove('is-breaking','is-shattering');card.classList.add('is-revealed')},reduce?20:1910);
  };
  cards.forEach(card=>{
