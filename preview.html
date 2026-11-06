@@ -1448,6 +1448,104 @@ body{background-color:#fbf8f3}
 .sr-project-dialog:not(.sr-doors-open) .sr-showcase-interior{filter:brightness(.6)}
 @media(max-width:780px){.sr-project-dialog{width:calc(100vw - 16px)!important;max-height:calc(100dvh - 35px)!important;height:calc(100dvh - 35px);padding:8px!important}.sr-wood-showcase{border-width:7px;padding:12px}.sr-project-dialog .sr-modal-grid{grid-template-columns:1fr!important;gap:12px;padding:9px!important}.sr-showcase-interior{height:calc(100% - 6px);overflow:auto}.sr-project-dialog .sr-modal-photo{min-height:180px!important;max-height:38vh!important;padding:10px!important}.sr-project-dialog .sr-modal-photo img{max-height:31vh!important}.sr-project-dialog .sr-modal-text{padding:18px!important;gap:9px}.sr-project-dialog .sr-dialog-close{top:-5px;right:-3px;width:42px;height:42px}.sr-wood-showcase-top{left:20px;right:20px;height:24px;font-size:9px}.sr-project-dialog .sr-modal-links{margin-top:0}.sr-showcase-door{top:13px;bottom:13px;width:calc(50% - 13px)}.sr-showcase-door-left{left:13px}.sr-showcase-door-right{right:13px}}
 @media(prefers-reduced-motion:reduce){.sr-showcase-door{transition:none}.sr-project-dialog.sr-doors-open .sr-showcase-door{visibility:hidden;opacity:0}}
+</style><style id="sr-project-fullscreen-construction-v2">
+/* Full viewport modal; real device viewport units rather than a centered card. */
+#srProjectDialog.sr-project-dialog{
+ position:fixed!important;inset:0!important;top:0!important;left:0!important;right:0!important;bottom:0!important;
+ margin:0!important;width:100vw!important;max-width:100vw!important;
+ height:100vh!important;height:100dvh!important;max-height:none!important;min-height:0!important;
+ padding:0!important;overflow:hidden!important;border:0!important;box-shadow:none!important;
+ background:#281b13!important;perspective:1700px;
+}
+#srProjectDialog .sr-wood-showcase{
+ width:100%;height:100%;min-height:0;box-sizing:border-box;
+ border:clamp(9px,1.25vw,19px) ridge #87552e!important;
+ padding:clamp(18px,2.1vw,34px)!important;
+ box-shadow:inset 4px 5px 0 #e9c08c,inset -6px -7px 0 #382219!important;
+}
+#srProjectDialog .sr-showcase-interior{
+ margin:14px 0 0!important;height:calc(100% - 16px)!important;
+ overflow-y:auto;overflow-x:hidden;scrollbar-color:#ac7c4c #34231a;
+}
+#srProjectDialog .sr-modal-grid{max-width:1680px;margin-inline:auto;min-height:100%;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)!important}
+#srProjectDialog .sr-modal-photo{min-height:min(72vh,690px)!important}
+#srProjectDialog .sr-modal-photo img{max-height:calc(100dvh - 200px)!important;max-width:100%;object-fit:contain}
+#srProjectDialog .sr-modal-text{min-height:0;justify-content:center}
+#srProjectDialog .sr-dialog-close{position:fixed;top:clamp(10px,1.2vw,20px)!important;right:clamp(12px,1.2vw,20px)!important}
+#srProjectDialog .sr-wood-showcase-top{top:4px!important;left:clamp(28px,4vw,70px);right:clamp(65px,5vw,105px);z-index:21}
+#srProjectDialog .sr-showcase-door{
+ top:clamp(20px,2.2vw,38px)!important;bottom:clamp(20px,2.2vw,38px)!important;
+ width:calc(50% - clamp(20px,2.2vw,38px))!important
+}
+#srProjectDialog .sr-showcase-door-left{left:clamp(20px,2.2vw,38px)!important}
+#srProjectDialog .sr-showcase-door-right{right:clamp(20px,2.2vw,38px)!important}
+/* Build overlay: four full-size timber frame beams, with a hammered nail at both ends. */
+#srProjectDialog .sr-build-overlay{position:absolute;inset:0;z-index:24;background:radial-gradient(ellipse at center,#52311f,#1b110c 73%);overflow:hidden;pointer-events:none;opacity:0;visibility:hidden}
+#srProjectDialog.sr-building .sr-build-overlay{opacity:1;visibility:visible}
+#srProjectDialog .sr-build-beam{position:absolute;display:block;box-sizing:border-box;background:
+ repeating-linear-gradient(174deg,transparent 0 24px,#3d231635 26px 28px,transparent 30px 59px),
+ linear-gradient(137deg,#efc18c,#b97f48 35%,#85502d 68%,#502e1d);
+ border:8px ridge #8e5a35;box-shadow:inset 4px 4px #f7d4a0,inset -5px -6px #422617,6px 8px 0 #160d09ad;opacity:0;transform:translate3d(0,0,0)}
+#srProjectDialog .sr-beam-top,#srProjectDialog .sr-beam-bottom{left:20px;right:20px;height:clamp(34px,5.2vh,56px)}
+#srProjectDialog .sr-beam-left,#srProjectDialog .sr-beam-right{top:clamp(34px,5.2vh,56px);bottom:clamp(34px,5.2vh,56px);width:clamp(34px,5.2vw,56px)}
+#srProjectDialog .sr-beam-top{top:12px;--step:0}
+#srProjectDialog .sr-beam-right{right:12px;--step:1}
+#srProjectDialog .sr-beam-bottom{bottom:12px;--step:2}
+#srProjectDialog .sr-beam-left{left:12px;--step:3}
+#srProjectDialog.sr-assembly-running .sr-build-beam{animation:srBeamMount .66s cubic-bezier(.17,.79,.25,1) calc(var(--step)*.68s) both}
+@keyframes srBeamMount{
+ 0%{opacity:0;transform:translate3d(0,-110px,0) rotate(-5deg)}
+ 72%{opacity:1;transform:translate3d(0,7px,0) rotate(.8deg)}
+ 100%{opacity:1;transform:translate3d(0,0,0) rotate(0)}
+}
+#srProjectDialog .sr-beam-right,#srProjectDialog .sr-beam-left{background:repeating-linear-gradient(90deg,#a96e40 0 6px,#d09a63 10px 22px,#87502f 30px 35px)}
+#srProjectDialog .sr-beam-right{transform:translateX(120px)}
+#srProjectDialog .sr-beam-left{transform:translateX(-120px)}
+#srProjectDialog .sr-beam-bottom{transform:translateY(100px)}
+#srProjectDialog .sr-beam-nail{position:absolute;width:17px;height:17px;border-radius:50%;opacity:0;background:radial-gradient(circle at 25% 24%,#fff,#b1b9b5 32%,#555f5c 67%,#242b28 93%);box-shadow:1px 3px 2px #28170c}
+#srProjectDialog .sr-beam-top .sr-beam-nail,#srProjectDialog .sr-beam-bottom .sr-beam-nail{top:50%;transform:translateY(-50%) scale(1.5)}
+#srProjectDialog .sr-beam-top .first,#srProjectDialog .sr-beam-bottom .first{left:25px}
+#srProjectDialog .sr-beam-top .second,#srProjectDialog .sr-beam-bottom .second{right:25px}
+#srProjectDialog .sr-beam-left .sr-beam-nail,#srProjectDialog .sr-beam-right .sr-beam-nail{left:50%;transform:translateX(-50%) scale(1.5)}
+#srProjectDialog .sr-beam-left .first,#srProjectDialog .sr-beam-right .first{top:25px}
+#srProjectDialog .sr-beam-left .second,#srProjectDialog .sr-beam-right .second{bottom:25px}
+#srProjectDialog.sr-assembly-running .sr-beam-nail{animation:srNailSet .2s ease-out calc(var(--step)*.68s + .51s) both}
+@keyframes srNailSet{0%{opacity:0;filter:brightness(3)}100%{opacity:1;filter:brightness(1)}}
+#srProjectDialog .sr-build-hammer{position:absolute;z-index:6;width:clamp(58px,7vw,110px);height:clamp(58px,7vw,110px);left:12%;top:4%;opacity:0;filter:drop-shadow(4px 5px 3px #0007)}
+#srProjectDialog .sr-build-hammer svg{width:100%;height:100%;display:block}
+#srProjectDialog.sr-assembly-running .sr-build-hammer{animation:srAssemblyHammer 3.1s ease-in-out .2s both}
+@keyframes srAssemblyHammer{
+ 0%{opacity:0;left:12%;top:5%;transform:rotate(-32deg)}
+ 8%{opacity:1;left:12%;top:5%;transform:rotate(32deg)}
+ 18%{opacity:1;left:12%;top:5%;transform:rotate(-25deg)}
+ 25%{opacity:1;left:88%;top:14%;transform:rotate(-40deg)}
+ 34%{opacity:1;left:88%;top:14%;transform:rotate(28deg)}
+ 44%{opacity:1;left:88%;top:14%;transform:rotate(-18deg)}
+ 52%{opacity:1;left:71%;top:83%;transform:rotate(-40deg)}
+ 63%{opacity:1;left:71%;top:83%;transform:rotate(32deg)}
+ 70%{opacity:1;left:71%;top:83%;transform:rotate(-25deg)}
+ 79%{opacity:1;left:6%;top:56%;transform:rotate(-38deg)}
+ 88%{opacity:1;left:6%;top:56%;transform:rotate(32deg)}
+ 100%{opacity:0;left:6%;top:56%;transform:rotate(-25deg)}
+}
+#srProjectDialog .sr-build-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:13px 18px;background:#d5a16b;color:#382315;border:5px ridge #8e5a35;box-shadow:6px 8px 0 #20120e;font:800 clamp(11px,1.35vw,18px)/1.3 var(--font-mono,monospace);letter-spacing:.07em;text-align:center}
+#srProjectDialog.sr-building .sr-wood-showcase-top,#srProjectDialog.sr-building .sr-showcase-door,#srProjectDialog.sr-building .sr-showcase-interior{visibility:hidden!important}
+#srProjectDialog.sr-ready .sr-build-overlay{visibility:hidden!important;opacity:0!important}
+#srProjectDialog:not(.sr-ready) .sr-showcase-interior{visibility:hidden}
+@media(max-width:780px){
+ #srProjectDialog.sr-project-dialog{width:100vw!important;height:100vh!important;height:100dvh!important;max-height:none!important;padding:0!important}
+ #srProjectDialog .sr-wood-showcase{padding:17px 12px!important;border-width:8px!important}
+ #srProjectDialog .sr-showcase-interior{height:calc(100% - 11px)!important}
+ #srProjectDialog .sr-modal-grid{grid-template-columns:1fr!important;gap:15px;min-height:100%}
+ #srProjectDialog .sr-modal-photo{min-height:unset!important;max-height:none!important}
+ #srProjectDialog .sr-modal-photo img{max-height:35vh!important}
+ #srProjectDialog .sr-modal-text{min-height:unset}
+ #srProjectDialog .sr-wood-showcase-top{left:14px;right:58px;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ #srProjectDialog .sr-build-overlay{display:none!important}
+ #srProjectDialog .sr-showcase-door{transition:none!important}
+}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -1737,6 +1835,14 @@ body{background-color:#fbf8f3}
 <dialog id="srProjectDialog" class="sr-project-dialog" aria-labelledby="srModalTitle">
  <button class="sr-dialog-close" type="button" aria-label="Close project details">×</button>
  <div class="sr-wood-showcase">
+  <div class="sr-build-overlay" aria-hidden="true">
+    <span class="sr-build-beam sr-beam-top"><i class="sr-beam-nail first"></i><i class="sr-beam-nail second"></i></span>
+    <span class="sr-build-beam sr-beam-right"><i class="sr-beam-nail first"></i><i class="sr-beam-nail second"></i></span>
+    <span class="sr-build-beam sr-beam-bottom"><i class="sr-beam-nail first"></i><i class="sr-beam-nail second"></i></span>
+    <span class="sr-build-beam sr-beam-left"><i class="sr-beam-nail first"></i><i class="sr-beam-nail second"></i></span>
+    <span class="sr-build-hammer"><svg viewBox="0 0 96 96" shape-rendering="crispEdges"><path d="M18 14h49v10h9v22h-9v9H45V45H18z" fill="#273039"/><path d="M21 16h45v10h8v15H21z" fill="#9da8a8"/><path d="M21 17h42v7H21z" fill="#e3e8e3"/><path d="M36 43h17v12h-4v30H35V55h-3z" fill="#472c1c"/><path d="M39 47h7v32h-7z" fill="#c18a52"/><path d="M20 37h54v8H20z" fill="#58656d"/></svg></span>
+    <span class="sr-build-label">ASSEMBLING THE WOODEN SHOWCASE</span>
+  </div>
   <div class="sr-wood-showcase-top" aria-hidden="true"><i></i><span>THE WORKSHOP · PROJECT ARCHIVE</span><i></i></div>
   <div class="sr-showcase-interior">
   <div class="sr-modal-grid">
@@ -4715,10 +4821,23 @@ try {
    title.textContent=p.title;
    index.textContent=String(i+1).padStart(2,"0")+" / "+String(projects.length).padStart(2,"0");
    showProjectView(p.tabs?.marketing?"marketing":"mobile");
-   modal.classList.remove('sr-doors-open');
+   if(modal._assemblyTimer)clearTimeout(modal._assemblyTimer);
+   modal.classList.remove('sr-doors-open','sr-ready');
+   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+   modal.classList.toggle('sr-building',!reduced);
    if(typeof modal.showModal==="function")modal.showModal();else modal.setAttribute("open","");
-   // Trigger opening after the initially closed shutters have been painted.
-   requestAnimationFrame(()=>requestAnimationFrame(()=>{if(modal.open)modal.classList.add('sr-doors-open')}));
+   // Sequential timber assembly: top, right, bottom, left; hammer and nails follow.
+   // Focus stays in the native dialog, while its image and links remain preserved.
+   if(reduced){modal.classList.add('sr-ready','sr-doors-open');}
+   else{
+     requestAnimationFrame(()=>requestAnimationFrame(()=>modal.classList.add('sr-assembly-running')));
+     modal._assemblyTimer=setTimeout(()=>{
+       if(!modal.open)return;
+       modal.classList.remove('sr-building','sr-assembly-running');
+       modal.classList.add('sr-ready');
+       requestAnimationFrame(()=>requestAnimationFrame(()=>modal.classList.add('sr-doors-open')));
+     },3650);
+   }
    close.focus();
  }
  for(const button of allTabs)button.addEventListener("click",()=>showProjectView(button.dataset.view));
@@ -4735,7 +4854,11 @@ try {
  for(const frame of work.querySelectorAll(".sr-hang-image"))frame.addEventListener("click",e=>{if(e.target.closest("button"))return;const btn=frame.closest(".sr-hang-item")?.querySelector(".sr-detail-btn");if(btn)openProject(Number(btn.dataset.project))});
  close.addEventListener("click",()=>modal.close());
  modal.addEventListener("click",e=>{if(e.target===modal)modal.close()});
- modal.addEventListener("close",()=>{modal.classList.remove("sr-doors-open");image.removeAttribute("src")});
+ modal.addEventListener("close",()=>{
+   clearTimeout(modal._assemblyTimer);
+   modal.classList.remove("sr-doors-open","sr-building","sr-ready","sr-assembly-running");
+   image.removeAttribute("src");
+ });
  track.addEventListener("keydown",e=>{
    if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;
    e.preventDefault();
