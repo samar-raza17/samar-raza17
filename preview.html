@@ -1041,6 +1041,76 @@ body{background-color:#fbf8f3}
 #play .sn-howto{background:#f3e5cf!important;border:3px solid #a37349!important;box-shadow:4px 5px 0 #61412e}
 #play .sn-howto .tape{display:none}
 #play .sn-notepad{border-color:#8b623f!important;box-shadow:6px 7px 0 #503727!important}
+</style><style id="sr-stone-pong-styles">
+#stone-pong{position:relative;min-height:100vh;min-height:100svh;padding:clamp(78px,8vh,105px) 0 55px;display:flex;align-items:center;overflow:clip;background:radial-gradient(ellipse at 83% 25%,#f6dfc022,transparent 45%),#fbf8f1;isolation:isolate}
+#stone-pong:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.4;background-image:radial-gradient(#a983654a 1.5px,transparent 1.5px);background-size:30px 30px}
+.sp-shell{position:relative;z-index:1;width:100%}
+.sp-heading-row{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:clamp(22px,3.2vh,37px)}
+.sp-kicker,.sp-mini-label{font:700 12px/1.4 var(--font-mono,monospace);color:#d66c26;letter-spacing:.13em}
+.sp-heading-row h2{font-size:clamp(47px,6.9vw,104px);letter-spacing:-.085em;line-height:.98;margin:8px 0 16px;color:#241914;font-weight:900}
+.sp-heading-row h2 em{font-style:normal;color:#d46d29;text-shadow:3px 4px 0 #57362226}
+.sp-intro{max-width:720px;color:#675b52;line-height:1.55;font-size:clamp(15px,1.12vw,18px)}
+.sp-heading-stamp{height:91px;width:111px;flex:none;background:linear-gradient(142deg,#e4b584,#b57c4b);border:4px ridge #82512f;box-shadow:4px 5px 0 #412819;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(5deg)}
+.sp-heading-stamp>span{font:900 37px/1 var(--font-mono,monospace);letter-spacing:-.11em;color:#442a1a}
+.sp-heading-stamp>small{text-align:center;font:700 9px/1.3 var(--font-mono,monospace);color:#5f3f28}
+.sp-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(280px,.72fr);gap:clamp(20px,2.4vw,37px);align-items:stretch}
+.sp-cabinet{min-width:0;padding:15px 16px 12px;background:repeating-linear-gradient(176deg,#8d5835 0 9px,#995f39 13px 33px,#865130 38px 48px);border:7px ridge #704226;box-shadow:inset 3px 3px 0 #d2a174,inset -3px -4px 0 #462819,8px 10px 0 #2d211b}
+.sp-cabinet-top{display:flex;align-items:center;justify-content:space-between;gap:9px;color:#f7ddb4;font:700 11px var(--font-mono,monospace);letter-spacing:.07em;padding:0 6px 8px;text-align:center}
+.sp-cabinet-top i{color:#f59a40}
+.sp-bolt{display:block;flex:none;width:12px;height:12px;background:radial-gradient(circle at 30% 25%,#fff,#aaa6a0 50%,#41433c 85%);border-radius:50%;box-shadow:1px 2px 1px #302018}
+.sp-scorebar{display:grid;grid-template-columns:1fr 1.15fr 1fr;align-items:center;background:#31231d;border:3px solid #241711;padding:9px 18px;color:#f3dfc7;text-align:center;box-shadow:inset 0 3px 8px #160e0a}
+.sp-scorebar>div:first-child{text-align:left}.sp-scorebar>div:last-child{text-align:right}
+.sp-scorebar small{display:block;color:#c5a080;font:700 10px var(--font-mono,monospace);letter-spacing:.08em}
+.sp-scorebar b{font:900 clamp(29px,3vw,47px)/1 var(--font-mono,monospace);color:#ffb45b}
+.sp-center-label{font:700 11px var(--font-mono,monospace);color:#f1d1a1;white-space:nowrap}
+.sp-amber-dot{display:inline-block;background:#f99430;width:7px;height:7px;transform:rotate(45deg);margin:0 5px}
+.sp-arena-frame{position:relative;border:9px solid #3a2a22;border-left-color:#95704b;border-top-color:#a78861;box-shadow:inset 0 0 0 3px #e5c69e,0 3px 0 #281a12;overflow:hidden;background:#392b24;aspect-ratio:900/520}
+.sp-arena-frame canvas{display:block;width:100%;height:100%;touch-action:none;outline:none}
+.sp-arena-frame canvas:focus-visible{outline:3px solid #f49b43;outline-offset:-5px}
+.sp-game-overlay{position:absolute;inset:0;background:#1e1713ba;display:grid;place-items:center;z-index:2;padding:15px}
+.sp-game-overlay[hidden]{display:none!important}
+.sp-overlay-content{background:repeating-linear-gradient(177deg,transparent 0 25px,#60371920 26px 28px,transparent 29px 51px),linear-gradient(138deg,#ead0a6,#c3915f);border:6px ridge #9a6840;box-shadow:7px 9px 0 #20140e;padding:clamp(20px,3vw,35px);max-width:430px;text-align:center;position:relative;color:#2c1c14}
+.sp-overlay-content:before,.sp-overlay-content:after{content:"";position:absolute;top:9px;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 25% 25%,#fff,#a8a8a0 55%,#333)}
+.sp-overlay-content:before{left:10px}.sp-overlay-content:after{right:10px}
+.sp-overlay-content h3{font-size:clamp(28px,3vw,42px);letter-spacing:-.06em;margin:9px 0}
+.sp-overlay-content p{font-size:14px;line-height:1.55;color:#523725;margin:0 0 18px}
+.sp-overlay-content small{font:700 10px/1.5 var(--font-mono,monospace);color:#755239;display:block;margin-top:16px}
+.sp-wood-btn{font:800 14px var(--font-mono,monospace);letter-spacing:.04em;background:#322019;color:#ffdfb4;border:3px solid #21130f;box-shadow:4px 5px 0 #e47b29;padding:13px 20px;cursor:pointer}
+.sp-wood-btn:hover{background:#54301f;transform:translateY(-2px)}
+.sp-wood-btn:focus-visible{outline:3px dashed #a64e1a;outline-offset:4px}
+.sp-wood-btn span{color:#ffa04c;margin-left:10px}
+.sp-flash{position:absolute;top:13px;left:50%;transform:translateX(-50%) translateY(-5px);background:#e7be83;color:#3c281a;padding:6px 13px;border:2px solid #4e2e21;font:800 12px var(--font-mono,monospace);pointer-events:none;opacity:0;transition:opacity .2s,transform .2s;white-space:nowrap;z-index:1}
+.sp-flash.visible{opacity:1;transform:translateX(-50%) translateY(0)}
+.sp-cabinet-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 2px 0;color:#f6d8ac;font:700 10px var(--font-mono,monospace);letter-spacing:.03em}
+.sp-cabinet-bottom>div{display:flex;gap:8px}
+.sp-cabinet-bottom button{background:#eac99e;color:#432719;border:2px solid #38251a;padding:7px 11px;cursor:pointer;font:700 11px var(--font-mono,monospace);box-shadow:2px 3px 0 #291810}
+.sp-cabinet-bottom button:hover{background:#f6d9b5}
+.sp-discovery{background:linear-gradient(138deg,#50382a,#32251d);border:8px ridge #926744;box-shadow:7px 9px 0 #362318;padding:clamp(18px,2.2vw,29px);color:#fff1d9;display:flex;flex-direction:column;min-height:0}
+.sp-discovery-head{display:flex;align-items:center;gap:12px}
+.sp-discovery-icon{width:51px;height:51px;display:grid;place-items:center;background:linear-gradient(145deg,#f3b35c,#c96e2b);border:3px solid #ddac6b;box-shadow:3px 4px 0 #211913;font-size:27px;color:#4b2410}
+.sp-discovery-head span,.sp-discovery-foot>span{font:700 10px var(--font-mono,monospace);letter-spacing:.07em;color:#ebac6e}
+.sp-discovery-head h3{font-size:clamp(21px,2vw,29px);letter-spacing:-.04em;margin:4px 0 0;color:#fff2d7}
+.sp-discovery-intro{line-height:1.5;color:#d4bd9f;font-size:13px;margin:17px 0}
+.sp-progress>span{font:700 11px var(--font-mono,monospace);color:#f7bb72}
+.sp-progress>div{height:9px;background:#1c1511;border:1px solid #826247;margin:8px 0 17px}
+.sp-progress i{display:block;width:0;height:100%;background:linear-gradient(90deg,#d47429,#ffc16a);transition:width .4s}
+.sp-relics{display:grid;gap:9px;flex:1;align-content:start}
+.sp-relic{border:2px solid #826243;display:flex;align-items:center;gap:11px;background:linear-gradient(145deg,#cba271,#936e4c);color:#302118;padding:11px 12px;box-shadow:3px 3px 0 #24180f;font:700 11px/1.35 var(--font-mono,monospace)}
+.sp-relic-number{background:#3d2920;color:#ffbb71;padding:7px;font-size:11px}
+.sp-relic>span:nth-child(2){flex:1}
+.sp-relic.locked{background:linear-gradient(145deg,#5e4a39,#433327);color:#ab9275;border-color:#765d47}
+.sp-relic.locked .sp-relic-number{color:#9e7855;background:#32261f}
+.sp-relic.unlocked{animation:spRelicIn .5s ease-out both;border-color:#f6aa5d}
+.sp-relic.unlocked>span:last-child{color:#f58026}
+@keyframes spRelicIn{from{transform:translateY(7px);opacity:.25}to{transform:translateY(0);opacity:1}}
+.sp-discovery-foot{border-top:1px solid #8b6a4d;margin-top:18px;padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.sp-discovery-foot a{font:800 11px var(--font-mono,monospace);color:#ffd199;text-decoration:none}
+.sp-discovery-foot a:hover{color:#fff2d9}
+.sp-footer-row{display:flex;justify-content:space-between;gap:12px;margin-top:22px;color:#8f6649;font:700 10px var(--font-mono,monospace);letter-spacing:.05em}
+@media(max-width:1000px){.sp-layout{grid-template-columns:minmax(0,1.3fr) minmax(230px,.8fr)}.sp-cabinet-bottom>span:last-child{display:none}.sp-discovery{padding:15px}.sp-relic{padding:8px}}
+@media(max-width:760px){#stone-pong{min-height:100svh;padding:75px 0 50px}.sp-layout{grid-template-columns:1fr}.sp-heading-stamp{width:74px;height:76px}.sp-heading-stamp>span{font-size:26px}.sp-heading-stamp>small{font-size:7px}.sp-discovery{min-height:unset}.sp-relics{grid-template-columns:repeat(2,minmax(0,1fr))}.sp-intro{max-width:54ch}}
+@media(max-width:520px){.sp-heading-stamp{display:none}.sp-cabinet{padding:8px;border-width:5px}.sp-cabinet-top{font-size:9px}.sp-arena-frame{border-width:5px}.sp-scorebar{padding:6px 8px}.sp-scorebar small,.sp-center-label{font-size:8px}.sp-cabinet-bottom{font-size:9px}.sp-cabinet-bottom>span:first-child{display:none}.sp-cabinet-bottom>div{margin-left:auto}.sp-overlay-content{padding:17px 12px}.sp-overlay-content p{font-size:12px}.sp-overlay-content small{font-size:8px}.sp-relics{grid-template-columns:1fr}.sp-footer-row{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.sp-relic.unlocked{animation:none}.sp-progress i{transition:none}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
@@ -1844,6 +1914,19 @@ body{background-color:#fbf8f3}
   </div>
 
 </section>
+<section class="sp-section" id="stone-pong" aria-labelledby="sp-heading">
+<div class="shell sp-shell">
+ <div class="sp-heading-row"><div><p class="sp-kicker">/ THE QUARRY ARCADE &nbsp; • &nbsp; GAME 02</p><h2 id="sp-heading">Stone <em>Pong.</em></h2><p class="sp-intro">An old-school duel carved from wood, sandstone and a little competitive spirit. Every rally reveals something about the developer behind this website.</p></div><div class="sp-heading-stamp" aria-hidden="true"><span>SR</span><small>HAND BUILT<br>ARCADE</small></div></div>
+ <div class="sp-layout">
+  <div class="sp-cabinet">
+   <div class="sp-cabinet-top"><span class="sp-bolt"></span><span>QUARRY ARCADE <i>·</i> PLAYER VS MACHINE</span><span class="sp-bolt"></span></div>
+   <div class="sp-scorebar"><div><small>YOU / SAMAR</small><b id="sp-player-score">0</b></div><div class="sp-center-label"><span class="sp-amber-dot"></span> FIRST TO 7 <span class="sp-amber-dot"></span></div><div><small>THE MACHINE</small><b id="sp-ai-score">0</b></div></div>
+   <div class="sp-arena-frame"><canvas id="sp-canvas" width="900" height="520" tabindex="0" aria-label="Stone Pong game. Move your paddle using mouse, touch, W and S, or up and down arrows. Press Space to start or pause."></canvas><div class="sp-game-overlay" id="sp-overlay"><div class="sp-overlay-content"><span class="sp-mini-label">THE WORKSHOP CHALLENGE</span><h3 id="sp-overlay-title">Ready to rally?</h3><p id="sp-overlay-text">Keep the glowing amber ball in play. Win points, build a streak and uncover Samar's developer stats.</p><button type="button" id="sp-start" class="sp-wood-btn">START GAME <span>↗</span></button><small>MOUSE · TOUCH · ↑ ↓ · W S · SPACE TO PAUSE</small></div></div><div class="sp-flash" id="sp-flash" aria-live="polite"></div></div>
+   <div class="sp-cabinet-bottom"><span>◈ &nbsp; MOVE PADDLE TO DEFEND</span><div><button type="button" id="sp-pause" aria-label="Pause or resume Stone Pong">PAUSE</button><button type="button" id="sp-restart">RESTART ↻</button></div><span>MADE WITH ♥ &amp; CHAI</span></div>
+  </div>
+  <aside class="sp-discovery"><div class="sp-discovery-head"><div class="sp-discovery-icon">✦</div><div><span>HIDDEN IN THE STONE</span><h3>Developer relics</h3></div></div><p class="sp-discovery-intro">Keep the rally going. Each milestone unlocks another piece of the person who built this place.</p><div class="sp-progress"><span id="sp-unlock-count">0 / 5 UNLOCKED</span><div><i id="sp-progress-fill"></i></div></div><div class="sp-relics" id="sp-relics" aria-live="polite"><div class="sp-relic locked"><span class="sp-relic-number">01</span><span>LOCKED RELIC</span><span>◆</span></div><div class="sp-relic locked"><span class="sp-relic-number">02</span><span>LOCKED RELIC</span><span>◆</span></div><div class="sp-relic locked"><span class="sp-relic-number">03</span><span>LOCKED RELIC</span><span>◆</span></div><div class="sp-relic locked"><span class="sp-relic-number">04</span><span>LOCKED RELIC</span><span>◆</span></div><div class="sp-relic locked"><span class="sp-relic-number">05</span><span>LOCKED RELIC</span><span>◆</span></div></div><div class="sp-discovery-foot"><span>BEHIND THE BLOCKS</span><a href="#work">EXPLORE MY WORK <span>↗</span></a></div></aside>
+ </div><div class="sp-footer-row"><span>STONE SERPENT IS STILL UP ABOVE ↑</span><span>NO COINS REQUIRED. JUST GOOD REFLEXES.</span></div>
+</div></section>
 </main>
 
 <div class="shell site-foot">
@@ -4402,4 +4485,71 @@ try {
 </script><script defer src="./construction-assets-embedded.js"></script>
 <script defer src="./construction-tools-embedded.js"></script>
 <script defer src="./construction-poses-embedded.js"></script>
-</body></html>
+<script id="sr-stone-pong-game">
+(()=>{
+const root=document.getElementById('stone-pong');if(!root)return;
+const $=id=>document.getElementById('sp-'+id);
+const canvas=$('canvas'),ctx=canvas.getContext('2d');if(!ctx)return;
+const W=900,H=520,PW=20,PH=104,LEFT=38,RIGHT=W-38-PW,R=12;
+const facts=[['FULL-STACK DEVELOPER','Building websites, APIs & mobile apps'],['REACT / NEXT.JS','Frontend work with real-world polish'],['NODE.JS / BACKENDS','Server logic, integrations & databases'],['MOBILE EXPERIENCES','React Native and Expo projects'],['KARACHI, PAKISTAN','A developer building for clients and beyond']];
+const marks=[3,6,10,15,21];
+const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let unlocked=0,rally=0,score=[0,0],playing=false,paused=false,ended=false,serveDelay=0,raf=0,last=0;
+const keys={up:false,down:false};
+let mouseTarget=H/2,usingPointer=false;
+const ball={x:W/2,y:H/2,vx:0,vy:0};
+let userY=H/2,aiY=H/2,particles=[],flashTimer=0;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function updateScore(){$('player-score').textContent=score[0];$('ai-score').textContent=score[1]}
+function showMessage(title,body,label){$('overlay-title').textContent=title;$('overlay-text').textContent=body;$('start').innerHTML=label+' <span>↗</span>';$('overlay').hidden=false}
+function flash(text){const el=$('flash');el.textContent=text;el.classList.add('visible');clearTimeout(flashTimer);flashTimer=setTimeout(()=>el.classList.remove('visible'),1300)}
+function renderFacts(){const list=$('relics');list.innerHTML=facts.map((fact,i)=>'<div class="sp-relic '+(i<unlocked?'unlocked':'locked')+'"><span class="sp-relic-number">'+String(i+1).padStart(2,'0')+'</span><span>'+(i<unlocked?'<strong>'+fact[0]+'</strong><small style="display:block;font-weight:500;margin-top:3px">'+fact[1]+'</small>':'LOCKED RELIC · '+marks[i]+' HITS')+'</span><span>'+(i<unlocked?'✦':'◆')+'</span></div>').join('');$('unlock-count').textContent=unlocked+' / 5 UNLOCKED';$('progress-fill').style.width=(unlocked/5*100)+'%'}
+function unlock(){while(unlocked<facts.length&&rally>=marks[unlocked]){flash('RELIC UNLOCKED · '+facts[unlocked][0]);unlocked++}renderFacts()}
+function emit(x,y,c='#e4a04b',count=9){if(reduced)return;for(let i=0;i<count;i++){const a=Math.PI*2*i/count;particles.push({x,y,vx:Math.cos(a)*(50+Math.random()*130),vy:Math.sin(a)*(50+Math.random()*130),life:.3+Math.random()*.4,c})}}
+function serve(towardPlayer=Math.random()>.5){ball.x=W/2;ball.y=H/2;ball.vx=(towardPlayer?-1:1)*385;ball.vy=(Math.random()-.5)*230;serveDelay=.65}
+function newGame(){score=[0,0];rally=0;unlocked=0;userY=H/2;aiY=H/2;mouseTarget=H/2;usingPointer=false;particles=[];playing=true;paused=false;ended=false;updateScore();renderFacts();serve();$('overlay').hidden=true;$('pause').textContent='PAUSE';canvas.focus({preventScroll:true});ensureLoop()}
+function pauseToggle(){if(!playing||ended)return;paused=!paused;$('pause').textContent=paused?'RESUME':'PAUSE';if(paused)showMessage('Workshop break.','Your quarry duel is paused. Pick up right where you left off.','RESUME');else{$('overlay').hidden=true;ensureLoop()}}
+function endGame(){ended=true;playing=false;paused=false;const won=score[0]>score[1];showMessage(won?'You won the quarry!':'The machine wins.','Final score '+score[0]+' – '+score[1]+'. '+(won?'Nice reflexes.':'Give the wooden paddle another go.')+' You unlocked '+unlocked+' developer relics.','PLAY AGAIN')}
+function onStart(){if(paused){pauseToggle();return}newGame()}
+$('start').addEventListener('click',onStart);
+$('pause').addEventListener('click',()=>{if(!playing&&ended){newGame();return}pauseToggle()});
+$('restart').addEventListener('click',newGame);
+const listens=e=>{const t=e.target;return t===canvas||root.contains(document.activeElement)};
+addEventListener('keydown',e=>{if(e.target.closest?.('input,textarea,[contenteditable="true"]'))return;if(!listens(e))return;const k=e.key.toLowerCase();if(['arrowup','arrowdown','w','s',' '].includes(k))e.preventDefault();if(k==='arrowup'||k==='w'){keys.up=true;usingPointer=false}if(k==='arrowdown'||k==='s'){keys.down=true;usingPointer=false}if(k===' '){if(!e.repeat){if(!playing&&!paused)newGame();else pauseToggle()}}});
+addEventListener('keyup',e=>{const k=e.key.toLowerCase();if(k==='arrowup'||k==='w')keys.up=false;if(k==='arrowdown'||k==='s')keys.down=false});
+addEventListener('blur',()=>{keys.up=false;keys.down=false;if(playing&&!paused)pauseToggle()});
+function aim(e){const r=canvas.getBoundingClientRect();mouseTarget=clamp((e.clientY-r.top)/r.height*H,PH/2,H-PH/2);usingPointer=true}
+canvas.addEventListener('pointermove',e=>{if(e.pointerType==='mouse'||e.buttons)aim(e)});
+canvas.addEventListener('pointerdown',e=>{aim(e);if(e.pointerType!=='mouse')canvas.setPointerCapture?.(e.pointerId);if(!playing&&!paused)newGame()});
+canvas.addEventListener('pointerup',e=>{if(e.pointerType!=='mouse'&&canvas.hasPointerCapture?.(e.pointerId))canvas.releasePointerCapture(e.pointerId)});
+function point(who){score[who]++;updateScore();emit(who===0?RIGHT:LEFT,H/2,'#f5a24b',18);if(score[who]>=7){endGame();return}serve(who===0?false:true)}
+function step(dt){if(!playing||paused||ended)return;
+ if(usingPointer){userY+=clamp(mouseTarget-userY,-760*dt,760*dt)}else userY+=((keys.down?1:0)-(keys.up?1:0))*680*dt;
+ userY=clamp(userY,PH/2+5,H-PH/2-5);
+ aiY+=clamp(ball.y-aiY,-Math.min(410,245+score[0]*20)*dt,Math.min(410,245+score[0]*20)*dt);aiY=clamp(aiY,PH/2+5,H-PH/2-5);
+ if(serveDelay>0){serveDelay-=dt;return}
+ const px=ball.x,py=ball.y;ball.x+=ball.vx*dt;ball.y+=ball.vy*dt;
+ if(ball.y<R+13){ball.y=R+13;ball.vy=Math.abs(ball.vy);emit(ball.x,ball.y,'#cfac79',4)}
+ if(ball.y>H-R-13){ball.y=H-R-13;ball.vy=-Math.abs(ball.vy);emit(ball.x,ball.y,'#cfac79',4)}
+ if(ball.vx<0&&px-R>=LEFT+PW&&ball.x-R<=LEFT+PW&&Math.abs(ball.y-userY)<PH/2+R){ball.x=LEFT+PW+R;const off=clamp((ball.y-userY)/(PH/2),-1,1);ball.vx=Math.min(850,Math.abs(ball.vx)*1.055+12);ball.vy=off*330+ball.vy*.26;emit(ball.x,ball.y);rally++;unlock()}
+ if(ball.vx>0&&px+R<=RIGHT&&ball.x+R>=RIGHT&&Math.abs(ball.y-aiY)<PH/2+R){ball.x=RIGHT-R;const off=clamp((ball.y-aiY)/(PH/2),-1,1);ball.vx=-Math.min(850,Math.abs(ball.vx)*1.055+12);ball.vy=off*310+ball.vy*.24;emit(ball.x,ball.y);rally++;unlock()}
+ if(ball.x<-R){point(1);return}if(ball.x>W+R){point(0);return}
+ particles.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=200*dt;p.life-=dt});particles=particles.filter(p=>p.life>0);
+}
+function plank(x,y,w,h,color){ctx.fillStyle='#251810';ctx.fillRect(x+5,y+6,w,h);ctx.fillStyle=color;ctx.fillRect(x,y,w,h);ctx.fillStyle='#e6bb87';ctx.fillRect(x,y,w,6);ctx.fillStyle='#4d3427';ctx.fillRect(x+w-6,y+6,6,h-6);ctx.fillStyle='#80583e';ctx.fillRect(x+4,y+h*.35,w-11,2);ctx.fillRect(x+4,y+h*.7,w-11,2)}
+function paint(){ctx.clearRect(0,0,W,H);
+ const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#6d5746');g.addColorStop(.52,'#493b32');g.addColorStop(1,'#30271f');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ for(let y=0;y<H;y+=52)for(let x=0;x<W;x+=72){ctx.fillStyle=(x+y/52*8)%144===0?'#94735822':'#150f0a1a';ctx.fillRect(x,y,70,50);ctx.fillStyle='#b5986d35';ctx.fillRect(x+2,y+1,66,2);ctx.fillStyle='#24180f61';ctx.fillRect(x+68,y+2,3,48)}
+ ctx.fillStyle='#e3bd8a';for(let y=20;y<H;y+=36)ctx.fillRect(W/2-2,y,4,18);
+ ctx.fillStyle='#ead5b05e';ctx.font='bold 12px monospace';ctx.textAlign='center';ctx.fillText('SR · QUARRY DIVISION',W/2,37);
+ plank(LEFT,userY-PH/2,PW,PH,'#db9d59');plank(RIGHT,aiY-PH/2,PW,PH,'#ad8258');
+ ctx.save();ctx.shadowColor='#ffb145';ctx.shadowBlur=reduced?0:26;ctx.fillStyle='#ffd079';ctx.beginPath();ctx.arc(ball.x,ball.y,R+2,0,Math.PI*2);ctx.fill();ctx.restore();
+ ctx.fillStyle='#e98729';ctx.beginPath();ctx.moveTo(ball.x-7,ball.y-10);ctx.lineTo(ball.x+10,ball.y-7);ctx.lineTo(ball.x+7,ball.y+8);ctx.lineTo(ball.x-8,ball.y+10);ctx.closePath();ctx.fill();ctx.fillStyle='#fff3c2';ctx.fillRect(ball.x-4,ball.y-7,5,4);
+ for(const p of particles){ctx.globalAlpha=clamp(p.life/.45,0,1);ctx.fillStyle=p.c;ctx.fillRect(p.x,p.y,7,7);ctx.globalAlpha=1}
+}
+function frame(t){raf=0;if(!root.isConnected)return;let dt=last?Math.min(.035,(t-last)/1000):0;last=t;if(playing&&!paused)step(dt);paint();ensureLoop()}
+function ensureLoop(){if(!raf)raf=requestAnimationFrame(frame)}
+renderFacts();paint();ensureLoop();
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing&&!paused)pauseToggle()});
+})();
+</script></body></html>
