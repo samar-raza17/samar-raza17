@@ -529,6 +529,45 @@ nav a[data-target="studio"]{white-space:nowrap}
 @media(max-width:1050px){.sr-wall-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sr-wall-item{height:320px}.sr-wall-finale{grid-column:auto;min-height:320px}}
 @media(max-width:680px){.sr-wall-heading{display:block}.sr-wall-heading h3{font-size:clamp(48px,10.5vw,70px)}.sr-wall-heading>p{margin-top:20px}.sr-wall-guide{display:block;font-size:10px}.sr-wall-guide span:last-child{display:block;margin-top:8px}.sr-wall-grid{grid-template-columns:1fr;gap:36px;padding-inline:11px}.sr-wall-item{height:340px;margin-top:0!important}.sr-wall-finale{min-height:255px;padding:23px}.sr-wall-hover-word{display:none}.sr-wall-tap-word{display:inline}.sr-wall-job{font-size:clamp(23px,5.7vw,30px)}.sr-wall-story{font-size:12px}.sr-wall-hammer{right:-6px;top:-30px;width:116px;height:116px}}
 @media(prefers-reduced-motion:reduce){.sr-wall-item,.sr-wall-fragment,.sr-wall-front,.sr-wall-crack-lines,.sr-wall-hammer,.sr-wall-inside>*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* AI explorations — editorial wood & paper redesign */
+#ai.ai{position:relative;isolation:isolate;padding-top:clamp(100px,10vw,148px);padding-bottom:54px;color:#2a1a12}
+#ai.ai:before{content:"";position:absolute;z-index:-1;inset:65px -4vw 0;pointer-events:none;background:radial-gradient(ellipse at 12% 14%,#fff6e8 0,transparent 52%),repeating-linear-gradient(175deg,transparent 0 119px,#9b663218 120px 122px,transparent 123px 235px);opacity:.55}
+#ai .work-head{position:relative;border-top:1px solid #b77a492e;padding-top:24px}
+#ai .work-head:before{content:"+";position:absolute;top:12px;right:0;font-family:var(--mono);font-size:28px;font-weight:300;color:#ac7148}
+#ai .eyebrow{color:#bd632e;letter-spacing:.025em;font-size:clamp(.85rem,1.2vw,1rem)}
+#ai .slot-title{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:-.055em;line-height:1.02;font-size:clamp(3.4rem,7.6vw,7.3rem);margin:12px 0 0;color:#2b1b13}
+#ai .slot-title .hl svg{height:.24em;bottom:.04em}
+#ai .ai-grid{margin-top:clamp(48px,5.5vw,80px);gap:clamp(48px,6vw,80px)}
+#ai .entry{grid-template-columns:minmax(0,1.22fr) minmax(0,.98fr);align-items:center;gap:clamp(36px,5vw,76px)}
+#ai .entry-wrap{padding:14px 13px 18px 0}
+#ai .entry-wrap:before{content:"";position:absolute;inset:24px 0 4px 16px;background:#d8bc95;transform:rotate(2deg);box-shadow:0 9px 22px #4d280b1b}
+#ai .entry-media.thumb{--tilt:-.7deg;aspect-ratio:1.48;background:#332a24;border:9px ridge #a36a3c;border-radius:2px;box-shadow:0 5px 0 #60391f,0 19px 22px #4b2b1840;transform:rotate(var(--tilt));overflow:hidden}
+#ai .entry-media.thumb:after{content:"";inset:0;position:absolute;pointer-events:none;box-shadow:inset 0 0 0 2px #e3b48088,inset 0 0 26px #0002}
+#ai .entry-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+#ai .entry:hover .entry-media.thumb{box-shadow:0 7px 0 #60391f,0 22px 27px #4b2b1840;transform:rotate(0)translateY(-5px)}
+#ai .entry:hover .entry-media img{transform:scale(1.035)}
+#ai .entry-wrap>.tape.t1{display:none}
+#ai .entry-chip{background:#f4e3c8;color:#473022;border:1px solid #a46d44;border-radius:2px;box-shadow:2px 3px 0 #5a351c;padding:7px 12px;top:13px;right:12px;transform:rotate(3deg);font-size:.78rem}
+#ai .entry-chip:before{content:"";position:absolute;left:30%;right:30%;top:-9px;height:12px;background:#dc965482;transform:rotate(-3deg)}
+#ai .paws{width:min(240px,42%);bottom:-36px;left:6%;filter:sepia(.7)}
+#ai .entry-info{gap:18px;padding-top:4px}
+#ai .entry-meta{width:100%;border-bottom:1px solid #7c543b80;padding-bottom:15px;color:#665649;gap:7px 10px;font-size:clamp(.68rem,.83vw,.82rem);line-height:1.6}
+#ai .entry-meta span+span:before{margin-right:10px;color:#997456}
+#ai .entry-info h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.055em;font-size:clamp(2.8rem,4.7vw,5rem);line-height:1.08;color:#2b1b13;margin:10px 0 0;font-weight:700;text-wrap:balance;position:relative}
+#ai .entry-info h3:after{content:"";display:block;width:min(280px,80%);height:9px;background:#eea36d85;transform:rotate(-1.5deg);margin-top:-7px;position:relative;z-index:-1}
+#ai .entry-info .summary{max-width:51ch;color:#4b3b30;font-size:clamp(1rem,1.28vw,1.18rem);line-height:1.73;margin:6px 0 0}
+#ai .tags{gap:10px;margin-top:2px}
+#ai .tags li{background:#f9eddd;border:1px solid #a97852;box-shadow:2px 3px 0 #b9896266;border-radius:4px;color:#3f3025;padding:7px 12px;font-size:.8rem}
+#ai .entry-ctas{gap:16px;margin-top:12px}
+#ai .entry-ctas .cta{border:1.5px solid #412719;border-radius:5px;min-height:54px;box-shadow:4px 5px 0 #9d7259;color:#2c2119;background:#fff7ec;padding:0 22px}
+#ai .entry-ctas .cta.primary{background:#352016;color:#fff6e9;box-shadow:4px 5px 0 #b97641}
+#ai .entry-ctas .cta:hover{transform:translate(-2px,-3px);box-shadow:6px 8px 0 #9d7259}
+#ai .entry-ctas .cta.primary:hover{box-shadow:6px 8px 0 #b97641}
+#ai .next-entry{background:#f7e5c9;border:1px dashed #9d7654;box-shadow:4px 6px 0 #ad81532d;border-radius:2px;color:#342115}
+#ai .next-entry .ne-s{color:#a65a30}
+@media(max-width:860px){#ai .entry{grid-template-columns:minmax(0,1fr);gap:48px}#ai .entry-media.thumb{aspect-ratio:16/10}#ai .entry-wrap{max-width:660px;width:100%;margin:0 auto}#ai .entry-info{padding-top:18px}#ai .next-entry{align-self:flex-end}#ai .slot-title{font-size:clamp(3rem,11vw,5.6rem)}}
+@media(max-width:520px){#ai.ai{padding-bottom:26px}#ai .entry-wrap{padding:8px 8px 14px 0}#ai .entry-media.thumb{border-width:6px}#ai .entry-meta{flex-wrap:wrap}#ai .entry-ctas{width:100%;gap:12px}#ai .entry-ctas .cta{flex:1;justify-content:center;min-height:50px;padding:0 12px;font-size:.76rem}#ai .entry-info h3{font-size:clamp(2.7rem,12vw,4rem)}#ai .paws{bottom:-28px;width:150px}}
 </style><style id="hero-stone-break-styles">
 .pz-stage{isolation:isolate;overflow:hidden}
 .hero-break-fx{position:absolute;inset:0;z-index:20;pointer-events:none}
@@ -1934,9 +1973,7 @@ html.sr-project-open::-webkit-scrollbar,html.sr-project-open body::-webkit-scrol
       <article class="entry reveal">
         <div class="entry-wrap">
         <a class="entry-media thumb" style="--tilt:-1deg" href="desk-kitten.html" aria-label="Read the Desk Kitten story">
-          <video id="kittenCard" muted loop playsinline preload="metadata" poster="https://avatars.githubusercontent.com/samar-raza17?size=800" aria-label="A grey 3D kitten chasing a pink ball that follows the cursor">
-            <source src="https://avatars.githubusercontent.com/samar-raza17?size=800" type="video/mp4"><source src="https://avatars.githubusercontent.com/samar-raza17?size=800" type="video/webm">
-          </video>
+          <img id="kittenCard" src="https://avatars.githubusercontent.com/samar-raza17?size=800" alt="Desk Kitten project preview" loading="lazy" decoding="async">
           <span class="entry-chip">entry 01</span>
         </a>
         <span class="tape t1" aria-hidden="true"></span>
