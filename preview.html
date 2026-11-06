@@ -1282,6 +1282,76 @@ body{background-color:#fbf8f3}
 .site-foot footer{border-color:#7b5031!important}
 @media(max-width:720px){.sr-career-wall .sr-wood-plank:before,.sr-career-wall .sr-wood-plank:after{width:7px;height:7px}}
 @media(prefers-reduced-motion:reduce){.sr-career-wall .sr-wall-item.is-shattering .sr-wood-plank{animation-duration:.01ms!important;animation-delay:0ms!important}}
+</style><style id="sr-career-wood-readability-v3">
+/* Wooden wall UX: maintain nailed vertical boards and genuine narrow gaps,
+   but keep secret text hidden until the player smashes the boards. */
+.sr-career-wall .sr-wood-plank{width:calc(10% - 2.5px)!important;box-shadow:inset 2px 0 #f5d49a78,inset -3px 0 #3d23177a,2px 3px 3px #26170e99!important}
+.sr-career-wall .sr-wall-item:not(.is-shattering):not(.is-revealed) .sr-wall-inside>*,
+.sr-career-wall .sr-wall-item.is-breaking:not(.is-shattering) .sr-wall-inside>*{
+ opacity:0!important;visibility:hidden!important;transition:none!important;animation:none!important
+}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wall-inside>*,
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-inside>*{
+ opacity:1!important;visibility:visible!important
+}
+.sr-career-wall .sr-wall-front{
+ padding:clamp(18px,1.7vw,27px)!important;
+ display:flex!important;flex-direction:column!important;gap:0;
+ text-shadow:none!important;z-index:9!important
+}
+.sr-career-wall .sr-wall-front-row{align-items:center;gap:8px;font-size:clamp(10px,.75vw,12px)!important;line-height:1.25!important}
+.sr-career-wall .sr-wall-front-row span{
+ display:inline-block;background:#342016e8!important;color:#ffe4b3!important;
+ padding:7px 9px;border:1px solid #d39a5d;border-radius:2px;
+ box-shadow:2px 3px 0 #28180eb5;letter-spacing:.025em;
+ text-shadow:none!important;font-weight:800
+}
+.sr-career-wall .sr-wall-front-row span:last-child{
+ color:#ffb16a!important;background:#412718ed!important
+}
+.sr-career-wall .sr-wall-front strong{
+ box-sizing:border-box;align-self:stretch;width:100%;
+ background:linear-gradient(125deg,#3a241bf5,#533321f0 78%,#38231af2)!important;
+ border-left:5px solid #e18b43;border-top:1px solid #c18b5f;border-bottom:2px solid #26170e;
+ box-shadow:4px 5px 0 #2a190fe0,inset 0 1px #ffca8773;
+ padding:13px 12px 12px!important;
+ color:#fff5df!important;line-height:1.12!important;font-size:clamp(20px,1.72vw,29px)!important;
+ text-shadow:0 2px 2px #20120dbb!important;
+ letter-spacing:-.045em;margin:auto 0 0!important;
+ overflow-wrap:break-word;word-break:normal
+}
+.sr-career-wall .sr-wall-front-date{
+ align-self:flex-start;max-width:100%;
+ padding:8px 11px!important;background:#2f2019ee!important;color:#fce0b9!important;
+ font:700 clamp(10px,.73vw,12px)/1.35 var(--font-mono,monospace)!important;
+ border-bottom:2px solid #aa7042;border-right:1px solid #a67147;
+ box-shadow:3px 3px 0 #251810c7;text-shadow:none!important;
+ margin-top:11px!important;letter-spacing:.01em
+}
+.sr-career-wall .sr-wall-action{
+ margin-top:13px!important;padding:10px 10px!important;min-height:34px;
+ background:linear-gradient(95deg,#352116f2,#50311fed)!important;
+ border:1px solid #ad774b!important;border-left:3px solid #e3904f!important;
+ box-shadow:3px 4px 0 #2b1b12c9;
+ color:#ffbd77!important;text-shadow:none!important;
+ font:800 clamp(10px,.75vw,12px)/1.3 var(--font-mono,monospace)!important
+}
+.sr-career-wall .sr-wall-action i{color:#ffdca7;font-weight:900;line-height:1}
+.sr-career-wall .sr-wall-item.is-shattering .sr-wall-front,
+.sr-career-wall .sr-wall-item.is-revealed .sr-wall-front{visibility:hidden!important;opacity:0!important}
+.sr-career-wall .sr-wall-inside{padding:clamp(19px,1.6vw,27px)!important}
+.sr-career-wall .sr-wall-inside-eyebrow{color:#ffc082!important}
+.sr-career-wall .sr-wall-inside .sr-wall-job{font-size:clamp(19px,1.55vw,27px)!important;line-height:1.16;color:#fff0d5!important;margin:clamp(10px,1.2vw,18px) 0 7px}
+.sr-career-wall .sr-wall-inside .sr-wall-years{color:#fac18a!important}
+.sr-career-wall .sr-wall-inside .sr-wall-story{font-size:clamp(12px,.85vw,14px)!important;line-height:1.52!important;color:#f0d8bd!important;margin-top:13px}
+.sr-career-wall .sr-wall-inside .sr-wall-inner-company{font-weight:700;color:#ffb06d!important}
+@media(max-width:700px){
+ .sr-career-wall .sr-wall-front{padding:18px!important}
+ .sr-career-wall .sr-wall-front strong{font-size:clamp(20px,5vw,27px)!important;padding:12px 10px!important}
+ .sr-career-wall .sr-wall-front-row span{font-size:10px!important;padding:6px 7px}
+ .sr-career-wall .sr-wall-action{font-size:10px!important}
+}
+@media(prefers-reduced-motion:reduce){.sr-career-wall .sr-wall-front strong,.sr-career-wall .sr-wall-front-date{transition:none}}
 </style></head><body>
 
 <header class="site-nav" id="siteNav">
